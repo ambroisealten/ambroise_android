@@ -1,4 +1,4 @@
-package com.alten.ambroise.forum.beans;
+package com.alten.ambroise.forum.data.beans;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;

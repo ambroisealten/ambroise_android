@@ -1,11 +1,11 @@
-package com.alten.ambroise.forum.dao;
+package com.alten.ambroise.forum.data.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.alten.ambroise.forum.beans.Forum;
+import com.alten.ambroise.forum.data.beans.Forum;
 
 import java.util.List;
 
