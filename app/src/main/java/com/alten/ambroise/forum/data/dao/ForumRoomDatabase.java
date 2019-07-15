@@ -56,8 +56,8 @@ public abstract class ForumRoomDatabase extends RoomDatabase {
                 Forum forum = new Forum();
                 forum.set_id(i);
                 forum.setDate("10/07/2019");
-                forum.setName("name1");
-                forum.setPlace("place1");
+                forum.setName("name"+i);
+                forum.setPlace("place"+i);
                 mDao.insert(forum);
             }
             return null;
