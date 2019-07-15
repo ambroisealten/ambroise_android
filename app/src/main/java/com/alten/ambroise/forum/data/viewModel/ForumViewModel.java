@@ -22,7 +22,7 @@ public class ForumViewModel extends AndroidViewModel {
         mAllForums = mRepository.getAllForums();
     }
 
-    LiveData<List<Forum>> getAllWords() { return mAllForums; }
+    public LiveData<List<Forum>> getAllForums() { return mAllForums; }
 
     public void insert(Forum word) { mRepository.insert(word); }
 }

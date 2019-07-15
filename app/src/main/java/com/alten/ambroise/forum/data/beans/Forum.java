@@ -9,7 +9,7 @@ public class Forum {
 
     @PrimaryKey
     @NonNull
-    private String _id;
+    private long _id;
     @NonNull
     private String name;
     @NonNull
@@ -18,11 +18,11 @@ public class Forum {
     private String place;
 
     @NonNull
-    public String get_id() {
+    public long get_id() {
         return _id;
     }
 
-    public void set_id(@NonNull String _id) {
+    public void set_id(@NonNull long _id) {
         this._id = _id;
     }
 
