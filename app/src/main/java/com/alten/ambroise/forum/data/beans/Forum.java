@@ -7,8 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "forum_table")
 public class Forum {
 
-    @PrimaryKey
-    @NonNull
+    @PrimaryKey(autoGenerate = true)
     private long _id;
     @NonNull
     private String name;

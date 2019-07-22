@@ -54,7 +54,6 @@ public abstract class ForumRoomDatabase extends RoomDatabase {
             mDao.deleteAll();
             for(int i = 0;i<100;i++){
                 Forum forum = new Forum();
-                forum.set_id(i);
                 forum.setDate("10/07/2019");
                 forum.setName("name"+i);
                 forum.setPlace("place"+i);

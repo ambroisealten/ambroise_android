@@ -1,6 +1,7 @@
 package com.alten.ambroise.forum.view.fragmentSwitcher;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,13 +9,20 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.alten.ambroise.forum.R;
-import com.alten.ambroise.forum.view.fragments.ForumAddFragment;
+import com.alten.ambroise.forum.data.beans.Forum;
+import com.alten.ambroise.forum.data.viewModel.ForumViewModel;
+import com.alten.ambroise.forum.view.fragments.ForumAddDialogFragment;
 import com.alten.ambroise.forum.view.fragments.ForumListFragment;
 
 public class ForumFragmentSwitcher {
 
     public static final String forumListTag = "forumListTag";
     public static final String addForumTag = "addForumTag";
+    private final Activity activity;
+
+    public ForumFragmentSwitcher(Activity activity){
+        this.activity = activity;
+    }
 
     public void switchFragment(FragmentManager fm, String tag) {
         Fragment fragment;
@@ -23,8 +31,8 @@ public class ForumFragmentSwitcher {
                 fragment = switchForumListFragment(fm);
                 break;
             case addForumTag:
-                fragment = switchForumAddFragment(fm);
-                break;
+                switchForumAddFragment(fm);
+                return;
             default:
                 fragment = switchForumListFragment(fm);
                 break;
@@ -52,13 +60,18 @@ public class ForumFragmentSwitcher {
         return forumListFragment;
     }
 
-    private ForumAddFragment switchForumAddFragment(FragmentManager fm) {
-        ForumAddFragment forumAddFragment = (ForumAddFragment) fm.findFragmentByTag(addForumTag);
-        if (forumAddFragment == null) {
-            forumAddFragment = new ForumAddFragment();
-            Bundle bundle = new Bundle();
-            forumAddFragment.setArguments(bundle);
+    private void switchForumAddFragment(FragmentManager fm) {
+        Fragment frag = fm.findFragmentByTag("fragment_edit_name");
+        if (frag != null) {
+            fm.beginTransaction().remove(frag).commit();
         }
-        return forumAddFragment;
+        ForumAddDialogFragment addForumDialog = ForumAddDialogFragment.newInstance("New Forum");
+        addForumDialog.subscribeToSwitcher(this);
+        addForumDialog.show(fm, "fragment_edit_name");
+    }
+
+    public void addNewForum(Forum newForum) {
+        ForumViewModel forumViewModel = new ForumViewModel(activity.getApplication());
+        forumViewModel.insert(newForum);
     }
 }
