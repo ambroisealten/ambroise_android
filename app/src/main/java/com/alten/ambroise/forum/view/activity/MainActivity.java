@@ -1,5 +1,7 @@
 package com.alten.ambroise.forum.view.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,12 +14,14 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.alten.ambroise.forum.R;
+import com.alten.ambroise.forum.data.beans.Forum;
 import com.alten.ambroise.forum.view.fragmentSwitcher.ForumFragmentSwitcher;
+import com.alten.ambroise.forum.view.fragments.ForumListFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ForumListFragment.OnListFragmentInteractionListener {
 
     private ForumFragmentSwitcher forumFragmentSwitcher;
 
@@ -32,7 +36,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                forumFragmentSwitcher.switchFragment(getSupportFragmentManager(),ForumFragmentSwitcher.addForumTag);
+                forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.addForumTag);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -42,7 +46,7 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        forumFragmentSwitcher.switchFragment(getSupportFragmentManager(),ForumFragmentSwitcher.forumListTag);
+        forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.forumListTag);
     }
 
     @Override
@@ -100,5 +104,19 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onListFragmentInteraction(Forum item) {
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setMessage(item.getName() + ":" + item.getDate());
+        alertDialog.setTitle("Alert");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 }

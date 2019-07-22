@@ -15,6 +15,12 @@ import java.util.List;
 
 public class ForumRecyclerViewAdapter extends RecyclerView.Adapter<ForumRecyclerViewAdapter.ForumListViewHolder> {
 
+    private final OnItemClickListener listeners;
+
+    public interface OnItemClickListener {
+        void onItemClick(Forum forum);
+    }
+
     public class ForumListViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mNameView;
@@ -30,6 +36,15 @@ public class ForumRecyclerViewAdapter extends RecyclerView.Adapter<ForumRecycler
             mDateView = view.findViewById(R.id.forum_date);
         }
 
+        public void bind(final Forum forum, final OnItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(forum);
+                }
+            });
+        }
+
         @Override
         public String toString() {
             return super.toString() + " '" + mPlaceView.getText() + "'";
@@ -39,8 +54,9 @@ public class ForumRecyclerViewAdapter extends RecyclerView.Adapter<ForumRecycler
     private final LayoutInflater mInflater;
     private List<Forum> mForums; // Cached copy of forums
 
-    ForumRecyclerViewAdapter(Context context) {
+    ForumRecyclerViewAdapter(Context context, OnItemClickListener listener) {
         mInflater = LayoutInflater.from(context);
+        this.listeners = listener;
     }
 
     @Override
@@ -53,6 +69,7 @@ public class ForumRecyclerViewAdapter extends RecyclerView.Adapter<ForumRecycler
     @Override
     public void onBindViewHolder(ForumListViewHolder holder, int position) {
         if (mForums != null) {
+            holder.bind(mForums.get(position), listeners);
             holder.mItem = mForums.get(position);
             holder.mNameView.setText(mForums.get(position).getName());
             holder.mPlaceView.setText(mForums.get(position).getPlace());

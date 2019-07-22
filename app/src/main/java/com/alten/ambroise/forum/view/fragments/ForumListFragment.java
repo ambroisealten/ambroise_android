@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -56,7 +57,12 @@ public class ForumListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.adapter = new ForumRecyclerViewAdapter(this.getContext());
+        this.adapter = new ForumRecyclerViewAdapter(this.getContext(), new ForumRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Forum forum) {
+                Toast.makeText(getContext(), "Item Clicked:"+forum.getName()+forum.getPlace()+forum.getDate(), Toast.LENGTH_LONG).show();
+            }
+        });
         //Instantiate forum view model and add observer
         mForumViewModel = ViewModelProviders.of(this).get(ForumViewModel.class);
         mForumViewModel.getAllForums().observe(this, new Observer<List<Forum>>() {
@@ -84,6 +90,7 @@ public class ForumListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+
             recyclerView.setAdapter(adapter);
         }
         return view;
@@ -96,9 +103,8 @@ public class ForumListFragment extends Fragment {
         if (context instanceof OnListFragmentInteractionListener) {
             mListener = (OnListFragmentInteractionListener) context;
         } else {
-            //TODO implement this
-            //  throw new RuntimeException(context.toString()
-            //        + " must implement OnListFragmentInteractionListener");
+            throw new RuntimeException(context.toString()
+                    + " must implement OnListFragmentInteractionListener");
         }
     }
 
@@ -119,7 +125,6 @@ public class ForumListFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onListFragmentInteraction(Forum item);
     }
 }
