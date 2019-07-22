@@ -24,5 +24,5 @@ public class ForumViewModel extends AndroidViewModel {
 
     public LiveData<List<Forum>> getAllForums() { return mAllForums; }
 
-    public void insert(Forum word) { mRepository.insert(word); }
+    public void insert(Forum forum) { mRepository.insert(forum); }
 }
