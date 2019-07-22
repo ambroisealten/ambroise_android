@@ -1,34 +1,30 @@
 package com.alten.ambroise.forum.view.activity;
 
 import android.os.Bundle;
-
-import com.alten.ambroise.forum.R;
-import com.alten.ambroise.forum.view.fragments.ForumListFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
-import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-
-import android.view.MenuItem;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.view.Menu;
+import com.alten.ambroise.forum.R;
+import com.alten.ambroise.forum.view.fragmentSwitcher.ForumFragmentSwitcher;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private ForumFragmentSwitcher forumFragmentSwitcher;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.forumFragmentSwitcher = new ForumFragmentSwitcher();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -36,8 +32,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                forumFragmentSwitcher.switchFragment(getSupportFragmentManager(),ForumFragmentSwitcher.addForumTag);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -47,6 +42,7 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        forumFragmentSwitcher.switchFragment(getSupportFragmentManager(),ForumFragmentSwitcher.forumListTag);
     }
 
     @Override

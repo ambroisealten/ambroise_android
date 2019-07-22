@@ -8,16 +8,18 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <fragment
+    <androidx.fragment.app.FragmentTabHost
         android:id="@+id/fragment"
         android:name="com.alten.ambroise.forum.view.fragments.ForumListFragment"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp" />
 
     <include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"/>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"

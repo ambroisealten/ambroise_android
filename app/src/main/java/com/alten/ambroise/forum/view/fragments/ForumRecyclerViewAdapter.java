@@ -1,16 +1,15 @@
 package com.alten.ambroise.forum.view.fragments;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.beans.Forum;
-import com.alten.ambroise.forum.data.viewModel.ForumViewModel;
 
 import java.util.List;
 
@@ -18,25 +17,27 @@ public class ForumRecyclerViewAdapter extends RecyclerView.Adapter<ForumRecycler
 
     public class ForumListViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView mNameView;
+        public final TextView mPlaceView;
+        public final TextView mDateView;
         public Forum mItem;
 
         public ForumListViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = view.findViewById(R.id.item_number);
-            mContentView = view.findViewById(R.id.content);
+            mNameView = view.findViewById(R.id.forum_name);
+            mPlaceView = view.findViewById(R.id.forum_place);
+            mDateView = view.findViewById(R.id.forum_date);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mPlaceView.getText() + "'";
         }
     }
 
     private final LayoutInflater mInflater;
-    private List<Forum> mForums; // Cached copy of words
+    private List<Forum> mForums; // Cached copy of forums
 
     ForumRecyclerViewAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
@@ -53,15 +54,16 @@ public class ForumRecyclerViewAdapter extends RecyclerView.Adapter<ForumRecycler
     public void onBindViewHolder(ForumListViewHolder holder, int position) {
         if (mForums != null) {
             holder.mItem = mForums.get(position);
-            holder.mIdView.setText(mForums.get(position).getName());
-            holder.mContentView.setText(mForums.get(position).getPlace());
+            holder.mNameView.setText(mForums.get(position).getName());
+            holder.mPlaceView.setText(mForums.get(position).getPlace());
+            holder.mDateView.setText(mForums.get(position).getDate());
         } else {
             // Covers the case of data not being ready yet.
-            holder.mContentView.setText("No Word");
+            holder.mPlaceView.setText("No forum");
         }
     }
 
-    void setWords(List<Forum> forums) {
+    void setForums(List<Forum> forums) {
         mForums = forums;
         notifyDataSetChanged();
     }
