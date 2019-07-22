@@ -8,6 +8,12 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.alten.ambroise.forum.view.fragments.ForumListFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
@@ -22,12 +28,6 @@
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" >
     </com.google.android.material.navigation.NavigationView>
-
-    <fragment
-        android:id="@+id/fragment"
-        android:name="com.alten.ambroise.forum.view.fragments.ForumListFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
 
