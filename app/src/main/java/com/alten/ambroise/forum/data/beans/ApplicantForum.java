@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import com.alten.ambroise.forum.data.Nationality;
+import com.alten.ambroise.forum.data.converter.Converters;
 
 import java.util.List;
 
@@ -24,15 +26,18 @@ public class ApplicantForum {
     private String personInChargeMail;
     private String phoneNumber;
     private String cvPerson;
+    @TypeConverters(Converters.class)
     private List<String> mobilities;
     private String contractType;
     private String contractDuration;
     private String startAt;
     private String highestDiploma;
     private String highestDiplomaYear;
+    @TypeConverters(Converters.class)
     private List<String> skills;
     private boolean vehicule;
     private boolean driverLicense;
+    @TypeConverters(Converters.class)
     private Nationality nationality;
     private String sign;
     private String grade;
