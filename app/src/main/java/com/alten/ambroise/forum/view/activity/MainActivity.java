@@ -1,7 +1,5 @@
 package com.alten.ambroise.forum.view.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -108,15 +106,5 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(Forum item) {
-        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-        alertDialog.setMessage(item.getName() + ":" + item.getDate());
-        alertDialog.setTitle("Alert");
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
     }
 }

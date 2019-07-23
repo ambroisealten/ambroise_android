@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.beans.Forum;
 import com.alten.ambroise.forum.data.viewModel.ForumViewModel;
+import com.alten.ambroise.forum.view.fragmentSwitcher.ForumFragmentSwitcher;
 
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class ForumListFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private ForumViewModel mForumViewModel;
     private ForumRecyclerViewAdapter adapter;
+    private ForumFragmentSwitcher switcher;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -60,7 +62,7 @@ public class ForumListFragment extends Fragment {
         this.adapter = new ForumRecyclerViewAdapter(this.getContext(), new ForumRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Forum forum) {
-                Toast.makeText(getContext(), "Item Clicked:"+forum.getName()+forum.getPlace()+forum.getDate(), Toast.LENGTH_LONG).show();
+                switcher.onItemClick(forum);
             }
         });
         //Instantiate forum view model and add observer
@@ -112,6 +114,14 @@ public class ForumListFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public ForumFragmentSwitcher getSwitcher() {
+        return switcher;
+    }
+
+    public void setSwitcher(ForumFragmentSwitcher switcher) {
+        this.switcher = switcher;
     }
 
     /**

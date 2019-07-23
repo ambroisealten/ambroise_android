@@ -3,6 +3,7 @@ package com.alten.ambroise.forum.view.fragmentSwitcher;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -13,8 +14,9 @@ import com.alten.ambroise.forum.data.beans.Forum;
 import com.alten.ambroise.forum.data.viewModel.ForumViewModel;
 import com.alten.ambroise.forum.view.fragments.ForumAddDialogFragment;
 import com.alten.ambroise.forum.view.fragments.ForumListFragment;
+import com.alten.ambroise.forum.view.fragments.ForumRecyclerViewAdapter;
 
-public class ForumFragmentSwitcher {
+public class ForumFragmentSwitcher implements ForumRecyclerViewAdapter.OnItemClickListener{
 
     public static final String forumListTag = "forumListTag";
     public static final String addForumTag = "addForumTag";
@@ -56,6 +58,7 @@ public class ForumFragmentSwitcher {
             Bundle bundle = new Bundle();
             bundle.putInt(ForumListFragment.ARG_COLUMN_COUNT, 2);
             forumListFragment.setArguments(bundle);
+            forumListFragment.setSwitcher(this);
         }
         return forumListFragment;
     }
@@ -73,5 +76,13 @@ public class ForumFragmentSwitcher {
     public void addNewForum(Forum newForum) {
         ForumViewModel forumViewModel = new ForumViewModel(activity.getApplication());
         forumViewModel.insert(newForum);
+    }
+
+    @Override
+    public void onItemClick(Forum forum) {
+        Toast.makeText(activity.getBaseContext(), "Item Clicked+++:"+forum.getName()+forum.getPlace()+forum.getDate(), Toast.LENGTH_LONG).show();
+        //TODO Switch to forum activity
+//        Intent myIntent = new Intent(this, MyActivityName.class);
+//        activity.startActivity(myIntent);
     }
 }
