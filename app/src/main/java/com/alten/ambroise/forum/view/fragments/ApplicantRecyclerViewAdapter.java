@@ -28,6 +28,7 @@ public class ApplicantRecyclerViewAdapter extends RecyclerView.Adapter<Applicant
         public final TextView mGradeView;
         public final TextView mHighestDiplomaView;
         public final TextView mHighestDiplomaYearView;
+        public final TextView mContractTypeView;
         public final TextView mStartAtView;
 
         public ApplicantForum mItem;
@@ -40,6 +41,7 @@ public class ApplicantRecyclerViewAdapter extends RecyclerView.Adapter<Applicant
             mGradeView = view.findViewById(R.id.applicant_grade);
             mHighestDiplomaView = view.findViewById(R.id.applicant_diploma_name);
             mHighestDiplomaYearView = view.findViewById(R.id.applicant_diploma_year);
+            mContractTypeView = view.findViewById(R.id.applicant_contract);
             mStartAtView = view.findViewById(R.id.applicant_start);
         }
 
@@ -76,14 +78,21 @@ public class ApplicantRecyclerViewAdapter extends RecyclerView.Adapter<Applicant
     @Override
     public void onBindViewHolder(ApplicantRecyclerViewAdapter.ApplicantListViewHolder holder, int position) {
         if (mApplicants != null) {
-            holder.bind(mApplicants.get(position), listeners);
-            holder.mItem = mApplicants.get(position);
-            holder.mSurnameView.setText(mApplicants.get(position).getSurname());
-            holder.mNameView.setText(mApplicants.get(position).getName());
-            holder.mGradeView.setText(mApplicants.get(position).getGrade());
-            holder.mHighestDiplomaView.setText(mApplicants.get(position).getHighestDiploma());
-            holder.mHighestDiplomaYearView.setText(mApplicants.get(position).getHighestDiplomaYear());
-            holder.mStartAtView.setText(mApplicants.get(position).getStartAt());
+            final ApplicantForum applicant = mApplicants.get(position);
+            holder.bind(applicant, listeners);
+            holder.mItem = applicant;
+            holder.mSurnameView.setText(applicant.getSurname());
+            holder.mNameView.setText(applicant.getName());
+            holder.mGradeView.setText(applicant.getGrade());
+            holder.mHighestDiplomaView.setText(applicant.getHighestDiploma());
+            holder.mHighestDiplomaYearView.setText(applicant.getHighestDiplomaYear());
+            final String contractType = applicant.getContractType();
+            holder.mContractTypeView.setText(contractType);
+            if(contractType == null || contractType.equals("CDI")){
+                holder.mStartAtView.setText(applicant.getStartAt());
+            }else{
+                holder.mStartAtView.setText(applicant.getContractDuration());
+            }
         } else {
             // Covers the case of data not being ready yet.
             holder.mSurnameView.setText("No Applicant");

@@ -12,7 +12,6 @@ import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.view.fragments.ApplicantListFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantRecyclerViewAdapter;
-import com.alten.ambroise.forum.view.fragments.ForumListFragment;
 
 public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRecyclerViewAdapter.OnItemClickListener {
 
@@ -61,7 +60,7 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
         if (applicantListFragment == null) {
             applicantListFragment = new ApplicantListFragment();
             Bundle bundle = new Bundle();
-            bundle.putInt(ForumListFragment.ARG_COLUMN_COUNT, 1);
+            bundle.putInt(ApplicantListFragment.ARG_COLUMN_COUNT, 1);
             applicantListFragment.setArguments(bundle);
             applicantListFragment.setSwitcher(this);
         }

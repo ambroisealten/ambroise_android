@@ -32,7 +32,7 @@ public class ForumListFragment extends Fragment {
     // TODO: Customize parameter argument names
     public static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
-    private int mColumnCount = 2;
+    private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     private ForumViewModel mForumViewModel;
     private ForumRecyclerViewAdapter adapter;

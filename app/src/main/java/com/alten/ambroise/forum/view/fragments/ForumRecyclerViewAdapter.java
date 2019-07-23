@@ -69,11 +69,12 @@ public class ForumRecyclerViewAdapter extends RecyclerView.Adapter<ForumRecycler
     @Override
     public void onBindViewHolder(ForumListViewHolder holder, int position) {
         if (mForums != null) {
-            holder.bind(mForums.get(position), listeners);
-            holder.mItem = mForums.get(position);
-            holder.mNameView.setText(mForums.get(position).getName());
-            holder.mPlaceView.setText(mForums.get(position).getPlace());
-            holder.mDateView.setText(mForums.get(position).getDate());
+            final Forum forum = mForums.get(position);
+            holder.bind(forum, listeners);
+            holder.mItem = forum;
+            holder.mNameView.setText(forum.getName());
+            holder.mPlaceView.setText(forum.getPlace());
+            holder.mDateView.setText(forum.getDate());
         } else {
             // Covers the case of data not being ready yet.
             holder.mPlaceView.setText("No forum");
