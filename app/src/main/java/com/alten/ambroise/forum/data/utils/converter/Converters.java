@@ -1,8 +1,8 @@
-package com.alten.ambroise.forum.data.converter;
+package com.alten.ambroise.forum.data.utils.converter;
 
 import androidx.room.TypeConverter;
 
-import com.alten.ambroise.forum.data.Nationality;
+import com.alten.ambroise.forum.data.utils.Nationality;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

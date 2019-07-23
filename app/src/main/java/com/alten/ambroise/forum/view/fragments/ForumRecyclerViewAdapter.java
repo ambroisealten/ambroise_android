@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alten.ambroise.forum.R;
-import com.alten.ambroise.forum.data.beans.Forum;
+import com.alten.ambroise.forum.data.model.beans.Forum;
 
 import java.util.List;
 

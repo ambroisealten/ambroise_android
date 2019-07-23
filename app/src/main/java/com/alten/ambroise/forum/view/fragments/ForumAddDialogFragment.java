@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import androidx.fragment.app.DialogFragment;
 
 import com.alten.ambroise.forum.R;
-import com.alten.ambroise.forum.data.beans.Forum;
+import com.alten.ambroise.forum.data.model.beans.Forum;
 import com.alten.ambroise.forum.view.fragmentSwitcher.ForumFragmentSwitcher;
 
 public class ForumAddDialogFragment extends DialogFragment {

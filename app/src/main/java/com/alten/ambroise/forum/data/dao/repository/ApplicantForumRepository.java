@@ -1,13 +1,13 @@
-package com.alten.ambroise.forum.data.repository;
+package com.alten.ambroise.forum.data.dao.repository;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
-import com.alten.ambroise.forum.data.beans.ApplicantForum;
+import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.dao.ApplicantForumDao;
-import com.alten.ambroise.forum.data.dao.ApplicantForumRoomDatabase;
+import com.alten.ambroise.forum.data.dao.roomDatabase.ApplicantForumRoomDatabase;
 
 import java.util.List;
 

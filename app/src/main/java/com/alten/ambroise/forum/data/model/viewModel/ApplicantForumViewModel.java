@@ -1,12 +1,12 @@
-package com.alten.ambroise.forum.data.viewModel;
+package com.alten.ambroise.forum.data.model.viewModel;
 
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.alten.ambroise.forum.data.beans.ApplicantForum;
-import com.alten.ambroise.forum.data.repository.ApplicantForumRepository;
+import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
+import com.alten.ambroise.forum.data.dao.repository.ApplicantForumRepository;
 
 import java.util.List;
 

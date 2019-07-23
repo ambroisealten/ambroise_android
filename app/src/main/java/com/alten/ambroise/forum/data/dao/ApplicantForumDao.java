@@ -7,7 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.alten.ambroise.forum.data.beans.ApplicantForum;
+import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.alten.ambroise.forum.data.dao;
+package com.alten.ambroise.forum.data.dao.roomDatabase;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -9,20 +9,22 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.alten.ambroise.forum.data.beans.Forum;
+import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
+import com.alten.ambroise.forum.data.dao.ApplicantForumDao;
 
-@Database(entities = {Forum.class}, version = 1)
-public abstract class ForumRoomDatabase extends RoomDatabase {
-    public abstract ForumDao forumRepository();
 
-    private static volatile ForumRoomDatabase INSTANCE;
+@Database(entities = {ApplicantForum.class}, version = 1)
+public abstract class ApplicantForumRoomDatabase extends RoomDatabase {
+    public abstract ApplicantForumDao applicantForumRepository();
 
-    public static ForumRoomDatabase getDatabase(final Context context) {
+    private static volatile ApplicantForumRoomDatabase INSTANCE;
+
+    public static ApplicantForumRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (ForumRoomDatabase.class) {
+            synchronized (ApplicantForumRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            ForumRoomDatabase.class, "forum_database")
+                            ApplicantForumRoomDatabase.class, "applicantForum_database")
                             .addCallback(sRoomDatabaseCallback) //TODO DELETE ON PROD
                             .build();
                 }
@@ -43,21 +45,22 @@ public abstract class ForumRoomDatabase extends RoomDatabase {
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
-        private final ForumDao mDao;
+        private final ApplicantForumDao mDao;
 
-        PopulateDbAsync(ForumRoomDatabase db) {
-            mDao = db.forumRepository();
+        PopulateDbAsync(ApplicantForumRoomDatabase db) {
+            mDao = db.applicantForumRepository();
         }
 
         @Override
         protected Void doInBackground(final Void... params) {
             mDao.deleteAll();
             for(int i = 0;i<100;i++){
-                Forum forum = new Forum();
-                forum.setDate("10/07/2019");
-                forum.setName("name"+i);
-                forum.setPlace("place"+i);
-                mDao.insert(forum);
+                ApplicantForum applicant = new ApplicantForum();
+                applicant.setMail("mail"+i+"@mail.com");
+                applicant.setName("name"+i);
+                applicant.setSurname("surname"+i);
+                applicant.setPersonInChargeMail("inchargeMail@mail.com");
+                mDao.insert(applicant);
             }
             return null;
         }

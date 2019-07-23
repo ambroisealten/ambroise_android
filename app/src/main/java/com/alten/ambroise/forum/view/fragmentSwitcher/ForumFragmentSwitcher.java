@@ -10,8 +10,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.alten.ambroise.forum.R;
-import com.alten.ambroise.forum.data.beans.Forum;
-import com.alten.ambroise.forum.data.viewModel.ForumViewModel;
+import com.alten.ambroise.forum.data.model.beans.Forum;
+import com.alten.ambroise.forum.data.model.viewModel.ForumViewModel;
 import com.alten.ambroise.forum.view.fragments.ForumAddDialogFragment;
 import com.alten.ambroise.forum.view.fragments.ForumListFragment;
 import com.alten.ambroise.forum.view.fragments.ForumRecyclerViewAdapter;

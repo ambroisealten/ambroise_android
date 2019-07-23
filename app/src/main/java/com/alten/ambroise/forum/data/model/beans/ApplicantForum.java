@@ -1,4 +1,4 @@
-package com.alten.ambroise.forum.data.beans;
+package com.alten.ambroise.forum.data.model.beans;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -6,8 +6,8 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import com.alten.ambroise.forum.data.Nationality;
-import com.alten.ambroise.forum.data.converter.Converters;
+import com.alten.ambroise.forum.data.utils.Nationality;
+import com.alten.ambroise.forum.data.utils.converter.Converters;
 
 import java.util.List;
 

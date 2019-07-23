@@ -12,7 +12,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.alten.ambroise.forum.R;
-import com.alten.ambroise.forum.data.beans.Forum;
+import com.alten.ambroise.forum.data.model.beans.Forum;
 import com.alten.ambroise.forum.view.fragmentSwitcher.ForumFragmentSwitcher;
 import com.alten.ambroise.forum.view.fragments.ForumListFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
