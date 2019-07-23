@@ -35,7 +35,6 @@ public class ApplicantRecyclerViewAdapter extends RecyclerView.Adapter<Applicant
         public ApplicantListViewHolder(View view) {
             super(view);
             mView = view;
-            System.out.println(view.findViewById(R.id.applicant_surname));
             mSurnameView = view.findViewById(R.id.applicant_surname);
             mNameView = view.findViewById(R.id.applicant_name);
             mGradeView = view.findViewById(R.id.applicant_grade);
@@ -77,7 +76,6 @@ public class ApplicantRecyclerViewAdapter extends RecyclerView.Adapter<Applicant
     @Override
     public void onBindViewHolder(ApplicantRecyclerViewAdapter.ApplicantListViewHolder holder, int position) {
         if (mApplicants != null) {
-            System.out.println(mApplicants.get(position));
             holder.bind(mApplicants.get(position), listeners);
             holder.mItem = mApplicants.get(position);
             holder.mSurnameView.setText(mApplicants.get(position).getSurname());

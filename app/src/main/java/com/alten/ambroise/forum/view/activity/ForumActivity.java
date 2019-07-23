@@ -62,7 +62,13 @@ public class ForumActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            //We pop the backstack.
             super.onBackPressed();
+            //If when we pop the first element of backstack, this activity don't have fragment, we do back again
+            //Then we avoid to have empty activities
+            if (findViewById(R.id.fragment).getTag() == null) {
+                super.onBackPressed();
+            }
         }
     }
 
