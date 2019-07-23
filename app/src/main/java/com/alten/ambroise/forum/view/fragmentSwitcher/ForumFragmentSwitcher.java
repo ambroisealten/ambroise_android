@@ -82,7 +82,7 @@ public class ForumFragmentSwitcher implements ForumRecyclerViewAdapter.OnItemCli
     public void onItemClick(Forum forum) {
         Toast.makeText(activity.getBaseContext(), "Item Clicked+++:"+forum.getName()+forum.getPlace()+forum.getDate(), Toast.LENGTH_LONG).show();
         //TODO Switch to forum activity
-//        Intent myIntent = new Intent(this, MyActivityName.class);
+//        Intent myIntent = new Intent(activity.getBaseContext(), MyActivityName.class);
 //        activity.startActivity(myIntent);
     }
 }
