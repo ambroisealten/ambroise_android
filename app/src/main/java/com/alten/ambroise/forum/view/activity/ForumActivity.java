@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,23 +14,26 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.alten.ambroise.forum.R;
+import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.model.beans.Forum;
+import com.alten.ambroise.forum.view.fragmentSwitcher.ApplicantFragmentSwitcher;
+import com.alten.ambroise.forum.view.fragments.ApplicantListFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 public class ForumActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener , ApplicantListFragment.OnListFragmentInteractionListener{
 
     private Forum forum;
+    private ApplicantFragmentSwitcher applicantFragmentSwitcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        this.applicantFragmentSwitcher = new ApplicantFragmentSwitcher(this);
         Intent intent = getIntent();
         forum = intent.getParcelableExtra("forum");
-
+        this.setTitle(forum.getName());
         setContentView(R.layout.activity_forum);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -37,8 +41,7 @@ public class ForumActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Add applicant on forum"+forum.getName()+forum.getPlace()+forum.getDate(), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.ADD_APPLICANT_TAG);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -48,6 +51,7 @@ public class ForumActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG);
     }
 
     @Override
@@ -64,6 +68,8 @@ public class ForumActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.forum, menu);
+        ((TextView) findViewById(R.id.forumName)).setText(forum.getName());
+        ((TextView) findViewById(R.id.forumDate)).setText(forum.getDate());
         return true;
     }
 
@@ -105,5 +111,9 @@ public class ForumActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onListFragmentInteraction(ApplicantForum item) {
     }
 }

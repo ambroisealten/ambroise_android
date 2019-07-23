@@ -4,7 +4,6 @@ package com.alten.ambroise.forum.view.fragmentSwitcher;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -18,23 +17,24 @@ import com.alten.ambroise.forum.view.fragments.ForumAddDialogFragment;
 import com.alten.ambroise.forum.view.fragments.ForumListFragment;
 import com.alten.ambroise.forum.view.fragments.ForumRecyclerViewAdapter;
 
-public class ForumFragmentSwitcher implements ForumRecyclerViewAdapter.OnItemClickListener{
+public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerViewAdapter.OnItemClickListener{
 
-    public static final String forumListTag = "forumListTag";
-    public static final String addForumTag = "addForumTag";
+    public static final String FORUM_LIST_TAG = "forumListTag";
+    public static final String ADD_FORUM_TAG = "addForumTag";
     private final Activity activity;
 
     public ForumFragmentSwitcher(Activity activity){
         this.activity = activity;
     }
 
+    @Override
     public void switchFragment(FragmentManager fm, String tag) {
         Fragment fragment;
         switch (tag) {
-            case forumListTag:
+            case FORUM_LIST_TAG:
                 fragment = switchForumListFragment(fm);
                 break;
-            case addForumTag:
+            case ADD_FORUM_TAG:
                 switchForumAddFragment(fm);
                 return;
             default:
@@ -43,10 +43,11 @@ public class ForumFragmentSwitcher implements ForumRecyclerViewAdapter.OnItemCli
         }
         FragmentTransaction fTransaction = fm.beginTransaction();
         // Définissez les animations
-            /*fTransaction.setCustomAnimations(R.anim.anim_push_left_in,
-                    R.anim.anim_push_left_out,
-                    R.anim.anim_push_right_in,
-                    R.anim.anim_push_right_out);*/
+        fTransaction.setCustomAnimations(R.anim.push_left_in
+                ,R.anim.push_left_out
+                ,R.anim.push_right_in
+                ,R.anim.push_right_out
+        );
         // Remplacez, ajoutez à la backstack et commit
         fTransaction.replace(R.id.fragment, fragment, tag);
         fTransaction.addToBackStack(tag);
@@ -54,7 +55,7 @@ public class ForumFragmentSwitcher implements ForumRecyclerViewAdapter.OnItemCli
     }
 
     private ForumListFragment switchForumListFragment(FragmentManager fm) {
-        ForumListFragment forumListFragment = (ForumListFragment) fm.findFragmentByTag(forumListTag);
+        ForumListFragment forumListFragment = (ForumListFragment) fm.findFragmentByTag(FORUM_LIST_TAG);
         if (forumListFragment == null) {
             forumListFragment = new ForumListFragment();
             Bundle bundle = new Bundle();
@@ -82,7 +83,6 @@ public class ForumFragmentSwitcher implements ForumRecyclerViewAdapter.OnItemCli
 
     @Override
     public void onItemClick(Forum forum) {
-        Toast.makeText(activity.getBaseContext(), "Item Clicked+++:"+forum.getName()+forum.getPlace()+forum.getDate(), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(activity.getBaseContext(), ForumActivity.class);
         intent.putExtra("forum",forum);
         activity.startActivity(intent);

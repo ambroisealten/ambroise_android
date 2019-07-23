@@ -8,6 +8,12 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+    <androidx.fragment.app.FragmentTabHost
+        android:id="@+id/fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="60dp" />
+
     <include
         layout="@layout/app_bar_forum"
         android:layout_width="match_parent"

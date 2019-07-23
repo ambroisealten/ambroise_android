@@ -10,7 +10,6 @@
 
     <androidx.fragment.app.FragmentTabHost
         android:id="@+id/fragment"
-        android:name="com.alten.ambroise.forum.view.fragments.ForumListFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="60dp" />

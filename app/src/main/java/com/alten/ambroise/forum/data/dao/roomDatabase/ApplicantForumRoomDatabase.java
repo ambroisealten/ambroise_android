@@ -60,6 +60,10 @@ public abstract class ApplicantForumRoomDatabase extends RoomDatabase {
                 applicant.setName("name"+i);
                 applicant.setSurname("surname"+i);
                 applicant.setPersonInChargeMail("inchargeMail@mail.com");
+                applicant.setHighestDiploma("ALTEN SCHOOL");
+                applicant.setHighestDiplomaYear("23/07/2019");
+                applicant.setGrade("+++");
+                applicant.setStartAt("01/01/2020");
                 mDao.insert(applicant);
             }
             return null;

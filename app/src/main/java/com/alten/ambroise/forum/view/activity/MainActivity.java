@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.addForumTag);
+                forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.ADD_FORUM_TAG);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.forumListTag);
+        forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.FORUM_LIST_TAG);
     }
 
     @Override
