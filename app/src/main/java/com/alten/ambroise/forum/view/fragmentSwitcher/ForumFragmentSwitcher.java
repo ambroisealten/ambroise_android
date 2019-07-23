@@ -17,39 +17,44 @@ import com.alten.ambroise.forum.view.fragments.ForumAddDialogFragment;
 import com.alten.ambroise.forum.view.fragments.ForumListFragment;
 import com.alten.ambroise.forum.view.fragments.ForumRecyclerViewAdapter;
 
-public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerViewAdapter.OnItemClickListener{
+public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerViewAdapter.OnItemClickListener {
 
     public static final String FORUM_LIST_TAG = "forumListTag";
     public static final String ADD_FORUM_TAG = "addForumTag";
     private final Activity activity;
 
-    public ForumFragmentSwitcher(Activity activity){
+    public ForumFragmentSwitcher(Activity activity) {
         this.activity = activity;
     }
 
     @Override
     public void switchFragment(FragmentManager fm, String tag) {
-        Fragment fragment;
-        switch (tag) {
-            case FORUM_LIST_TAG:
-                fragment = switchForumListFragment(fm);
-                break;
-            case ADD_FORUM_TAG:
-                switchForumAddFragment(fm);
-                return;
-            default:
-                fragment = switchForumListFragment(fm);
-                break;
-        }
+        Fragment fragment = fm.findFragmentByTag(tag);
         FragmentTransaction fTransaction = fm.beginTransaction();
-        // Définissez les animations
-        fTransaction.setCustomAnimations(R.anim.push_left_in
-                ,R.anim.push_left_out
-                ,R.anim.push_right_in
-                ,R.anim.push_right_out
-        );
+        if (fragment == null) {
+            switch (tag) {
+                case FORUM_LIST_TAG:
+                    fragment = switchForumListFragment(fm);
+                    break;
+                case ADD_FORUM_TAG:
+                    switchForumAddFragment(fm);
+                    return;
+                default:
+                    fragment = switchForumListFragment(fm);
+                    break;
+            }
+            // Définissez les animations
+            fTransaction.setCustomAnimations(R.anim.push_left_in
+                    , R.anim.push_left_out
+                    , R.anim.push_right_in
+                    , R.anim.push_right_out
+            );
+            fTransaction.replace(R.id.fragment, fragment, tag);
+        } else {
+            // Le fragment existe déjà, il suffit de l'afficher
+            fTransaction.show(fragment);
+        }
         // Remplacez, ajoutez à la backstack et commit
-        fTransaction.replace(R.id.fragment, fragment, tag);
         fTransaction.addToBackStack(tag);
         fTransaction.commit();
     }
@@ -84,7 +89,7 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
     @Override
     public void onItemClick(Forum forum) {
         Intent intent = new Intent(activity.getBaseContext(), ForumActivity.class);
-        intent.putExtra("forum",forum);
+        intent.putExtra("forum", forum);
         activity.startActivity(intent);
     }
 }

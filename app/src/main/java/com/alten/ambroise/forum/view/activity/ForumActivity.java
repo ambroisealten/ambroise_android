@@ -22,7 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 public class ForumActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener , ApplicantListFragment.OnListFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener, ApplicantListFragment.OnListFragmentInteractionListener {
 
     private Forum forum;
     private ApplicantFragmentSwitcher applicantFragmentSwitcher;
@@ -51,7 +51,9 @@ public class ForumActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG);
+        if (savedInstanceState == null) {
+            applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG);
+        }
     }
 
     @Override

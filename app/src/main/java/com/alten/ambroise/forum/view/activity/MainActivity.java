@@ -44,7 +44,9 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.FORUM_LIST_TAG);
+        if (savedInstanceState == null) {
+            forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.FORUM_LIST_TAG);
+        }
     }
 
     @Override

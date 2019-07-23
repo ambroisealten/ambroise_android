@@ -26,26 +26,32 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
 
     @Override
     public void switchFragment(FragmentManager fm, String tag) {
-        Fragment fragment;
-        switch (tag) {
-            case APPLICANT_LIST_TAG:
-                fragment = switchApplicantListFragment(fm);
-                break;
-            case ADD_APPLICANT_TAG:
-//                switchForumAddFragment(fm);
-                return;
-            default:
-                fragment = switchApplicantListFragment(fm);
-                break;
-        }
+        Fragment fragment = fm.findFragmentByTag(tag);
         FragmentTransaction fTransaction = fm.beginTransaction();
-        // Définissez les animations
-        fTransaction.setCustomAnimations(R.anim.push_left_in,
-                R.anim.push_left_out,
-                R.anim.push_right_in,
-                R.anim.push_right_out);
+        if (fragment == null) {
+            switch (tag) {
+                case APPLICANT_LIST_TAG:
+                    fragment = switchApplicantListFragment(fm);
+                    break;
+                case ADD_APPLICANT_TAG:
+//                switchForumAddFragment(fm);
+                    return;
+                default:
+                    fragment = switchApplicantListFragment(fm);
+                    break;
+            }
+            // Définissez les animations
+            fTransaction.setCustomAnimations(R.anim.push_left_in
+                    , R.anim.push_left_out
+                    , R.anim.push_right_in
+                    , R.anim.push_right_out
+            );
+            fTransaction.replace(R.id.fragment, fragment, tag);
+        } else {
+            // Le fragment existe déjà, il suffit de l'afficher
+            fTransaction.show(fragment);
+        }
         // Remplacez, ajoutez à la backstack et commit
-        fTransaction.replace(R.id.fragment, fragment, tag);
         fTransaction.addToBackStack(tag);
         fTransaction.commit();
     }
@@ -64,7 +70,7 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
 
     @Override
     public void onItemClick(ApplicantForum applicant) {
-        Toast.makeText(activity, "CLICK SUR CANDIDAT"+applicant.getMail(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, "CLICK SUR CANDIDAT" + applicant.getMail(), Toast.LENGTH_SHORT).show();
 //        Intent intent = new Intent(activity.getBaseContext(), ForumActivity.class);
 //        intent.putExtra("forum",forum);
 //        activity.startActivity(intent);
