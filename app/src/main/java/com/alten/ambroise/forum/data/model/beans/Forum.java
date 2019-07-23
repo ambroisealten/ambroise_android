@@ -1,11 +1,15 @@
 package com.alten.ambroise.forum.data.model.beans;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "forum_table")
-public class Forum {
+public class Forum implements Parcelable {
+
 
     @PrimaryKey(autoGenerate = true)
     private long _id;
@@ -50,5 +54,40 @@ public class Forum {
 
     public void setPlace(@NonNull String place) {
         this.place = place;
+    }
+
+    public Forum() {
+    }
+
+    protected Forum(Parcel in) {
+        _id = in.readLong();
+        name = in.readString();
+        date = in.readString();
+        place = in.readString();
+    }
+
+    public static final Creator<Forum> CREATOR = new Creator<Forum>() {
+        @Override
+        public Forum createFromParcel(Parcel in) {
+            return new Forum(in);
+        }
+
+        @Override
+        public Forum[] newArray(int size) {
+            return new Forum[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(_id);
+        dest.writeString(name);
+        dest.writeString(date);
+        dest.writeString(place);
     }
 }

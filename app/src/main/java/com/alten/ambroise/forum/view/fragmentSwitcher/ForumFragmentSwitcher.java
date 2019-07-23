@@ -2,6 +2,7 @@ package com.alten.ambroise.forum.view.fragmentSwitcher;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -12,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.Forum;
 import com.alten.ambroise.forum.data.model.viewModel.ForumViewModel;
+import com.alten.ambroise.forum.view.activity.ForumActivity;
 import com.alten.ambroise.forum.view.fragments.ForumAddDialogFragment;
 import com.alten.ambroise.forum.view.fragments.ForumListFragment;
 import com.alten.ambroise.forum.view.fragments.ForumRecyclerViewAdapter;
@@ -81,8 +83,8 @@ public class ForumFragmentSwitcher implements ForumRecyclerViewAdapter.OnItemCli
     @Override
     public void onItemClick(Forum forum) {
         Toast.makeText(activity.getBaseContext(), "Item Clicked+++:"+forum.getName()+forum.getPlace()+forum.getDate(), Toast.LENGTH_LONG).show();
-        //TODO Switch to forum activity
-//        Intent myIntent = new Intent(activity.getBaseContext(), MyActivityName.class);
-//        activity.startActivity(myIntent);
+        Intent intent = new Intent(activity.getBaseContext(), ForumActivity.class);
+        intent.putExtra("forum",forum);
+        activity.startActivity(intent);
     }
 }
