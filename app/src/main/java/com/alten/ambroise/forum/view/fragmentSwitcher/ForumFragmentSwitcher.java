@@ -4,6 +4,8 @@ package com.alten.ambroise.forum.view.fragmentSwitcher;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -17,15 +19,30 @@ import com.alten.ambroise.forum.view.fragments.ForumAddDialogFragment;
 import com.alten.ambroise.forum.view.fragments.ForumListFragment;
 import com.alten.ambroise.forum.view.fragments.ForumRecyclerViewAdapter;
 
-public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerViewAdapter.OnItemClickListener {
+public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerViewAdapter.OnItemClickListener, Parcelable {
 
     public static final String FORUM_LIST_TAG = "forumListTag";
     public static final String ADD_FORUM_TAG = "addForumTag";
-    private final Activity activity;
+    private Activity activity;
 
     public ForumFragmentSwitcher(Activity activity) {
         this.activity = activity;
     }
+
+    protected ForumFragmentSwitcher(Parcel in) {
+    }
+
+    public static final Creator<ForumFragmentSwitcher> CREATOR = new Creator<ForumFragmentSwitcher>() {
+        @Override
+        public ForumFragmentSwitcher createFromParcel(Parcel in) {
+            return new ForumFragmentSwitcher(in);
+        }
+
+        @Override
+        public ForumFragmentSwitcher[] newArray(int size) {
+            return new ForumFragmentSwitcher[size];
+        }
+    };
 
     @Override
     public void switchFragment(FragmentManager fm, String tag) {
@@ -91,5 +108,18 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
         Intent intent = new Intent(activity.getBaseContext(), ForumActivity.class);
         intent.putExtra("forum", forum);
         activity.startActivity(intent);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 }

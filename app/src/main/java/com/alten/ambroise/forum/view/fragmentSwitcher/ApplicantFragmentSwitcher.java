@@ -2,6 +2,8 @@ package com.alten.ambroise.forum.view.fragmentSwitcher;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -13,15 +15,31 @@ import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.view.fragments.ApplicantListFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantRecyclerViewAdapter;
 
-public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRecyclerViewAdapter.OnItemClickListener {
+public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRecyclerViewAdapter.OnItemClickListener, Parcelable {
 
     public static final String APPLICANT_LIST_TAG = "applicantListTag";
     public static final String ADD_APPLICANT_TAG = "addApplicantTag";
-    private final Activity activity;
+
+    private Activity activity;
 
     public ApplicantFragmentSwitcher(Activity activity) {
         this.activity = activity;
     }
+
+    protected ApplicantFragmentSwitcher(Parcel in) {
+    }
+
+    public static final Creator<ApplicantFragmentSwitcher> CREATOR = new Creator<ApplicantFragmentSwitcher>() {
+        @Override
+        public ApplicantFragmentSwitcher createFromParcel(Parcel in) {
+            return new ApplicantFragmentSwitcher(in);
+        }
+
+        @Override
+        public ApplicantFragmentSwitcher[] newArray(int size) {
+            return new ApplicantFragmentSwitcher[size];
+        }
+    };
 
     @Override
     public void switchFragment(FragmentManager fm, String tag) {
@@ -73,5 +91,18 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
 //        Intent intent = new Intent(activity.getBaseContext(), ForumActivity.class);
 //        intent.putExtra("forum",forum);
 //        activity.startActivity(intent);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 }

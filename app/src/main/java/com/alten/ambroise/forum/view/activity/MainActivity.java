@@ -26,17 +26,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.forumFragmentSwitcher = new ForumFragmentSwitcher(this);
         setContentView(R.layout.activity_main);
+        //If is not a restored activity
+        if (savedInstanceState == null) {
+            this.forumFragmentSwitcher = new ForumFragmentSwitcher(this);
+        }else{
+            this.forumFragmentSwitcher = savedInstanceState.getParcelable("forumFragmentSwitcher");
+            this.forumFragmentSwitcher.setActivity(this);
+        }
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.ADD_FORUM_TAG);
-            }
-        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -44,9 +44,13 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        if (savedInstanceState == null) {
-            forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.FORUM_LIST_TAG);
-        }
+        forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.FORUM_LIST_TAG);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.ADD_FORUM_TAG);
+            }
+        });
     }
 
     @Override

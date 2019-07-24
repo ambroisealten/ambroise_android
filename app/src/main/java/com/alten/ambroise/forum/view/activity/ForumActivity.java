@@ -30,20 +30,21 @@ public class ForumActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.applicantFragmentSwitcher = new ApplicantFragmentSwitcher(this);
-        Intent intent = getIntent();
-        forum = intent.getParcelableExtra("forum");
-        this.setTitle(forum.getName());
         setContentView(R.layout.activity_forum);
+        //If is not a restored activity
+        if (savedInstanceState == null) {
+            this.applicantFragmentSwitcher = new ApplicantFragmentSwitcher(this);
+            Intent intent = getIntent();
+            forum = intent.getParcelableExtra("forum");
+        }else{
+            this.applicantFragmentSwitcher = savedInstanceState.getParcelable("applicantFragmentSwitcher");
+            this.applicantFragmentSwitcher.setActivity(this);
+            this.forum = savedInstanceState.getParcelable("forum");
+        }
+        this.setTitle(forum.getName());
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.ADD_APPLICANT_TAG);
-            }
-        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -51,9 +52,21 @@ public class ForumActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        if (savedInstanceState == null) {
-            applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG);
-        }
+
+        applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.ADD_APPLICANT_TAG);
+            }
+        });
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putParcelable("forum", this.forum);
+        savedInstanceState.putParcelable("applicantFragmentSwitcher", this.applicantFragmentSwitcher);
     }
 
     @Override
