@@ -5,16 +5,16 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
-import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.dao.ApplicantForumDao;
 import com.alten.ambroise.forum.data.dao.roomDatabase.ApplicantForumRoomDatabase;
+import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 
 import java.util.List;
 
 public class ApplicantForumRepository {
 
-    private ApplicantForumDao applicantForumDao;
-    private LiveData<List<ApplicantForum>> mAllApplicants;
+    private final ApplicantForumDao applicantForumDao;
+    private final LiveData<List<ApplicantForum>> mAllApplicants;
 
     public ApplicantForumRepository(Application application) {
         ApplicantForumRoomDatabase db = ApplicantForumRoomDatabase.getDatabase(application);
@@ -27,13 +27,13 @@ public class ApplicantForumRepository {
     }
 
 
-    public void insert (ApplicantForum applicant) {
+    public void insert(ApplicantForum applicant) {
         new ApplicantForumRepository.insertAsyncTask(applicantForumDao).execute(applicant);
     }
 
     private static class insertAsyncTask extends AsyncTask<ApplicantForum, Void, Void> {
 
-        private ApplicantForumDao mAsyncTaskDao;
+        private final ApplicantForumDao mAsyncTaskDao;
 
         insertAsyncTask(ApplicantForumDao dao) {
             mAsyncTaskDao = dao;

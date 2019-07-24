@@ -30,8 +30,9 @@ public class MainActivity extends AppCompatActivity
         //If is not a restored activity
         if (savedInstanceState == null) {
             this.forumFragmentSwitcher = new ForumFragmentSwitcher(this);
-        }else{
+        } else {
             this.forumFragmentSwitcher = savedInstanceState.getParcelable("forumFragmentSwitcher");
+            assert this.forumFragmentSwitcher != null;
             this.forumFragmentSwitcher.setActivity(this);
         }
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
             //If when we pop the first element of backstack, this activity don't have fragment, we do back again
             //Then we avoid to have empty activities
-            if (findViewById(R.id.fragment).getTag() == null) {
+            if (findViewById(R.id.main_fragment).getTag() == null) {
                 super.onBackPressed();
             }
         }

@@ -23,15 +23,6 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
 
     public static final String FORUM_LIST_TAG = "forumListTag";
     public static final String ADD_FORUM_TAG = "addForumTag";
-    private Activity activity;
-
-    public ForumFragmentSwitcher(Activity activity) {
-        this.activity = activity;
-    }
-
-    protected ForumFragmentSwitcher(Parcel in) {
-    }
-
     public static final Creator<ForumFragmentSwitcher> CREATOR = new Creator<ForumFragmentSwitcher>() {
         @Override
         public ForumFragmentSwitcher createFromParcel(Parcel in) {
@@ -43,6 +34,14 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
             return new ForumFragmentSwitcher[size];
         }
     };
+    private Activity activity;
+
+    public ForumFragmentSwitcher(Activity activity) {
+        this.activity = activity;
+    }
+
+    private ForumFragmentSwitcher(Parcel in) {
+    }
 
     @Override
     public void switchFragment(FragmentManager fm, String tag) {
@@ -55,7 +54,7 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
                     break;
                 case ADD_FORUM_TAG:
                     switchForumAddFragment(fm);
-                    return;
+                    return; //Just in this cas because we open a dialog (fragment dialog)
                 default:
                     fragment = switchForumListFragment(fm);
                     break;
@@ -65,15 +64,13 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
                     , R.anim.push_left_out
                     , R.anim.push_right_in
                     , R.anim.push_right_out
-            );
-            fTransaction.replace(R.id.fragment, fragment, tag);
+            ).replace(R.id.main_fragment, fragment, tag);
         } else {
             // Le fragment existe déjà, il suffit de l'afficher
             fTransaction.show(fragment);
         }
         // Remplacez, ajoutez à la backstack et commit
-        fTransaction.addToBackStack(tag);
-        fTransaction.commit();
+        fTransaction.addToBackStack(tag).commit();
     }
 
     private ForumListFragment switchForumListFragment(FragmentManager fm) {

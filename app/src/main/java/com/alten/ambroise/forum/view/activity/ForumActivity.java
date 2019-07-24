@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,12 +18,15 @@ import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.model.beans.Forum;
 import com.alten.ambroise.forum.view.fragmentSwitcher.ApplicantFragmentSwitcher;
+import com.alten.ambroise.forum.view.fragments.ApplicantAddFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantListFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Objects;
+
 public class ForumActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ApplicantListFragment.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ApplicantListFragment.OnListFragmentInteractionListener, ApplicantAddFragment.OnFragmentInteractionListener {
 
     private Forum forum;
     private ApplicantFragmentSwitcher applicantFragmentSwitcher;
@@ -36,15 +40,21 @@ public class ForumActivity extends AppCompatActivity
             this.applicantFragmentSwitcher = new ApplicantFragmentSwitcher(this);
             Intent intent = getIntent();
             forum = intent.getParcelableExtra("forum");
-        }else{
+        } else {
             this.applicantFragmentSwitcher = savedInstanceState.getParcelable("applicantFragmentSwitcher");
-            this.applicantFragmentSwitcher.setActivity(this);
+            Objects.requireNonNull(this.applicantFragmentSwitcher).setActivity(this);
             this.forum = savedInstanceState.getParcelable("forum");
         }
-        this.setTitle(forum.getName());
+        this.setTitle(Objects.requireNonNull(forum).getName());
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.ADD_APPLICANT_TAG);
+            }
+        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -79,7 +89,7 @@ public class ForumActivity extends AppCompatActivity
             super.onBackPressed();
             //If when we pop the first element of backstack, this activity don't have fragment, we do back again
             //Then we avoid to have empty activities
-            if (findViewById(R.id.fragment).getTag() == null) {
+            if (findViewById(R.id.forum_fragment).getTag() == null) {
                 super.onBackPressed();
             }
         }
@@ -111,7 +121,7 @@ public class ForumActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -136,5 +146,9 @@ public class ForumActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(ApplicantForum item) {
+    }
+
+    @Override
+    public void onFragmentInteraction(ApplicantForum applicant) {
     }
 }

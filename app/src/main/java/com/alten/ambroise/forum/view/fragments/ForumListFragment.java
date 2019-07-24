@@ -34,7 +34,6 @@ public class ForumListFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
-    private ForumViewModel mForumViewModel;
     private ForumRecyclerViewAdapter adapter;
     private ForumFragmentSwitcher switcher;
 
@@ -67,7 +66,7 @@ public class ForumListFragment extends Fragment {
             }
         });
         //Instantiate forum view model and add observer
-        mForumViewModel = ViewModelProviders.of(this).get(ForumViewModel.class);
+        ForumViewModel mForumViewModel = ViewModelProviders.of(this).get(ForumViewModel.class);
         mForumViewModel.getAllForums().observe(this, new Observer<List<Forum>>() {
             @Override
             public void onChanged(@Nullable final List<Forum> forums) {

@@ -7,10 +7,23 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 @Entity(tableName = "forum_table")
 public class Forum implements Parcelable {
 
 
+    public static final Creator<Forum> CREATOR = new Creator<Forum>() {
+        @Override
+        public Forum createFromParcel(Parcel in) {
+            return new Forum(in);
+        }
+
+        @Override
+        public Forum[] newArray(int size) {
+            return new Forum[size];
+        }
+    };
     @PrimaryKey(autoGenerate = true)
     private long _id;
     @NonNull
@@ -20,12 +33,21 @@ public class Forum implements Parcelable {
     @NonNull
     private String place;
 
-    @NonNull
+    public Forum() {
+    }
+
+    protected Forum(Parcel in) {
+        _id = in.readLong();
+        name = Objects.requireNonNull(in.readString());
+        date = Objects.requireNonNull(in.readString());
+        place = Objects.requireNonNull(in.readString());
+    }
+
     public long get_id() {
         return _id;
     }
 
-    public void set_id(@NonNull long _id) {
+    public void set_id(long _id) {
         this._id = _id;
     }
 
@@ -55,28 +77,6 @@ public class Forum implements Parcelable {
     public void setPlace(@NonNull String place) {
         this.place = place;
     }
-
-    public Forum() {
-    }
-
-    protected Forum(Parcel in) {
-        _id = in.readLong();
-        name = in.readString();
-        date = in.readString();
-        place = in.readString();
-    }
-
-    public static final Creator<Forum> CREATOR = new Creator<Forum>() {
-        @Override
-        public Forum createFromParcel(Parcel in) {
-            return new Forum(in);
-        }
-
-        @Override
-        public Forum[] newArray(int size) {
-            return new Forum[size];
-        }
-    };
 
     @Override
     public int describeContents() {

@@ -9,15 +9,22 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.dao.ApplicantForumDao;
+import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 
 
 @Database(entities = {ApplicantForum.class}, version = 1)
 public abstract class ApplicantForumRoomDatabase extends RoomDatabase {
-    public abstract ApplicantForumDao applicantForumRepository();
-
     private static volatile ApplicantForumRoomDatabase INSTANCE;
+    private static final RoomDatabase.Callback sRoomDatabaseCallback =
+            new RoomDatabase.Callback() {
+
+                @Override
+                public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                    super.onOpen(db);
+                    new PopulateDbAsync(INSTANCE).execute();
+                }
+            };
 
     public static ApplicantForumRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
@@ -33,15 +40,7 @@ public abstract class ApplicantForumRoomDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    private static RoomDatabase.Callback sRoomDatabaseCallback =
-            new RoomDatabase.Callback(){
-
-                @Override
-                public void onOpen (@NonNull SupportSQLiteDatabase db){
-                    super.onOpen(db);
-                    new PopulateDbAsync(INSTANCE).execute();
-                }
-            };
+    public abstract ApplicantForumDao applicantForumRepository();
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
@@ -54,11 +53,11 @@ public abstract class ApplicantForumRoomDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(final Void... params) {
             mDao.deleteAll();
-            for(int i = 0;i<100;i++){
+            for (int i = 0; i < 100; i++) {
                 ApplicantForum applicant = new ApplicantForum();
-                applicant.setMail("mail"+i+"@mail.com");
-                applicant.setName("name"+i);
-                applicant.setSurname("surname"+i);
+                applicant.setMail("mail" + i + "@mail.com");
+                applicant.setName("name" + i);
+                applicant.setSurname("surname" + i);
                 applicant.setPersonInChargeMail("inchargeMail@mail.com");
                 applicant.setHighestDiploma("ALTEN SCHOOL");
                 applicant.setHighestDiplomaYear("23/07/2019");

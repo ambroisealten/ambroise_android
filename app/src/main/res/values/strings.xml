@@ -16,10 +16,13 @@
     <string name="menu_send">Send</string>
     <string name="forum_name">Forum name</string>
     <string name="forum_place">Forum place</string>
-    <string name="save">save</string>
-    <string name="cancel">cancel</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
     <string name="new_forum">New forum</string>
     <string name="unknown">Unknown</string>
     <string name="preview">Preview</string>
     <string name="title_activity_forum">ForumActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

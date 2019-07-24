@@ -16,46 +16,10 @@ import java.util.List;
 public class ForumRecyclerViewAdapter extends RecyclerView.Adapter<ForumRecyclerViewAdapter.ForumListViewHolder> {
 
     private final OnItemClickListener listeners;
-
-    public interface OnItemClickListener {
-        void onItemClick(Forum forum);
-    }
-
-    public class ForumListViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mNameView;
-        public final TextView mPlaceView;
-        public final TextView mDateView;
-        public Forum mItem;
-
-        public ForumListViewHolder(View view) {
-            super(view);
-            mView = view;
-            mNameView = view.findViewById(R.id.forum_name);
-            mPlaceView = view.findViewById(R.id.forum_place);
-            mDateView = view.findViewById(R.id.forum_date);
-        }
-
-        public void bind(final Forum forum, final OnItemClickListener listener) {
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onItemClick(forum);
-                }
-            });
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mPlaceView.getText() + "'";
-        }
-    }
-
-    private final LayoutInflater mInflater;
     private List<Forum> mForums; // Cached copy of forums
 
     ForumRecyclerViewAdapter(Context context, OnItemClickListener listener) {
-        mInflater = LayoutInflater.from(context);
+        LayoutInflater mInflater = LayoutInflater.from(context);
         this.listeners = listener;
     }
 
@@ -93,5 +57,39 @@ public class ForumRecyclerViewAdapter extends RecyclerView.Adapter<ForumRecycler
         if (mForums != null)
             return mForums.size();
         else return 0;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Forum forum);
+    }
+
+    public class ForumListViewHolder extends RecyclerView.ViewHolder {
+        final View mView;
+        final TextView mNameView;
+        final TextView mPlaceView;
+        final TextView mDateView;
+        Forum mItem;
+
+        ForumListViewHolder(View view) {
+            super(view);
+            mView = view;
+            mNameView = view.findViewById(R.id.forum_name);
+            mPlaceView = view.findViewById(R.id.forum_place);
+            mDateView = view.findViewById(R.id.forum_date);
+        }
+
+        void bind(final Forum forum, final OnItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(forum);
+                }
+            });
+        }
+
+        @Override
+        public String toString() {
+            return super.toString() + " '" + mPlaceView.getText() + "'";
+        }
     }
 }

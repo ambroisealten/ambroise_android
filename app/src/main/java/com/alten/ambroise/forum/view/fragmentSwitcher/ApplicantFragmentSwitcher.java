@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
+import com.alten.ambroise.forum.view.fragments.ApplicantAddFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantListFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantRecyclerViewAdapter;
 
@@ -19,16 +21,6 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
 
     public static final String APPLICANT_LIST_TAG = "applicantListTag";
     public static final String ADD_APPLICANT_TAG = "addApplicantTag";
-
-    private Activity activity;
-
-    public ApplicantFragmentSwitcher(Activity activity) {
-        this.activity = activity;
-    }
-
-    protected ApplicantFragmentSwitcher(Parcel in) {
-    }
-
     public static final Creator<ApplicantFragmentSwitcher> CREATOR = new Creator<ApplicantFragmentSwitcher>() {
         @Override
         public ApplicantFragmentSwitcher createFromParcel(Parcel in) {
@@ -40,6 +32,14 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
             return new ApplicantFragmentSwitcher[size];
         }
     };
+    private Activity activity;
+
+    public ApplicantFragmentSwitcher(Activity activity) {
+        this.activity = activity;
+    }
+
+    private ApplicantFragmentSwitcher(Parcel in) {
+    }
 
     @Override
     public void switchFragment(FragmentManager fm, String tag) {
@@ -51,8 +51,8 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
                     fragment = switchApplicantListFragment(fm);
                     break;
                 case ADD_APPLICANT_TAG:
-//                switchForumAddFragment(fm);
-                    return;
+                    fragment = switchApplicantAddFragment(fm);
+                    break;
                 default:
                     fragment = switchApplicantListFragment(fm);
                     break;
@@ -62,15 +62,26 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
                     , R.anim.push_left_out
                     , R.anim.push_right_in
                     , R.anim.push_right_out
-            );
-            fTransaction.replace(R.id.fragment, fragment, tag);
+            ).replace(R.id.forum_fragment, fragment, tag);
         } else {
             // Le fragment existe déjà, il suffit de l'afficher
             fTransaction.show(fragment);
         }
         // Remplacez, ajoutez à la backstack et commit
-        fTransaction.addToBackStack(tag);
-        fTransaction.commit();
+        fTransaction.addToBackStack(tag).commit();
+    }
+
+    private ApplicantAddFragment switchApplicantAddFragment(FragmentManager fm) {
+        ApplicantAddFragment applicantAddFragment = (ApplicantAddFragment) fm.findFragmentByTag(ADD_APPLICANT_TAG);
+        if (applicantAddFragment == null) {
+            applicantAddFragment = new ApplicantAddFragment();
+            Bundle bundle = new Bundle();
+            applicantAddFragment.setArguments(bundle);
+            applicantAddFragment.setSwitcher(this);
+        }
+        //Deactivate fab add button
+        activity.findViewById(R.id.fab).setVisibility(View.GONE);
+        return applicantAddFragment;
     }
 
     private ApplicantListFragment switchApplicantListFragment(FragmentManager fm) {
@@ -82,6 +93,8 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
             applicantListFragment.setArguments(bundle);
             applicantListFragment.setSwitcher(this);
         }
+        //Be sure to have fab applicant add button visible
+        activity.findViewById(R.id.fab).setVisibility(View.VISIBLE);
         return applicantListFragment;
     }
 

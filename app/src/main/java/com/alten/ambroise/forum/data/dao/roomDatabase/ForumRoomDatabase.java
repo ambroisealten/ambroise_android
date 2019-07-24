@@ -9,14 +9,21 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.alten.ambroise.forum.data.model.beans.Forum;
 import com.alten.ambroise.forum.data.dao.ForumDao;
+import com.alten.ambroise.forum.data.model.beans.Forum;
 
 @Database(entities = {Forum.class}, version = 1)
 public abstract class ForumRoomDatabase extends RoomDatabase {
-    public abstract ForumDao forumRepository();
-
     private static volatile ForumRoomDatabase INSTANCE;
+    private static final RoomDatabase.Callback sRoomDatabaseCallback =
+            new RoomDatabase.Callback() {
+
+                @Override
+                public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                    super.onOpen(db);
+                    new PopulateDbAsync(INSTANCE).execute();
+                }
+            };
 
     public static ForumRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
@@ -32,15 +39,7 @@ public abstract class ForumRoomDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    private static RoomDatabase.Callback sRoomDatabaseCallback =
-            new RoomDatabase.Callback(){
-
-                @Override
-                public void onOpen (@NonNull SupportSQLiteDatabase db){
-                    super.onOpen(db);
-                    new PopulateDbAsync(INSTANCE).execute();
-                }
-            };
+    public abstract ForumDao forumRepository();
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
@@ -53,11 +52,11 @@ public abstract class ForumRoomDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(final Void... params) {
             mDao.deleteAll();
-            for(int i = 0;i<100;i++){
+            for (int i = 0; i < 100; i++) {
                 Forum forum = new Forum();
                 forum.setDate("10/07/2019");
-                forum.setName("name"+i);
-                forum.setPlace("place"+i);
+                forum.setName("name" + i);
+                forum.setPlace("place" + i);
                 mDao.insert(forum);
             }
             return null;

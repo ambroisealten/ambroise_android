@@ -13,10 +13,22 @@ import com.alten.ambroise.forum.data.utils.Nationality;
 import com.alten.ambroise.forum.data.utils.converter.Converters;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity(tableName = "applicantForum_table", indices = {@Index(value = "mail", unique = true)})
 public class ApplicantForum implements Parcelable {
 
+    public static final Creator<ApplicantForum> CREATOR = new Creator<ApplicantForum>() {
+        @Override
+        public ApplicantForum createFromParcel(Parcel in) {
+            return new ApplicantForum(in);
+        }
+
+        @Override
+        public ApplicantForum[] newArray(int size) {
+            return new ApplicantForum[size];
+        }
+    };
     @PrimaryKey(autoGenerate = true)
     private long _id;
     @NonNull
@@ -44,6 +56,30 @@ public class ApplicantForum implements Parcelable {
     private Nationality nationality;
     private String sign;
     private String grade;
+
+    public ApplicantForum() {
+    }
+
+    protected ApplicantForum(Parcel in) {
+        _id = in.readLong();
+        mail = Objects.requireNonNull(in.readString());
+        surname = Objects.requireNonNull(in.readString());
+        name = Objects.requireNonNull(in.readString());
+        personInChargeMail = Objects.requireNonNull(in.readString());
+        phoneNumber = in.readString();
+        cvPerson = in.readString();
+        mobilities = in.createStringArrayList();
+        contractType = in.readString();
+        contractDuration = in.readString();
+        startAt = in.readString();
+        highestDiploma = in.readString();
+        highestDiplomaYear = in.readString();
+        skills = in.createStringArrayList();
+        vehicule = in.readByte() != 0;
+        driverLicense = in.readByte() != 0;
+        sign = in.readString();
+        grade = in.readString();
+    }
 
     public long get_id() {
         return _id;
@@ -200,42 +236,6 @@ public class ApplicantForum implements Parcelable {
     public void setGrade(String grade) {
         this.grade = grade;
     }
-
-    public ApplicantForum() {
-    }
-
-    protected ApplicantForum(Parcel in) {
-        _id = in.readLong();
-        mail = in.readString();
-        surname = in.readString();
-        name = in.readString();
-        personInChargeMail = in.readString();
-        phoneNumber = in.readString();
-        cvPerson = in.readString();
-        mobilities = in.createStringArrayList();
-        contractType = in.readString();
-        contractDuration = in.readString();
-        startAt = in.readString();
-        highestDiploma = in.readString();
-        highestDiplomaYear = in.readString();
-        skills = in.createStringArrayList();
-        vehicule = in.readByte() != 0;
-        driverLicense = in.readByte() != 0;
-        sign = in.readString();
-        grade = in.readString();
-    }
-
-    public static final Creator<ApplicantForum> CREATOR = new Creator<ApplicantForum>() {
-        @Override
-        public ApplicantForum createFromParcel(Parcel in) {
-            return new ApplicantForum(in);
-        }
-
-        @Override
-        public ApplicantForum[] newArray(int size) {
-            return new ApplicantForum[size];
-        }
-    };
 
     @Override
     public int describeContents() {

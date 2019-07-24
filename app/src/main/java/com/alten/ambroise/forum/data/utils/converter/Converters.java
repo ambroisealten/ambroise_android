@@ -17,9 +17,9 @@ public class Converters {
             return (null);
         }
         Gson gson = new Gson();
-        Type type = new TypeToken<List<String>>() {}.getType();
-        String json = gson.toJson(list, type);
-        return json;
+        Type type = new TypeToken<List<String>>() {
+        }.getType();
+        return gson.toJson(list, type);
     }
 
     @TypeConverter
@@ -28,7 +28,8 @@ public class Converters {
             return (null);
         }
         Gson gson = new Gson();
-        Type type = new TypeToken<List<String>>() {}.getType();
+        Type type = new TypeToken<List<String>>() {
+        }.getType();
         return gson.fromJson(listString, type);
     }
 

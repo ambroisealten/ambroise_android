@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -34,7 +35,6 @@ public class ApplicantListFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 2;
     private OnListFragmentInteractionListener mListener;
-    private ApplicantForumViewModel mApplicantForumViewModel;
     private ApplicantRecyclerViewAdapter adapter;
     private ApplicantFragmentSwitcher switcher;
 
@@ -67,7 +67,7 @@ public class ApplicantListFragment extends Fragment {
             }
         });
         //Instantiate forum view model and add observer
-        mApplicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
+        ApplicantForumViewModel mApplicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
         mApplicantForumViewModel.getAllApplicants().observe(this, new Observer<List<ApplicantForum>>() {
             @Override
             public void onChanged(@Nullable final List<ApplicantForum> applicant) {
@@ -81,7 +81,7 @@ public class ApplicantListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_applicant_list, container, false);
         // Set the adapter
