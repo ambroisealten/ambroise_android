@@ -8,71 +8,91 @@
     android:orientation="vertical"
     tools:context=".view.fragments.ApplicantAddFragment">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:paddingTop="30dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/surname_input_layout"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:elevation="3dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/surname_input_editText"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/surname_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/surname" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:textColor="#11618F"
+                android:textColorHint="#11618F">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/name_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/surname_input_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/surname"
+                    android:textColor="#11618F" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/name_input_editText"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/name_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/name" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:textColorHint="#11618F">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/phone_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/name_input_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/name"
+                    android:textColor="#11618F" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/candidat_phone"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phone_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/phone"
-                android:inputType="phone" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:textColorHint="#11618F">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/mail_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/candidat_mail"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/candidat_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/phone"
+                    android:inputType="phone"
+                    android:textColor="#11618F" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/mail_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/mail"
-                android:inputType="textEmailAddress" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:textColorHint="#11618F">
 
-    </LinearLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/candidat_mail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/mail"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#11618F" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_height="wrap_content">
 
         <View
             android:id="@+id/divider"
@@ -81,42 +101,60 @@
             android:background="?android:attr/listDivider" />
     </FrameLayout>
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/cvText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cv_picture" />
+        android:layout_gravity="center"
+        android:layout_weight="5"
+        android:paddingTop="30dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:elevation="3dp"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/cv_display"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/cvText"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:src="@android:drawable/ic_menu_camera" />
+                android:text="@string/cv_picture"
+                android:textColor="#11618F" />
 
-            <Button
-                android:id="@+id/cv_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="CV" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/cv_display"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:contentDescription="@string/cv_picture_description"
+                    android:src="@android:drawable/ic_menu_camera"
+                    android:textColor="#11618F" />
+
+                <Button
+                    android:id="@+id/cv_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/take_cv_picture"
+                    android:textColor="#11618F" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/start_interview" />
+        android:elevation="1dp"
+        android:text="@string/start_interview"
+        android:textColor="#11618F" />
 </LinearLayout>
