@@ -1,5 +1,8 @@
 package com.alten.ambroise.forum.data.model.beans;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Index;
@@ -11,8 +14,8 @@ import com.alten.ambroise.forum.data.utils.converter.Converters;
 
 import java.util.List;
 
-@Entity(tableName = "applicantForum_table",indices = {@Index(value = "mail", unique = true)})
-public class ApplicantForum {
+@Entity(tableName = "applicantForum_table", indices = {@Index(value = "mail", unique = true)})
+public class ApplicantForum implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     private long _id;
@@ -196,5 +199,68 @@ public class ApplicantForum {
 
     public void setGrade(String grade) {
         this.grade = grade;
+    }
+
+    public ApplicantForum() {
+    }
+
+    protected ApplicantForum(Parcel in) {
+        _id = in.readLong();
+        mail = in.readString();
+        surname = in.readString();
+        name = in.readString();
+        personInChargeMail = in.readString();
+        phoneNumber = in.readString();
+        cvPerson = in.readString();
+        mobilities = in.createStringArrayList();
+        contractType = in.readString();
+        contractDuration = in.readString();
+        startAt = in.readString();
+        highestDiploma = in.readString();
+        highestDiplomaYear = in.readString();
+        skills = in.createStringArrayList();
+        vehicule = in.readByte() != 0;
+        driverLicense = in.readByte() != 0;
+        sign = in.readString();
+        grade = in.readString();
+    }
+
+    public static final Creator<ApplicantForum> CREATOR = new Creator<ApplicantForum>() {
+        @Override
+        public ApplicantForum createFromParcel(Parcel in) {
+            return new ApplicantForum(in);
+        }
+
+        @Override
+        public ApplicantForum[] newArray(int size) {
+            return new ApplicantForum[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(_id);
+        dest.writeString(mail);
+        dest.writeString(surname);
+        dest.writeString(name);
+        dest.writeString(personInChargeMail);
+        dest.writeString(phoneNumber);
+        dest.writeString(cvPerson);
+        dest.writeStringList(mobilities);
+        dest.writeString(contractType);
+        dest.writeString(contractDuration);
+        dest.writeString(startAt);
+        dest.writeString(highestDiploma);
+        dest.writeString(highestDiplomaYear);
+        dest.writeStringList(skills);
+        dest.writeByte((byte) (vehicule ? 1 : 0));
+        dest.writeByte((byte) (driverLicense ? 1 : 0));
+        dest.writeString(sign);
+        dest.writeString(grade);
     }
 }
