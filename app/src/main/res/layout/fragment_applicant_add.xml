@@ -30,13 +30,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#11618F"
-                android:textColorHint="#11618F">
+                android:textColorHint="#11618F"
+                android:hint="@string/surname">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/surname_input_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/surname"
                     android:textColor="#11618F" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -44,13 +44,13 @@
                 android:id="@+id/name_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="#11618F">
+                android:textColorHint="#11618F"
+                android:hint="@string/name">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/name_input_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/name"
                     android:textColor="#11618F" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,15 +58,15 @@
                 android:id="@+id/phone_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="#11618F">
+                android:textColorHint="#11618F"
+                android:hint="@string/phone">
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/candidat_phone"
+                    android:id="@+id/phone_input_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="@string/phone"
                     android:inputType="phone"
                     android:textColor="#11618F" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -75,14 +75,14 @@
                 android:id="@+id/mail_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="#11618F">
+                android:textColorHint="#11618F"
+                android:hint="@string/mail">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/candidat_mail"
+                    android:id="@+id/mail_input_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="@string/mail"
                     android:inputType="textEmailAddress"
                     android:textColor="#11618F" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -134,9 +134,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="4"
-                    android:contentDescription="@string/cv_picture_description"
-                    android:src="@android:drawable/ic_menu_camera"
-                    android:textColor="#11618F" />
+                    android:contentDescription="@string/cv_picture_description"/>
 
                 <Button
                     android:id="@+id/cv_button"
@@ -150,7 +148,7 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"

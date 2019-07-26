@@ -7,9 +7,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -20,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.view.fragmentSwitcher.ApplicantFragmentSwitcher;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,12 +43,16 @@ import static android.content.Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
  */
 public class ApplicantAddFragment extends Fragment {
 
-    private OnFragmentInteractionListener mListener;
-
-    private ApplicantFragmentSwitcher applicantFragmentSwitcher;
-
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private OnFragmentInteractionListener mListener;
+    private ApplicantFragmentSwitcher applicantFragmentSwitcher;
     private String currentPhotoPath;
+    private Button button_start;
+    private ImageView cvDisplay;
+    private TextInputEditText surname;
+    private TextInputEditText name;
+    private TextInputEditText phone;
+    private TextInputEditText mail;
 
 
     public ApplicantAddFragment() {
@@ -84,18 +92,88 @@ public class ApplicantAddFragment extends Fragment {
                 dispatchTakePictureIntent();
             }
         });
+        button_start = view.findViewById(R.id.button_start);
+        button_start.setEnabled(false);
+
+        cvDisplay = view.findViewById(R.id.cv_display);
+        surname = view.findViewById(R.id.surname_input_editText);
+        name = view.findViewById(R.id.name_input_editText);
+        phone = view.findViewById(R.id.phone_input_editText);
+        mail = view.findViewById(R.id.mail_input_editText);
+
+        surname.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkIfStartAllowed();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        name.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkIfStartAllowed();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkIfStartAllowed();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        mail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkIfStartAllowed();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_menu_camera));
         //add preview picture action
-        view.findViewById(R.id.cv_display).setOnClickListener(new View.OnClickListener() {
+        cvDisplay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uri =  FileProvider.getUriForFile(getActivity(),
-                        "com.alten.ambroise.forum.fileprovider",
-                        new File(currentPhotoPath));
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_QUICK_VIEW);
-                intent.setDataAndType(uri, "image/*");
-                intent.setFlags(FLAG_GRANT_READ_URI_PERMISSION | FLAG_GRANT_WRITE_URI_PERMISSION);
-                startActivity(intent);
+                if (cvDisplay.getDrawable() != null) {
+                    Uri uri = FileProvider.getUriForFile(getActivity(),
+                            "com.alten.ambroise.forum.fileprovider",
+                            new File(currentPhotoPath));
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_QUICK_VIEW);
+                    intent.setDataAndType(uri, "image/*");
+                    intent.setFlags(FLAG_GRANT_READ_URI_PERMISSION | FLAG_GRANT_WRITE_URI_PERMISSION);
+                    startActivity(intent);
+                } else {
+                    dispatchTakePictureIntent();
+                }
             }
         });
 
@@ -107,6 +185,15 @@ public class ApplicantAddFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(applicant);
         }
+    }
+
+    private void checkIfStartAllowed() {
+        boolean startAllow = cvDisplay.getDrawable() != null || (stringNotNullAndEmpty(name.getText().toString()) && stringNotNullAndEmpty(surname.getText().toString()) && stringNotNullAndEmpty(phone.getText().toString()) && stringNotNullAndEmpty(mail.getText().toString()));
+        button_start.setEnabled(startAllow);
+    }
+
+    private boolean stringNotNullAndEmpty(String text) {
+        return text != null && text.length() > 0;
     }
 
     private File createImageFile() throws IOException {
@@ -122,6 +209,8 @@ public class ApplicantAddFragment extends Fragment {
 
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
+        cvDisplay.setBackground(null);
+        checkIfStartAllowed();
         return image;
     }
 
@@ -134,7 +223,7 @@ public class ApplicantAddFragment extends Fragment {
             try {
                 photoFile = createImageFile();
             } catch (IOException ex) {
-                Toast.makeText(this.getContext(),getString(R.string.error_creating_file),Toast.LENGTH_SHORT);
+                Toast.makeText(this.getContext(), getString(R.string.error_creating_file), Toast.LENGTH_SHORT);
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
@@ -149,8 +238,16 @@ public class ApplicantAddFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case REQUEST_IMAGE_CAPTURE:
+                if(resultCode == Activity.RESULT_OK){
+                    cvDisplay.setImageURI(Uri.fromFile(new File(currentPhotoPath)));
+                }else{
+                    cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_menu_camera));
+                }
+                break;
+        }
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            ((ImageView) getActivity().findViewById(R.id.cv_display)).setImageURI(Uri.fromFile(new File(currentPhotoPath)));
         }
     }
 
