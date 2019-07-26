@@ -41,9 +41,11 @@ public class ForumActivity extends AppCompatActivity
             Intent intent = getIntent();
             forum = intent.getParcelableExtra("forum");
         } else {
-            this.applicantFragmentSwitcher = savedInstanceState.getParcelable("applicantFragmentSwitcher");
-            Objects.requireNonNull(this.applicantFragmentSwitcher).setActivity(this);
             this.forum = savedInstanceState.getParcelable("forum");
+            this.applicantFragmentSwitcher = savedInstanceState.getParcelable("applicantFragmentSwitcher") != null
+                    ? (ApplicantFragmentSwitcher) savedInstanceState.getParcelable("applicantFragmentSwitcher")
+                    : new ApplicantFragmentSwitcher(this);
+            this.applicantFragmentSwitcher.setActivity(this);
         }
         this.setTitle(Objects.requireNonNull(forum).getName());
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -70,6 +72,11 @@ public class ForumActivity extends AppCompatActivity
                 applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.ADD_APPLICANT_TAG);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

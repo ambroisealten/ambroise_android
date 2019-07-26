@@ -31,8 +31,9 @@ public class MainActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             this.forumFragmentSwitcher = new ForumFragmentSwitcher(this);
         } else {
-            this.forumFragmentSwitcher = savedInstanceState.getParcelable("forumFragmentSwitcher");
-            assert this.forumFragmentSwitcher != null;
+            this.forumFragmentSwitcher = savedInstanceState.getParcelable("forumFragmentSwitcher") != null
+                    ? (ForumFragmentSwitcher) savedInstanceState.getParcelable("forumFragmentSwitcher")
+                    : new ForumFragmentSwitcher(this);
             this.forumFragmentSwitcher.setActivity(this);
         }
         Toolbar toolbar = findViewById(R.id.toolbar);
