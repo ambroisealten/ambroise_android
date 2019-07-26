@@ -13,7 +13,7 @@ import com.alten.ambroise.forum.data.dao.ApplicantForumDao;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 
 
-@Database(entities = {ApplicantForum.class}, version = 1)
+@Database(entities = {ApplicantForum.class}, version = 1, exportSchema = false)
 public abstract class ApplicantForumRoomDatabase extends RoomDatabase {
     private static volatile ApplicantForumRoomDatabase INSTANCE;
     private static final RoomDatabase.Callback sRoomDatabaseCallback =

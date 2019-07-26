@@ -12,7 +12,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.alten.ambroise.forum.data.dao.ForumDao;
 import com.alten.ambroise.forum.data.model.beans.Forum;
 
-@Database(entities = {Forum.class}, version = 1)
+@Database(entities = {Forum.class}, version = 1, exportSchema = false)
 public abstract class ForumRoomDatabase extends RoomDatabase {
     private static volatile ForumRoomDatabase INSTANCE;
     private static final RoomDatabase.Callback sRoomDatabaseCallback =
