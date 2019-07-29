@@ -53,6 +53,7 @@ public class ApplicantAddFragment extends Fragment {
     private TextInputEditText name;
     private TextInputEditText phone;
     private TextInputEditText mail;
+    private String temp;
 
 
     public ApplicantAddFragment() {
@@ -214,6 +215,7 @@ public class ApplicantAddFragment extends Fragment {
     }
 
     private void dispatchTakePictureIntent() {
+        this.temp = this.currentPhotoPath;
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
@@ -237,17 +239,21 @@ public class ApplicantAddFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode){
+        switch (requestCode) {
             case REQUEST_IMAGE_CAPTURE:
-                if(resultCode == Activity.RESULT_OK){
+                if (resultCode == Activity.RESULT_OK) {
                     cvDisplay.setImageURI(Uri.fromFile(new File(currentPhotoPath)));
+                    this.temp = null;
                     checkIfStartAllowed();
-                }else{
-                    cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_menu_camera));
+                } else{
+                    if (cvDisplay.getDrawable() == null) {
+                        cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_menu_camera));
+                    }else {
+                        this.currentPhotoPath = this.temp;
+                        this.temp = null;
+                    }
                 }
                 break;
-        }
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
         }
     }
 
