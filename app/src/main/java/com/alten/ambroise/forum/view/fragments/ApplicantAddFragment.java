@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -86,15 +87,6 @@ public class ApplicantAddFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(savedInstanceState != null){
-            this.switcher = savedInstanceState.getParcelable(STATE_SWITCHER);
-            this.currentPhotoPath = savedInstanceState.getString(STATE_APPLICANT_CURRENT_PHOTO_PATH);
-            this.mail.setText(savedInstanceState.getString(STATE_APPLICANT_MAIL));
-            this.name.setText(savedInstanceState.getString(STATE_APPLICANT_NAME));
-            this.phone.setText(savedInstanceState.getString(STATE_APPLICANT_PHONE));
-            this.surname.setText(savedInstanceState.getString(STATE_APPLICANT_SURNAME));
-            this.button_start.setEnabled(savedInstanceState.getBoolean(STATE_BUTTON_START_ENABLE));
-        }
     }
 
     @Override
@@ -112,6 +104,15 @@ public class ApplicantAddFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            this.switcher = savedInstanceState.getParcelable(STATE_SWITCHER);
+            this.currentPhotoPath = savedInstanceState.getString(STATE_APPLICANT_CURRENT_PHOTO_PATH);
+            this.mail.setText(savedInstanceState.getString(STATE_APPLICANT_MAIL));
+            this.name.setText(savedInstanceState.getString(STATE_APPLICANT_NAME));
+            this.phone.setText(savedInstanceState.getString(STATE_APPLICANT_PHONE));
+            this.surname.setText(savedInstanceState.getString(STATE_APPLICANT_SURNAME));
+            this.button_start.setEnabled(savedInstanceState.getBoolean(STATE_BUTTON_START_ENABLE));
+        }
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_applicant_add, container, false);
         //Add take picture action
@@ -132,13 +133,17 @@ public class ApplicantAddFragment extends Fragment {
                 newApplicant.setName(name.length() == 0 ? "Candidat#" + newId : name.getText().toString());
                 newApplicant.setMail(mail.length() == 0 ? "Candidat#" + newId + R.string.noMail : surname.getText().toString());
 
-                Bitmap bitmap = ((BitmapDrawable) cvDisplay.getDrawable()).getBitmap();
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                byte[] bitMapData = stream.toByteArray();
+                final Drawable drawable = cvDisplay.getDrawable();
+                if(drawable != null) {
+                    Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                    byte[] bitMapData = stream.toByteArray();
 
-                newApplicant.setCvPerson(Base64.encodeToString(bitMapData, Base64.DEFAULT));
-
+                    newApplicant.setCvPerson(Base64.encodeToString(bitMapData, Base64.DEFAULT));
+                }else{
+                    newApplicant.setCvPerson(null);
+                }
                 switcher.startNewApplicantProcess(newApplicant);
             }
         });
@@ -149,9 +154,9 @@ public class ApplicantAddFragment extends Fragment {
         phone = view.findViewById(R.id.phone_input_editText);
         mail = view.findViewById(R.id.mail_input_editText);
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             cvDisplay.setImageURI(Uri.fromFile(new File(currentPhotoPath)));
-        }else{
+        } else {
             cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_menu_camera));
             button_start.setEnabled(false);
         }
