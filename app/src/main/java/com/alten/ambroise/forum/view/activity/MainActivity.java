@@ -1,6 +1,7 @@
 package com.alten.ambroise.forum.view.activity;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -82,6 +83,12 @@ public class MainActivity extends AppCompatActivity
                 super.onBackPressed();
             }
         }
+    }
+
+    @Override
+    public void onDestroy(){
+        getExternalFilesDir(Environment.DIRECTORY_PICTURES).deleteOnExit();
+        super.onDestroy();
     }
 
     @Override
