@@ -210,7 +210,6 @@ public class ApplicantAddFragment extends Fragment {
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
         cvDisplay.setBackground(null);
-        checkIfStartAllowed();
         return image;
     }
 
@@ -242,6 +241,7 @@ public class ApplicantAddFragment extends Fragment {
             case REQUEST_IMAGE_CAPTURE:
                 if(resultCode == Activity.RESULT_OK){
                     cvDisplay.setImageURI(Uri.fromFile(new File(currentPhotoPath)));
+                    checkIfStartAllowed();
                 }else{
                     cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_menu_camera));
                 }
