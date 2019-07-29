@@ -34,4 +34,5 @@
     <string name="take_cv_picture">CV</string>
     <string name="cv_picture_description">CV picture</string>
     <string name="error_creating_file">An error occurred while creating the File</string>
+    <string name="noMail">\@noMail.alten.com</string>
 </resources>

@@ -45,7 +45,7 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
     }
 
     @Override
-    public void switchFragment(FragmentManager fm, String tag) {
+    public void switchFragment(FragmentManager fm, String tag, Object... args) {
         Fragment fragment = fm.findFragmentByTag(tag);
         FragmentTransaction fTransaction = fm.beginTransaction();
         if (fragment == null) {

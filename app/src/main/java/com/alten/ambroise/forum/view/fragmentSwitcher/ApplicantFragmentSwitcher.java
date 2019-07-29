@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.view.fragments.ApplicantAddFragment;
+import com.alten.ambroise.forum.view.fragments.ApplicantDiplomaFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantListFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantRecyclerViewAdapter;
 
@@ -32,6 +34,7 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
             return new ApplicantFragmentSwitcher[size];
         }
     };
+    private static final String APPLICANT_DIPLOMA_TAG = "applicantDiplomaTag";
     private Activity activity;
 
     public ApplicantFragmentSwitcher(Activity activity) {
@@ -42,7 +45,7 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
     }
 
     @Override
-    public void switchFragment(FragmentManager fm, String tag) {
+    public void switchFragment(FragmentManager fm, String tag, Object... args) {
         Fragment fragment = fm.findFragmentByTag(tag);
         FragmentTransaction fTransaction = fm.beginTransaction();
         if (fragment == null) {
@@ -52,6 +55,9 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
                     break;
                 case ADD_APPLICANT_TAG:
                     fragment = switchApplicantAddFragment(fm);
+                    break;
+                case APPLICANT_DIPLOMA_TAG:
+                    fragment = switchApplicantDiplomaFragment(fm, (ApplicantForum) args[0]);
                     break;
                 default:
                     fragment = switchApplicantListFragment(fm);
@@ -100,6 +106,19 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
         return applicantListFragment;
     }
 
+    private ApplicantDiplomaFragment switchApplicantDiplomaFragment(FragmentManager fm, ApplicantForum applicant) {
+        ApplicantDiplomaFragment applicantDiplomaFragment = (ApplicantDiplomaFragment) fm.findFragmentByTag(APPLICANT_DIPLOMA_TAG);
+        if (applicantDiplomaFragment == null) {
+            applicantDiplomaFragment = new ApplicantDiplomaFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(ApplicantDiplomaFragment.STATE_APPLICANT,applicant);
+            applicantDiplomaFragment.setArguments(bundle);
+            applicantDiplomaFragment.setSwitcher(this);
+        }
+        activity.findViewById(R.id.forum_fragment).setTag(APPLICANT_DIPLOMA_TAG);
+        return applicantDiplomaFragment;
+    }
+
     @Override
     public void onItemClick(ApplicantForum applicant) {
         Toast.makeText(activity, "CLICK SUR CANDIDAT" + applicant.getMail(), Toast.LENGTH_SHORT).show();
@@ -119,5 +138,9 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
 
     public void setActivity(Activity activity) {
         this.activity = activity;
+    }
+
+    public void startNewApplicantProcess(ApplicantForum applicant) {
+        switchFragment(((AppCompatActivity) activity).getSupportFragmentManager(), APPLICANT_DIPLOMA_TAG, applicant);
     }
 }

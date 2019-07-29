@@ -1,6 +1,7 @@
 package com.alten.ambroise.forum.view.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.model.beans.Forum;
 import com.alten.ambroise.forum.view.fragmentSwitcher.ApplicantFragmentSwitcher;
 import com.alten.ambroise.forum.view.fragments.ApplicantAddFragment;
+import com.alten.ambroise.forum.view.fragments.ApplicantDiplomaFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantListFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -26,7 +28,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.Objects;
 
 public class ForumActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ApplicantListFragment.OnListFragmentInteractionListener, ApplicantAddFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ApplicantListFragment.OnListFragmentInteractionListener, ApplicantAddFragment.OnFragmentInteractionListener, ApplicantDiplomaFragment.OnFragmentInteractionListener {
 
     public static final String STATE_FORUM = "forum";
     private static final String STATE_APPLICANT_FRAGMENT_SWITCHER = "applicantFragmentSwitcher";
@@ -174,5 +176,9 @@ public class ForumActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(ApplicantForum applicant) {
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
     }
 }

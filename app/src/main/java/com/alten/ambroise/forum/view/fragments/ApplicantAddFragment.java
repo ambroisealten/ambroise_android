@@ -3,12 +3,15 @@ package com.alten.ambroise.forum.view.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,7 @@ import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.view.fragmentSwitcher.ApplicantFragmentSwitcher;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -43,9 +47,16 @@ import static android.content.Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
  */
 public class ApplicantAddFragment extends Fragment {
 
+    private static final String STATE_SWITCHER = "switcher";
+    private static final String STATE_APPLICANT_CURRENT_PHOTO_PATH = "currentPhotoPath";
+    private static final String STATE_APPLICANT_SURNAME = "surname";
+    private static final String STATE_APPLICANT_NAME = "name";
+    private static final String STATE_APPLICANT_PHONE = "phone";
+    private static final String STATE_APPLICANT_MAIL = "mail";
+    private static final String STATE_BUTTON_START_ENABLE = "button_start_enable";
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private OnFragmentInteractionListener mListener;
-    private ApplicantFragmentSwitcher applicantFragmentSwitcher;
+    private ApplicantFragmentSwitcher switcher;
     private String currentPhotoPath;
     private Button button_start;
     private ImageView cvDisplay;
@@ -69,16 +80,33 @@ public class ApplicantAddFragment extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static ApplicantAddFragment newInstance() {
         ApplicantAddFragment fragment = new ApplicantAddFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if(savedInstanceState != null){
+            this.switcher = savedInstanceState.getParcelable(STATE_SWITCHER);
+            this.currentPhotoPath = savedInstanceState.getString(STATE_APPLICANT_CURRENT_PHOTO_PATH);
+            this.mail.setText(savedInstanceState.getString(STATE_APPLICANT_MAIL));
+            this.name.setText(savedInstanceState.getString(STATE_APPLICANT_NAME));
+            this.phone.setText(savedInstanceState.getString(STATE_APPLICANT_PHONE));
+            this.surname.setText(savedInstanceState.getString(STATE_APPLICANT_SURNAME));
+            this.button_start.setEnabled(savedInstanceState.getBoolean(STATE_BUTTON_START_ENABLE));
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putParcelable(STATE_SWITCHER, switcher);
+        savedInstanceState.putString(STATE_APPLICANT_CURRENT_PHOTO_PATH, currentPhotoPath);
+        savedInstanceState.putString(STATE_APPLICANT_MAIL, mail.getText().toString());
+        savedInstanceState.putString(STATE_APPLICANT_NAME, name.getText().toString());
+        savedInstanceState.putString(STATE_APPLICANT_PHONE, phone.getText().toString());
+        savedInstanceState.putString(STATE_APPLICANT_SURNAME, surname.getText().toString());
+        savedInstanceState.putBoolean(STATE_BUTTON_START_ENABLE, button_start.isEnabled());
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override
@@ -94,13 +122,39 @@ public class ApplicantAddFragment extends Fragment {
             }
         });
         button_start = view.findViewById(R.id.button_start);
-        button_start.setEnabled(false);
+        button_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ApplicantForum newApplicant = new ApplicantForum();
+                long newId = System.currentTimeMillis();
+
+                newApplicant.setSurname(surname.length() == 0 ? "Candidat#" + newId : surname.getText().toString());
+                newApplicant.setName(name.length() == 0 ? "Candidat#" + newId : name.getText().toString());
+                newApplicant.setMail(mail.length() == 0 ? "Candidat#" + newId + R.string.noMail : surname.getText().toString());
+
+                Bitmap bitmap = ((BitmapDrawable) cvDisplay.getDrawable()).getBitmap();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] bitMapData = stream.toByteArray();
+
+                newApplicant.setCvPerson(Base64.encodeToString(bitMapData, Base64.DEFAULT));
+
+                switcher.startNewApplicantProcess(newApplicant);
+            }
+        });
 
         cvDisplay = view.findViewById(R.id.cv_display);
         surname = view.findViewById(R.id.surname_input_editText);
         name = view.findViewById(R.id.name_input_editText);
         phone = view.findViewById(R.id.phone_input_editText);
         mail = view.findViewById(R.id.mail_input_editText);
+
+        if(savedInstanceState != null){
+            cvDisplay.setImageURI(Uri.fromFile(new File(currentPhotoPath)));
+        }else{
+            cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_menu_camera));
+            button_start.setEnabled(false);
+        }
 
         surname.addTextChangedListener(new TextWatcher() {
             @Override
@@ -158,7 +212,6 @@ public class ApplicantAddFragment extends Fragment {
             public void afterTextChanged(Editable s) {
             }
         });
-        cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_menu_camera));
         //add preview picture action
         cvDisplay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,7 +230,6 @@ public class ApplicantAddFragment extends Fragment {
                 }
             }
         });
-
         return view;
     }
 
@@ -245,10 +297,10 @@ public class ApplicantAddFragment extends Fragment {
                     cvDisplay.setImageURI(Uri.fromFile(new File(currentPhotoPath)));
                     this.temp = null;
                     checkIfStartAllowed();
-                } else{
+                } else {
                     if (cvDisplay.getDrawable() == null) {
                         cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_menu_camera));
-                    }else {
+                    } else {
                         this.currentPhotoPath = this.temp;
                         this.temp = null;
                     }
@@ -275,7 +327,7 @@ public class ApplicantAddFragment extends Fragment {
     }
 
     public void setSwitcher(ApplicantFragmentSwitcher applicantFragmentSwitcher) {
-        this.applicantFragmentSwitcher = applicantFragmentSwitcher;
+        this.switcher = applicantFragmentSwitcher;
     }
 
     /**
