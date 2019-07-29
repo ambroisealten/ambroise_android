@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState){
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
         this.forumFragmentSwitcher = savedInstanceState.getParcelable(STATE_FORUM_FRAGMENT_SWITCHER);
         super.onRestoreInstanceState(savedInstanceState);
     }
@@ -77,8 +77,7 @@ public class MainActivity extends AppCompatActivity
         } else {
             //We pop the backstack.
             super.onBackPressed();
-            //If when we pop the first element of backstack, this activity don't have fragment, we do back again
-            //Then we avoid to have empty activities
+            //If when we pop the first element of backstack, this activity don't have fragment, we add List fragment to dont have empty activity
             if (findViewById(R.id.main_fragment).getTag() == null) {
                 super.onBackPressed();
             }

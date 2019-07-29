@@ -61,6 +61,7 @@ public class ForumListFragment extends Fragment {
         if(savedInstanceState != null){
             this.mColumnCount = savedInstanceState.getInt(STATE_COLUMN_COUNT);
             this.switcher = savedInstanceState.getParcelable(STATE_SWITCHER);
+            this.switcher.setActivity(getActivity());
         }
         this.adapter = new ForumRecyclerViewAdapter(this.getContext(), new ForumRecyclerViewAdapter.OnItemClickListener() {
             @Override

@@ -29,7 +29,7 @@ public class ForumActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ApplicantListFragment.OnListFragmentInteractionListener, ApplicantAddFragment.OnFragmentInteractionListener {
 
     public static final String STATE_FORUM = "forum";
-    private static final String  STATE_APPLICANT_FRAGMENT_SWITCHER = "applicantFragmentSwitcher";
+    private static final String STATE_APPLICANT_FRAGMENT_SWITCHER = "applicantFragmentSwitcher";
 
     private Forum forum;
     private ApplicantFragmentSwitcher applicantFragmentSwitcher;
@@ -53,7 +53,7 @@ public class ForumActivity extends AppCompatActivity
         this.setTitle(Objects.requireNonNull(forum).getName());
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab_forum);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,7 +90,7 @@ public class ForumActivity extends AppCompatActivity
     }
 
     @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState){
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
         this.applicantFragmentSwitcher = savedInstanceState.getParcelable(STATE_APPLICANT_FRAGMENT_SWITCHER);
         this.forum = savedInstanceState.getParcelable(STATE_FORUM);
         super.onRestoreInstanceState(savedInstanceState);
@@ -102,12 +102,19 @@ public class ForumActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            //We pop the backstack.
-            super.onBackPressed();
-            //If when we pop the first element of backstack, this activity don't have fragment, we do back again
-            //Then we avoid to have empty activities
-            if (findViewById(R.id.forum_fragment).getTag() == null) {
+            if (findViewById(R.id.forum_fragment).getTag() != null && findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
+                findViewById(R.id.forum_fragment).setTag(null);
                 super.onBackPressed();
+                super.onBackPressed();
+            } else {
+                super.onBackPressed();
+                findViewById(R.id.forum_fragment).setTag(getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName());
+                if (findViewById(R.id.forum_fragment).getTag() == null) {
+                    this.applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG);
+                }
+                if (findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
+                    findViewById(R.id.fab_forum).setVisibility(View.VISIBLE);
+                }
             }
         }
     }

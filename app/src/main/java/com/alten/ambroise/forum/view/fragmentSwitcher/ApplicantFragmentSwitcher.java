@@ -80,7 +80,8 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
             applicantAddFragment.setSwitcher(this);
         }
         //Deactivate fab add button
-        activity.findViewById(R.id.fab).setVisibility(View.GONE);
+        activity.findViewById(R.id.fab_forum).setVisibility(View.GONE);
+        activity.findViewById(R.id.forum_fragment).setTag(ADD_APPLICANT_TAG);
         return applicantAddFragment;
     }
 
@@ -94,7 +95,8 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
             applicantListFragment.setSwitcher(this);
         }
         //Be sure to have fab applicant add button visible
-        activity.findViewById(R.id.fab).setVisibility(View.VISIBLE);
+        activity.findViewById(R.id.fab_forum).setVisibility(View.VISIBLE);
+        activity.findViewById(R.id.forum_fragment).setTag(APPLICANT_LIST_TAG);
         return applicantListFragment;
     }
 
