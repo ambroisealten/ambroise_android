@@ -21,6 +21,8 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ForumListFragment.OnListFragmentInteractionListener {
 
+    private static final String STATE_FORUM_FRAGMENT_SWITCHER = "forumFragmentSwitcher";
+
     private ForumFragmentSwitcher forumFragmentSwitcher;
 
     @Override
@@ -31,8 +33,8 @@ public class MainActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             this.forumFragmentSwitcher = new ForumFragmentSwitcher(this);
         } else {
-            this.forumFragmentSwitcher = savedInstanceState.getParcelable("forumFragmentSwitcher") != null
-                    ? (ForumFragmentSwitcher) savedInstanceState.getParcelable("forumFragmentSwitcher")
+            this.forumFragmentSwitcher = savedInstanceState.getParcelable(STATE_FORUM_FRAGMENT_SWITCHER) != null
+                    ? (ForumFragmentSwitcher) savedInstanceState.getParcelable(STATE_FORUM_FRAGMENT_SWITCHER)
                     : new ForumFragmentSwitcher(this);
             this.forumFragmentSwitcher.setActivity(this);
         }
@@ -53,6 +55,18 @@ public class MainActivity extends AppCompatActivity
                 forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.ADD_FORUM_TAG);
             }
         });
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putParcelable(STATE_FORUM_FRAGMENT_SWITCHER, this.forumFragmentSwitcher);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState){
+        this.forumFragmentSwitcher = savedInstanceState.getParcelable(STATE_FORUM_FRAGMENT_SWITCHER);
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override

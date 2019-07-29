@@ -30,7 +30,8 @@ import java.util.List;
 public class ForumListFragment extends Fragment {
 
     // TODO: Customize parameter argument names
-    public static final String ARG_COLUMN_COUNT = "column-count";
+    public static final String STATE_COLUMN_COUNT = "column-count";
+    public static final String STATE_SWITCHER = "switcher";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
@@ -49,7 +50,7 @@ public class ForumListFragment extends Fragment {
     public static ForumListFragment newInstance(int columnCount) {
         ForumListFragment fragment = new ForumListFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putInt(STATE_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,6 +58,10 @@ public class ForumListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState != null){
+            this.mColumnCount = savedInstanceState.getInt(STATE_COLUMN_COUNT);
+            this.switcher = savedInstanceState.getParcelable(STATE_SWITCHER);
+        }
         this.adapter = new ForumRecyclerViewAdapter(this.getContext(), new ForumRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Forum forum) {
@@ -75,9 +80,17 @@ public class ForumListFragment extends Fragment {
             }
         });
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            mColumnCount = getArguments().getInt(STATE_COLUMN_COUNT);
         }
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putParcelable(STATE_SWITCHER,switcher);
+        savedInstanceState.putInt(STATE_COLUMN_COUNT,mColumnCount);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -89,7 +89,7 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
         if (applicantListFragment == null) {
             applicantListFragment = new ApplicantListFragment();
             Bundle bundle = new Bundle();
-            bundle.putInt(ApplicantListFragment.ARG_COLUMN_COUNT, 1);
+            bundle.putInt(ApplicantListFragment.STATE_COLUMN_COUNT, 1);
             applicantListFragment.setArguments(bundle);
             applicantListFragment.setSwitcher(this);
         }

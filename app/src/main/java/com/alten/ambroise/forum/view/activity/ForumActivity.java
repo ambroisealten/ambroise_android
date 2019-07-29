@@ -28,6 +28,9 @@ import java.util.Objects;
 public class ForumActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ApplicantListFragment.OnListFragmentInteractionListener, ApplicantAddFragment.OnFragmentInteractionListener {
 
+    public static final String STATE_FORUM = "forum";
+    private static final String  STATE_APPLICANT_FRAGMENT_SWITCHER = "applicantFragmentSwitcher";
+
     private Forum forum;
     private ApplicantFragmentSwitcher applicantFragmentSwitcher;
 
@@ -39,11 +42,11 @@ public class ForumActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             this.applicantFragmentSwitcher = new ApplicantFragmentSwitcher(this);
             Intent intent = getIntent();
-            forum = intent.getParcelableExtra("forum");
+            forum = intent.getParcelableExtra(STATE_FORUM);
         } else {
-            this.forum = savedInstanceState.getParcelable("forum");
-            this.applicantFragmentSwitcher = savedInstanceState.getParcelable("applicantFragmentSwitcher") != null
-                    ? (ApplicantFragmentSwitcher) savedInstanceState.getParcelable("applicantFragmentSwitcher")
+            this.forum = savedInstanceState.getParcelable(STATE_FORUM);
+            this.applicantFragmentSwitcher = savedInstanceState.getParcelable(STATE_APPLICANT_FRAGMENT_SWITCHER) != null
+                    ? (ApplicantFragmentSwitcher) savedInstanceState.getParcelable(STATE_APPLICANT_FRAGMENT_SWITCHER)
                     : new ApplicantFragmentSwitcher(this);
             this.applicantFragmentSwitcher.setActivity(this);
         }
@@ -81,9 +84,16 @@ public class ForumActivity extends AppCompatActivity
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putParcelable(STATE_FORUM, this.forum);
+        savedInstanceState.putParcelable(STATE_APPLICANT_FRAGMENT_SWITCHER, this.applicantFragmentSwitcher);
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putParcelable("forum", this.forum);
-        savedInstanceState.putParcelable("applicantFragmentSwitcher", this.applicantFragmentSwitcher);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState){
+        this.applicantFragmentSwitcher = savedInstanceState.getParcelable(STATE_APPLICANT_FRAGMENT_SWITCHER);
+        this.forum = savedInstanceState.getParcelable(STATE_FORUM);
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override

@@ -23,6 +23,7 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
 
     public static final String FORUM_LIST_TAG = "forumListTag";
     public static final String ADD_FORUM_TAG = "addForumTag";
+
     public static final Creator<ForumFragmentSwitcher> CREATOR = new Creator<ForumFragmentSwitcher>() {
         @Override
         public ForumFragmentSwitcher createFromParcel(Parcel in) {
@@ -78,7 +79,7 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
         if (forumListFragment == null) {
             forumListFragment = new ForumListFragment();
             Bundle bundle = new Bundle();
-            bundle.putInt(ForumListFragment.ARG_COLUMN_COUNT, 1);
+            bundle.putInt(ForumListFragment.STATE_COLUMN_COUNT, 1);
             forumListFragment.setArguments(bundle);
             forumListFragment.setSwitcher(this);
         }
@@ -103,7 +104,7 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
     @Override
     public void onItemClick(Forum forum) {
         Intent intent = new Intent(activity.getBaseContext(), ForumActivity.class);
-        intent.putExtra("forum", forum);
+        intent.putExtra(ForumActivity.STATE_FORUM, forum);
         activity.startActivity(intent);
     }
 

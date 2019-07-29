@@ -31,7 +31,8 @@ import java.util.List;
 public class ApplicantListFragment extends Fragment {
 
     // TODO: Customize parameter argument names
-    public static final String ARG_COLUMN_COUNT = "column-count";
+    public static final String STATE_COLUMN_COUNT = "column-count";
+    public static final String STATE_SWITCHER = "switcher";
     // TODO: Customize parameters
     private int mColumnCount = 2;
     private OnListFragmentInteractionListener mListener;
@@ -50,13 +51,17 @@ public class ApplicantListFragment extends Fragment {
     public static ApplicantListFragment newInstance(int columnCount) {
         ApplicantListFragment fragment = new ApplicantListFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putInt(STATE_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        if(savedInstanceState != null){
+            this.mColumnCount = savedInstanceState.getInt(STATE_COLUMN_COUNT);
+            this.switcher = savedInstanceState.getParcelable(STATE_SWITCHER);
+        }
         super.onCreate(savedInstanceState);
         this.adapter = new ApplicantRecyclerViewAdapter(this.getContext(), new ApplicantRecyclerViewAdapter.OnItemClickListener() {
             @Override
@@ -76,8 +81,15 @@ public class ApplicantListFragment extends Fragment {
             }
         });
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            mColumnCount = getArguments().getInt(STATE_COLUMN_COUNT);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putParcelable(STATE_SWITCHER,switcher);
+        savedInstanceState.putInt(STATE_COLUMN_COUNT,mColumnCount);
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override
