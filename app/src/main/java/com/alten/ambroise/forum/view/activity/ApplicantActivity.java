@@ -40,5 +40,26 @@ public class ApplicantActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+        for (int i = 0; i < sectionsPagerAdapter.getCount() ; i++) {
+            tabs.getTabAt(i).setIcon(getTabIcon(sectionsPagerAdapter.getPageTitleId(i)));
+        }
+
+    }
+
+    private int getTabIcon(int title) {
+        switch (title){
+            case R.string.mobility:
+                return R.drawable.mobility;
+            case R.string.contract:
+                return R.drawable.contract;
+            case R.string.diploma:
+                return R.drawable.diploma;
+            case R.string.skills:
+                return R.drawable.skills;
+            case R.string.more:
+                return R.drawable.more;
+            default:
+               return R.drawable.googleg_standard_color_18;
+        }
     }
 }

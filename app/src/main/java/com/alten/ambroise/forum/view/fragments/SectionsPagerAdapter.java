@@ -17,7 +17,7 @@ import com.alten.ambroise.forum.R;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
+    private static final int[] TAB_TITLES = new int[]{R.string.mobility, R.string.contract, R.string.diploma, R.string.skills, R.string.more};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -32,6 +32,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         return PlaceholderFragment.newInstance(position + 1);
     }
 
+    public int getPageTitleId(int position){
+        return TAB_TITLES[position];
+    }
+
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
@@ -41,6 +45,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         // Show 2 total pages.
-        return 2;
+        return TAB_TITLES.length;
     }
 }
