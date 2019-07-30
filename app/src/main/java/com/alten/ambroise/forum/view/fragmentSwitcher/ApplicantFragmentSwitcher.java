@@ -1,6 +1,7 @@
 package com.alten.ambroise.forum.view.fragmentSwitcher;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -13,15 +14,17 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
+import com.alten.ambroise.forum.view.activity.ApplicantActivity;
 import com.alten.ambroise.forum.view.fragments.ApplicantAddFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantListFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantRecyclerViewAdapter;
+
+import static com.alten.ambroise.forum.view.activity.ApplicantActivity.STATE_APPLICANT;
 
 public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRecyclerViewAdapter.OnItemClickListener, Parcelable {
 
     public static final String APPLICANT_LIST_TAG = "applicantListTag";
     public static final String ADD_APPLICANT_TAG = "addApplicantTag";
-    private static final String APPLICANT_TAB_TAG = "applicantTabTag";
 
     public static final Creator<ApplicantFragmentSwitcher> CREATOR = new Creator<ApplicantFragmentSwitcher>() {
         @Override
@@ -124,6 +127,8 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
     }
 
     public void startNewApplicantProcess(ApplicantForum applicant) {
-        //run applicant activity
+        Intent intent = new Intent(activity.getBaseContext(), ApplicantActivity.class);
+        intent.putExtra(STATE_APPLICANT, applicant);
+        activity.startActivity(intent);
     }
 }
