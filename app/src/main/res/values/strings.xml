@@ -45,4 +45,13 @@
     <string name="more">More</string>
     <string name="title_activity_applicant">ApplicantActivity</string>
     <string name="splashscreen">Spash screen</string>
+    <string name="geographic">Geographics</string>
+    <string name="france">France</string>
+    <string name="franceWithoutIDF">France without IDF</string>
+    <string name="international">International</string>
+    <string name="mobility_radius">Within a radius of</string>
+    <string name="radius">Radius</string>
+    <string name="minutes">Mins</string>
+    <string name="kilometers">Kms</string>
+    <string name="francemobility">Mobility for France ?</string>
 </resources>
