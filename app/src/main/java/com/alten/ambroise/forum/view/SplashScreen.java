@@ -9,7 +9,7 @@ import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.view.activity.MainActivity;
 
 public class SplashScreen extends Activity {
-    private static int SPLASH_TIME_OUT = 3000;
+    private static final int SPLASH_TIME_OUT = 3000;
 
     @Override
     protected void onCreate(Bundle savedStateInstance){
@@ -19,6 +19,7 @@ public class SplashScreen extends Activity {
             @Override
             public void run(){
                 Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             }
