@@ -13,6 +13,7 @@ import com.alten.ambroise.forum.data.utils.Nationality;
 import com.alten.ambroise.forum.data.utils.converter.Converters;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity(tableName = "applicantForum_table", indices = {@Index(value = "mail", unique = true)})
 public class ApplicantForum implements Parcelable {
@@ -61,10 +62,10 @@ public class ApplicantForum implements Parcelable {
 
     protected ApplicantForum(Parcel in) {
         _id = in.readLong();
-        mail = in.readString();
-        surname = in.readString();
-        name = in.readString();
-        personInChargeMail = in.readString();
+        mail = Objects.requireNonNull(in.readString());
+        surname = Objects.requireNonNull(in.readString());
+        name = Objects.requireNonNull(in.readString());
+        personInChargeMail = Objects.requireNonNull(in.readString());
         phoneNumber = in.readString();
         cvPerson = in.readString();
         mobilities = in.createStringArrayList();
