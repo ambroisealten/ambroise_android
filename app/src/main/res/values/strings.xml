@@ -35,4 +35,12 @@
     <string name="cv_picture_description">CV picture</string>
     <string name="error_creating_file">An error occurred while creating the File</string>
     <string name="noMail">\@noMail.alten.com</string>
+    <string name="title_activity_blbl">blbl</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="mobility">Mobility</string>
+    <string name="contract">Contract</string>
+    <string name="diploma">Diploma</string>
+    <string name="skills">Skills</string>
+    <string name="more">More</string>
 </resources>
