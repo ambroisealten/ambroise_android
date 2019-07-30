@@ -43,4 +43,6 @@
     <string name="diploma">Diploma</string>
     <string name="skills">Skills</string>
     <string name="more">More</string>
+    <string name="title_activity_applicant">ApplicantActivity</string>
+    <string name="splashscreen">Spash screen</string>
 </resources>

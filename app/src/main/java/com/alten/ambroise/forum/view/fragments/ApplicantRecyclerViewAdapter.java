@@ -28,7 +28,7 @@ public class ApplicantRecyclerViewAdapter extends RecyclerView.Adapter<Applicant
     @Override
     public ApplicantRecyclerViewAdapter.ApplicantListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_applicant, parent, false);
+                .inflate(R.layout.fragment_applicant_start, parent, false);
         return new ApplicantRecyclerViewAdapter.ApplicantListViewHolder(view);
     }
 
