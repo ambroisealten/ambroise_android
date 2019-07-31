@@ -61,6 +61,8 @@
     <string name="number_of_months">Number of months</string>
     <string name="forTime">For</string>
     <string name="abstractContract">Abstract</string>
+    <string name="defaultTextMobility">Mobility, within 100 kms</string>
+    <string name="add_geographic">Add</string>
 
     <!-- Arrays for spinners -->
     <string-array name="contract_type">

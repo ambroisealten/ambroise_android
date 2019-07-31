@@ -2,6 +2,7 @@ package com.alten.ambroise.forum.data.utils.converter;
 
 import androidx.room.TypeConverter;
 
+import com.alten.ambroise.forum.data.model.Mobility;
 import com.alten.ambroise.forum.data.utils.Nationality;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -12,23 +13,23 @@ import java.util.List;
 public class Converters {
 
     @TypeConverter
-    public String fromList(List<String> list) {
+    public String fromList(List list) {
         if (list == null) {
             return (null);
         }
         Gson gson = new Gson();
-        Type type = new TypeToken<List<String>>() {
+        Type type = new TypeToken<List>() {
         }.getType();
         return gson.toJson(list, type);
     }
 
     @TypeConverter
-    public List<String> toList(String listString) {
+    public List toList(String listString) {
         if (listString == null) {
             return (null);
         }
         Gson gson = new Gson();
-        Type type = new TypeToken<List<String>>() {
+        Type type = new TypeToken<List>() {
         }.getType();
         return gson.fromJson(listString, type);
     }
@@ -47,5 +48,23 @@ public class Converters {
             return (null);
         }
         return Nationality.valueOf(nationalityString);
+    }
+
+    @TypeConverter
+    public String fromMobility(Mobility mobility) {
+        if (mobility == null) {
+            return (null);
+        }
+        Gson gson = new Gson();
+        return gson.toJson(mobility,Mobility.class);
+    }
+
+    @TypeConverter
+    public Mobility toMobility(String mobilityString) {
+        if (mobilityString == null) {
+            return (null);
+        }
+        Gson gson = new Gson();
+        return gson.fromJson(mobilityString,Mobility.class);
     }
 }

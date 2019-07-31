@@ -10,7 +10,11 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.alten.ambroise.forum.data.dao.ApplicantForumDao;
+import com.alten.ambroise.forum.data.model.Mobility;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 @Database(entities = {ApplicantForum.class}, version = 1, exportSchema = false)
@@ -63,6 +67,7 @@ public abstract class ApplicantForumRoomDatabase extends RoomDatabase {
                 applicant.setHighestDiplomaYear("23/07/2019");
                 applicant.setGrade("+++");
                 applicant.setStartAt("01/01/2020");
+                applicant.setMobilities(Arrays.asList(new Mobility(),new Mobility()));
                 mDao.insert(applicant);
             }
             return null;
