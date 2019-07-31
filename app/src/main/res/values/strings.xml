@@ -54,4 +54,26 @@
     <string name="minutes">Mins</string>
     <string name="kilometers">Kms</string>
     <string name="francemobility">Mobility for France ?</string>
+    <string name="begin_at">Beginning at</string>
+    <string name="dateBegin">Beginning date</string>
+    <string name="withinMonths">Within</string>
+    <string name="months">months</string>
+    <string name="number_of_months">Number of months</string>
+    <string name="forTime">For</string>
+    <string name="abstractContract">Abstract</string>
+
+    <!-- Arrays for spinners -->
+    <string-array name="contract_type">
+        <item>Internship</item>
+        <item>CDD</item>
+        <item>CDI</item>
+        <item>Freelance</item>
+        <item>Subcontracting</item>
+        <item>Reconversion</item>
+    </string-array>
+    <string-array name="contract_duration_type">
+        <item>Days</item>
+        <item>Months</item>
+        <item>Years</item>
+    </string-array>
 </resources>
