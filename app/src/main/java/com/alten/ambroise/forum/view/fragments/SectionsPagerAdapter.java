@@ -17,7 +17,7 @@ import com.alten.ambroise.forum.R;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.mobility, R.string.contract, R.string.diploma, R.string.skills, R.string.more};
+    public static final int[] TAB_TITLES = new int[]{R.string.mobility, R.string.contract, R.string.diploma, R.string.skills, R.string.more};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -32,7 +32,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         return PlaceHolderFragment.newInstance(position + 1);
     }
 
-    public int getPageTitleId(int position){
+    public static int getPageTitleId(int position){
         return TAB_TITLES[position];
     }
 

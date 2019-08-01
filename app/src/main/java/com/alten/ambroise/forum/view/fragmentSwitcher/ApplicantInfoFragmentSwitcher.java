@@ -9,18 +9,17 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.alten.ambroise.forum.R;
+import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
+import com.alten.ambroise.forum.view.fragments.ApplicantMobilityFragment;
 
 
-public class ApplicantInfoFragmentSwitcher  implements FragmentSwitcher, Parcelable {
+public class ApplicantInfoFragmentSwitcher implements FragmentSwitcher, Parcelable {
 
-    private Activity activity;
-
-    public ApplicantInfoFragmentSwitcher(Activity activity) {
-        this.activity = activity;
-    }
-
-    protected ApplicantInfoFragmentSwitcher(Parcel in) {
-    }
+    public static final String APPLICANT_INFO_MOBILITY_TAG = "applicantInfoMobilityTag";
+    public static final String APPLICANT_INFO_CONTRACT_TAG = "applicantInfoContractTag";
+    public static final String APPLICANT_INFO_DIPLOMA_TAG = "applicantInfoDiplomaTag";
+    public static final String APPLICANT_INFO_SKILLS_TAG = "applicantInfoSkillsTag";
+    public static final String APPLICANT_INFO_MORE_TAG = "applicantInfoMoreTag";
 
     public static final Creator<ApplicantInfoFragmentSwitcher> CREATOR = new Creator<ApplicantInfoFragmentSwitcher>() {
         @Override
@@ -33,6 +32,14 @@ public class ApplicantInfoFragmentSwitcher  implements FragmentSwitcher, Parcela
             return new ApplicantInfoFragmentSwitcher[size];
         }
     };
+    private Activity activity;
+
+    public ApplicantInfoFragmentSwitcher(Activity activity) {
+        this.activity = activity;
+    }
+
+    protected ApplicantInfoFragmentSwitcher(Parcel in) {
+    }
 
     @Override
     public void switchFragment(FragmentManager fm, String tag, Object... args) {
@@ -40,6 +47,9 @@ public class ApplicantInfoFragmentSwitcher  implements FragmentSwitcher, Parcela
         FragmentTransaction fTransaction = fm.beginTransaction();
         if (fragment == null) {
             switch (tag) {
+                case APPLICANT_INFO_MOBILITY_TAG:
+                    fragment = switchApplicantInfoMobilityFragment(fm, (ApplicantForum) args[0]);
+                    break;
                 default:
                     break;
             }
@@ -48,13 +58,21 @@ public class ApplicantInfoFragmentSwitcher  implements FragmentSwitcher, Parcela
                     , R.anim.push_left_out
                     , R.anim.push_right_in
                     , R.anim.push_right_out
-            ).replace(R.id.forum_fragment, fragment, tag);
+            ).replace(R.id.applicant_info_fragment, fragment, tag);
         } else {
             // Le fragment existe déjà, il suffit de l'afficher
             fTransaction.show(fragment);
         }
         // Remplacez, ajoutez à la backstack et commit
         fTransaction.addToBackStack(tag).commit();
+    }
+
+    private ApplicantMobilityFragment switchApplicantInfoMobilityFragment(FragmentManager fm, ApplicantForum applicant) {
+        ApplicantMobilityFragment applicantMobilityFragment = (ApplicantMobilityFragment) fm.findFragmentByTag(APPLICANT_INFO_MOBILITY_TAG);
+        if (applicantMobilityFragment == null) {
+            applicantMobilityFragment = new ApplicantMobilityFragment();
+        }
+        return applicantMobilityFragment;
     }
 
     @Override
