@@ -30,6 +30,11 @@
         </provider>
 
         <activity
+            android:name=".view.activity.ApplicantActivity"
+            android:label="@string/title_activity_applicant"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".view.activity.ForumActivity"
             android:label="@string/title_activity_forum"
             android:theme="@style/AppTheme.NoActionBar" />
