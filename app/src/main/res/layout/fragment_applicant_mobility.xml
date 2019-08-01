@@ -131,25 +131,18 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_weight="1">
 
-        <LinearLayout
+        <GridView
+            android:id="@id/gridView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center|top"
-            android:orientation="vertical">
+            android:gravity="center"
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth">
 
-            <GridView
-                android:id="@id/gridView1"
-                android:numColumns="auto_fit"
-                android:gravity="center"
-                android:stretchMode="columnWidth"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </GridView>
-        </LinearLayout>
+        </GridView>
 
     </androidx.cardview.widget.CardView>
 
