@@ -3,10 +3,14 @@ package com.alten.ambroise.forum.data.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.Ignore;
+
 public class Mobility implements Parcelable {
     private String geographic;
     private int radius;
     private String unit;
+    @Ignore
+    private String tag;
 
     public Mobility(){
 
@@ -54,6 +58,14 @@ public class Mobility implements Parcelable {
         this.unit = unit;
     }
 
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -64,5 +76,10 @@ public class Mobility implements Parcelable {
         dest.writeString(geographic);
         dest.writeInt(radius);
         dest.writeString(unit);
+    }
+
+    @Override
+    public String toString(){
+        return radius > 0 ? geographic+", within "+radius+unit : geographic;
     }
 }

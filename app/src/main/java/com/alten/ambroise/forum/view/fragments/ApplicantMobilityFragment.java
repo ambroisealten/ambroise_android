@@ -11,16 +11,14 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import com.alten.ambroise.forum.R;
+import com.alten.ambroise.forum.data.model.Mobility;
 import com.alten.ambroise.forum.view.CustomGrid;
-import com.alten.ambroise.forum.view.activity.MainActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
@@ -38,17 +36,29 @@ public class ApplicantMobilityFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final int minRadius = 0;
     private static final int maxRadius = 500;
-    private ArrayList<String> allGeos = new ArrayList<String>();
+    private ArrayList<Mobility> allGeos = new ArrayList<Mobility>();
     private int[] allRadius = {};
     private String currentUnit = "mins";
-
-    private Button addGeographics;
-    private boolean isEnabled = false;
-
 
     private TextInputEditText geographicsInput;
     private TextInputEditText radiusInput;
     private Switch unitSwitch;
+
+    private Button addGeographics;
+    private boolean isEnabled = false;
+
+    private Button buttonFrance;
+    private boolean isFrancechecked = false;
+    private int franceMobilityID;
+    private Button buttonFranceWithoutIDF;
+    private boolean isIDFChecked = false;
+    private int idfMobilityID;
+    private static final String PRESENT_FRANCE_TAG = "France_present";
+    private static final String PRESENT_IDF_TAG = "Idf_present";
+    private static final String PRESENT_INTERNATIONAL_TAG = "International_present";
+
+    private Switch internationalSwitch;
+    private Integer internationalId;
 
     // TODO: Rename and change types of parameters
     private GridView gridView;
@@ -89,13 +99,17 @@ public class ApplicantMobilityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_applicant_mobility, container, false);
         gridView = view.findViewById(R.id.gridView1);
 
+        final ApplicantMobilityFragment that = this;
+
         addGeographics = view.findViewById(R.id.button_add_geographics);
         addGeographics.setEnabled(isEnabled);
         addGeographics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    allGeos.add(geographicsInput.getText().toString()+" : "+radiusInput.getText().toString()+currentUnit);
-                    gridView.setAdapter(new CustomGrid(getActivity(), allGeos, allRadius));
+                    Mobility createdMobility = createNewMobility(geographicsInput.getText().toString(),Integer.parseInt(radiusInput.getText().toString()),currentUnit);
+
+                    allGeos.add(createdMobility);
+                    refreshGridView();
                     geographicsInput.getText().clear();
                     radiusInput.getText().clear();
                     unitSwitch.setChecked(false);
@@ -145,18 +159,88 @@ public class ApplicantMobilityFragment extends Fragment {
             }
         });
 
-        CustomGrid adapter = new CustomGrid(getActivity(), allGeos, allRadius);
+        refreshGridView();
 
-        gridView.setAdapter(adapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        buttonFrance = view.findViewById(R.id.buttonFrance);
+        buttonFrance.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), "Click detected", Toast.LENGTH_SHORT);
+            public void onClick(View v) {
+                if(!isFrancechecked && !tagExists(PRESENT_FRANCE_TAG)){
+                    Mobility createdMobility = createNewMobility("France",0,"kms");
+                    createdMobility.setTag(PRESENT_FRANCE_TAG);
+
+                    if(isIDFChecked) deleteGeographic("France without IDF");
+
+                    franceMobilityID = allGeos.size();
+                    allGeos.add(createdMobility);
+                    isFrancechecked = true;
+                    isIDFChecked = false;
+                    buttonFrance.setEnabled(isIDFChecked);
+                    buttonFranceWithoutIDF.setEnabled(isFrancechecked);
+                    refreshGridView();
+                }
+            }
+        });
+
+        buttonFranceWithoutIDF = view.findViewById(R.id.buttonIDF);
+        buttonFranceWithoutIDF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isIDFChecked && !tagExists(PRESENT_IDF_TAG)){
+                    Mobility createdMobility = createNewMobility("France without IDF",0,"kms");
+                    createdMobility.setTag(PRESENT_IDF_TAG);
+
+                    if(isFrancechecked) deleteGeographic("France");
+
+                    idfMobilityID = allGeos.size();
+                    allGeos.add(createdMobility);
+                    isIDFChecked = true;
+                    isFrancechecked = false;
+                    buttonFranceWithoutIDF.setEnabled(isFrancechecked);
+                    buttonFrance.setEnabled(isIDFChecked);
+                    refreshGridView();
+                }
+            }
+        });
+
+        internationalSwitch = view.findViewById(R.id.switchInternational);
+        internationalSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked && !tagExists(PRESENT_INTERNATIONAL_TAG)){
+                    internationalId = allGeos.size();
+
+                    Mobility createdMobility = createNewMobility("International",0,"kms");
+                    createdMobility.setTag(PRESENT_INTERNATIONAL_TAG);
+                    allGeos.add(createdMobility);
+                    refreshGridView();
+                }
+                else{
+                    if(internationalId != null && tagExists(PRESENT_INTERNATIONAL_TAG)) deleteGeographic("International");
+
+                    internationalId = null;
+                }
+
             }
         });
 
         return view;
     }
+
+    private boolean tagExists(String presenceTag) {
+        for(Mobility mobility_pour_faire_plaisir_a_andy : allGeos){
+            if(mobility_pour_faire_plaisir_a_andy.getTag() == presenceTag) return true;
+        }
+        return false;
+    }
+
+    public Mobility createNewMobility(String geographic, int radius, String unit){
+        Mobility createdMobility = new Mobility();
+        createdMobility.setGeographic(geographic);
+        createdMobility.setRadius(radius);
+        createdMobility.setUnit(unit);
+        return createdMobility;
+    }
+
 
     public void checkValidity() {
         if (geographicsInput.getText().length() > 0 && radiusInput.getText().length() > 0 )  {
@@ -190,9 +274,37 @@ public class ApplicantMobilityFragment extends Fragment {
         mListener = null;
     }
 
-    public void addGeographic(View v) {
-
+    public void refreshGridView(){
+        CustomGrid adapter = new CustomGrid(getActivity(), allGeos, allRadius, this);
+        gridView.setAdapter(adapter);
     }
+
+    public void deleteGeographic(String geo){
+        int position = findPosition(geo);
+        if(position != -1){
+            Mobility tobeDeleted = allGeos.get(position);
+            if(tobeDeleted.getGeographic() == "France" || tobeDeleted.getGeographic() == "France without IDF"){
+                buttonFranceWithoutIDF.setEnabled(true);
+                buttonFrance.setEnabled(true);
+                isFrancechecked = false;
+                isIDFChecked = false;
+            }
+            else if (tobeDeleted.getGeographic() == "International"){
+                internationalSwitch.setChecked(false);
+            }
+            allGeos.remove(position);
+
+            refreshGridView();
+        }
+    }
+
+    public int findPosition(String geo){
+        for(Mobility mobility : allGeos){
+            if(mobility.getGeographic() == geo) return allGeos.indexOf(mobility);
+        }
+        return -1;
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this
