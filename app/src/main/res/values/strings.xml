@@ -53,6 +53,10 @@
     <string name="radius">Radius</string>
     <string name="minutes">Mins</string>
     <string name="kilometers">Kms</string>
+    <string name="sign_hint">Sign here</string>
+    <string name="decline">Decline</string>
+    <string name="accept">Accept</string>
+    <string name="sign">Signature</string>
     <string name="francemobility">Mobility for France ?</string>
     <string name="begin_at">Beginning at</string>
     <string name="dateBegin">Beginning date</string>
@@ -78,4 +82,5 @@
         <item>Months</item>
         <item>Years</item>
     </string-array>
+    <string name="not_implemented">Tab not implemented yet</string>
 </resources>
