@@ -9,6 +9,7 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import com.alten.ambroise.forum.data.model.Mobility;
 import com.alten.ambroise.forum.data.utils.Nationality;
 import com.alten.ambroise.forum.data.utils.converter.Converters;
 
@@ -17,17 +18,6 @@ import java.util.List;
 @Entity(tableName = "applicantForum_table", indices = {@Index(value = "mail", unique = true)})
 public class ApplicantForum implements Parcelable {
 
-    public static final Creator<ApplicantForum> CREATOR = new Creator<ApplicantForum>() {
-        @Override
-        public ApplicantForum createFromParcel(Parcel in) {
-            return new ApplicantForum(in);
-        }
-
-        @Override
-        public ApplicantForum[] newArray(int size) {
-            return new ApplicantForum[size];
-        }
-    };
     @PrimaryKey(autoGenerate = true)
     private long _id;
     @NonNull
@@ -41,7 +31,7 @@ public class ApplicantForum implements Parcelable {
     private String phoneNumber;
     private String cvPerson;
     @TypeConverters(Converters.class)
-    private List<String> mobilities;
+    private List<Mobility> mobilities;
     private String contractType;
     private String contractDuration;
     private String startAt;
@@ -59,15 +49,16 @@ public class ApplicantForum implements Parcelable {
     public ApplicantForum() {
     }
 
+
     protected ApplicantForum(Parcel in) {
         _id = in.readLong();
         mail = in.readString();
         surname = in.readString();
         name = in.readString();
-        personInChargeMail =in.readString();
+        personInChargeMail = in.readString();
         phoneNumber = in.readString();
         cvPerson = in.readString();
-        mobilities = in.createStringArrayList();
+        mobilities = in.createTypedArrayList(Mobility.CREATOR);
         contractType = in.readString();
         contractDuration = in.readString();
         startAt = in.readString();
@@ -79,6 +70,18 @@ public class ApplicantForum implements Parcelable {
         sign = in.readString();
         grade = in.readString();
     }
+
+    public static final Creator<ApplicantForum> CREATOR = new Creator<ApplicantForum>() {
+        @Override
+        public ApplicantForum createFromParcel(Parcel in) {
+            return new ApplicantForum(in);
+        }
+
+        @Override
+        public ApplicantForum[] newArray(int size) {
+            return new ApplicantForum[size];
+        }
+    };
 
     public long get_id() {
         return _id;
@@ -140,11 +143,11 @@ public class ApplicantForum implements Parcelable {
         this.cvPerson = cvPerson;
     }
 
-    public List<String> getMobilities() {
+    public List<Mobility> getMobilities() {
         return mobilities;
     }
 
-    public void setMobilities(List<String> mobilities) {
+    public void setMobilities(List<Mobility> mobilities) {
         this.mobilities = mobilities;
     }
 
@@ -250,7 +253,7 @@ public class ApplicantForum implements Parcelable {
         dest.writeString(personInChargeMail);
         dest.writeString(phoneNumber);
         dest.writeString(cvPerson);
-        dest.writeStringList(mobilities);
+        dest.writeTypedList(mobilities);
         dest.writeString(contractType);
         dest.writeString(contractDuration);
         dest.writeString(startAt);

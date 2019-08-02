@@ -10,11 +10,12 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.view.adapter.ViewPagerAdapter;
+import com.alten.ambroise.forum.view.fragments.ApplicantContractFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantMobilityFragment;
 import com.alten.ambroise.forum.view.fragments.SignFragment;
 import com.google.android.material.tabs.TabLayout;
 
-public class ApplicantActivity extends AppCompatActivity implements ApplicantMobilityFragment.OnFragmentInteractionListener, SignFragment.OnFragmentInteractionListener {
+public class ApplicantActivity extends AppCompatActivity implements SignFragment.OnFragmentInteractionListener, ApplicantMobilityFragment.OnFragmentInteractionListener, ApplicantContractFragment.OnFragmentInteractionListener {
 
     public static final String STATE_APPLICANT = "applicant";
     private Toolbar toolbar;
@@ -40,6 +41,7 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
 
     private void setIcon() {
         tabLayout.getTabAt(0).setIcon(R.drawable.mobility);
+        tabLayout.getTabAt(1).setIcon(R.drawable.contract);
     }
 
     private void setViewPager(ViewPager viewPager) {
@@ -50,6 +52,10 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
         fragment = new ApplicantMobilityFragment();
         adapter.addFragment(fragment, getString(R.string.mobility));
 
+        fragment = new ApplicantContractFragment();
+        adapter.addFragment(fragment, getString(R.string.contract));
+
+
         fragment = new SignFragment();
         adapter.addFragment(fragment, getString(R.string.sign));
 
@@ -58,6 +64,6 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-        
+
     }
 }

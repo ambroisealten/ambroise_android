@@ -46,17 +46,41 @@
     <string name="title_activity_applicant">ApplicantActivity</string>
     <string name="splashscreen">Spash screen</string>
     <string name="geographic">Geographics</string>
+    <string name="france">France</string>
+    <string name="franceWithoutIDF">France without IDF</string>
+    <string name="international">International</string>
     <string name="mobility_radius">Within a radius of</string>
     <string name="radius">Radius</string>
     <string name="minutes">Mins</string>
     <string name="kilometers">Kms</string>
-    <string name="france_mobility">Mobility for France ?</string>
-    <string name="france">France</string>
-    <string name="franceWithoutIDF">France without IDF</string>
-    <string name="international">International</string>
-    <string name="not_implemented">Tab not implemented yet</string>
-    <string name="sign">Signature</string>
-    <string name="accept">Accept</string>
-    <string name="decline">Decline</string>
     <string name="sign_hint">Sign here</string>
+    <string name="decline">Decline</string>
+    <string name="accept">Accept</string>
+    <string name="sign">Signature</string>
+    <string name="francemobility">Mobility for France ?</string>
+    <string name="begin_at">Beginning at</string>
+    <string name="dateBegin">Beginning date</string>
+    <string name="withinMonths">Within</string>
+    <string name="months">months</string>
+    <string name="number_of_months">Number of months</string>
+    <string name="forTime">For</string>
+    <string name="abstractContract">Resume</string>
+    <string name="defaultTextMobility">Mobility, within 100 kms</string>
+    <string name="add_geographic">Add</string>
+
+    <!-- Arrays for spinners -->
+    <string-array name="contract_type">
+        <item>Internship</item>
+        <item>CDD</item>
+        <item>CDI</item>
+        <item>Freelance</item>
+        <item>Subcontracting</item>
+        <item>Reconversion</item>
+    </string-array>
+    <string-array name="contract_duration_type">
+        <item>Days</item>
+        <item>Months</item>
+        <item>Years</item>
+    </string-array>
+    <string name="not_implemented">Tab not implemented yet</string>
 </resources>
