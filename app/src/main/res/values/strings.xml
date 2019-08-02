@@ -55,4 +55,7 @@
     <string name="franceWithoutIDF">France without IDF</string>
     <string name="international">International</string>
     <string name="not_implemented">Tab not implemented yet</string>
+    <string name="sign">Signature</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
 </resources>
