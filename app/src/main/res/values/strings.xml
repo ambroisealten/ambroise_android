@@ -54,4 +54,5 @@
     <string name="france">France</string>
     <string name="franceWithoutIDF">France without IDF</string>
     <string name="international">International</string>
+    <string name="not_implemented">Tab not implemented yet</string>
 </resources>

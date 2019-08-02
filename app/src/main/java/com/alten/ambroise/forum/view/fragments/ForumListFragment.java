@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.Forum;
 import com.alten.ambroise.forum.data.model.viewModel.ForumViewModel;
+import com.alten.ambroise.forum.view.adapter.ForumRecyclerViewAdapter;
 import com.alten.ambroise.forum.view.fragmentSwitcher.ForumFragmentSwitcher;
 
 import java.util.List;
