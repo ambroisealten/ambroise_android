@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.Mobility;
 import com.alten.ambroise.forum.data.utils.InputFilterMinMax;
-import com.alten.ambroise.forum.view.CustomGrid;
+import com.alten.ambroise.forum.view.adapter.CustomGridAdapter;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
@@ -284,7 +284,7 @@ public class ApplicantMobilityFragment extends Fragment {
     }
 
     public void refreshGridView() {
-        CustomGrid adapter = new CustomGrid(getActivity(), allGeos, allRadius, this);
+        CustomGridAdapter adapter = new CustomGridAdapter(getActivity(), allGeos, allRadius, this);
         gridView.setAdapter(adapter);
     }
 
