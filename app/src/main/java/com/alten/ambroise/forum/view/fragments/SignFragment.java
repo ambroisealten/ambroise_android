@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
 import com.alten.ambroise.forum.R;
+import com.github.gcacace.signaturepad.views.SignaturePad;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +24,8 @@ import com.alten.ambroise.forum.R;
 public class SignFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    private SignaturePad mSignaturePad;
+    private String signature;
 
     public SignFragment() {
         // Required empty public constructor
@@ -45,7 +49,44 @@ public class SignFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign, container, false);
+        final View view = inflater.inflate(R.layout.fragment_sign, container, false);
+        mSignaturePad = view.findViewById(R.id.signature_pad);
+
+        //To Clear or not to clear, that is the question. Remove if we dont want action on signed
+//        mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
+//
+//            @Override
+//            public void onStartSigning() {
+//                //Event triggered when the pad is touched
+//            }
+//
+//            @Override
+//            public void onSigned() {
+//                //Event triggered when the pad is signed
+//            }
+//
+//            @Override
+//            public void onClear() {
+//                //Event triggered when the pad is cleared
+//            }
+//        });
+        Button decline = view.findViewById(R.id.decline);
+        decline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Abort the mission!
+            }
+        });
+
+        Button accept = view.findViewById(R.id.accept);
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signature = mSignaturePad.getSignatureSvg();
+                // Continue process
+            }
+        });
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
