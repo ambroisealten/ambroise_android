@@ -15,15 +15,28 @@
         android:layout_weight="8"
         android:paddingTop="30dp"
         app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
+        app:cardElevation="10dp"
         app:cardUseCompatPadding="true">
 
-        <com.github.gcacace.signaturepad.views.SignaturePad
-            android:id="@+id/signature_pad"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:clearOnDoubleClick="true"
-            app:penColor="@android:color/black" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/sign_hint" />
+
+            <com.github.gcacace.signaturepad.views.SignaturePad
+                android:id="@+id/signature_pad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:clearOnDoubleClick="true"
+                app:penColor="@android:color/black" />
+        </FrameLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -40,15 +53,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             style="?android:attr/buttonBarButtonStyle"
-            android:text="@string/decline" />
+            android:text="@string/decline"
+            android:textColor="@color/red_decline"/>
 
         <Button
             android:id="@+id/accept"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            style="?android:attr/buttonBarButtonStyle"
-            android:text="@string/accept" />
+            android:text="@string/accept"
+            android:textColor="@color/green_accept" />
     </LinearLayout>
 
 </LinearLayout>
