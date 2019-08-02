@@ -15,9 +15,9 @@ import androidx.fragment.app.FragmentTransaction;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.view.activity.ApplicantActivity;
+import com.alten.ambroise.forum.view.adapter.ApplicantRecyclerViewAdapter;
 import com.alten.ambroise.forum.view.fragments.ApplicantAddFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantListFragment;
-import com.alten.ambroise.forum.view.fragments.ApplicantRecyclerViewAdapter;
 
 public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRecyclerViewAdapter.OnItemClickListener, Parcelable {
 
