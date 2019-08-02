@@ -9,10 +9,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.view.adapter.ViewPagerAdapter;
+import com.alten.ambroise.forum.view.fragments.ApplicantContractFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantMobilityFragment;
 import com.google.android.material.tabs.TabLayout;
 
-public class ApplicantActivity extends AppCompatActivity implements ApplicantMobilityFragment.OnFragmentInteractionListener {
+public class ApplicantActivity extends AppCompatActivity implements ApplicantMobilityFragment.OnFragmentInteractionListener, ApplicantContractFragment.OnFragmentInteractionListener{
 
     public static final String STATE_APPLICANT = "applicant";
     private Toolbar toolbar;
@@ -38,6 +39,7 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
 
     private void setIcon() {
         tabLayout.getTabAt(0).setIcon(R.drawable.mobility);
+        tabLayout.getTabAt(1).setIcon(R.drawable.contract);
     }
 
     private void setViewPager(ViewPager viewPager) {
@@ -46,6 +48,9 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
         //Add fragments here
         ApplicantMobilityFragment fragment = new ApplicantMobilityFragment();
         adapter.addFragment(fragment, getString(R.string.mobility));
+
+        ApplicantContractFragment fragment2 = new ApplicantContractFragment();
+        adapter.addFragment(fragment2, getString(R.string.contract));
 
         viewPager.setAdapter(adapter);
     }
