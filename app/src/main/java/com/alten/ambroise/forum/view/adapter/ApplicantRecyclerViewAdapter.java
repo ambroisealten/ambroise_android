@@ -1,4 +1,4 @@
-package com.alten.ambroise.forum.view.fragments;
+package com.alten.ambroise.forum.view.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -19,7 +19,7 @@ public class ApplicantRecyclerViewAdapter extends RecyclerView.Adapter<Applicant
     private final ApplicantRecyclerViewAdapter.OnItemClickListener listeners;
     private List<ApplicantForum> mApplicants; // Cached copy of applicants
 
-    ApplicantRecyclerViewAdapter(Context context, ApplicantRecyclerViewAdapter.OnItemClickListener listener) {
+    public ApplicantRecyclerViewAdapter(Context context, ApplicantRecyclerViewAdapter.OnItemClickListener listener) {
         LayoutInflater mInflater = LayoutInflater.from(context);
         this.listeners = listener;
     }
@@ -56,7 +56,7 @@ public class ApplicantRecyclerViewAdapter extends RecyclerView.Adapter<Applicant
         }
     }
 
-    void setApplicants(List<ApplicantForum> applicants) {
+    public void setApplicants(List<ApplicantForum> applicants) {
         mApplicants = applicants;
         notifyDataSetChanged();
     }
