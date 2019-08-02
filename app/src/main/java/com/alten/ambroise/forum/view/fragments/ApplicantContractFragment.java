@@ -2,13 +2,27 @@ package com.alten.ambroise.forum.view.fragments;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.alten.ambroise.forum.R;
+import com.alten.ambroise.forum.data.utils.InputFilterMinMax;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +41,24 @@ public class ApplicantContractFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private Spinner contractSpinner;
+    private String contractType = "Internship";
+
+    private DatePicker datePicker;
+    private String beginningDate = "";
+
+    private TextView abstractTextView;
+
+    private Spinner optionnalSpinner;
+    private EditText optionnalDuration;
+    private Integer duration = null;
+    private String durationType = "days";
+
+    private EditText withinMonths;
+    private Integer monthsUntil = null;
+
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -61,11 +93,145 @@ public class ApplicantContractFragment extends Fragment {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_applicant_contract, container, false);
+        View view = inflater.inflate(R.layout.fragment_applicant_contract, container, false);
+
+        this.abstractTextView = view.findViewById(R.id.abstractText);
+
+        final String[] contractArray = getResources().getStringArray(R.array.contract_type);
+        final String[] contractDurationArray = getResources().getStringArray(R.array.contract_duration_type);
+
+        this.contractSpinner = (Spinner) view.findViewById(R.id.contractSpinner);
+
+        this.withinMonths = (EditText) view.findViewById(R.id.withinMonths);
+
+        this.optionnalSpinner = (Spinner) view.findViewById(R.id.optionnalSpinner);
+        this.optionnalSpinner.setEnabled(false);
+        this.optionnalSpinner.setFocusable(false);
+
+        this.optionnalDuration = (EditText) view.findViewById(R.id.optionnalDuration);
+        this.optionnalDuration.setInputType(InputType.TYPE_NULL);
+
+        final ApplicantContractFragment that = this;
+
+        contractSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                that.contractType = contractArray[position];
+                that.refreshAllVars();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                that.contractType = "";
+                that.refreshAllVars();
+            }
+        });
+
+        this.datePicker = (DatePicker) view.findViewById(R.id.datePicker);
+
+        this.datePicker.setMinDate(System.currentTimeMillis() - 1000);
+        this.datePicker.setOnDateChangedListener(new DatePicker.OnDateChangedListener(){
+            @Override
+            public void onDateChanged(DatePicker datePicker, int year, int month, int dayOfMonth){
+                that.beginningDate = dayOfMonth+"/"+(month+1)+"/"+year;
+                that.monthsUntil = null;
+                that.withinMonths.clearComposingText();
+                that.setAbstractText();
+            }
+        });
+
+        this.withinMonths.setFilters(new InputFilter[]{new InputFilterMinMax("1","24")});
+        this.withinMonths.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().equals("")){
+                    that.monthsUntil = null;
+                }
+                else {
+                    that.monthsUntil = Integer.parseInt((s.toString()));
+                    that.beginningDate = "";
+                }
+                that.setAbstractText();
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        this.optionnalDuration.setFilters(new InputFilter[]{new InputFilterMinMax("1","31")});
+        this.optionnalDuration.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().equals("")){
+                    that.duration = null;
+                }
+                else if (that.contractType.equals("Internship") || that.contractType.equals("CDD")) that.duration = Integer.parseInt(s.toString());
+                else that.duration = null;
+                that.setAbstractText();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        this.optionnalSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                that.durationType = contractDurationArray[position].toLowerCase();
+                that.setAbstractText();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                that.durationType = "days";
+                that.setAbstractText();
+            }
+        });
+
+        return view;
+    }
+
+    private void refreshAllVars(){
+        this.beginningDate = "";
+        this.monthsUntil = null;
+        this.duration = null;
+        this.withinMonths.clearFocus();
+        this.withinMonths.getText().clear();
+        this.optionnalDuration.clearFocus();
+        this.optionnalDuration.getText().clear();
+        this.setAbstractText();
+    }
+
+    private void refreshView() {
+            if (this.contractType.equals("Internship") || this.contractType.equals("CDD")) {
+                this.optionnalSpinner.setFocusable(true);
+                this.optionnalSpinner.setEnabled(true);
+                this.optionnalDuration.setInputType(InputType.TYPE_CLASS_NUMBER);
+            } else {
+                this.optionnalSpinner.setFocusable(false);
+                this.optionnalSpinner.setEnabled(false);
+                this.optionnalDuration.setInputType(InputType.TYPE_NULL);
+
+            }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -90,6 +256,39 @@ public class ApplicantContractFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public void setAbstractText(){
+        String dateRepresentation = "";
+        if(this.monthsUntil == null){
+            if(this.beginningDate.length() > 0){
+                if(this.duration != null){
+                    dateRepresentation = this.contractType+", beginning the "+this.beginningDate+", for "+this.duration+" "+this.durationType;
+                }
+                else{
+                    dateRepresentation = this.contractType+", beginning the "+this.beginningDate;
+                }
+            }
+            else{
+                if(this.duration != null){
+                    dateRepresentation = this.contractType+", for "+this.duration+" "+this.durationType;
+                }
+                else{
+                    dateRepresentation = this.contractType;
+                }
+            }
+        }
+        else{
+            if(this.duration != null){
+                dateRepresentation = this.contractType+", within "+this.monthsUntil+" months, for "+this.duration+" "+this.durationType;
+            }
+            else{
+                dateRepresentation = this.contractType+", within "+this.monthsUntil+" months";
+            }
+        }
+
+        this.abstractTextView.setText(dateRepresentation);
+        refreshView();
     }
 
     /**

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.Mobility;
+import com.alten.ambroise.forum.data.utils.InputFilterMinMax;
 import com.alten.ambroise.forum.view.CustomGrid;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -135,6 +137,7 @@ public class ApplicantMobilityFragment extends Fragment {
         });
 
         radiusInput = view.findViewById(R.id.radius_input_editText);
+        radiusInput.setFilters(new InputFilter[]{new InputFilterMinMax("1","150")});
         radiusInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
