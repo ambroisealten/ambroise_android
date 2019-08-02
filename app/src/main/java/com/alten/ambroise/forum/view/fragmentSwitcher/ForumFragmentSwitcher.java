@@ -17,7 +17,7 @@ import com.alten.ambroise.forum.data.model.viewModel.ForumViewModel;
 import com.alten.ambroise.forum.view.activity.ForumActivity;
 import com.alten.ambroise.forum.view.fragments.ForumAddDialogFragment;
 import com.alten.ambroise.forum.view.fragments.ForumListFragment;
-import com.alten.ambroise.forum.view.fragments.ForumRecyclerViewAdapter;
+import com.alten.ambroise.forum.view.adapter.ForumRecyclerViewAdapter;
 
 public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerViewAdapter.OnItemClickListener, Parcelable {
 

@@ -14,7 +14,6 @@ import com.alten.ambroise.forum.data.utils.Nationality;
 import com.alten.ambroise.forum.data.utils.converter.Converters;
 
 import java.util.List;
-import java.util.Objects;
 
 @Entity(tableName = "applicantForum_table", indices = {@Index(value = "mail", unique = true)})
 public class ApplicantForum implements Parcelable {

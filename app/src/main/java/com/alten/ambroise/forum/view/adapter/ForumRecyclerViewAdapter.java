@@ -1,4 +1,4 @@
-package com.alten.ambroise.forum.view.fragments;
+package com.alten.ambroise.forum.view.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -18,7 +18,7 @@ public class ForumRecyclerViewAdapter extends RecyclerView.Adapter<ForumRecycler
     private final OnItemClickListener listeners;
     private List<Forum> mForums; // Cached copy of forums
 
-    ForumRecyclerViewAdapter(Context context, OnItemClickListener listener) {
+    public ForumRecyclerViewAdapter(Context context, OnItemClickListener listener) {
         LayoutInflater mInflater = LayoutInflater.from(context);
         this.listeners = listener;
     }
@@ -45,7 +45,7 @@ public class ForumRecyclerViewAdapter extends RecyclerView.Adapter<ForumRecycler
         }
     }
 
-    void setForums(List<Forum> forums) {
+    public void setForums(List<Forum> forums) {
         mForums = forums;
         notifyDataSetChanged();
     }
