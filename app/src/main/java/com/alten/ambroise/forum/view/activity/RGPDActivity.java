@@ -1,7 +1,6 @@
 package com.alten.ambroise.forum.view.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -39,7 +38,7 @@ public class RGPDActivity extends AppCompatActivity implements SignFragment.OnFr
         setContentView(R.layout.activity_rgpd);
     }
 
-    private void stopProcess(){
+    private void stopProcess() {
 
     }
 
@@ -47,16 +46,16 @@ public class RGPDActivity extends AppCompatActivity implements SignFragment.OnFr
     public void onFragmentInteraction(final boolean accept, final String tag, ApplicantForum... applicant) {
         switch (tag) {
             case RGPDFragmentSwitcher.RGPD_TEXT_TAG:
-                if(accept){
-                    this.rgpdFragmentSwitcher.switchFragment(getSupportFragmentManager(),RGPDFragmentSwitcher.RGPD_SIGN_TAG);
-                }else{
+                if (accept) {
+                    this.rgpdFragmentSwitcher.switchFragment(getSupportFragmentManager(), RGPDFragmentSwitcher.RGPD_SIGN_TAG, this.applicant);
+                } else {
                     stopProcess();
                 }
                 break;
             case RGPDFragmentSwitcher.RGPD_SIGN_TAG:
-                if(accept){
+                if (accept) {
 //                    this.rgpdFragmentSwitcher.switchFragment(getSupportFragmentManager(),RGPDFragmentSwitcher.RGPD_SIGN_TAG);
-                }else{
+                } else {
                     stopProcess();
                 }
                 break;
@@ -64,11 +63,6 @@ public class RGPDActivity extends AppCompatActivity implements SignFragment.OnFr
                 Toast.makeText(this, getString(R.string.not_implemented), Toast.LENGTH_SHORT).show();
                 break;
         }
-    }
-
-    @Override
-    public void onFragmentInteraction(final Uri uri) {
-
     }
 }
 

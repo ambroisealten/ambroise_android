@@ -10,7 +10,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.alten.ambroise.forum.R;
-import com.alten.ambroise.forum.view.fragments.ForumListFragment;
+import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
+import com.alten.ambroise.forum.view.activity.RGPDActivity;
 import com.alten.ambroise.forum.view.fragments.RGPDTextFragment;
 import com.alten.ambroise.forum.view.fragments.SignFragment;
 
@@ -49,7 +50,7 @@ public class RGPDFragmentSwitcher implements FragmentSwitcher, Parcelable {
                     fragment = switchRGPDTextFragment(fm);
                     break;
                 case RGPD_SIGN_TAG:
-                    fragment = switchRGPDSignFragment(fm);
+                    fragment = switchRGPDSignFragment(fm, (ApplicantForum) args[0]);
                     break;
                 default:
                     fragment = switchRGPDTextFragment(fm);
@@ -74,18 +75,17 @@ public class RGPDFragmentSwitcher implements FragmentSwitcher, Parcelable {
         if (rgpdTextFragment == null) {
             rgpdTextFragment = new RGPDTextFragment();
             Bundle bundle = new Bundle();
-            bundle.putInt(ForumListFragment.STATE_COLUMN_COUNT, 1);
             rgpdTextFragment.setArguments(bundle);
         }
         return rgpdTextFragment;
     }
 
-    private SignFragment switchRGPDSignFragment(FragmentManager fm) {
+    private SignFragment switchRGPDSignFragment(FragmentManager fm, ApplicantForum applicant) {
         SignFragment signFragment = (SignFragment) fm.findFragmentByTag(RGPD_SIGN_TAG);
         if (signFragment == null) {
             signFragment = new SignFragment();
             Bundle bundle = new Bundle();
-            bundle.putInt(ForumListFragment.STATE_COLUMN_COUNT, 1);
+            bundle.putParcelable(RGPDActivity.STATE_APPLICANT, applicant);
             signFragment.setArguments(bundle);
         }
         return signFragment;
