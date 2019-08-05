@@ -15,7 +15,7 @@ import java.util.List;
 public interface ApplicantForumDao {
 
     @Insert
-    void insert(ApplicantForum applicant);
+    long insert(ApplicantForum applicant);
 
     @Update
     void update(ApplicantForum... applicants);

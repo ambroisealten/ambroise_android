@@ -27,12 +27,16 @@ public class ApplicantForumRepository {
     }
 
 
-    public void insert(ApplicantForum applicant) {
+    public Long insert(ApplicantForum applicant) {
         new ApplicantForumRepository.insertAsyncTask(applicantForumDao).execute(applicant);
+        return applicant.get_id();
     }
 
-    private static class insertAsyncTask extends AsyncTask<ApplicantForum, Void, Void> {
+    public void update(ApplicantForum... applicants) {
+        new ApplicantForumRepository.updateAsyncTask(applicantForumDao).execute(applicants);
+    }
 
+    private static class insertAsyncTask extends AsyncTask<ApplicantForum, Void, Long> {
         private final ApplicantForumDao mAsyncTaskDao;
 
         insertAsyncTask(ApplicantForumDao dao) {
@@ -40,8 +44,22 @@ public class ApplicantForumRepository {
         }
 
         @Override
+        protected Long doInBackground(final ApplicantForum... params) {
+            return mAsyncTaskDao.insert(params[0]);
+        }
+    }
+
+    private static class updateAsyncTask extends AsyncTask<ApplicantForum, Void, Void> {
+
+        private final ApplicantForumDao mAsyncTaskDao;
+
+        updateAsyncTask(ApplicantForumDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
         protected Void doInBackground(final ApplicantForum... params) {
-            mAsyncTaskDao.insert(params[0]);
+            mAsyncTaskDao.update(params);
             return null;
         }
     }

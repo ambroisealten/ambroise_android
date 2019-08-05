@@ -1,7 +1,6 @@
 package com.alten.ambroise.forum.view.fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -18,8 +17,9 @@ import androidx.fragment.app.Fragment;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.Mobility;
+import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.utils.InputFilterMinMax;
-import com.alten.ambroise.forum.view.CustomGrid;
+import com.alten.ambroise.forum.view.adapter.CustomGridAdapter;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ import java.util.HashSet;
  * Use the {@link ApplicantMobilityFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ApplicantMobilityFragment extends Fragment {
+public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final int minRadius = 0;
@@ -51,7 +51,7 @@ public class ApplicantMobilityFragment extends Fragment {
     private Button addGeographics;
     private boolean isEnabled = false;
     private Button buttonFrance;
-    private boolean isFrancechecked = false;
+    private boolean isFranceChecked = false;
     private int franceMobilityID;
     private Button buttonFranceWithoutIDF;
     private boolean isIDFChecked = false;
@@ -167,7 +167,7 @@ public class ApplicantMobilityFragment extends Fragment {
         buttonFrance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isFrancechecked && !tagExists(PRESENT_FRANCE_TAG)) {
+                if (!isFranceChecked && !tagExists(PRESENT_FRANCE_TAG)) {
                     Mobility createdMobility = createNewMobility("France", 0, "kms");
                     createdMobility.setTag(PRESENT_FRANCE_TAG);
 
@@ -177,10 +177,10 @@ public class ApplicantMobilityFragment extends Fragment {
 
                     franceMobilityID = allGeos.size();
                     allGeos.add(createdMobility);
-                    isFrancechecked = true;
+                    isFranceChecked = true;
                     isIDFChecked = false;
                     buttonFrance.setEnabled(isIDFChecked);
-                    buttonFranceWithoutIDF.setEnabled(isFrancechecked);
+                    buttonFranceWithoutIDF.setEnabled(isFranceChecked);
                     refreshGridView();
                 }
             }
@@ -194,15 +194,15 @@ public class ApplicantMobilityFragment extends Fragment {
                     Mobility createdMobility = createNewMobility("France without IDF", 0, "kms");
                     createdMobility.setTag(PRESENT_IDF_TAG);
 
-                    if (isFrancechecked) {
+                    if (isFranceChecked) {
                         deleteGeographic("France");
                     }
 
                     idfMobilityID = allGeos.size();
                     allGeos.add(createdMobility);
                     isIDFChecked = true;
-                    isFrancechecked = false;
-                    buttonFranceWithoutIDF.setEnabled(isFrancechecked);
+                    isFranceChecked = false;
+                    buttonFranceWithoutIDF.setEnabled(isFranceChecked);
                     buttonFrance.setEnabled(isIDFChecked);
                     refreshGridView();
                 }
@@ -259,13 +259,6 @@ public class ApplicantMobilityFragment extends Fragment {
         }
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -284,7 +277,7 @@ public class ApplicantMobilityFragment extends Fragment {
     }
 
     public void refreshGridView() {
-        CustomGrid adapter = new CustomGrid(getActivity(), allGeos, allRadius, this);
+        CustomGridAdapter adapter = new CustomGridAdapter(getActivity(), allGeos, allRadius, this);
         gridView.setAdapter(adapter);
     }
 
@@ -295,7 +288,7 @@ public class ApplicantMobilityFragment extends Fragment {
             if (tobeDeleted.getGeographic() == "France" || tobeDeleted.getGeographic() == "France without IDF") {
                 buttonFranceWithoutIDF.setEnabled(true);
                 buttonFrance.setEnabled(true);
-                isFrancechecked = false;
+                isFranceChecked = false;
                 isIDFChecked = false;
             } else if (tobeDeleted.getGeographic() == "International") {
                 internationalSwitch.setChecked(false);
@@ -316,19 +309,12 @@ public class ApplicantMobilityFragment extends Fragment {
         return -1;
     }
 
+    @Override
+    public void saveInformation(ApplicantForum applicant) {
+        mListener.onFragmentInteraction(applicant);
+    }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(ApplicantForum applicant);
     }
 }

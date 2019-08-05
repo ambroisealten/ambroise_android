@@ -29,4 +29,6 @@ public class ApplicantForumViewModel extends AndroidViewModel {
     public void insert(ApplicantForum applicant) {
         mApplicantForumRepository.insert(applicant);
     }
+
+    public void update(ApplicantForum applicant) { mApplicantForumRepository.update(applicant); }
 }

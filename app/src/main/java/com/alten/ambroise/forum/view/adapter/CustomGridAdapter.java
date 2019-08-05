@@ -1,4 +1,4 @@
-package com.alten.ambroise.forum.view;
+package com.alten.ambroise.forum.view.adapter;
 
 
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.Mobility;
@@ -16,13 +15,13 @@ import com.alten.ambroise.forum.view.fragments.ApplicantMobilityFragment;
 
 import java.util.ArrayList;
 
-public class CustomGrid extends BaseAdapter{
+public class CustomGridAdapter extends BaseAdapter{
     private Context mContext;
     private final ArrayList<Mobility> web;
     private final ApplicantMobilityFragment parent;
     private final int[] Imageid;
 
-    public CustomGrid(Context c, ArrayList<Mobility> web, int[] Imageid, ApplicantMobilityFragment parent ) {
+    public CustomGridAdapter(Context c, ArrayList<Mobility> web, int[] Imageid, ApplicantMobilityFragment parent ) {
         mContext = c;
         this.Imageid = Imageid;
         this.web = web;
@@ -54,16 +53,16 @@ public class CustomGrid extends BaseAdapter{
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        final CustomGrid that = this;
+        final CustomGridAdapter that = this;
 
         if (convertView == null) {
 
             grid = new View(mContext);
             grid = inflater.inflate(R.layout.mobility_capsule, null);
-            TextView textView = (TextView) grid.findViewById(R.id.mobility_resume);
+            TextView textView = grid.findViewById(R.id.mobility_resume);
             textView.setText(web.get(position).toString());
 
-            ImageButton buttonDelete = (ImageButton) grid.findViewById(R.id.imageButton);
+            ImageButton buttonDelete = grid.findViewById(R.id.imageButton);
             buttonDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -72,7 +71,7 @@ public class CustomGrid extends BaseAdapter{
             });
 
         } else {
-            grid = (View) convertView;
+            grid = convertView;
         }
 
         return grid;
