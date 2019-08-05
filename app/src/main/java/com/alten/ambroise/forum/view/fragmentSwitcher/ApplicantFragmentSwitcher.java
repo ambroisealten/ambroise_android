@@ -126,7 +126,9 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
     }
 
     public void startNewApplicantProcess(ApplicantForum applicant) {
-        new ApplicantForumViewModel(activity.getApplication()).insert(applicant);
+        ApplicantForumViewModel applicantForumViewModel = new ApplicantForumViewModel(activity.getApplication());
+        Long id = applicantForumViewModel.insert(applicant);
+        applicant.set_id(id);
         Intent intent = new Intent(activity.getBaseContext(), ApplicantActivity.class);
         intent.putExtra(ApplicantActivity.STATE_APPLICANT, applicant);
         activity.startActivity(intent);

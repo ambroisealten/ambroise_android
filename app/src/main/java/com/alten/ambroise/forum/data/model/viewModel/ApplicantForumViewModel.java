@@ -26,8 +26,8 @@ public class ApplicantForumViewModel extends AndroidViewModel {
         return mAllApplicantsForum;
     }
 
-    public void insert(ApplicantForum applicant) {
-        mApplicantForumRepository.insert(applicant);
+    public Long insert(ApplicantForum applicant) {
+         return mApplicantForumRepository.insert(applicant);
     }
 
     public void update(ApplicantForum applicant) { mApplicantForumRepository.update(applicant); }

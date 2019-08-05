@@ -49,6 +49,8 @@ public class ApplicantContractFragment extends Fragment implements ApplicantInfo
     private EditText withinMonths;
     private Integer monthsUntil = null;
 
+    private String dateRepresentation = "";
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -230,26 +232,25 @@ public class ApplicantContractFragment extends Fragment implements ApplicantInfo
     }
 
     public void setAbstractText() {
-        String dateRepresentation;
         if (this.monthsUntil == null) {
             if (this.beginningDate.length() > 0) {
                 if (this.duration != null) {
-                    dateRepresentation = this.contractType + ", beginning the " + this.beginningDate + ", for " + this.duration + " " + this.durationType;
+                    this.dateRepresentation = this.contractType + ", beginning the " + this.beginningDate + ", for " + this.duration + " " + this.durationType;
                 } else {
-                    dateRepresentation = this.contractType + ", beginning the " + this.beginningDate;
+                    this.dateRepresentation = this.contractType + ", beginning the " + this.beginningDate;
                 }
             } else {
                 if (this.duration != null) {
-                    dateRepresentation = this.contractType + ", for " + this.duration + " " + this.durationType;
+                    this.dateRepresentation = this.contractType + ", for " + this.duration + " " + this.durationType;
                 } else {
-                    dateRepresentation = this.contractType;
+                    this.dateRepresentation = this.contractType;
                 }
             }
         } else {
             if (this.duration != null) {
-                dateRepresentation = this.contractType + ", within " + this.monthsUntil + " months, for " + this.duration + " " + this.durationType;
+                this.dateRepresentation = this.contractType + ", within " + this.monthsUntil + " months, for " + this.duration + " " + this.durationType;
             } else {
-                dateRepresentation = this.contractType + ", within " + this.monthsUntil + " months";
+                this.dateRepresentation = this.contractType + ", within " + this.monthsUntil + " months";
             }
         }
 
@@ -259,6 +260,9 @@ public class ApplicantContractFragment extends Fragment implements ApplicantInfo
 
     @Override
     public void saveInformation(ApplicantForum applicant) {
+        applicant.setContractType(contractType);
+        applicant.setContractDuration(duration.toString());
+        applicant.setStartAt(this.dateRepresentation);
         mListener.onFragmentInteraction(applicant);
     }
 
