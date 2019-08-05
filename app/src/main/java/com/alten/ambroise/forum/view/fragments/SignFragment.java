@@ -70,7 +70,7 @@ public class SignFragment extends Fragment {
 //                //Event triggered when the pad is cleared
 //            }
 //        });
-        Button decline = view.findViewById(R.id.decline);
+        Button decline = view.findViewById(R.id.decline_sign);
         decline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +78,7 @@ public class SignFragment extends Fragment {
             }
         });
 
-        Button accept = view.findViewById(R.id.accept);
+        Button accept = view.findViewById(R.id.accept_sign);
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

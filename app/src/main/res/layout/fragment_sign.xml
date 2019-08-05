@@ -47,7 +47,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/decline"
+            android:id="@+id/decline_sign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -56,7 +56,7 @@
             android:textColor="@color/red_decline"/>
 
         <Button
-            android:id="@+id/accept"
+            android:id="@+id/accept_sign"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
