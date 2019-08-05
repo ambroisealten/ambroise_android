@@ -59,10 +59,10 @@ public class CustomGridAdapter extends BaseAdapter{
 
             grid = new View(mContext);
             grid = inflater.inflate(R.layout.mobility_capsule, null);
-            TextView textView = (TextView) grid.findViewById(R.id.mobility_resume);
+            TextView textView = grid.findViewById(R.id.mobility_resume);
             textView.setText(web.get(position).toString());
 
-            ImageButton buttonDelete = (ImageButton) grid.findViewById(R.id.imageButton);
+            ImageButton buttonDelete = grid.findViewById(R.id.imageButton);
             buttonDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -71,7 +71,7 @@ public class CustomGridAdapter extends BaseAdapter{
             });
 
         } else {
-            grid = (View) convertView;
+            grid = convertView;
         }
 
         return grid;
