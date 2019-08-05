@@ -67,6 +67,20 @@
     <string name="abstractContract">Resume</string>
     <string name="defaultTextMobility">Mobility, within 100 kms</string>
     <string name="add_geographic">Add</string>
+    <string name="not_implemented">Tab not implemented yet</string>
+    <string name="diplomas">Diplomas</string>
+    <string name="graduatingYear">Year of obtention</string>
+    <string name="diplomaAdd">Add Diploma</string>
+    <string name="allDiplomas">All Diplomas</string>
+    <string name="skillsAdd">Add Skill</string>
+    <string name="allSkills">All Skills</string>
+    <string name="nationality">Nationality :</string>
+    <string name="driving_license">Driving license</string>
+    <string name="has_vehicle">Has a personnal vehicle</string>
+    <string name="french_nationality">French</string>
+    <string name="european_citizenship">European</string>
+    <string name="other_nationality">Other</string>
+    <string name="other_infos">Other informations</string>
 
     <!-- Arrays for spinners -->
     <string-array name="contract_type">
@@ -82,5 +96,6 @@
         <item>Months</item>
         <item>Years</item>
     </string-array>
-    <string name="not_implemented">Tab not implemented yet</string>
+
+
 </resources>

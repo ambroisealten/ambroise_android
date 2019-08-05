@@ -12,15 +12,15 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/diplomas_input_layout"
+            android:id="@+id/skills_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/diplomas"
+            android:hint="@string/skills"
             android:textColor="#11618F"
             android:textColorHint="#11618F">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/diplomas_input_editText"
+                android:id="@+id/skills_input_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -34,39 +34,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/graduatingYear" />
-
-                <EditText
-                    android:id="@+id/editText2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:autofillHints="@string/graduatingYear"
-                    android:ems="10"
-                    android:inputType="date" />
-            </LinearLayout>
-
             <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/diplomaAdd" />
-
-        </LinearLayout>
+                android:text="@string/skillsAdd" />
 
     </androidx.cardview.widget.CardView>
 
@@ -94,9 +66,9 @@
 
             <TextView
                 android:id="@+id/textView12"
-                android:layout_width="301dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/allDiplomas"
+                android:text="@string/allSkills"
                 android:textColor="#000000"
                 android:textSize="50sp" />
 

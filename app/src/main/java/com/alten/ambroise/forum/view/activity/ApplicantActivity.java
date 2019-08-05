@@ -14,13 +14,15 @@ import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.model.viewModel.ApplicantForumViewModel;
 import com.alten.ambroise.forum.view.adapter.ViewPagerAdapter;
+import com.alten.ambroise.forum.view.fragments.ApplicantComplementFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantContractFragment;
+import com.alten.ambroise.forum.view.fragments.ApplicantDiplomaFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantInfo;
 import com.alten.ambroise.forum.view.fragments.ApplicantMobilityFragment;
-import com.alten.ambroise.forum.view.fragments.SignFragment;
+import com.alten.ambroise.forum.view.fragments.ApplicantSkillsFragment;
 import com.google.android.material.tabs.TabLayout;
 
-public class ApplicantActivity extends AppCompatActivity implements ApplicantMobilityFragment.OnFragmentInteractionListener, ApplicantContractFragment.OnFragmentInteractionListener {
+public class ApplicantActivity extends AppCompatActivity implements ApplicantMobilityFragment.OnFragmentInteractionListener, ApplicantDiplomaFragment.OnFragmentInteractionListener, ApplicantSkillsFragment.OnFragmentInteractionListener, ApplicantComplementFragment.OnFragmentInteractionListener, ApplicantContractFragment.OnFragmentInteractionListener {
 
     public static final String STATE_APPLICANT = "applicant";
     private Toolbar toolbar;
@@ -55,7 +57,6 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
                 //Get the view pager adapter to get the corresponding fragment and fire save process. Then, save new position to current
                 ((ApplicantInfo) ((ViewPagerAdapter) viewPager.getAdapter()).getItem(currentPosition)).saveInformation(applicant);
                 currentPosition = position;
-                System.out.println(applicant.toString());
             }
 
             @Override
@@ -74,6 +75,9 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
     private void setIcon() {
         tabLayout.getTabAt(0).setIcon(R.drawable.mobility);
         tabLayout.getTabAt(1).setIcon(R.drawable.contract);
+        tabLayout.getTabAt(2).setIcon(R.drawable.diploma);
+        tabLayout.getTabAt(3).setIcon(R.drawable.skills);
+        tabLayout.getTabAt(4).setIcon(R.drawable.more);
     }
 
     private void setViewPager(ViewPager viewPager) {
@@ -87,6 +91,15 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
         fragment = new ApplicantContractFragment();
         adapter.addFragment(fragment, getString(R.string.contract));
 
+        fragment = new ApplicantDiplomaFragment();
+        adapter.addFragment(fragment, getString(R.string.diploma));
+
+        fragment = new ApplicantSkillsFragment();
+        adapter.addFragment(fragment, getString(R.string.skills));
+
+        fragment = new ApplicantComplementFragment();
+        adapter.addFragment(fragment, getString(R.string.more));
+
         viewPager.setAdapter(adapter);
     }
 
@@ -94,5 +107,6 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
     public void onFragmentInteraction(ApplicantForum applicant) {
         applicantForumViewModel.update(applicant);
     }
+
 
 }
