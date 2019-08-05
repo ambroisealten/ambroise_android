@@ -26,7 +26,6 @@ public class ApplicantForum implements Parcelable {
     private String surname;
     @NonNull
     private String name;
-    @NonNull
     private String personInChargeMail;
     private String phoneNumber;
     private String cvPerson;

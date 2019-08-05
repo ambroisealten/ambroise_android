@@ -261,7 +261,11 @@ public class ApplicantContractFragment extends Fragment implements ApplicantInfo
     @Override
     public void saveInformation(ApplicantForum applicant) {
         applicant.setContractType(contractType);
-        applicant.setContractDuration(duration.toString());
+        if (duration != null) {
+            applicant.setContractDuration(String.valueOf(duration));
+        } else {
+            applicant.setContractDuration("");
+        }
         applicant.setStartAt(this.dateRepresentation);
         mListener.onFragmentInteraction(applicant);
     }
