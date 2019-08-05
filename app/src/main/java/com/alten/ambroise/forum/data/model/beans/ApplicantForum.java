@@ -244,6 +244,31 @@ public class ApplicantForum implements Parcelable {
     }
 
     @Override
+    public String toString() {
+        return "ApplicantForum{" +
+                "_id=" + _id +
+                ", mail='" + mail + '\'' +
+                ", surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", personInChargeMail='" + personInChargeMail + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", cvPerson='" + cvPerson + '\'' +
+                ", mobilities=" + mobilities +
+                ", contractType='" + contractType + '\'' +
+                ", contractDuration='" + contractDuration + '\'' +
+                ", startAt='" + startAt + '\'' +
+                ", highestDiploma='" + highestDiploma + '\'' +
+                ", highestDiplomaYear='" + highestDiplomaYear + '\'' +
+                ", skills=" + skills +
+                ", vehicule=" + vehicule +
+                ", driverLicense=" + driverLicense +
+                ", nationality=" + nationality +
+                ", sign='" + sign + '\'' +
+                ", grade='" + grade + '\'' +
+                '}';
+    }
+
+    @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(_id);
         dest.writeString(mail);

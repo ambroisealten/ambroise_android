@@ -125,7 +125,8 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
         this.activity = activity;
     }
 
-    public void startNewApplicantProcess(ApplicantForum applicant) {
+    public void startNewApplicantProcess(ApplicantForum applicant, FragmentManager fm) {
+        fm.popBackStackImmediate();
         ApplicantForumViewModel applicantForumViewModel = new ApplicantForumViewModel(activity.getApplication());
         Long id = applicantForumViewModel.insert(applicant);
         applicant.set_id(id);

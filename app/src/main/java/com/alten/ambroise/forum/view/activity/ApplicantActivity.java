@@ -20,7 +20,7 @@ import com.alten.ambroise.forum.view.fragments.ApplicantMobilityFragment;
 import com.alten.ambroise.forum.view.fragments.SignFragment;
 import com.google.android.material.tabs.TabLayout;
 
-public class ApplicantActivity extends AppCompatActivity implements SignFragment.OnFragmentInteractionListener, ApplicantMobilityFragment.OnFragmentInteractionListener, ApplicantContractFragment.OnFragmentInteractionListener {
+public class ApplicantActivity extends AppCompatActivity implements ApplicantMobilityFragment.OnFragmentInteractionListener, ApplicantContractFragment.OnFragmentInteractionListener {
 
     public static final String STATE_APPLICANT = "applicant";
     private Toolbar toolbar;
@@ -55,6 +55,7 @@ public class ApplicantActivity extends AppCompatActivity implements SignFragment
                 //Get the view pager adapter to get the corresponding fragment and fire save process. Then, save new position to current
                 ((ApplicantInfo) ((ViewPagerAdapter) viewPager.getAdapter()).getItem(currentPosition)).saveInformation(applicant);
                 currentPosition = position;
+                System.out.println(applicant.toString());
             }
 
             @Override
@@ -86,10 +87,6 @@ public class ApplicantActivity extends AppCompatActivity implements SignFragment
         fragment = new ApplicantContractFragment();
         adapter.addFragment(fragment, getString(R.string.contract));
 
-
-        fragment = new SignFragment();
-        adapter.addFragment(fragment, getString(R.string.sign));
-
         viewPager.setAdapter(adapter);
     }
 
@@ -98,8 +95,4 @@ public class ApplicantActivity extends AppCompatActivity implements SignFragment
         applicantForumViewModel.update(applicant);
     }
 
-    @Override
-    public void onFragmentInteraction(final Uri uri) {
-
-    }
 }

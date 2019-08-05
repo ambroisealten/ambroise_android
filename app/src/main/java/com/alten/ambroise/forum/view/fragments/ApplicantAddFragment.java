@@ -144,7 +144,7 @@ public class ApplicantAddFragment extends Fragment {
                 }else{
                     newApplicant.setCvPerson(null);
                 }
-                switcher.startNewApplicantProcess(newApplicant);
+                switcher.startNewApplicantProcess(newApplicant,getActivity().getSupportFragmentManager());
             }
         });
 
