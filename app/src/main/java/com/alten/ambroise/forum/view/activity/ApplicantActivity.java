@@ -1,8 +1,9 @@
 package com.alten.ambroise.forum.view.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,7 +18,6 @@ import com.alten.ambroise.forum.view.adapter.ViewPagerAdapter;
 import com.alten.ambroise.forum.view.fragments.ApplicantContractFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantInfo;
 import com.alten.ambroise.forum.view.fragments.ApplicantMobilityFragment;
-import com.alten.ambroise.forum.view.fragments.SignFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class ApplicantActivity extends AppCompatActivity implements ApplicantMobilityFragment.OnFragmentInteractionListener, ApplicantContractFragment.OnFragmentInteractionListener {
@@ -42,6 +42,17 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Button validateButton = new Button(this);
+        validateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                Intent intent = new Intent(getBaseContext(), RGPDActivity.class);
+                intent.putExtra(RGPDActivity.STATE_APPLICANT, applicant);
+                startActivity(intent);
+            }
+        });
+        toolbar.addView(validateButton);
 
         viewPager = findViewById(R.id.viewpager);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
