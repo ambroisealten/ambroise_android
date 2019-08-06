@@ -81,6 +81,7 @@
     <string name="european_citizenship">European</string>
     <string name="other_nationality">Other</string>
     <string name="other_infos">Other informations</string>
+    <string name="minRadius">1</string>
 
     <!-- Arrays for spinners -->
     <string-array name="contract_type">

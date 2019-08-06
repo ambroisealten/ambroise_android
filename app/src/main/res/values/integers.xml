@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="mobility_min_radius">1</integer>
+    <integer name="mobility_max_radius">150</integer>
+</resources>
