@@ -16,6 +16,7 @@
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways" />
 
+
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -40,4 +41,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/save_applicant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:backgroundTint="@color/greyAlten"
+        app:borderWidth="0dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@android:drawable/ic_menu_save"
+        app:fabSize="normal" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

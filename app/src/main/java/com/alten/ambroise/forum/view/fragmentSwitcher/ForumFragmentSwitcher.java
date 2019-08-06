@@ -91,7 +91,7 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
         if (frag != null) {
             fm.beginTransaction().remove(frag).commit();
         }
-        ForumAddDialogFragment addForumDialog = ForumAddDialogFragment.newInstance("New Forum");
+        ForumAddDialogFragment addForumDialog = ForumAddDialogFragment.newInstance(activity.getString(R.string.dialog_forum));
         addForumDialog.subscribeToSwitcher(this);
         addForumDialog.show(fm, "fragment_edit_name");
     }

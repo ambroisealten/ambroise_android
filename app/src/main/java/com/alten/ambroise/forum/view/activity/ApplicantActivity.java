@@ -21,6 +21,7 @@ import com.alten.ambroise.forum.view.fragments.ApplicantDiplomaFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantInfo;
 import com.alten.ambroise.forum.view.fragments.ApplicantMobilityFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantSkillsFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 public class ApplicantActivity extends AppCompatActivity implements ApplicantMobilityFragment.OnFragmentInteractionListener, ApplicantDiplomaFragment.OnFragmentInteractionListener, ApplicantSkillsFragment.OnFragmentInteractionListener, ApplicantComplementFragment.OnFragmentInteractionListener, ApplicantContractFragment.OnFragmentInteractionListener {
@@ -46,7 +47,7 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button validateButton = new Button(this);
+        FloatingActionButton validateButton = findViewById(R.id.save_applicant);
         validateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -55,7 +56,6 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
                 startActivity(intent);
             }
         });
-        toolbar.addView(validateButton);
 
         viewPager = findViewById(R.id.viewpager);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

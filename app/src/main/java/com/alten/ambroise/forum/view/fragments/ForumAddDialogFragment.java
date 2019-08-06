@@ -3,12 +3,14 @@ package com.alten.ambroise.forum.view.fragments;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.Gravity;
+import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -19,12 +21,19 @@ import androidx.fragment.app.DialogFragment;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.Forum;
 import com.alten.ambroise.forum.view.fragmentSwitcher.ForumFragmentSwitcher;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
+import static android.view.Gravity.CENTER;
+import static android.view.Gravity.CENTER_HORIZONTAL;
+import static android.view.Gravity.CENTER_VERTICAL;
+import static android.view.Gravity.HORIZONTAL_GRAVITY_MASK;
+import static android.view.Gravity.TOP;
 
 public class ForumAddDialogFragment extends DialogFragment {
-    private EditText mEditText;
     private ForumFragmentSwitcher forumFragmentSwitcher;
-    private EditText inputName;
-    private EditText inputPlace;
+    private TextInputEditText inputName;
+    private TextInputEditText inputPlace;
     private DatePicker inputDate;
     private TextView previewTextView;
 
@@ -71,17 +80,30 @@ public class ForumAddDialogFragment extends DialogFragment {
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setGravity(Gravity.CENTER);
 
-        inputName = new EditText(this.getContext());
-        inputName.setHint(R.string.forum_name);
-        inputName.setInputType(InputType.TYPE_CLASS_TEXT);
-        inputName.addTextChangedListener(textWatcher);
-        layout.addView(inputName);
+        TextInputLayout inputNameLayout = new TextInputLayout(getContext());
+        inputNameLayout.setHint(getString(R.string.forum_name));
+        inputNameLayout.setHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.text_color)));
 
-        inputPlace = new EditText(this.getContext());
-        inputPlace.setHint(R.string.forum_place);
-        inputPlace.setInputType(InputType.TYPE_CLASS_TEXT);
+        inputName = new TextInputEditText(getContext());
+        inputName.setTextColor(ColorStateList.valueOf(getResources().getColor(R.color.text_color)));
+        inputName.addTextChangedListener(textWatcher);
+        inputNameLayout.addView(inputName);
+        layout.addView(inputNameLayout);
+
+        TextInputLayout inputPlaceLayout = new TextInputLayout(getContext());
+        inputPlaceLayout.setHint(getString(R.string.forum_place));
+        inputPlaceLayout.setHintTextColor(ColorStateList.valueOf(getResources().getColor(R.color.text_color)));
+
+        inputPlace = new TextInputEditText(getContext());
+        inputPlace.setTextColor(ColorStateList.valueOf(getResources().getColor(R.color.text_color)));
         inputPlace.addTextChangedListener(textWatcher);
-        layout.addView(inputPlace);
+        inputPlaceLayout.addView(inputPlace);
+        layout.addView(inputPlaceLayout);
+
+        LinearLayout dateLayout = new LinearLayout(getContext());
+        dateLayout.setGravity(CENTER);
+        dateLayout.setMinimumWidth(layout.getWidth());
+        dateLayout.setLayoutMode(HORIZONTAL_GRAVITY_MASK);
 
         inputDate = new DatePicker(this.getContext());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -92,13 +114,17 @@ public class ForumAddDialogFragment extends DialogFragment {
                 }
             });
         }
-        layout.addView(inputDate);
+        dateLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        dateLayout.addView(inputDate);
+        layout.addView(dateLayout);
 
         TextView preview = new TextView(this.getContext());
         preview.setText(R.string.preview);
+        preview.setGravity(CENTER_HORIZONTAL);
         layout.addView(preview);
 
         previewTextView = new TextView(this.getContext());
+        previewTextView.setGravity(CENTER_HORIZONTAL);
         layout.addView(previewTextView);
         updateTextPreview();
 
@@ -108,13 +134,13 @@ public class ForumAddDialogFragment extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Forum newForum = new Forum();
-                if (inputName.length() == 0) {
-                    inputName.setText(R.string.unknown);
+                if (ForumAddDialogFragment.this.inputName.length() == 0) {
+                    ForumAddDialogFragment.this.inputName.setText(R.string.unknown);
                 }
                 if (inputPlace.length() == 0) {
                     inputPlace.setText(R.string.unknown);
                 }
-                newForum.setName(inputName.getText().toString());
+                newForum.setName(ForumAddDialogFragment.this.inputName.getText().toString());
                 newForum.setPlace(inputPlace.getText().toString());
                 // Check if day and month have only one digit. If it's the case, then add 0 before the digit to match with xx format
                 String day = inputDate.getDayOfMonth() <= 9 ? "0" + inputDate.getDayOfMonth() : String.valueOf(inputDate.getDayOfMonth());
@@ -138,7 +164,7 @@ public class ForumAddDialogFragment extends DialogFragment {
     private void updateTextPreview() {
         // Check if day and month have only one digit. If it's the case, then add 0 before the digit to match with xx format
         String day = inputDate.getDayOfMonth() <= 9 ? "0" + inputDate.getDayOfMonth() : String.valueOf(inputDate.getDayOfMonth());
-        String month = inputDate.getMonth() <= 9 ? "0" + inputDate.getMonth() : String.valueOf(inputDate.getMonth());
+        String month = inputDate.getMonth() < 9 ? "0" + (inputDate.getMonth()+1) : String.valueOf(inputDate.getMonth()+1);
         String name = inputName.getText().length() == 0 ? getResources().getString(R.string.unknown) : inputName.getText().toString();
         String place = inputPlace.getText().length() == 0 ? getResources().getString(R.string.unknown) : inputPlace.getText().toString();
         String text = new StringBuilder().append(name)
