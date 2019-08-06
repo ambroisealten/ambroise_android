@@ -1,6 +1,7 @@
 package com.alten.ambroise.forum.view.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -55,6 +56,22 @@ public class RGPDActivity extends AppCompatActivity implements SignFragment.OnFr
             case RGPDFragmentSwitcher.RGPD_SIGN_TAG:
                 if (accept) {
 //                    this.rgpdFragmentSwitcher.switchFragment(getSupportFragmentManager(),RGPDFragmentSwitcher.RGPD_SIGN_TAG);
+
+                    //Code only for test. Need to be put on good fragment
+                    final ApplicantForum applicantForum = applicant[0];
+                    String mail = "altenstrasbourg@gmail.com";
+                    Intent intent = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
+                    intent.setData(Uri.parse("mailto:" + mail)); //If more than 1 receiver, then use , (comma) to separate them
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Applicant " + applicantForum.getName());
+                    intent.putExtra(Intent.EXTRA_TEXT, applicantForum.toString());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
+                    try {
+                        startActivity(Intent.createChooser(intent, "Send email using..."));
+                    } catch (android.content.ActivityNotFoundException ex) {
+                        Toast.makeText(this, "No email clients installed.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    //on activity result
                 } else {
                     stopProcess();
                 }
