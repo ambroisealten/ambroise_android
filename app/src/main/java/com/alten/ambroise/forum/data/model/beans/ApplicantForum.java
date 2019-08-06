@@ -10,8 +10,8 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.alten.ambroise.forum.data.model.Mobility;
-import com.alten.ambroise.forum.data.utils.Nationality;
-import com.alten.ambroise.forum.data.utils.converter.Converters;
+import com.alten.ambroise.forum.utils.Nationality;
+import com.alten.ambroise.forum.utils.converter.Converters;
 
 import java.util.List;
 

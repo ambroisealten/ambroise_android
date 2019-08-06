@@ -13,31 +13,20 @@ import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.Switch;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.Mobility;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
-import com.alten.ambroise.forum.data.utils.InputFilterMinMax;
+import com.alten.ambroise.forum.utils.InputFilterMinMax;
 import com.alten.ambroise.forum.view.adapter.CustomGridAdapter;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ApplicantMobilityFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ApplicantMobilityFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo{
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final int minRadius = 0;
-    private static final int maxRadius = 500;
     private static final String PRESENT_FRANCE_TAG = "France_present";
     private static final String PRESENT_IDF_TAG = "Idf_present";
     private static final String PRESENT_INTERNATIONAL_TAG = "International_present";
@@ -49,17 +38,13 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
     private TextInputEditText radiusInput;
     private Switch unitSwitch;
     private Button addGeographics;
-    private boolean isEnabled = false;
     private Button buttonFrance;
     private boolean isFranceChecked = false;
-    private int franceMobilityID;
     private Button buttonFranceWithoutIDF;
     private boolean isIDFChecked = false;
-    private int idfMobilityID;
     private Switch internationalSwitch;
     private Integer internationalId;
 
-    // TODO: Rename and change types of parameters
     private GridView gridView;
 
 
@@ -69,38 +54,21 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ApplicantMobilityFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ApplicantMobilityFragment newInstance(String param1, String param2) {
-        ApplicantMobilityFragment fragment = new ApplicantMobilityFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_applicant_mobility, container, false);
-        gridView = view.findViewById(R.id.gridView1);
+        this.gridView = view.findViewById(R.id.gridView1);
 
-        final ApplicantMobilityFragment that = this;
 
         addGeographics = view.findViewById(R.id.button_add_geographics);
-        addGeographics.setEnabled(isEnabled);
+        addGeographics.setEnabled(false);
         addGeographics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,7 +104,7 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
         });
 
         radiusInput = view.findViewById(R.id.radius_input_editText);
-        radiusInput.setFilters(new InputFilter[]{new InputFilterMinMax("1","150")});
+        radiusInput.setFilters(new InputFilter[]{new InputFilterMinMax(getResources().getInteger(R.integer.mobility_min_radius),getResources().getInteger(R.integer.mobility_max_radius))});
         radiusInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -175,11 +143,10 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
                         deleteGeographic("France without IDF");
                     }
 
-                    franceMobilityID = allGeos.size();
                     allGeos.add(createdMobility);
                     isFranceChecked = true;
                     isIDFChecked = false;
-                    buttonFrance.setEnabled(isIDFChecked);
+                    buttonFrance.setEnabled(false);
                     buttonFranceWithoutIDF.setEnabled(isFranceChecked);
                     refreshGridView();
                 }
@@ -198,11 +165,10 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
                         deleteGeographic("France");
                     }
 
-                    idfMobilityID = allGeos.size();
                     allGeos.add(createdMobility);
                     isIDFChecked = true;
                     isFranceChecked = false;
-                    buttonFranceWithoutIDF.setEnabled(isFranceChecked);
+                    buttonFranceWithoutIDF.setEnabled(false);
                     buttonFrance.setEnabled(isIDFChecked);
                     refreshGridView();
                 }
@@ -234,15 +200,15 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
     }
 
     private boolean tagExists(String presenceTag) {
-        for (Mobility mobility_pour_faire_plaisir_a_andy : allGeos) {
-            if (mobility_pour_faire_plaisir_a_andy.getTag() == presenceTag) {
+        for (Mobility mobility : allGeos) {
+            if (mobility.getTag().equals(presenceTag)) {
                 return true;
             }
         }
         return false;
     }
 
-    public Mobility createNewMobility(String geographic, int radius, String unit) {
+    private Mobility createNewMobility(String geographic, int radius, String unit) {
         Mobility createdMobility = new Mobility();
         createdMobility.setGeographic(geographic);
         createdMobility.setRadius(radius);
@@ -251,16 +217,12 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
     }
 
 
-    public void checkValidity() {
-        if (geographicsInput.getText().length() > 0 && radiusInput.getText().length() > 0) {
-            addGeographics.setEnabled(true);
-        } else {
-            addGeographics.setEnabled(false);
-        }
+    private void checkValidity() {
+        addGeographics.setEnabled(geographicsInput.getText().length() > 0 && radiusInput.getText().length() > 0);
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
@@ -276,23 +238,24 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
         mListener = null;
     }
 
-    public void refreshGridView() {
+    private void refreshGridView() {
         CustomGridAdapter adapter = new CustomGridAdapter(getActivity(), allGeos, allRadius, this);
-        gridView.setAdapter(adapter);
+        this.gridView.setAdapter(adapter);
     }
 
     public void deleteGeographic(String geo) {
         int position = findPosition(geo);
         if (position != -1) {
             Mobility tobeDeleted = allGeos.get(position);
-            if (tobeDeleted.getGeographic() == "France" || tobeDeleted.getGeographic() == "France without IDF") {
+            if (tobeDeleted.getGeographic().equals("France") || tobeDeleted.getGeographic().equals("France without IDF")) {
                 buttonFranceWithoutIDF.setEnabled(true);
                 buttonFrance.setEnabled(true);
                 isFranceChecked = false;
                 isIDFChecked = false;
-            } else if (tobeDeleted.getGeographic() == "International") {
+            } else if (tobeDeleted.getGeographic().equals("International")) {
                 internationalSwitch.setChecked(false);
-            } else if (position < allGeos.size()) {
+            }
+            if (position < allGeos.size()){
                 allGeos.remove(position);
                 allGeographicsUsed.remove(geo.toLowerCase());
             }
@@ -300,9 +263,9 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
         }
     }
 
-    public int findPosition(String geo) {
+    private int findPosition(String geo) {
         for (Mobility mobility : allGeos) {
-            if (mobility.getGeographic() == geo) {
+            if (mobility.getGeographic().equals(geo)) {
                 return allGeos.indexOf(mobility);
             }
         }

@@ -21,7 +21,7 @@ import androidx.fragment.app.Fragment;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
-import com.alten.ambroise.forum.data.utils.InputFilterMinMax;
+import com.alten.ambroise.forum.utils.InputFilterMinMax;
 
 /**
  * A simple {@link Fragment} subclass.

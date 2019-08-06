@@ -1,4 +1,4 @@
-package com.alten.ambroise.forum.data.utils;
+package com.alten.ambroise.forum.utils;
 
 import android.text.InputFilter;
 import android.text.Spanned;
