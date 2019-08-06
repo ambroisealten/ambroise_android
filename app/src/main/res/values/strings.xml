@@ -97,7 +97,6 @@
         <item>Months</item>
         <item>Years</item>
     </string-array>
-    <string name="not_implemented">Tab not implemented yet</string>
     <string name="rgpd_warning">!Applicant must read RGPD and accept it!</string>
     <string name="rgpd_accept">Do you accept that your data is saved?</string>
     <string name="rgpd_text"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas magna sapien, volutpat nec dui eget, lacinia consequat lectus. Vivamus at volutpat velit. Proin ac turpis accumsan, lobortis tellus venenatis, sollicitudin felis. Phasellus eleifend velit eget massa posuere placerat. Duis tincidunt, urna vitae cursus finibus, elit tortor faucibus tellus, vel luctus libero diam sit amet massa. Aenean vitae lacinia sapien, sit amet facilisis lorem. Phasellus feugiat tortor vel ante pulvinar pulvinar.
