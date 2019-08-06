@@ -52,7 +52,7 @@
                     android:text="@string/graduatingYear" />
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/date_edit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:autofillHints="@string/graduatingYear"
@@ -61,7 +61,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/add_diploma_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/diplomaAdd" />
@@ -96,12 +96,13 @@
                 android:id="@+id/textView12"
                 android:layout_width="301dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="@string/allDiplomas"
                 android:textColor="#000000"
                 android:textSize="50sp" />
 
             <GridView
-                android:id="@id/gridView1"
+                android:id="@+id/diplomas_grid_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

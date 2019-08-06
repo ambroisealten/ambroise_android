@@ -2,4 +2,6 @@
 <resources>
     <integer name="mobility_min_radius">1</integer>
     <integer name="mobility_max_radius">150</integer>
+    <integer name="min_year">1930</integer>
+    <integer name="mobility_max_year">2025</integer>
 </resources>
