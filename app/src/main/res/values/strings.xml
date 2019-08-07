@@ -200,4 +200,16 @@ Suspendisse potenti. Nunc eu aliquet eros, nec luctus quam. Curabitur nec laoree
     <string name="send_email_using">Send email using...</string>
     <string name="no_client_mail">No email clients installed.</string>
     <string name="end_of_process">End of process</string>
+    <string name="mail_hello_text">
+        <![CDATA[
+Bonjour,
+
+Voici un CV qui devrais vous intéresser.
+        ]]>
+    </string>
+    <string name="mail_bye_text">
+        <![CDATA[Cordialement,
+        ]]>
+    </string>
+    <string name="cv_that_will_interest_you">Cv that will interest you</string>
 </resources>
