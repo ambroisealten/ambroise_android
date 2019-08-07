@@ -190,4 +190,7 @@ Pellentesque diam arcu, ornare sit amet nunc in, ornare euismod lectus. Nam vest
 Suspendisse potenti. Nunc eu aliquet eros, nec luctus quam. Curabitur nec laoreet nisi, sit amet semper quam. Proin vehicula luctus lectus, nec bibendum magna hendrerit ut. Morbi sodales odio purus, id aliquam tellus pulvinar quis. Cras pretium nisi non ultricies vulputate. Donec elementum nibh nec est suscipit gravida. Proin id nulla eget tortor laoreet tincidunt. Sed lectus urna, bibendum id eros efficitur, eleifend tristique justo. Morbi non libero luctus, feugiat massa ut, vulputate sem. Cras ante est, finibus eget iaculis non, viverra et metus. Maecenas commodo at quam nec tristique. Ut in lobortis nunc.
     ]]></string>
     <string name="dialog_forum">New Forum</string>
+    <string name="applicant_accepted_and_validated">Applicant sheet created and validated</string>
+    <string name="proceed">Proceed</string>
+    <string name="validation_image_description">Check validation icon</string>
 </resources>

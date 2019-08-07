@@ -14,11 +14,13 @@ import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.view.activity.RGPDActivity;
 import com.alten.ambroise.forum.view.fragments.RGPDTextFragment;
 import com.alten.ambroise.forum.view.fragments.SignFragment;
+import com.alten.ambroise.forum.view.fragments.ValidationFragment;
 
 public class RGPDFragmentSwitcher implements FragmentSwitcher, Parcelable {
 
     public static final String RGPD_TEXT_TAG = "rgpdTextTag";
     public static final String RGPD_SIGN_TAG = "rgpdSignTag";
+    public static final String RGPD_VALIDATION_TAG = "rgpdValidationTag";
 
     public static final Creator<RGPDFragmentSwitcher> CREATOR = new Creator<RGPDFragmentSwitcher>() {
         @Override
@@ -51,6 +53,9 @@ public class RGPDFragmentSwitcher implements FragmentSwitcher, Parcelable {
                     break;
                 case RGPD_SIGN_TAG:
                     fragment = switchRGPDSignFragment(fm, (ApplicantForum) args[0]);
+                    break;
+                case RGPD_VALIDATION_TAG:
+                    fragment = switchRGPDValidationFragment(fm);
                     break;
                 default:
                     fragment = switchRGPDTextFragment(fm);
@@ -89,6 +94,16 @@ public class RGPDFragmentSwitcher implements FragmentSwitcher, Parcelable {
             signFragment.setArguments(bundle);
         }
         return signFragment;
+    }
+
+    private ValidationFragment switchRGPDValidationFragment(FragmentManager fm) {
+        ValidationFragment validationFragment = (ValidationFragment) fm.findFragmentByTag(RGPD_VALIDATION_TAG);
+        if (validationFragment == null) {
+            validationFragment = new ValidationFragment();
+            Bundle bundle = new Bundle();
+            validationFragment.setArguments(bundle);
+        }
+        return validationFragment;
     }
 
     @Override
