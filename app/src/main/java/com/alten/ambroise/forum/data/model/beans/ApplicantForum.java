@@ -18,6 +18,17 @@ import java.util.List;
 @Entity(tableName = "applicantForum_table", indices = {@Index(value = "mail", unique = true)})
 public class ApplicantForum implements Parcelable {
 
+    public static final Creator<ApplicantForum> CREATOR = new Creator<ApplicantForum>() {
+        @Override
+        public ApplicantForum createFromParcel(Parcel in) {
+            return new ApplicantForum(in);
+        }
+
+        @Override
+        public ApplicantForum[] newArray(int size) {
+            return new ApplicantForum[size];
+        }
+    };
     @PrimaryKey(autoGenerate = true)
     private long _id;
     @NonNull
@@ -45,9 +56,9 @@ public class ApplicantForum implements Parcelable {
     private String sign;
     private String grade;
 
+
     public ApplicantForum() {
     }
-
 
     protected ApplicantForum(Parcel in) {
         _id = in.readLong();
@@ -69,18 +80,6 @@ public class ApplicantForum implements Parcelable {
         sign = in.readString();
         grade = in.readString();
     }
-
-    public static final Creator<ApplicantForum> CREATOR = new Creator<ApplicantForum>() {
-        @Override
-        public ApplicantForum createFromParcel(Parcel in) {
-            return new ApplicantForum(in);
-        }
-
-        @Override
-        public ApplicantForum[] newArray(int size) {
-            return new ApplicantForum[size];
-        }
-    };
 
     public long get_id() {
         return _id;
@@ -244,31 +243,6 @@ public class ApplicantForum implements Parcelable {
     }
 
     @Override
-    public String toString() {
-        return "ApplicantForum{" +
-                "_id=" + _id +
-                ", mail='" + mail + '\'' +
-                ", surname='" + surname + '\'' +
-                ", name='" + name + '\'' +
-                ", personInChargeMail='" + personInChargeMail + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", cvPerson='" + cvPerson + '\'' +
-                ", mobilities=" + mobilities +
-                ", contractType='" + contractType + '\'' +
-                ", contractDuration='" + contractDuration + '\'' +
-                ", startAt='" + startAt + '\'' +
-                ", highestDiploma='" + highestDiploma + '\'' +
-                ", highestDiplomaYear='" + highestDiplomaYear + '\'' +
-                ", skills=" + skills +
-                ", vehicule=" + vehicule +
-                ", driverLicense=" + driverLicense +
-                ", nationality=" + nationality +
-                ", sign='" + sign + '\'' +
-                ", grade='" + grade + '\'' +
-                '}';
-    }
-
-    @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(_id);
         dest.writeString(mail);
@@ -288,5 +262,33 @@ public class ApplicantForum implements Parcelable {
         dest.writeByte((byte) (driverLicense ? 1 : 0));
         dest.writeString(sign);
         dest.writeString(grade);
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder()
+                .append(surname).append(" ").append(name).append(System.lineSeparator())
+                .append("Mail: '").append(mail).append(System.lineSeparator())
+                .append("Phone number: '").append(phoneNumber).append(System.lineSeparator())
+                .append("Mobilities: ").append(mobilitiesToString(mobilities)).append(System.lineSeparator())
+                .append("Contract type'").append(contractType).append(" duration: '").append(contractDuration).append(" startAt: '").append(startAt).append(System.lineSeparator())
+                .append("Highest diploma: '").append(highestDiploma).append(" ").append(highestDiplomaYear).append(System.lineSeparator())
+                .append("Skills: ").append(skillsToString(skills)).append(System.lineSeparator())
+                .append("Has a vehicle ").append(vehicule).append(" Has a driver license: ").append(driverLicense).append(System.lineSeparator())
+                .append("Nationality: ").append(nationality).append(System.lineSeparator())
+                .append("Grade='").append(grade).append(System.lineSeparator())
+                .toString();
+    }
+
+    private String skillsToString(final List<String> skills) {
+        final StringBuilder builder = new StringBuilder();
+        skills.forEach(builder::append);
+        return builder.toString();
+    }
+
+    private String mobilitiesToString(final List<Mobility> mobilities) {
+        final StringBuilder builder = new StringBuilder();
+        mobilities.forEach(mobility -> builder.append(mobility.toString()));
+        return builder.toString();
     }
 }
