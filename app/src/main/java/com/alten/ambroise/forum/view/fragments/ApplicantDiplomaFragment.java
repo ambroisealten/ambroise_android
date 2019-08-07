@@ -36,7 +36,7 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
     private String highestDiploma;
 
     private EditText inputEditDate;
-    private String highestDiplomaYear;
+    private Integer highestDiplomaYear = 0;
 
     private Button addButton;
 
@@ -72,7 +72,7 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                that.highestDiploma = s.toString();
+                that.setEnableButton();
             }
 
             @Override
@@ -91,7 +91,7 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                that.highestDiplomaYear = s.toString();
+                that.setEnableButton();
             }
 
             @Override
@@ -104,14 +104,10 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
         this.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(! that.allDiplomas.contains(that.highestDiploma.toLowerCase()) && Integer.parseInt(that.highestDiplomaYear) > 1900){
-                    that.allDiplomasRepresentation.add(that.highestDiploma+" - "+that.highestDiplomaYear);
-                    that.allDiplomas.add(that.highestDiploma.toLowerCase());
-                }
+                String diploma = that.diplomaEditText.getText().toString();
+                String diplomaYear = that.inputEditDate.getText().toString();
 
-
-                that.highestDiploma = "";
-                that.highestDiplomaYear = "";
+                that.saveNewDiploma(diploma, diplomaYear);
 
                 that.inputEditDate.getText().clear();
                 that.diplomaEditText.getText().clear();
@@ -144,12 +140,40 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
 
     @Override
     public void saveInformation(ApplicantForum applicant) {
+        applicant.setHighestDiploma(this.highestDiploma);
+        applicant.setHighestDiplomaYear(this.highestDiplomaYear.toString());
+
+
         mListener.onFragmentInteraction(applicant);
+    }
+
+    private void saveNewDiploma(String diploma, String diplomaYear){
+        if(! this.allDiplomas.contains(diploma.toLowerCase()) && Integer.parseInt(diplomaYear) > 1930){
+            this.allDiplomasRepresentation.add(diploma+" - "+diplomaYear);
+            this.allDiplomas.add(diploma.toLowerCase());
+        }
+
+        if(Integer.parseInt(diplomaYear) >= this.highestDiplomaYear){
+            this.highestDiploma = diploma;
+            this.highestDiplomaYear = Integer.parseInt(diplomaYear);
+        }
     }
 
     private void refreshGridView() {
         CustomGridDiplomasAdapter adapter = new CustomGridDiplomasAdapter(getActivity(), allDiplomasRepresentation, this);
         this.gridView.setAdapter(adapter);
+    }
+
+    private void setEnableButton(){
+        String currentDiploma = this.diplomaEditText.getText().toString();
+        String currentDiplomaYear = this.inputEditDate.getText().toString();
+
+        if(currentDiploma.length() > 0 && currentDiplomaYear.length() > 0  && Integer.parseInt(currentDiplomaYear.toString()) > 1930) {
+            this.addButton.setEnabled(true);
+        }
+        else{
+            this.addButton.setEnabled(false);
+        }
     }
 
     public void deleteDiploma(String diplomaToDelete){
