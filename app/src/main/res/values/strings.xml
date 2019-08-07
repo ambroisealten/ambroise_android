@@ -97,6 +97,8 @@
         <item>Months</item>
         <item>Years</item>
     </string-array>
+
+
     <string name="rgpd_warning">!Applicant must read RGPD and accept it!</string>
     <string name="rgpd_accept">Do you accept that your data is saved?</string>
     <string name="rgpd_text"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas magna sapien, volutpat nec dui eget, lacinia consequat lectus. Vivamus at volutpat velit. Proin ac turpis accumsan, lobortis tellus venenatis, sollicitudin felis. Phasellus eleifend velit eget massa posuere placerat. Duis tincidunt, urna vitae cursus finibus, elit tortor faucibus tellus, vel luctus libero diam sit amet massa. Aenean vitae lacinia sapien, sit amet facilisis lorem. Phasellus feugiat tortor vel ante pulvinar pulvinar.
@@ -190,4 +192,15 @@ Pellentesque diam arcu, ornare sit amet nunc in, ornare euismod lectus. Nam vest
 Suspendisse potenti. Nunc eu aliquet eros, nec luctus quam. Curabitur nec laoreet nisi, sit amet semper quam. Proin vehicula luctus lectus, nec bibendum magna hendrerit ut. Morbi sodales odio purus, id aliquam tellus pulvinar quis. Cras pretium nisi non ultricies vulputate. Donec elementum nibh nec est suscipit gravida. Proin id nulla eget tortor laoreet tincidunt. Sed lectus urna, bibendum id eros efficitur, eleifend tristique justo. Morbi non libero luctus, feugiat massa ut, vulputate sem. Cras ante est, finibus eget iaculis non, viverra et metus. Maecenas commodo at quam nec tristique. Ut in lobortis nunc.
     ]]></string>
     <string name="dialog_forum">New Forum</string>
+    <string name="applicant_accepted_and_validated">Applicant sheet created and validated</string>
+    <string name="proceed">Proceed</string>
+    <string name="validation_image_description">Check validation icon</string>
+    <string name="opinion">Opinion</string>
+    <string name="sendTo">Send by mail to</string>
+    <string name="sendToHint">(separate each person by a comma \",\")</string>
+    <string name="validate">Validate</string>
+    <string name="send_email_using">Send email using...</string>
+    <string name="no_client_mail">No email clients installed.</string>
+    <string name="end_of_process">End of process</string>
+    <string name="diplomaName">Diploma\'s name</string>
 </resources>

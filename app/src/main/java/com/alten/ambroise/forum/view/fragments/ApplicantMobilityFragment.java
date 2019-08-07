@@ -20,7 +20,7 @@ import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.Mobility;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.utils.InputFilterMinMax;
-import com.alten.ambroise.forum.view.adapter.CustomGridAdapter;
+import com.alten.ambroise.forum.view.adapter.CustomGridMobilityAdapter;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
@@ -65,7 +65,6 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_applicant_mobility, container, false);
         this.gridView = view.findViewById(R.id.gridView1);
-
 
         addGeographics = view.findViewById(R.id.button_add_geographics);
         addGeographics.setEnabled(false);
@@ -129,7 +128,7 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
             }
         });
 
-        refreshGridView();
+
 
         buttonFrance = view.findViewById(R.id.buttonFrance);
         buttonFrance.setOnClickListener(new View.OnClickListener() {
@@ -176,6 +175,7 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
         });
 
         internationalSwitch = view.findViewById(R.id.switchInternational);
+
         internationalSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked && !tagExists(PRESENT_INTERNATIONAL_TAG)) {
@@ -195,6 +195,8 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
 
             }
         });
+
+        refreshGridView();
 
         return view;
     }
@@ -238,8 +240,10 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
         mListener = null;
     }
 
+
+
     private void refreshGridView() {
-        CustomGridAdapter adapter = new CustomGridAdapter(getActivity(), allGeos, allRadius, this);
+        CustomGridMobilityAdapter adapter = new CustomGridMobilityAdapter(getActivity(), allGeos, allRadius, this);
         this.gridView.setAdapter(adapter);
     }
 
@@ -275,6 +279,7 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
     @Override
     public void saveInformation(ApplicantForum applicant) {
         applicant.setMobilities(allGeos);
+
         mListener.onFragmentInteraction(applicant);
     }
 

@@ -10,6 +10,8 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -17,8 +19,7 @@ import android.widget.GridView;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.utils.InputFilterMinMax;
-import com.alten.ambroise.forum.view.adapter.CustomGridDiplomasAdapter;
-import com.google.android.material.textfield.TextInputEditText;
+import com.alten.ambroise.forum.view.adapter.CustomGridStringAdapter;
 
 import java.util.ArrayList;
 
@@ -30,7 +31,7 @@ import java.util.ArrayList;
  */
 public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo {
 
-    private TextInputEditText diplomaEditText;
+    private AutoCompleteTextView diplomaAutoComplete;
     private ArrayList<String> allDiplomasRepresentation = new ArrayList<String>();
     private ArrayList<String> allDiplomas = new ArrayList<String>();
     private String highestDiploma;
@@ -63,8 +64,12 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
 
         final ApplicantDiplomaFragment that = this;
 
-        this.diplomaEditText = view.findViewById(R.id.diplomas_input_editText);
-        this.diplomaEditText.addTextChangedListener(new TextWatcher() {
+
+        this.diplomaAutoComplete = view.findViewById(R.id.diplomaAutocomplete);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
+                R.layout.array_adapter, getResources().getStringArray(R.array.diplomas));
+        this.diplomaAutoComplete.setAdapter(adapter);
+        this.diplomaAutoComplete.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -80,6 +85,7 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
 
             }
         });
+
 
         this.inputEditDate = view.findViewById(R.id.date_edit_text);
         this.inputEditDate.setFilters(new InputFilter[]{new InputFilterMinMax(0,2030)});
@@ -100,23 +106,24 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
             }
         });
 
-        this.addButton = view.findViewById(R.id.add_diploma_button);
+        this.addButton = view.findViewById(R.id.add_skills_button);
         this.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String diploma = that.diplomaEditText.getText().toString();
+                String diploma = that.diplomaAutoComplete.getText().toString();
                 String diplomaYear = that.inputEditDate.getText().toString();
 
                 that.saveNewDiploma(diploma, diplomaYear);
 
                 that.inputEditDate.getText().clear();
-                that.diplomaEditText.getText().clear();
+                that.diplomaAutoComplete.getText().clear();
 
                 that.refreshGridView();
             }
         });
 
         this.gridView = view.findViewById(R.id.diplomas_grid_view);
+        this.refreshGridView();
 
         return view;
     }
@@ -160,12 +167,12 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
     }
 
     private void refreshGridView() {
-        CustomGridDiplomasAdapter adapter = new CustomGridDiplomasAdapter(getActivity(), allDiplomasRepresentation, this);
+        CustomGridStringAdapter adapter = new CustomGridStringAdapter(getActivity(), allDiplomasRepresentation, this);
         this.gridView.setAdapter(adapter);
     }
 
     private void setEnableButton(){
-        String currentDiploma = this.diplomaEditText.getText().toString();
+        String currentDiploma = this.diplomaAutoComplete.getText().toString();
         String currentDiplomaYear = this.inputEditDate.getText().toString();
 
         if(currentDiploma.length() > 0 && currentDiplomaYear.length() > 0  && Integer.parseInt(currentDiplomaYear.toString()) > 1930) {
@@ -180,6 +187,7 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
         int position = allDiplomasRepresentation.indexOf(diplomaToDelete);
         if(position != -1){
             allDiplomasRepresentation.remove(position);
+            allDiplomas.remove(position);
             refreshGridView();
         }
     }

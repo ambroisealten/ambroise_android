@@ -8,6 +8,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
@@ -32,6 +33,7 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
     private ViewPager viewPager;
     private ApplicantForum applicant;
     private int currentPosition;
+    private Fragment fragment;
     private ApplicantForumViewModel applicantForumViewModel;
 
     @Override
@@ -79,6 +81,28 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
         setViewPager(viewPager);
 
         tabLayout = findViewById(R.id.tabs);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+                fragment = ((ViewPagerAdapter)viewPager.getAdapter()).getItem(currentPosition);
+
+                fTransaction.attach(fragment);
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+                if (fragment != null) {
+                    fTransaction.detach(fragment);
+                }
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
         tabLayout.setupWithViewPager(viewPager);
 
         setIcon();
