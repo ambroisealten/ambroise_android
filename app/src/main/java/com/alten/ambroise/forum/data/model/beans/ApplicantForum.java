@@ -281,12 +281,18 @@ public class ApplicantForum implements Parcelable {
     }
 
     private String skillsToString(final List<String> skills) {
+        if(skills == null){
+            return "";
+        }
         final StringBuilder builder = new StringBuilder();
         skills.forEach(builder::append);
         return builder.toString();
     }
 
     private String mobilitiesToString(final List<Mobility> mobilities) {
+        if(skills == null){
+            return "";
+        }
         final StringBuilder builder = new StringBuilder();
         mobilities.forEach(mobility -> builder.append(mobility.toString()));
         return builder.toString();
