@@ -89,10 +89,17 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
                 String mail = this.applicant.getPersonInChargeMail();
                 Intent intent = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
                 intent.setData(Uri.parse("mailto:" + mail)); //If more than 1 receiver, then use , (comma) to separate them
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Applicant " + this.applicant.getName().toUpperCase() + " " + this.applicant.getSurname());
-                intent.putExtra(Intent.EXTRA_TEXT, this.applicant.toString());
+                intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.cv_that_will_interest_you));
+                String body = new StringBuilder().append(getString(R.string.mail_hello_text)).append(System.lineSeparator())
+                        .append(System.lineSeparator())
+                        .append(this.applicant.toString())
+                        .append(System.lineSeparator())
+                        .append(System.lineSeparator())
+                        .append(getString(R.string.mail_bye_text))
+                        .toString();
+                intent.putExtra(Intent.EXTRA_TEXT, body);
 
-                //intent.putExtra(Intent.EXTRA_CC,"caboncopiedMail");
+                //intent.putExtra(Intent.EXTRA_CC,"carboncopiedMail");
 
                 if (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -129,7 +136,7 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
                     fOut.flush(); // Not really required
                     fOut.close(); // do not forget to close the stream
 
-                    MediaStore.Images.Media.insertImage(getContentResolver(),file.getAbsolutePath(),file.getName(),file.getName());
+                    MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(), file.getName());
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
