@@ -99,7 +99,7 @@ public class SignFragment extends Fragment {
             public void onClick(View v) {
                 signature = mSignaturePad.getSignatureSvg();
                 applicant.setSign(signature);
-                mListener.onFragmentInteraction(false, RGPDFragmentSwitcher.RGPD_SIGN_TAG);
+                mListener.onFragmentInteraction(true, RGPDFragmentSwitcher.RGPD_SIGN_TAG, applicant);
             }
         });
         return view;

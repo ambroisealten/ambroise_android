@@ -201,7 +201,7 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
 
     private boolean tagExists(String presenceTag) {
         for (Mobility mobility : allGeos) {
-            if (mobility.getTag().equals(presenceTag)) {
+            if (mobility.getTag() != null && mobility.getTag().equals(presenceTag)) {
                 return true;
             }
         }

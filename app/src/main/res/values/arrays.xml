@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="grade">
+        <item>@string/none</item>
+        <item>+++</item>
+        <item>++</item>
+        <item>+</item>
+        <item>-</item>
+        <item>--</item>
+        <item>---</item>
+        <item>NOK</item>
+    </string-array>
+    <string-array name="managers">
+        <item>mail1@mail.com</item>
+        <item>mail2@mail.com</item>
+        <item>mail3@mail.com</item>
+        <item>mail4@mail.com</item>
+        <item>mail5@mail.com</item>
+        <item>mail6@mail.com</item>
+        <item>mail7@mail.com</item>
+        <item>mail8@mail.com</item>
+        <item>mail9@mail.com</item>
+    </string-array>
+    <string name="none">None</string>
+</resources>

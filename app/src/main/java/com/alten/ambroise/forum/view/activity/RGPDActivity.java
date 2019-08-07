@@ -1,6 +1,7 @@
 package com.alten.ambroise.forum.view.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -11,10 +12,12 @@ import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.model.viewModel.ApplicantForumViewModel;
 import com.alten.ambroise.forum.view.fragmentSwitcher.RGPDFragmentSwitcher;
+import com.alten.ambroise.forum.view.fragments.GradeAndSendFragment;
 import com.alten.ambroise.forum.view.fragments.RGPDTextFragment;
 import com.alten.ambroise.forum.view.fragments.SignFragment;
+import com.alten.ambroise.forum.view.fragments.ValidationFragment;
 
-public class RGPDActivity extends AppCompatActivity implements SignFragment.OnFragmentInteractionListener, RGPDTextFragment.OnFragmentInteractionListener {
+public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragment.OnFragmentInteractionListener, ValidationFragment.OnFragmentInteractionListener, SignFragment.OnFragmentInteractionListener, RGPDTextFragment.OnFragmentInteractionListener {
 
     public static final String STATE_APPLICANT = "applicant";
     public static final String STATE_RGPD_FRAGMENT_SWITCHER = "rgpdFragmentSwitcher";
@@ -54,10 +57,31 @@ public class RGPDActivity extends AppCompatActivity implements SignFragment.OnFr
                 break;
             case RGPDFragmentSwitcher.RGPD_SIGN_TAG:
                 if (accept) {
-//                    this.rgpdFragmentSwitcher.switchFragment(getSupportFragmentManager(),RGPDFragmentSwitcher.RGPD_SIGN_TAG);
+                    this.applicant = applicant[0];
+                    this.rgpdFragmentSwitcher.switchFragment(getSupportFragmentManager(), RGPDFragmentSwitcher.RGPD_VALIDATION_TAG);
                 } else {
                     stopProcess();
                 }
+                break;
+            case RGPDFragmentSwitcher.RGPD_VALIDATION_TAG:
+                this.rgpdFragmentSwitcher.switchFragment(getSupportFragmentManager(), RGPDFragmentSwitcher.RGPD_GRADE_AND_SEND_TAG, this.applicant);
+                break;
+            case RGPDFragmentSwitcher.RGPD_GRADE_AND_SEND_TAG:
+                this.applicant = applicant[0];
+
+                String mail = this.applicant.getPersonInChargeMail();
+                Intent intent = new Intent(Intent.ACTION_SENDTO); // it's not ACTION_SEND
+                intent.setData(Uri.parse("mailto:" + mail)); //If more than 1 receiver, then use , (comma) to separate them
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Applicant " + this.applicant.getName().toUpperCase() + " " + this.applicant.getSurname() );
+                intent.putExtra(Intent.EXTRA_TEXT, this.applicant.toString());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
+                try {
+                    startActivity(Intent.createChooser(intent, getString(R.string.send_email_using)));
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(this, getString(R.string.no_client_mail), Toast.LENGTH_SHORT).show();
+                }
+
+                //on activity result continue process
                 break;
             default:
                 Toast.makeText(this, getString(R.string.not_implemented), Toast.LENGTH_SHORT).show();
