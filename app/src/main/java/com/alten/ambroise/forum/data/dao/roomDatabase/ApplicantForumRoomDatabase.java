@@ -13,7 +13,6 @@ import com.alten.ambroise.forum.data.dao.ApplicantForumDao;
 import com.alten.ambroise.forum.data.model.Mobility;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -57,7 +56,7 @@ public abstract class ApplicantForumRoomDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(final Void... params) {
             mDao.deleteAll();
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 10; i++) {
                 ApplicantForum applicant = new ApplicantForum();
                 applicant.setMail("mail" + i + "@mail.com");
                 applicant.setName("name" + i);

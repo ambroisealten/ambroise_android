@@ -129,9 +129,8 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
         fm.popBackStackImmediate();
         ApplicantForumViewModel applicantForumViewModel = new ApplicantForumViewModel(activity.getApplication());
         Long id = applicantForumViewModel.insert(applicant);
-        applicant.set_id(id);
         Intent intent = new Intent(activity.getBaseContext(), ApplicantActivity.class);
-        intent.putExtra(ApplicantActivity.STATE_APPLICANT, applicant);
+        intent.putExtra(ApplicantActivity.STATE_APPLICANT, id);
         activity.startActivity(intent);
     }
 }

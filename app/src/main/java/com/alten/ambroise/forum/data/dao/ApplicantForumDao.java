@@ -28,4 +28,7 @@ public interface ApplicantForumDao {
 
     @Query("SELECT * from applicantForum_table ORDER BY _id ASC")
     LiveData<List<ApplicantForum>> getAllApplicants();
+
+    @Query("SELECT * FROM applicantForum_table WHERE _id = :id ")
+    ApplicantForum getApplicant(Long id);
 }
