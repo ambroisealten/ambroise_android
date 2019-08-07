@@ -35,6 +35,7 @@ public class RGPDFragmentSwitcher implements FragmentSwitcher, Parcelable {
             return new RGPDFragmentSwitcher[size];
         }
     };
+
     private Activity activity;
 
     public RGPDFragmentSwitcher(Activity activity) {
@@ -95,7 +96,7 @@ public class RGPDFragmentSwitcher implements FragmentSwitcher, Parcelable {
         if (gradeAndSendFragment == null) {
             gradeAndSendFragment = new GradeAndSendFragment();
             Bundle bundle = new Bundle();
-            bundle.putParcelable(RGPDActivity.STATE_APPLICANT, applicant);
+            bundle.putLong(RGPDActivity.STATE_APPLICANT, applicant.get_id());
             gradeAndSendFragment.setArguments(bundle);
         }
         return gradeAndSendFragment;
@@ -106,7 +107,7 @@ public class RGPDFragmentSwitcher implements FragmentSwitcher, Parcelable {
         if (signFragment == null) {
             signFragment = new SignFragment();
             Bundle bundle = new Bundle();
-            bundle.putParcelable(RGPDActivity.STATE_APPLICANT, applicant);
+            bundle.putLong(RGPDActivity.STATE_APPLICANT, applicant.get_id());
             signFragment.setArguments(bundle);
         }
         return signFragment;

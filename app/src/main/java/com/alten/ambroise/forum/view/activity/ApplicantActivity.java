@@ -2,8 +2,6 @@ package com.alten.ambroise.forum.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -41,20 +39,18 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
         applicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
 
         Intent intent = getIntent();
-        this.applicant = intent.getParcelableExtra(STATE_APPLICANT);
+        this.applicant = applicantForumViewModel.getApplicant(intent.getLongExtra(STATE_APPLICANT, -1));
+
         setContentView(R.layout.activity_applicant);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton validateButton = findViewById(R.id.save_applicant);
-        validateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                Intent intent = new Intent(getBaseContext(), RGPDActivity.class);
-                intent.putExtra(RGPDActivity.STATE_APPLICANT, applicant);
-                startActivity(intent);
-            }
+        validateButton.setOnClickListener(v -> {
+            Intent intent1 = new Intent(getBaseContext(), RGPDActivity.class);
+            intent1.putExtra(RGPDActivity.STATE_APPLICANT, applicant.get_id());
+            startActivity(intent1);
         });
 
         viewPager = findViewById(R.id.viewpager);

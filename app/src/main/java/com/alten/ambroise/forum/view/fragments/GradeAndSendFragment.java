@@ -13,11 +13,14 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
-import com.alten.ambroise.forum.view.activity.RGPDActivity;
+import com.alten.ambroise.forum.data.model.viewModel.ApplicantForumViewModel;
 import com.alten.ambroise.forum.view.fragmentSwitcher.RGPDFragmentSwitcher;
+
+import static com.alten.ambroise.forum.view.activity.RGPDActivity.STATE_APPLICANT;
 
 public class GradeAndSendFragment extends Fragment {
 
@@ -42,8 +45,9 @@ public class GradeAndSendFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getArguments() != null){
-            this.applicant = getArguments().getParcelable(RGPDActivity.STATE_APPLICANT);
+        if (getArguments() != null) {
+            final ApplicantForumViewModel applicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
+            this.applicant = applicantForumViewModel.getApplicant(getArguments().getLong(STATE_APPLICANT));
         }
     }
 
@@ -59,14 +63,11 @@ public class GradeAndSendFragment extends Fragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         Button validate = view.findViewById(R.id.validation_and_send);
-        validate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                applicant.setGrade(((Spinner) view.findViewById(R.id.spinner_grade)).getSelectedItem().toString());
-                applicant.setPersonInChargeMail(((AutoCompleteTextView) view.findViewById(R.id.send_to)).getText().toString());
+        validate.setOnClickListener(v -> {
+            applicant.setGrade(((Spinner) view.findViewById(R.id.spinner_grade)).getSelectedItem().toString());
+            applicant.setPersonInChargeMail(((AutoCompleteTextView) view.findViewById(R.id.send_to)).getText().toString());
 
-                mListener.onFragmentInteraction(true, RGPDFragmentSwitcher.RGPD_GRADE_AND_SEND_TAG,applicant);
-            }
+            mListener.onFragmentInteraction(true, RGPDFragmentSwitcher.RGPD_GRADE_AND_SEND_TAG, applicant);
         });
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),

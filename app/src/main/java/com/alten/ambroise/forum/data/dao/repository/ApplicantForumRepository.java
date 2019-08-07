@@ -10,6 +10,7 @@ import com.alten.ambroise.forum.data.dao.roomDatabase.ApplicantForumRoomDatabase
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class ApplicantForumRepository {
 
@@ -28,12 +29,42 @@ public class ApplicantForumRepository {
 
 
     public Long insert(ApplicantForum applicant) {
-        new ApplicantForumRepository.insertAsyncTask(applicantForumDao).execute(applicant);
-        return applicant.get_id();
+        try {
+            return new insertAsyncTask(applicantForumDao).execute(applicant).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void update(ApplicantForum... applicants) {
         new ApplicantForumRepository.updateAsyncTask(applicantForumDao).execute(applicants);
+    }
+
+    public ApplicantForum getApplicant(final Long id) {
+        try {
+            return new getAsyncTask(applicantForumDao).execute(id).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static class getAsyncTask extends AsyncTask<Long, Void, ApplicantForum> {
+        private final ApplicantForumDao mAsyncTaskDao;
+
+        getAsyncTask(ApplicantForumDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected ApplicantForum doInBackground(Long... id) {
+            return mAsyncTaskDao.getApplicant(id[0]);
+        }
     }
 
     private static class insertAsyncTask extends AsyncTask<ApplicantForum, Void, Long> {
