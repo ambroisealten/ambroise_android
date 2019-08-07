@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.view.activity.RGPDActivity;
+import com.alten.ambroise.forum.view.fragments.GradeAndSendFragment;
 import com.alten.ambroise.forum.view.fragments.RGPDTextFragment;
 import com.alten.ambroise.forum.view.fragments.SignFragment;
 import com.alten.ambroise.forum.view.fragments.ValidationFragment;
@@ -21,6 +22,7 @@ public class RGPDFragmentSwitcher implements FragmentSwitcher, Parcelable {
     public static final String RGPD_TEXT_TAG = "rgpdTextTag";
     public static final String RGPD_SIGN_TAG = "rgpdSignTag";
     public static final String RGPD_VALIDATION_TAG = "rgpdValidationTag";
+    public static final String RGPD_GRADE_AND_SEND_TAG = "rgpdGradeAndSendTag";
 
     public static final Creator<RGPDFragmentSwitcher> CREATOR = new Creator<RGPDFragmentSwitcher>() {
         @Override
@@ -57,6 +59,9 @@ public class RGPDFragmentSwitcher implements FragmentSwitcher, Parcelable {
                 case RGPD_VALIDATION_TAG:
                     fragment = switchRGPDValidationFragment(fm);
                     break;
+                case RGPD_GRADE_AND_SEND_TAG:
+                    fragment = switchRGPDGradeAndSendFragment(fm,(ApplicantForum) args[0]);
+                    break;
                 default:
                     fragment = switchRGPDTextFragment(fm);
                     break;
@@ -83,6 +88,17 @@ public class RGPDFragmentSwitcher implements FragmentSwitcher, Parcelable {
             rgpdTextFragment.setArguments(bundle);
         }
         return rgpdTextFragment;
+    }
+
+    private GradeAndSendFragment switchRGPDGradeAndSendFragment(FragmentManager fm, ApplicantForum applicant) {
+        GradeAndSendFragment gradeAndSendFragment = (GradeAndSendFragment) fm.findFragmentByTag(RGPD_GRADE_AND_SEND_TAG);
+        if (gradeAndSendFragment == null) {
+            gradeAndSendFragment = new GradeAndSendFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(RGPDActivity.STATE_APPLICANT, applicant);
+            gradeAndSendFragment.setArguments(bundle);
+        }
+        return gradeAndSendFragment;
     }
 
     private SignFragment switchRGPDSignFragment(FragmentManager fm, ApplicantForum applicant) {

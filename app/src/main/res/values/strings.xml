@@ -193,4 +193,11 @@ Suspendisse potenti. Nunc eu aliquet eros, nec luctus quam. Curabitur nec laoree
     <string name="applicant_accepted_and_validated">Applicant sheet created and validated</string>
     <string name="proceed">Proceed</string>
     <string name="validation_image_description">Check validation icon</string>
+    <string name="opinion">Opinion</string>
+    <string name="sendTo">Send by mail to</string>
+    <string name="sendToHint">(separate each person by a comma \",\")</string>
+    <string name="validate">Validate</string>
+    <string name="send_email_using">Send email using...</string>
+    <string name="no_client_mail">No email clients installed.</string>
+    <string name="end_of_process">End of process</string>
 </resources>
