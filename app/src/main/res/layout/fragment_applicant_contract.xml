@@ -14,14 +14,15 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center|top"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <Spinner
                 android:id="@+id/contractSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:entries="@array/contract_type"
-                android:gravity="center" />
+                android:gravity="center"/>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
@@ -69,7 +70,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:calendarViewShown="false"
-                    android:datePickerMode="spinner" />
+                    android:datePickerMode="spinner"
+                    android:textColor="@color/colorPrimary"/>
             </LinearLayout>
 
             <LinearLayout

@@ -47,7 +47,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/mobility_radius" />
+                    android:text="@string/mobility_radius"
+                    android:textColor="@color/colorPrimary"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/radius_input_layout"
@@ -73,7 +74,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/minutes" />
+                    android:text="@string/minutes"
+                    android:textColor="@color/colorPrimary"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -86,7 +88,10 @@
                         android:id="@+id/switch2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:thumbTint="@color/colorPrimary"
+                        android:trackTint="@color/colorPrimary"
+                        />
                 </LinearLayout>
 
                 <TextView
@@ -95,7 +100,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/kilometers" />
+                    android:text="@string/kilometers"
+                    android:textColor="@color/colorPrimary"/>
             </LinearLayout>
 
             <LinearLayout
@@ -105,12 +111,13 @@
                 android:orientation="vertical">
 
                 <Button
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:id="@+id/button_add_geographics"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/add_geographic" />
+                    android:text="@string/add_geographic"
+                    />
             </LinearLayout>
 
         </LinearLayout>
@@ -142,7 +149,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:numColumns="auto_fit"
-            android:stretchMode="columnWidth">
+            android:stretchMode="columnWidth"
+            android:horizontalSpacing="7dp"
+            android:verticalSpacing="5dp">
 
         </GridView>
 
@@ -219,16 +228,17 @@
 
                 <CheckBox
                     android:id="@+id/internationalCheckBox"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center_horizontal"
+
                     android:paddingTop="5dp"
                     android:switchTextAppearance="@style/TextAppearance.AppCompat.Small"
                     android:text="@string/international"
+                    android:textColor="#000000"
                     android:textSize="25sp"
-                    android:textColor="#000000" 
-                    android:gravity="center"
-                    android:text="@string/international" />
+                    />
             </LinearLayout>
 
         </LinearLayout>
