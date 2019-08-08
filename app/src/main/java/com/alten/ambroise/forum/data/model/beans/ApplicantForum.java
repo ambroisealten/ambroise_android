@@ -297,9 +297,6 @@ public class ApplicantForum implements Parcelable {
     }
 
     private String mobilitiesToString(List<?> mobilities) {
-        System.out.println(mobilities);
-        System.out.println(mobilities.getClass());
-        System.out.println(mobilities.get(0));
         mobilities = (List<LinkedTreeMap>) mobilities;
         if (mobilities == null) {
             return "";

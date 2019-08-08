@@ -124,28 +124,29 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
                     }
                 }
 
-                final byte[] CvBytes = Base64.decode(this.applicant.getCvPerson(), Base64.DEFAULT);
+                if (this.applicant.getCvPerson() != null) {
+                    final byte[] CvBytes = Base64.decode(this.applicant.getCvPerson(), Base64.DEFAULT);
 
-                Bitmap cvBitmap = BitmapFactory.decodeByteArray(CvBytes, 0, CvBytes.length);
+                    Bitmap cvBitmap = BitmapFactory.decodeByteArray(CvBytes, 0, CvBytes.length);
 
-                String path = Environment.getExternalStorageDirectory().toString();
-                File file = new File(path, "cv.jpg"); // the File to save , append increasing numeric counter to prevent files from getting overwritten.
-                try {
-                    FileOutputStream fOut = new FileOutputStream(file);
-                    cvBitmap.compress(Bitmap.CompressFormat.JPEG, 85, fOut); // saving the Bitmap to a file compressed as a JPEG with 85% compression rate
-                    fOut.flush(); // Not really required
-                    fOut.close(); // do not forget to close the stream
+                    String path = Environment.getExternalStorageDirectory().toString();
+                    File file = new File(path, "cv.jpg"); // the File to save , append increasing numeric counter to prevent files from getting overwritten.
+                    try {
+                        FileOutputStream fOut = new FileOutputStream(file);
+                        cvBitmap.compress(Bitmap.CompressFormat.JPEG, 85, fOut); // saving the Bitmap to a file compressed as a JPEG with 85% compression rate
+                        fOut.flush(); // Not really required
+                        fOut.close(); // do not forget to close the stream
 
-                    MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(), file.getName());
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                        MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(), file.getName());
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+
                 }
-
-
-                intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
                 try {
                     startActivity(Intent.createChooser(intent, getString(R.string.send_email_using)));
