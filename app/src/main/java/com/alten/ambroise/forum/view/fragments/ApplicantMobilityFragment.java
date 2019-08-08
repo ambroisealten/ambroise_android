@@ -26,6 +26,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo{
     private static final String PRESENT_FRANCE_TAG = "France_present";
@@ -222,6 +223,15 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
 
 
     private void refreshGridView() {
+        AtomicReference<Integer> positionInternational = new AtomicReference<Integer>();
+        allGeos.forEach( mobility -> {
+            if(mobility.getGeographic() == "International") {
+                positionInternational.set(allGeos.indexOf(mobility));
+            }
+        });
+
+        allGeos.remove(positionInternational.get());
+
         CustomGridMobilityAdapter adapter = new CustomGridMobilityAdapter(getActivity(), allGeos, allRadius, this);
         this.gridView.setAdapter(adapter);
     }
