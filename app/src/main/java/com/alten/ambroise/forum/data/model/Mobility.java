@@ -6,22 +6,6 @@ import android.os.Parcelable;
 import androidx.room.Ignore;
 
 public class Mobility implements Parcelable {
-    private String geographic;
-    private int radius;
-    private String unit;
-    @Ignore
-    private String tag;
-
-    public Mobility(){
-
-    }
-
-    protected Mobility(Parcel in) {
-        geographic = in.readString();
-        radius = in.readInt();
-        unit = in.readString();
-    }
-
     public static final Creator<Mobility> CREATOR = new Creator<Mobility>() {
         @Override
         public Mobility createFromParcel(Parcel in) {
@@ -33,6 +17,21 @@ public class Mobility implements Parcelable {
             return new Mobility[size];
         }
     };
+    private String geographic;
+    private int radius;
+    private String unit;
+    @Ignore
+    private String tag;
+
+    public Mobility() {
+
+    }
+
+    protected Mobility(Parcel in) {
+        geographic = in.readString();
+        radius = in.readInt();
+        unit = in.readString();
+    }
 
     public String getGeographic() {
         return geographic;
@@ -79,7 +78,7 @@ public class Mobility implements Parcelable {
     }
 
     @Override
-    public String toString(){
-        return radius > 0 ? geographic+", within "+radius+unit : geographic;
+    public String toString() {
+        return radius > 0 ? geographic + ", within " + radius + unit : geographic;
     }
 }

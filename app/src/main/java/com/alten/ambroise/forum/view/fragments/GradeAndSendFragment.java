@@ -5,8 +5,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.Spinner;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -14,18 +19,15 @@ import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.model.viewModel.ApplicantForumViewModel;
 import com.alten.ambroise.forum.view.fragmentSwitcher.RGPDFragmentSwitcher;
-import com.github.gcacace.signaturepad.views.SignaturePad;
 
 import static com.alten.ambroise.forum.view.activity.RGPDActivity.STATE_APPLICANT;
 
-public class SignFragment extends Fragment {
+public class GradeAndSendFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
-    private SignaturePad mSignaturePad;
-    private String signature;
     private ApplicantForum applicant;
 
-    public SignFragment() {
+    public GradeAndSendFragment() {
         // Required empty public constructor
     }
 
@@ -53,44 +55,26 @@ public class SignFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_sign, container, false);
-        mSignaturePad = view.findViewById(R.id.signature_pad);
+        final View view = inflater.inflate(R.layout.fragment_grade_and_send, container, false);
 
-        //To Clear or not to clear, that is the question. Remove if we dont want action on signed
-//        mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
-//
-//            @Override
-//            public void onStartSigning() {
-//                //Event triggered when the pad is touched
-//            }
-//
-//            @Override
-//            public void onSigned() {
-//                //Event triggered when the pad is signed
-//            }
-//
-//            @Override
-//            public void onClear() {
-//                //Event triggered when the pad is cleared
-//            }
-//        });
-        Button decline = view.findViewById(R.id.decline_sign);
-        decline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.onFragmentInteraction(false, RGPDFragmentSwitcher.RGPD_SIGN_TAG, applicant);
-            }
+        Toolbar toolbar = view.findViewById(R.id.toolbar_grade_send);
+        toolbar.setTitle(getString(R.string.end_of_process));
+        toolbar.setSubtitle(this.applicant.getName() + " " + this.applicant.getSurname());
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+
+        Button validate = view.findViewById(R.id.validation_and_send);
+        validate.setOnClickListener(v -> {
+            applicant.setGrade(((Spinner) view.findViewById(R.id.spinner_grade)).getSelectedItem().toString());
+            applicant.setPersonInChargeMail(((AutoCompleteTextView) view.findViewById(R.id.send_to)).getText().toString());
+
+            mListener.onFragmentInteraction(true, RGPDFragmentSwitcher.RGPD_GRADE_AND_SEND_TAG, applicant);
         });
 
-        Button accept = view.findViewById(R.id.accept_sign);
-        accept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signature = mSignaturePad.getSignatureSvg();
-                applicant.setSign(signature);
-                mListener.onFragmentInteraction(true, RGPDFragmentSwitcher.RGPD_SIGN_TAG, applicant);
-            }
-        });
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
+                R.layout.array_adapter, getResources().getStringArray(R.array.managers));
+        AutoCompleteTextView textView = view.findViewById(R.id.send_to);
+        textView.setAdapter(adapter);
+
         return view;
     }
 

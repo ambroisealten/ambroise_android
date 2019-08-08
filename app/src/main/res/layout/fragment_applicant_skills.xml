@@ -11,23 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/skills_input_layout"
+        <AutoCompleteTextView
+            android:id="@+id/skillsAutoComplete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/skills"
-            android:textColor="#11618F"
-            android:textColorHint="#11618F">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/skills_input_editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="textShortMessage"
-                android:textColor="#11618F" />
-        </com.google.android.material.textfield.TextInputLayout>
-
+            android:gravity="center"
+            android:hint="@string/skills" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -35,7 +24,7 @@
         android:layout_height="wrap_content" >
 
             <Button
-                android:id="@+id/add_diploma_button"
+                android:id="@+id/add_skills_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/skillsAdd" />
@@ -73,7 +62,7 @@
                 android:textSize="50sp" />
 
             <GridView
-                android:id="@id/gridView1"
+                android:id="@+id/skills_grid_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

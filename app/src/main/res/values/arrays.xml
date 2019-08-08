@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="grade">
+        <item>@string/none</item>
+        <item>+++</item>
+        <item>++</item>
+        <item>+</item>
+        <item>-</item>
+        <item>--</item>
+        <item>---</item>
+        <item>NOK</item>
+    </string-array>
+    <string-array name="managers">
+        <item>mail1@mail.com</item>
+        <item>mail2@mail.com</item>
+        <item>mail3@mail.com</item>
+        <item>mail4@mail.com</item>
+        <item>mail5@mail.com</item>
+        <item>mail6@mail.com</item>
+        <item>mail7@mail.com</item>
+        <item>mail8@mail.com</item>
+        <item>mail9@mail.com</item>
+    </string-array>
+
+    <string-array name="diplomas">
+        <item>ENSISA</item>
+        <item>TELECOM</item>
+        <item>EPITECH</item>
+        <item>ENSIIE</item>
+        <item>MASTER</item>
+    </string-array>
+
+    <string-array name="skills" >
+        <item>C++</item>
+        <item>C#</item>
+        <item>PHP</item>
+        <item>Angular</item>
+        <item>Javascript</item>
+        <item>HTML</item>
+        <item>Java</item>
+        <item>CSS</item>
+        <item>.NET</item>
+        <item>Python</item>
+        <item>Ruby</item>
+        <item>Node.js</item>
+        <item>JEE</item>
+        <item>Communication</item>
+        <item>Management</item>
+        <item>TDD</item>
+        <item>Project management</item>
+        <item>V Cycle</item>
+    </string-array>
+    
+    <string name="none">None</string>
+</resources>

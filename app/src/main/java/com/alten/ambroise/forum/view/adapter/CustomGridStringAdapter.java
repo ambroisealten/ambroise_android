@@ -11,18 +11,28 @@ import android.widget.TextView;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.view.fragments.ApplicantDiplomaFragment;
+import com.alten.ambroise.forum.view.fragments.ApplicantSkillsFragment;
 
 import java.util.ArrayList;
 
-public class CustomGridDiplomasAdapter extends BaseAdapter{
+public class CustomGridStringAdapter extends BaseAdapter{
     private Context mContext;
     private final ArrayList<String> web;
     private final ApplicantDiplomaFragment parent;
+    private final ApplicantSkillsFragment parentF;
 
-    public CustomGridDiplomasAdapter(Context c, ArrayList<String> web, ApplicantDiplomaFragment parent ) {
+    public CustomGridStringAdapter(Context c, ArrayList<String> web, ApplicantDiplomaFragment parent ) {
         mContext = c;
         this.web = web;
         this.parent = parent;
+        this.parentF = null;
+    }
+
+    public CustomGridStringAdapter(Context c, ArrayList<String> web, ApplicantSkillsFragment parentF ) {
+        mContext = c;
+        this.web = web;
+        this.parentF = parentF;
+        this.parent = null;
     }
 
     @Override
@@ -50,7 +60,7 @@ public class CustomGridDiplomasAdapter extends BaseAdapter{
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        final CustomGridDiplomasAdapter that = this;
+        final CustomGridStringAdapter that = this;
 
         if (convertView == null) {
 
@@ -63,7 +73,12 @@ public class CustomGridDiplomasAdapter extends BaseAdapter{
             buttonDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    that.parent.deleteDiploma(web.get(position));
+                    if(that.parent != null){
+                        that.parent.deleteDiploma(web.get(position));
+                    }
+                    else{
+                        that.parentF.deleteSkill(web.get(position));
+                    }
                 }
             });
 

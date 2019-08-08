@@ -176,6 +176,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:paddingBottom="25dp"
                 android:text="@string/francemobility"
                 android:textColor="#000000"
                 android:textSize="50sp" />
@@ -183,7 +184,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="25dp">
 
                 <Button
                     style="@style/Widget.AppCompat.Button.Colored"
@@ -209,20 +211,24 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center|top"
                 android:orientation="horizontal">
 
-                <Switch
-                    android:id="@+id/switchInternational"
-                    android:layout_width="0dp"
+                <CheckBox
+                    android:id="@+id/internationalCheckBox"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingTop="5dp"
                     android:switchTextAppearance="@style/TextAppearance.AppCompat.Small"
                     android:text="@string/international"
                     android:textSize="25sp"
-                    android:textColor="#000000" />
+                    android:textColor="#000000" 
+                    android:gravity="center"
+                    android:text="@string/international" />
             </LinearLayout>
 
         </LinearLayout>
