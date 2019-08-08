@@ -197,14 +197,14 @@ Suspendisse potenti. Nunc eu aliquet eros, nec luctus quam. Curabitur nec laoree
     <string name="sendTo">Send by mail to</string>
     <string name="sendToHint">(separate each person by a comma \",\")</string>
     <string name="validate">Validate</string>
-    <string name="send_email_using">Send email using...</string>
+    <string name="send_email_using">Send email using…</string>
     <string name="no_client_mail">No email clients installed.</string>
     <string name="end_of_process">End of process</string>
     <string name="mail_hello_text">
         <![CDATA[
 Bonjour,
 
-Voici un CV qui devrais vous intéresser.
+Voici un CV qui devrait vous intéresser.
         ]]>
     </string>
     <string name="mail_bye_text">
@@ -212,4 +212,13 @@ Voici un CV qui devrais vous intéresser.
         ]]>
     </string>
     <string name="cv_that_will_interest_you">Cv that will interest you</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Mail</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="carbon_copied_preference">Automatic Carbon Copied</string>
+    <string name="not_defined">No value defined</string>
 </resources>

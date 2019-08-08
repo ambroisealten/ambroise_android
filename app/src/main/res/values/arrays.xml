@@ -22,4 +22,23 @@
         <item>mail9@mail.com</item>
     </string-array>
     <string name="none">None</string>
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
+    </string-array>
+    <string-array name="carbon_copied_mail_default" />
+    <string-array name="carbon_copied_mail">
+        <item>Anita LEROI</item>
+        <item>Marie Fleur ROCHAT</item>
+    </string-array>
+    <string-array name="carbon_copied_mail_value">
+        <item>anita.leroi@alten.com</item>
+        <item>mariefleur.rochat@alten.com</item>
+    </string-array>
 </resources>
