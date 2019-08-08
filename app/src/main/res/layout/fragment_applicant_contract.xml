@@ -55,23 +55,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
+                android:gravity="center|fill_horizontal"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textView6"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/begin_at" />
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="0"
+                    android:text="@string/begin_at"
+
+                    android:textColor="@color/colorPrimary" />
 
                 <DatePicker
                     android:id="@+id/datePicker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:calendarViewShown="false"
                     android:datePickerMode="spinner"
-                    android:textColor="@color/colorPrimary"/>
+                    android:paddingRight="150dp"
+                    android:textColor="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
@@ -84,29 +89,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/withinMonths" />
+                    android:gravity="left"
+                    android:paddingLeft="20dp"
+                    android:text="@string/withinMonths"
+                    android:textColor="@color/colorPrimary" />
 
                 <EditText
                     android:id="@+id/withinMonths"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2.5"
+                    android:autofillHints="@string/number_of_months"
                     android:ems="10"
                     android:inputType="number"
-                    android:autofillHints="@string/number_of_months"/>
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary" />
 
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/months" />
+                    android:layout_weight="1.65"
+                    android:gravity="left"
+                    android:text="@string/months"
+                    android:textColor="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/dateOptionnal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
@@ -114,23 +127,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/forTime" />
+                    android:gravity="left"
+                    android:paddingLeft="20dp"
+                    android:text="@string/forTime"
+                    android:textColor="@color/colorPrimary" />
 
                 <EditText
                     android:id="@+id/optionnalDuration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:autofillHints="@string/number_of_months"
                     android:ems="10"
-                    android:inputType="number"/>
+                    android:inputType="number"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"/>
 
                 <Spinner
                     android:id="@+id/optionnalSpinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:entries="@array/contract_duration_type"/>
+                    android:layout_weight="0.75"
+                    android:entries="@array/contract_duration_type"
+                    android:textColor="@color/colorPrimary" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
