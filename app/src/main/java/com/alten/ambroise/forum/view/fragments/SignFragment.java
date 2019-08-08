@@ -54,41 +54,37 @@ public class SignFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_sign, container, false);
-        mSignaturePad = view.findViewById(R.id.signature_pad);
 
-        //To Clear or not to clear, that is the question. Remove if we dont want action on signed
-//        mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
-//
-//            @Override
-//            public void onStartSigning() {
-//                //Event triggered when the pad is touched
-//            }
-//
-//            @Override
-//            public void onSigned() {
-//                //Event triggered when the pad is signed
-//            }
-//
-//            @Override
-//            public void onClear() {
-//                //Event triggered when the pad is cleared
-//            }
-//        });
         Button decline = view.findViewById(R.id.decline_sign);
-        decline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.onFragmentInteraction(false, RGPDFragmentSwitcher.RGPD_SIGN_TAG, applicant);
-            }
-        });
+        decline.setOnClickListener(v -> mListener.onFragmentInteraction(false, RGPDFragmentSwitcher.RGPD_SIGN_TAG, applicant));
 
         Button accept = view.findViewById(R.id.accept_sign);
-        accept.setOnClickListener(new View.OnClickListener() {
+        accept.setVisibility(View.GONE);
+        accept.setOnClickListener(v -> {
+            signature = mSignaturePad.getSignatureSvg();
+            applicant.setSign(signature);
+            mListener.onFragmentInteraction(true, RGPDFragmentSwitcher.RGPD_SIGN_TAG, applicant);
+        });
+
+        mSignaturePad = view.findViewById(R.id.signature_pad);
+
+        mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
+
             @Override
-            public void onClick(View v) {
-                signature = mSignaturePad.getSignatureSvg();
-                applicant.setSign(signature);
-                mListener.onFragmentInteraction(true, RGPDFragmentSwitcher.RGPD_SIGN_TAG, applicant);
+            public void onStartSigning() {
+                //Event triggered when the pad is touched
+                accept.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onSigned() {
+                //Event triggered when the pad is signed
+            }
+
+            @Override
+            public void onClear() {
+                //Event triggered when the pad is cleared
+                accept.setVisibility(View.GONE);
             }
         });
         return view;
