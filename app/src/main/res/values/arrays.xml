@@ -33,10 +33,12 @@
         <item>reply_all</item>
     </string-array>
     <string-array name="carbon_copied_mail_default" />
+    <!-- Value display in preference dialog -->
     <string-array name="carbon_copied_mail">
         <item>Anita LEROI</item>
         <item>Marie Fleur ROCHAT</item>
     </string-array>
+    <!-- Value use in in application. Order correspond to previous carbon_copied_mail array (in order) -->
     <string-array name="carbon_copied_mail_value">
         <item>anita.leroi@alten.com</item>
         <item>mariefleur.rochat@alten.com</item>

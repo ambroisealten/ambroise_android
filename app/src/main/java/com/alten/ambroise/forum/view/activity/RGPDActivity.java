@@ -2,6 +2,7 @@ package com.alten.ambroise.forum.view.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.preference.PreferenceManager;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
@@ -33,6 +35,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Set;
 
 public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragment.OnFragmentInteractionListener, ValidationFragment.OnFragmentInteractionListener, SignFragment.OnFragmentInteractionListener, RGPDTextFragment.OnFragmentInteractionListener {
 
@@ -124,7 +127,9 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
     private void sendMail() {
         String mail = this.applicant.getPersonInChargeMail();
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:" + mail)); //If more than 1 receiver, then use , (comma) to separate them
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String cc = setToString(preferences.getStringSet("carbon_copied", null));
+        intent.setData(Uri.parse("mailto:" + mail + "?cc=" + cc)); //If more than 1 receiver, then use , (comma) to separate them, same for cc (carbon copied beceause EXTRA_CC not supported by SENDTO
         intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.cv_that_will_interest_you));
         String body = new StringBuilder().append(getString(R.string.mail_hello_text)).append(System.lineSeparator())
                 .append(System.lineSeparator())
@@ -132,10 +137,10 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
                 .append(System.lineSeparator())
                 .append(System.lineSeparator())
                 .append(getString(R.string.mail_bye_text))
+                .append(System.lineSeparator())
+                .append(preferences.getString("signature", ""))
                 .toString();
         intent.putExtra(Intent.EXTRA_TEXT, body);
-
-        //intent.putExtra(Intent.EXTRA_CC,"carboncopiedMail");
 
         final byte[] CvBytes = Base64.decode(this.applicant.getCvPerson(), Base64.DEFAULT);
 
@@ -166,6 +171,21 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
         }
 
         //on activity result continue process
+    }
+
+    private String setToString(final Set<String> stringSet) {
+        if (stringSet == null || stringSet.size() == 0) {
+            return "";
+        }
+        StringBuilder builder = new StringBuilder();
+        for (final String s : stringSet) {
+            if (builder.length() != 0) {
+                builder.append(",");
+            }
+            builder.append(s);
+        }
+        System.out.println(builder.toString());
+        return builder.toString();
     }
 }
 

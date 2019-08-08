@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
 import com.alten.ambroise.forum.R;
 
@@ -30,16 +31,19 @@ public class SettingsActivity extends AppCompatActivity {
         Toolbar mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle(getString(R.string.title_activity_settings));
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-        mToolbar.setNavigationOnClickListener(view -> super.onBackPressed());
-
+        mToolbar.setNavigationOnClickListener(view -> onBackPressed());
     }
 
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().commit();
+    }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
-
             final MultiSelectListPreference mMultiPref = findPreference("carbon_copied");
             mMultiPref.setSummaryProvider(preference -> {
                 MultiSelectListPreference multiSelectListPreference = (MultiSelectListPreference) preference;
