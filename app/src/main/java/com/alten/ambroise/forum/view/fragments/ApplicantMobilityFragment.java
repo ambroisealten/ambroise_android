@@ -278,6 +278,9 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
 
     @Override
     public void saveInformation(ApplicantForum applicant) {
+        System.out.println(allGeos);
+        System.out.println(allGeos.getClass());
+        System.out.println(allGeos.get(0));
         applicant.setMobilities(allGeos);
 
         mListener.onFragmentInteraction(applicant);

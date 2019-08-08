@@ -12,7 +12,12 @@ import androidx.room.TypeConverters;
 import com.alten.ambroise.forum.data.model.Mobility;
 import com.alten.ambroise.forum.utils.Nationality;
 import com.alten.ambroise.forum.utils.converter.Converters;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.internal.LinkedTreeMap;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "applicantForum_table", indices = {@Index(value = "mail", unique = true)})
@@ -58,6 +63,8 @@ public class ApplicantForum implements Parcelable {
 
 
     public ApplicantForum() {
+        this.mobilities = new ArrayList<Mobility>();
+        this.skills = new ArrayList<String>();
     }
 
     protected ApplicantForum(Parcel in) {
@@ -281,7 +288,7 @@ public class ApplicantForum implements Parcelable {
     }
 
     private String skillsToString(final List<String> skills) {
-        if(skills == null){
+        if (skills == null) {
             return "";
         }
         final StringBuilder builder = new StringBuilder();
@@ -289,12 +296,21 @@ public class ApplicantForum implements Parcelable {
         return builder.toString();
     }
 
-    private String mobilitiesToString(final List<Mobility> mobilities) {
-        if(skills == null){
+    private String mobilitiesToString(List<?> mobilities) {
+        System.out.println(mobilities);
+        System.out.println(mobilities.getClass());
+        System.out.println(mobilities.get(0));
+        mobilities = (List<LinkedTreeMap>) mobilities;
+        if (mobilities == null) {
             return "";
         }
         final StringBuilder builder = new StringBuilder();
-        mobilities.forEach(mobility -> builder.append(mobility.toString()));
+        mobilities.forEach(mobility -> {
+            Gson gson = new GsonBuilder().create();
+            JsonObject jsonMobility = gson.toJsonTree(mobility).getAsJsonObject();
+
+            builder.append(gson.fromJson(jsonMobility, Mobility.class).toString());
+        });
         return builder.toString();
     }
 }
