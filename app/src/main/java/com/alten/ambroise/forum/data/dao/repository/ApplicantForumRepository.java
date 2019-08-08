@@ -54,6 +54,31 @@ public class ApplicantForumRepository {
         return null;
     }
 
+    public boolean delete(ApplicantForum applicant) {
+        try {
+            return new deleteAsyncTask(applicantForumDao).execute(applicant).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private static class deleteAsyncTask extends AsyncTask<ApplicantForum, Void, Boolean> {
+
+        private final ApplicantForumDao mAsyncTaskDao;
+
+        deleteAsyncTask(ApplicantForumDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Boolean doInBackground(final ApplicantForum... params) {
+            return mAsyncTaskDao.deleteApplicantsForum(params);
+        }
+    }
+
     private static class getAsyncTask extends AsyncTask<Long, Void, ApplicantForum> {
         private final ApplicantForumDao mAsyncTaskDao;
 

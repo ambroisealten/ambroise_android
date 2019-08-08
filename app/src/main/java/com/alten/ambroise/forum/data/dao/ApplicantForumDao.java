@@ -21,7 +21,7 @@ public interface ApplicantForumDao {
     void update(ApplicantForum... applicants);
 
     @Delete
-    void deleteApplicantsForum(ApplicantForum... applicants);
+    boolean deleteApplicantsForum(ApplicantForum... applicants);
 
     @Query("DELETE FROM applicantForum_table")
     void deleteAll();

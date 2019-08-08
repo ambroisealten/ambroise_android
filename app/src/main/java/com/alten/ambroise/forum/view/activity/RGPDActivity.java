@@ -1,6 +1,9 @@
 package com.alten.ambroise.forum.view.activity;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -59,6 +62,24 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
     }
 
     private void stopProcess() {
+
+        Context ctx = this;
+        new AlertDialog.Builder(this)
+                .setTitle("Need confirmation")
+                .setMessage("Do you really want to decline ? It will stop the process, and delete all your data within the application.")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        boolean tranasctionDone = applicantForumViewModel.delete(applicant);
+                        if(!tranasctionDone){
+                            Toast.makeText(ctx,"Transaction didn't worked :/",Toast.LENGTH_LONG);
+                        }
+                        else{
+                            Intent intent = new Intent(ctx, ForumActivity.class);
+                            startActivity(intent);
+                        }
+                    }})
+                .setNegativeButton(android.R.string.no, null).show();
 
     }
 
