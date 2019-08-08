@@ -21,5 +21,35 @@
         <item>mail8@mail.com</item>
         <item>mail9@mail.com</item>
     </string-array>
+
+    <string-array name="diplomas">
+        <item>ENSISA</item>
+        <item>TELECOM</item>
+        <item>EPITECH</item>
+        <item>ENSIIE</item>
+        <item>MASTER</item>
+    </string-array>
+
+    <string-array name="skills" >
+        <item>C++</item>
+        <item>C#</item>
+        <item>PHP</item>
+        <item>Angular</item>
+        <item>Javascript</item>
+        <item>HTML</item>
+        <item>Java</item>
+        <item>CSS</item>
+        <item>.NET</item>
+        <item>Python</item>
+        <item>Ruby</item>
+        <item>Node.js</item>
+        <item>JEE</item>
+        <item>Communication</item>
+        <item>Management</item>
+        <item>TDD</item>
+        <item>Project management</item>
+        <item>V Cycle</item>
+    </string-array>
+    
     <string name="none">None</string>
 </resources>

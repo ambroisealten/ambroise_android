@@ -8,21 +8,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
-import com.alten.ambroise.forum.view.activity.RGPDActivity;
+import com.alten.ambroise.forum.data.model.viewModel.ApplicantForumViewModel;
 import com.alten.ambroise.forum.view.fragmentSwitcher.RGPDFragmentSwitcher;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SignFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SignFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import static com.alten.ambroise.forum.view.activity.RGPDActivity.STATE_APPLICANT;
+
 public class SignFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
@@ -32,13 +27,6 @@ public class SignFragment extends Fragment {
 
     public SignFragment() {
         // Required empty public constructor
-    }
-
-    public static SignFragment newInstance(String param1, String param2) {
-        SignFragment fragment = new SignFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -56,7 +44,8 @@ public class SignFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            this.applicant = getArguments().getParcelable(RGPDActivity.STATE_APPLICANT);
+            final ApplicantForumViewModel applicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
+            this.applicant = applicantForumViewModel.getApplicant(getArguments().getLong(STATE_APPLICANT));
         }
     }
 

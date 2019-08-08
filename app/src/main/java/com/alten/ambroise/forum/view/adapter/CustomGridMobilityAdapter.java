@@ -15,13 +15,13 @@ import com.alten.ambroise.forum.view.fragments.ApplicantMobilityFragment;
 
 import java.util.ArrayList;
 
-public class CustomGridAdapter extends BaseAdapter{
+public class CustomGridMobilityAdapter extends BaseAdapter{
     private Context mContext;
     private final ArrayList<Mobility> web;
     private final ApplicantMobilityFragment parent;
     private final int[] Imageid;
 
-    public CustomGridAdapter(Context c, ArrayList<Mobility> web, int[] Imageid, ApplicantMobilityFragment parent ) {
+    public CustomGridMobilityAdapter(Context c, ArrayList<Mobility> web, int[] Imageid, ApplicantMobilityFragment parent ) {
         mContext = c;
         this.Imageid = Imageid;
         this.web = web;
@@ -53,7 +53,7 @@ public class CustomGridAdapter extends BaseAdapter{
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        final CustomGridAdapter that = this;
+        final CustomGridMobilityAdapter that = this;
 
         if (convertView == null) {
 

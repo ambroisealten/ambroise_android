@@ -23,32 +23,18 @@ import com.alten.ambroise.forum.view.fragmentSwitcher.ApplicantFragmentSwitcher;
 
 import java.util.List;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- */
 public class ApplicantListFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     public static final String STATE_COLUMN_COUNT = "column-count";
     public static final String STATE_SWITCHER = "switcher";
-    // TODO: Customize parameters
     private int mColumnCount = 2;
     private OnListFragmentInteractionListener mListener;
     private ApplicantRecyclerViewAdapter adapter;
     private ApplicantFragmentSwitcher switcher;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public ApplicantListFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static ApplicantListFragment newInstance(int columnCount) {
         ApplicantListFragment fragment = new ApplicantListFragment();
         Bundle args = new Bundle();
