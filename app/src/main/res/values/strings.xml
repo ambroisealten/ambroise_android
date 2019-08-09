@@ -215,4 +215,5 @@ Voici un CV qui devrais vous intéresser.
         ]]>
     </string>
     <string name="cv_that_will_interest_you">Cv that will interest you</string>
+    <string name="selectContract">Contract Type</string>
 </resources>

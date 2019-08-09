@@ -16,8 +16,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:hint="@string/skills" />
+            android:hint="@string/skills"
+            android:textColor="@color/colorPrimary"
+            />
     </androidx.cardview.widget.CardView>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="60dp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -67,7 +73,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:numColumns="auto_fit"
-                android:stretchMode="columnWidth">
+                android:stretchMode="columnWidth"
+                android:horizontalSpacing="7dp"
+                android:verticalSpacing="5dp">
 
             </GridView>
 
