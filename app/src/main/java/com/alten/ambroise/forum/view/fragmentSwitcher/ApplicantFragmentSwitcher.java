@@ -135,4 +135,8 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
         intent.putExtra(ForumActivity.STATE_FORUM,( (ForumActivity) activity).getForumId());
         activity.startActivity(intent);
     }
+
+    public void setFabInvisible() {
+        activity.findViewById(R.id.fab_forum).setVisibility(View.INVISIBLE);
+    }
 }

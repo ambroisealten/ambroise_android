@@ -33,6 +33,7 @@ public class ForumActivity extends AppCompatActivity
 
     private Forum forum;
     private ApplicantFragmentSwitcher applicantFragmentSwitcher;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class ForumActivity extends AppCompatActivity
         this.setTitle(Objects.requireNonNull(forum).getName());
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab_forum);
+        fab = findViewById(R.id.fab_forum);
         fab.setOnClickListener(view -> applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.ADD_APPLICANT_TAG));
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -65,7 +66,6 @@ public class ForumActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG);
-        fab.setOnClickListener(view -> applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.ADD_APPLICANT_TAG));
     }
 
     @Override
@@ -85,6 +85,14 @@ public class ForumActivity extends AppCompatActivity
         this.applicantFragmentSwitcher = savedInstanceState.getParcelable(STATE_APPLICANT_FRAGMENT_SWITCHER);
         this.forum = savedInstanceState.getParcelable(STATE_FORUM);
         super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onRestart(){
+        //if (findViewById(R.id.forum_fragment).getTag() != null && findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
+            fab.setVisibility(View.VISIBLE);
+        //}
+        super.onRestart();
     }
 
     @Override
