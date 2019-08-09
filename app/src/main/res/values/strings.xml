@@ -202,9 +202,6 @@ Suspendisse potenti. Nunc eu aliquet eros, nec luctus quam. Curabitur nec laoree
     <string name="send_email_using">Send email using…</string>
     <string name="no_client_mail">No email clients installed.</string>
     <string name="end_of_process">End of process</string>
-    <string name="alert_process_title">Need confirmation</string>
-    <string name="alert_process_message">Do you really want to decline ? It will stop the process, and delete all your data within the application.</string>
-    <string name="cancel_error">Transaction didn\'t worked :/</string>
     <string name="diplomaName">Diploma\'s name</string>
     <string name="mail_hello_text">
         <![CDATA[
