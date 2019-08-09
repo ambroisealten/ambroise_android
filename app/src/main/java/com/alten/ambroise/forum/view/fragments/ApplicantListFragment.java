@@ -50,23 +50,7 @@ public class ApplicantListFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        final Bundle arguments = getArguments();
-        if (arguments != null) {
-            this.mColumnCount = arguments.getInt(STATE_COLUMN_COUNT);
-            this.forumId = arguments.getLong(ForumActivity.STATE_FORUM);
-        }
-        if (savedInstanceState != null) {
-            this.mColumnCount = savedInstanceState.getInt(STATE_COLUMN_COUNT);
-            this.switcher = savedInstanceState.getParcelable(STATE_SWITCHER);
-        }
-        super.onCreate(savedInstanceState);
-        this.adapter = new ApplicantRecyclerViewAdapter(this.getContext(), applicant -> {
-            if (applicant != null) {
-                switcher.onItemClick(applicant);
-            }
-        });
-
+    public void onResume(){
         //Instantiate forum view model and add observer
         ApplicantForumViewModel mApplicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
         mApplicantForumViewModel.getAllApplicants().observe(this, applicants -> {
@@ -85,12 +69,34 @@ public class ApplicantListFragment extends Fragment {
             // Update the cached copy of the applicants in the adapter. (with filter them to don't have unrelated forum applicant
             adapter.setApplicants(applicantsFiltered);
         });
+        super.onResume();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        final Bundle arguments = getArguments();
+        if (arguments != null) {
+            this.mColumnCount = arguments.getInt(STATE_COLUMN_COUNT);
+            this.forumId = arguments.getLong(ForumActivity.STATE_FORUM);
+        }
+        if (savedInstanceState != null) {
+            this.mColumnCount = savedInstanceState.getInt(STATE_COLUMN_COUNT);
+            this.switcher = savedInstanceState.getParcelable(STATE_SWITCHER);
+        }
+        super.onCreate(savedInstanceState);
+        this.adapter = new ApplicantRecyclerViewAdapter(this.getContext(), applicant -> {
+            if (applicant != null) {
+                switcher.onItemClick(applicant);
+            }
+        });
+
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_applicant_list, container, false);
+
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
