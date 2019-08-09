@@ -167,4 +167,8 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
     }
 
 
+    @Override
+    public void onBackPressed(){
+        this.stopProcess();
+    }
 }
