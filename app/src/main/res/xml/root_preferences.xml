@@ -1,0 +1,21 @@
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="@string/messages_header">
+
+        <androidx.preference.EditTextPreference
+            app:key="signature"
+            app:title="@string/signature_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <MultiSelectListPreference
+            android:defaultValue="@array/carbon_copied_mail_default"
+            android:entries="@array/carbon_copied_mail"
+            android:entryValues="@array/carbon_copied_mail_value"
+            android:key="carbon_copied"
+            android:title="@string/carbon_copied_preference"/>
+
+
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>
