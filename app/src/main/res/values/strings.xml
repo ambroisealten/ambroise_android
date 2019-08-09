@@ -215,4 +215,7 @@ Voici un CV qui devrais vous intéresser.
         ]]>
     </string>
     <string name="cv_that_will_interest_you">Cv that will interest you</string>
+    <string name="alert_process_title">Need confirmation</string>
+    <string name="alert_process_message">Do you really want to decline ? It will stop the process, and delete all your data within the application.</string>
+    <string name="cancel_error">Transaction didn\'t worked :/</string>
 </resources>

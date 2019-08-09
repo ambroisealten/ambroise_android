@@ -3,7 +3,6 @@ package com.alten.ambroise.forum.view.activity;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -25,6 +24,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.model.viewModel.ApplicantForumViewModel;
+import com.alten.ambroise.forum.data.model.viewModel.ForumViewModel;
 import com.alten.ambroise.forum.view.fragmentSwitcher.RGPDFragmentSwitcher;
 import com.alten.ambroise.forum.view.fragments.GradeAndSendFragment;
 import com.alten.ambroise.forum.view.fragments.RGPDTextFragment;
@@ -43,6 +43,7 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
     private ApplicantForum applicant;
     private ApplicantForumViewModel applicantForumViewModel;
     private RGPDFragmentSwitcher rgpdFragmentSwitcher;
+    private long forumId;
 
 
     @Override
@@ -51,6 +52,7 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
         applicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
 
         Intent intent = getIntent();
+        this.forumId = intent.getLongExtra(ForumActivity.STATE_FORUM,-1);
         this.applicant = applicantForumViewModel.getApplicant(intent.getLongExtra(STATE_APPLICANT, -1));
 
 
@@ -62,25 +64,20 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
     }
 
     private void stopProcess() {
-
-        Context ctx = this;
         new AlertDialog.Builder(this)
-                .setTitle("Need confirmation")
-                .setMessage("Do you really want to decline ? It will stop the process, and delete all your data within the application.")
+                .setTitle(R.string.alert_process_title)
+                .setMessage(R.string.alert_process_message)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        boolean tranasctionDone = applicantForumViewModel.delete(applicant);
-                        if(!tranasctionDone){
-                            Toast.makeText(ctx,"Transaction didn't worked :/",Toast.LENGTH_LONG);
-                        }
-                        else{
-                            Intent intent = new Intent(ctx, ForumActivity.class);
-                            startActivity(intent);
-                        }
-                    }})
-                .setNegativeButton(android.R.string.no, null).show();
+                .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> {
+                    applicantForumViewModel.delete(applicant);
 
+                    Intent intent = new Intent(this, ForumActivity.class);
+                    ForumViewModel mForumViewModel = ViewModelProviders.of(this).get(ForumViewModel.class);
+                    mForumViewModel.getForum(this.forumId);
+                    intent.putExtra(ForumActivity.STATE_FORUM,mForumViewModel.getForum(this.forumId));
+                    startActivity(intent);
+                })
+                .setNegativeButton(android.R.string.no, null).show();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

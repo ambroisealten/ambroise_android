@@ -36,7 +36,7 @@ public class ApplicantForumViewModel extends AndroidViewModel {
         return mApplicantForumRepository.getApplicant(id);
     }
 
-    public boolean delete(ApplicantForum applicant) {
-        return mApplicantForumRepository.delete(applicant);
+    public void delete(ApplicantForum applicant) {
+        mApplicantForumRepository.delete(applicant);
     }
 }

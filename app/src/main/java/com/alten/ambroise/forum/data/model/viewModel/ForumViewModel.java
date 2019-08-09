@@ -29,4 +29,8 @@ public class ForumViewModel extends AndroidViewModel {
     public void insert(Forum forum) {
         mRepository.insert(forum);
     }
+
+    public Forum getForum(long forumId) {
+        return mRepository.getForum(forumId);
+    }
 }

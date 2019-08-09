@@ -21,4 +21,6 @@ public interface ForumDao {
     @Query("SELECT * from forum_table ORDER BY _id ASC")
     LiveData<List<Forum>> getAllForums();
 
+    @Query("SELECT * from forum_table WHERE _id = :id")
+    Forum getForum(Long id);
 }

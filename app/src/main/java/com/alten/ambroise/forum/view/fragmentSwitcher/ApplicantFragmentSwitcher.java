@@ -16,6 +16,7 @@ import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.model.viewModel.ApplicantForumViewModel;
 import com.alten.ambroise.forum.view.activity.ApplicantActivity;
+import com.alten.ambroise.forum.view.activity.ForumActivity;
 import com.alten.ambroise.forum.view.adapter.ApplicantRecyclerViewAdapter;
 import com.alten.ambroise.forum.view.fragments.ApplicantAddFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantListFragment;
@@ -131,6 +132,7 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
         Long id = applicantForumViewModel.insert(applicant);
         Intent intent = new Intent(activity.getBaseContext(), ApplicantActivity.class);
         intent.putExtra(ApplicantActivity.STATE_APPLICANT, id);
+        intent.putExtra(ForumActivity.STATE_FORUM,( (ForumActivity) activity).getForumId());
         activity.startActivity(intent);
     }
 }
