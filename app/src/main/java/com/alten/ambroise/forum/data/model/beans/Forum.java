@@ -6,12 +6,38 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
+import com.alten.ambroise.forum.utils.converter.Converters;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(tableName = "forum_table")
 public class Forum implements Parcelable {
 
+    @PrimaryKey(autoGenerate = true)
+    private long _id;
+    @NonNull
+    private String name;
+    @NonNull
+    private String date;
+    @NonNull
+    private String place;
+    @TypeConverters(Converters.class)
+    private List<Long> applicants;
+
+    public Forum() {
+        this.applicants = new ArrayList<Long>();
+    }
+
+    protected Forum(Parcel in) {
+        _id = in.readLong();
+        name = in.readString();
+        date = in.readString();
+        place = in.readString();
+    }
 
     public static final Creator<Forum> CREATOR = new Creator<Forum>() {
         @Override
@@ -24,24 +50,6 @@ public class Forum implements Parcelable {
             return new Forum[size];
         }
     };
-    @PrimaryKey(autoGenerate = true)
-    private long _id;
-    @NonNull
-    private String name;
-    @NonNull
-    private String date;
-    @NonNull
-    private String place;
-
-    public Forum() {
-    }
-
-    protected Forum(Parcel in) {
-        _id = in.readLong();
-        name = Objects.requireNonNull(in.readString());
-        date = Objects.requireNonNull(in.readString());
-        place = Objects.requireNonNull(in.readString());
-    }
 
     public long get_id() {
         return _id;
@@ -89,5 +97,17 @@ public class Forum implements Parcelable {
         dest.writeString(name);
         dest.writeString(date);
         dest.writeString(place);
+    }
+
+    public List<Long> getApplicants() {
+        return applicants;
+    }
+
+    public void setApplicants(List<Long> applicants) {
+        this.applicants = applicants;
+    }
+
+    public void putApplicantId(long id){
+        this.applicants.add(id);
     }
 }

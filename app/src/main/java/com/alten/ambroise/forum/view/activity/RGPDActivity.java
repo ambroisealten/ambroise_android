@@ -2,7 +2,6 @@ package com.alten.ambroise.forum.view.activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -26,6 +25,7 @@ import androidx.preference.PreferenceManager;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
+import com.alten.ambroise.forum.data.model.beans.Forum;
 import com.alten.ambroise.forum.data.model.viewModel.ApplicantForumViewModel;
 import com.alten.ambroise.forum.data.model.viewModel.ForumViewModel;
 import com.alten.ambroise.forum.view.fragmentSwitcher.RGPDFragmentSwitcher;
@@ -45,19 +45,21 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
     public static final String STATE_APPLICANT = "applicant";
     public static final String STATE_RGPD_FRAGMENT_SWITCHER = "rgpdFragmentSwitcher";
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+    private static final int MAIL_REQUEST_CODE = 1;
     private ApplicantForum applicant;
     private ApplicantForumViewModel applicantForumViewModel;
     private RGPDFragmentSwitcher rgpdFragmentSwitcher;
     private long forumId;
+    private ForumViewModel forumViewModel;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         applicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
-
+        forumViewModel = ViewModelProviders.of(this).get(ForumViewModel.class);
         Intent intent = getIntent();
-        this.forumId = intent.getLongExtra(ForumActivity.STATE_FORUM,-1);
+        this.forumId = intent.getLongExtra(ForumActivity.STATE_FORUM, -1);
         this.applicant = applicantForumViewModel.getApplicant(intent.getLongExtra(STATE_APPLICANT, -1));
 
 
@@ -76,13 +78,16 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
                 .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> {
                     applicantForumViewModel.delete(applicant);
 
-                    Intent intent = new Intent(this, ForumActivity.class);
-                    ForumViewModel mForumViewModel = ViewModelProviders.of(this).get(ForumViewModel.class);
-                    mForumViewModel.getForum(this.forumId);
-                    intent.putExtra(ForumActivity.STATE_FORUM,mForumViewModel.getForum(this.forumId));
-                    startActivity(intent);
+                    goToListApplicant();
                 })
                 .setNegativeButton(android.R.string.no, null).show();
+    }
+
+    private void goToListApplicant() {
+        Intent intent = new Intent(this, ForumActivity.class);
+        forumViewModel.getForum(this.forumId);
+        intent.putExtra(ForumActivity.STATE_FORUM, forumViewModel.getForum(this.forumId));
+        startActivity(intent);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -160,35 +165,50 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
                 .toString();
         intent.putExtra(Intent.EXTRA_TEXT, body);
 
-        final byte[] CvBytes = Base64.decode(this.applicant.getCvPerson(), Base64.DEFAULT);
-
-        Bitmap cvBitmap = BitmapFactory.decodeByteArray(CvBytes, 0, CvBytes.length);
-
-        String path = Environment.getExternalStorageDirectory().toString();
-        File file = new File(path, "cv.jpg"); // the File to save , append increasing numeric counter to prevent files from getting overwritten.
         try {
+            final byte[] CvBytes = Base64.decode(this.applicant.getCvPerson(), Base64.DEFAULT);
+
+            Bitmap cvBitmap = BitmapFactory.decodeByteArray(CvBytes, 0, CvBytes.length);
+
+            String path = Environment.getExternalStorageDirectory().toString();
+            File file = new File(path, "cv.jpg"); // the File to save , append increasing numeric counter to prevent files from getting overwritten.
+
             FileOutputStream fOut = new FileOutputStream(file);
             cvBitmap.compress(Bitmap.CompressFormat.JPEG, 85, fOut); // saving the Bitmap to a file compressed as a JPEG with 85% compression rate
             fOut.flush(); // Not really required
             fOut.close(); // do not forget to close the stream
 
             MediaStore.Images.Media.insertImage(getContentResolver(), file.getAbsolutePath(), file.getName(), file.getName());
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch(NullPointerException e){
             e.printStackTrace();
         }
-
-        intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
         try {
-            startActivity(Intent.createChooser(intent, getString(R.string.send_email_using)));
+            startActivityForResult(Intent.createChooser(intent, getString(R.string.send_email_using)), MAIL_REQUEST_CODE);
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(this, getString(R.string.no_client_mail), Toast.LENGTH_SHORT).show();
         }
+    }
 
-        //on activity result continue process
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case MAIL_REQUEST_CODE:
+                if (resultCode == RESULT_CANCELED) {
+                    Forum forum = this.forumViewModel.getForum(this.forumId);
+                    forum.putApplicantId(this.applicant.get_id());
+                    goToListApplicant();
+                }
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private String setToString(final Set<String> stringSet) {
