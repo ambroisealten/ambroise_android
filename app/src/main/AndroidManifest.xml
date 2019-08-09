@@ -19,10 +19,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".view.activity.RGPDActivity"/>
+        <activity
+            android:name=".view.activity.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".view.activity.RGPDActivity"
+            android:noHistory="true"/>
         <activity
             android:name=".view.activity.ApplicantActivity"
-            android:label="@string/title_activity_applicant" />
+            android:label="@string/title_activity_applicant"
+            android:noHistory="true"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

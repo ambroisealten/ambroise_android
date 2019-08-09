@@ -107,12 +107,7 @@ public class ForumAddDialogFragment extends DialogFragment {
 
         inputDate = new DatePicker(this.getContext());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            inputDate.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
-                @Override
-                public void onDateChanged(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                    updateTextPreview();
-                }
-            });
+            inputDate.setOnDateChangedListener((datePicker, year, month, dayOfMonth) -> updateTextPreview());
         }
         dateLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         dateLayout.addView(inputDate);
@@ -130,31 +125,25 @@ public class ForumAddDialogFragment extends DialogFragment {
 
         alertDialogBuilder.setView(layout);
 
-        alertDialogBuilder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Forum newForum = new Forum();
-                if (ForumAddDialogFragment.this.inputName.length() == 0) {
-                    ForumAddDialogFragment.this.inputName.setText(R.string.unknown);
-                }
-                if (inputPlace.length() == 0) {
-                    inputPlace.setText(R.string.unknown);
-                }
-                newForum.setName(ForumAddDialogFragment.this.inputName.getText().toString());
-                newForum.setPlace(inputPlace.getText().toString());
-                // Check if day and month have only one digit. If it's the case, then add 0 before the digit to match with xx format
-                String day = inputDate.getDayOfMonth() <= 9 ? "0" + inputDate.getDayOfMonth() : String.valueOf(inputDate.getDayOfMonth());
-                String month = inputDate.getMonth() <= 9 ? "0" + inputDate.getMonth() : String.valueOf(inputDate.getMonth());
-                newForum.setDate(day + "/" + month + "/" + inputDate.getYear());
-                forumFragmentSwitcher.addNewForum(newForum);
+        alertDialogBuilder.setPositiveButton(R.string.save, (dialog, which) -> {
+            Forum newForum = new Forum();
+            if (ForumAddDialogFragment.this.inputName.length() == 0) {
+                ForumAddDialogFragment.this.inputName.setText(R.string.unknown);
             }
+            if (inputPlace.length() == 0) {
+                inputPlace.setText(R.string.unknown);
+            }
+            newForum.setName(ForumAddDialogFragment.this.inputName.getText().toString());
+            newForum.setPlace(inputPlace.getText().toString());
+            // Check if day and month have only one digit. If it's the case, then add 0 before the digit to match with xx format
+            String day = inputDate.getDayOfMonth() <= 9 ? "0" + inputDate.getDayOfMonth() : String.valueOf(inputDate.getDayOfMonth());
+            String month = inputDate.getMonth() <= 9 ? "0" + inputDate.getMonth() : String.valueOf(inputDate.getMonth());
+            newForum.setDate(day + "/" + month + "/" + inputDate.getYear());
+            forumFragmentSwitcher.addNewForum(newForum);
         });
-        alertDialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (dialog != null) {
-                    dialog.dismiss();
-                }
+        alertDialogBuilder.setNegativeButton(R.string.cancel, (dialog, which) -> {
+            if (dialog != null) {
+                dialog.dismiss();
             }
         });
 

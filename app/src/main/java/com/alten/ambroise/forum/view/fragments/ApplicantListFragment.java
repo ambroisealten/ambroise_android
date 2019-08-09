@@ -26,21 +26,13 @@ import java.util.List;
 public class ApplicantListFragment extends Fragment {
 
     public static final String STATE_COLUMN_COUNT = "column-count";
-    public static final String STATE_SWITCHER = "switcher";
+    private static final String STATE_SWITCHER = "switcher";
     private int mColumnCount = 2;
     private OnListFragmentInteractionListener mListener;
     private ApplicantRecyclerViewAdapter adapter;
     private ApplicantFragmentSwitcher switcher;
 
     public ApplicantListFragment() {
-    }
-
-    public static ApplicantListFragment newInstance(int columnCount) {
-        ApplicantListFragment fragment = new ApplicantListFragment();
-        Bundle args = new Bundle();
-        args.putInt(STATE_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -50,22 +42,16 @@ public class ApplicantListFragment extends Fragment {
             this.switcher = savedInstanceState.getParcelable(STATE_SWITCHER);
         }
         super.onCreate(savedInstanceState);
-        this.adapter = new ApplicantRecyclerViewAdapter(this.getContext(), new ApplicantRecyclerViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(ApplicantForum applicant) {
-                if (applicant != null) {
-                    switcher.onItemClick(applicant);
-                }
+        this.adapter = new ApplicantRecyclerViewAdapter(this.getContext(), applicant -> {
+            if (applicant != null) {
+                switcher.onItemClick(applicant);
             }
         });
         //Instantiate forum view model and add observer
         ApplicantForumViewModel mApplicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
-        mApplicantForumViewModel.getAllApplicants().observe(this, new Observer<List<ApplicantForum>>() {
-            @Override
-            public void onChanged(@Nullable final List<ApplicantForum> applicant) {
-                // Update the cached copy of the applicant in the adapter.
-                adapter.setApplicants(applicant);
-            }
+        mApplicantForumViewModel.getAllApplicants().observe(this, applicant -> {
+            // Update the cached copy of the applicant in the adapter.
+            adapter.setApplicants(applicant);
         });
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(STATE_COLUMN_COUNT);

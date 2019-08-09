@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
+import com.alten.ambroise.forum.view.activity.ForumActivity;
 import com.alten.ambroise.forum.view.fragmentSwitcher.ApplicantFragmentSwitcher;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -55,7 +56,7 @@ public class ApplicantAddFragment extends Fragment {
     private static final String STATE_APPLICANT_PHONE = "phone";
     private static final String STATE_APPLICANT_MAIL = "mail";
     private static final String STATE_BUTTON_START_ENABLE = "button_start_enable";
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    public static final int REQUEST_IMAGE_CAPTURE = 1;
     private OnFragmentInteractionListener mListener;
     private ApplicantFragmentSwitcher switcher;
     private String currentPhotoPath;
@@ -229,7 +230,7 @@ public class ApplicantAddFragment extends Fragment {
                     intent.setAction(Intent.ACTION_QUICK_VIEW);
                     intent.setDataAndType(uri, "image/*");
                     intent.setFlags(FLAG_GRANT_READ_URI_PERMISSION | FLAG_GRANT_WRITE_URI_PERMISSION);
-                    startActivity(intent);
+                    startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
                 } else {
                     dispatchTakePictureIntent();
                 }
@@ -312,6 +313,13 @@ public class ApplicantAddFragment extends Fragment {
                 }
                 break;
         }
+        switcher.setFabInvisible();
+    }
+
+    @Override
+    public void onResume(){
+        switcher.setFabInvisible();
+        super.onResume();
     }
 
     @Override

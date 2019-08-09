@@ -54,6 +54,25 @@ public class ApplicantForumRepository {
         return null;
     }
 
+    public void delete(ApplicantForum applicant) {
+        new deleteAsyncTask(applicantForumDao).execute(applicant);
+    }
+
+    private static class deleteAsyncTask extends AsyncTask<ApplicantForum, Void, Void> {
+
+        private final ApplicantForumDao mAsyncTaskDao;
+
+        deleteAsyncTask(ApplicantForumDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final ApplicantForum... params) {
+            mAsyncTaskDao.deleteApplicantsForum(params);
+            return null;
+        }
+    }
+
     private static class getAsyncTask extends AsyncTask<Long, Void, ApplicantForum> {
         private final ApplicantForumDao mAsyncTaskDao;
 
