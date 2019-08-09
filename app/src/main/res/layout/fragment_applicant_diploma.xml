@@ -60,7 +60,7 @@
                     android:layout_weight="1"
                     android:autofillHints="@string/graduatingYear"
                     android:ems="10"
-                    android:gravity="center|right"
+                    android:gravity="center|left"
                     android:inputType="date"
                     android:textColor="@color/colorPrimary" />
             </LinearLayout>
