@@ -35,7 +35,7 @@ public class ApplicantForum implements Parcelable {
         }
     };
     @PrimaryKey(autoGenerate = true)
-    private long _id;
+    private Long _id;
     @NonNull
     private String mail;
     @NonNull
@@ -88,7 +88,7 @@ public class ApplicantForum implements Parcelable {
         grade = in.readString();
     }
 
-    public long get_id() {
+    public Long get_id() {
         return _id;
     }
 
@@ -273,7 +273,7 @@ public class ApplicantForum implements Parcelable {
 
     @Override
     public String toString() {
-        return new StringBuilder()
+                return new StringBuilder()
                 .append(surname).append(" ").append(name).append(System.lineSeparator())
                 .append("Mail: '").append(mail).append(System.lineSeparator())
                 .append("Phone number: '").append(phoneNumber).append(System.lineSeparator())

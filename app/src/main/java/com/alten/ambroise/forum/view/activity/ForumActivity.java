@@ -65,12 +65,7 @@ public class ForumActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG, this.getForumId());
     }
 
     @Override
@@ -81,6 +76,11 @@ public class ForumActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         this.applicantFragmentSwitcher = savedInstanceState.getParcelable(STATE_APPLICANT_FRAGMENT_SWITCHER);
         this.forum = savedInstanceState.getParcelable(STATE_FORUM);
@@ -88,34 +88,11 @@ public class ForumActivity extends AppCompatActivity
     }
 
     @Override
-    public void onRestart(){
+    public void onRestart() {
         //if (findViewById(R.id.forum_fragment).getTag() != null && findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
-            fab.setVisibility(View.VISIBLE);
+        fab.setVisibility(View.VISIBLE);
         //}
         super.onRestart();
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            if (findViewById(R.id.forum_fragment).getTag() != null && findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
-                findViewById(R.id.forum_fragment).setTag(null);
-                super.onBackPressed();
-                super.onBackPressed();
-            } else {
-                super.onBackPressed();
-                findViewById(R.id.forum_fragment).setTag(getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName());
-                if (findViewById(R.id.forum_fragment).getTag() == null) {
-                    this.applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG);
-                }
-                if (findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
-                    findViewById(R.id.fab_forum).setVisibility(View.VISIBLE);
-                }
-            }
-        }
     }
 
     @Override
@@ -142,6 +119,29 @@ public class ForumActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            if (findViewById(R.id.forum_fragment).getTag() != null && findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
+                findViewById(R.id.forum_fragment).setTag(null);
+                super.onBackPressed();
+                super.onBackPressed();
+            } else {
+                super.onBackPressed();
+                findViewById(R.id.forum_fragment).setTag(getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName());
+                if (findViewById(R.id.forum_fragment).getTag() == null) {
+                    this.applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG,this.getForumId());
+                }
+                if (findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
+                    findViewById(R.id.fab_forum).setVisibility(View.VISIBLE);
+                }
+            }
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -177,7 +177,7 @@ public class ForumActivity extends AppCompatActivity
     public void onFragmentInteraction(ApplicantForum applicant) {
     }
 
-    public long getForumId(){
+    public long getForumId() {
         return forum.get_id();
     }
 }

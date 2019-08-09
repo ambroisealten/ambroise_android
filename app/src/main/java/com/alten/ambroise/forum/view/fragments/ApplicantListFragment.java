@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,11 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
+import com.alten.ambroise.forum.data.model.beans.Forum;
 import com.alten.ambroise.forum.data.model.viewModel.ApplicantForumViewModel;
+import com.alten.ambroise.forum.data.model.viewModel.ForumViewModel;
+import com.alten.ambroise.forum.view.activity.ForumActivity;
 import com.alten.ambroise.forum.view.adapter.ApplicantRecyclerViewAdapter;
 import com.alten.ambroise.forum.view.fragmentSwitcher.ApplicantFragmentSwitcher;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ApplicantListFragment extends Fragment {
 
@@ -31,13 +33,30 @@ public class ApplicantListFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private ApplicantRecyclerViewAdapter adapter;
     private ApplicantFragmentSwitcher switcher;
+    private long forumId = 0;
 
     public ApplicantListFragment() {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnListFragmentInteractionListener) {
+            mListener = (OnListFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnListFragmentInteractionListener");
+        }
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
-        if(savedInstanceState != null){
+        final Bundle arguments = getArguments();
+        if (arguments != null) {
+            this.mColumnCount = arguments.getInt(STATE_COLUMN_COUNT);
+            this.forumId = arguments.getLong(ForumActivity.STATE_FORUM);
+        }
+        if (savedInstanceState != null) {
             this.mColumnCount = savedInstanceState.getInt(STATE_COLUMN_COUNT);
             this.switcher = savedInstanceState.getParcelable(STATE_SWITCHER);
         }
@@ -47,22 +66,25 @@ public class ApplicantListFragment extends Fragment {
                 switcher.onItemClick(applicant);
             }
         });
+
         //Instantiate forum view model and add observer
         ApplicantForumViewModel mApplicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
-        mApplicantForumViewModel.getAllApplicants().observe(this, applicant -> {
-            // Update the cached copy of the applicant in the adapter.
-            adapter.setApplicants(applicant);
+        mApplicantForumViewModel.getAllApplicants().observe(this, applicants -> {
+            final ForumViewModel forumViewModel = ViewModelProviders.of(this).get(ForumViewModel.class);
+            Forum forum = forumViewModel.getForum(this.forumId);
+            final List<ApplicantForum> applicantsFiltered = applicants.stream().filter(applicant -> {
+                //Conversion with Double necessary but for no known reason. List<Long> was a List<double> with no reason.
+                for (final Object forumApplicantId : forum.getApplicants()) {
+                    final Double id = (Double) forumApplicantId;
+                    if(id.longValue() == applicant.get_id()){
+                        return true;
+                    }
+                }
+                return false;
+            }).collect(Collectors.toList());
+            // Update the cached copy of the applicants in the adapter. (with filter them to don't have unrelated forum applicant
+            adapter.setApplicants(applicantsFiltered);
         });
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(STATE_COLUMN_COUNT);
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putParcelable(STATE_SWITCHER,switcher);
-        savedInstanceState.putInt(STATE_COLUMN_COUNT,mColumnCount);
-        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override
@@ -84,16 +106,11 @@ public class ApplicantListFragment extends Fragment {
         return view;
     }
 
-
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putParcelable(STATE_SWITCHER, switcher);
+        savedInstanceState.putInt(STATE_COLUMN_COUNT, mColumnCount);
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override

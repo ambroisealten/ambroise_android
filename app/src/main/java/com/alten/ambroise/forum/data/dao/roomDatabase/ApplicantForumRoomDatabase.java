@@ -10,10 +10,7 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.alten.ambroise.forum.data.dao.ApplicantForumDao;
-import com.alten.ambroise.forum.data.model.Mobility;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
-
-import java.util.Arrays;
 
 
 @Database(entities = {ApplicantForum.class}, version = 1, exportSchema = false)
@@ -55,20 +52,20 @@ public abstract class ApplicantForumRoomDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(final Void... params) {
-            mDao.deleteAll();
-            for (int i = 0; i < 10; i++) {
-                ApplicantForum applicant = new ApplicantForum();
-                applicant.setMail("mail" + i + "@mail.com");
-                applicant.setName("name" + i);
-                applicant.setSurname("surname" + i);
-                applicant.setPersonInChargeMail("inchargeMail@mail.com");
-                applicant.setHighestDiploma("ALTEN SCHOOL");
-                applicant.setHighestDiplomaYear("23/07/2019");
-                applicant.setGrade("+++");
-                applicant.setStartAt("01/01/2020");
-                applicant.setMobilities(Arrays.asList(new Mobility(),new Mobility()));
-                mDao.insert(applicant);
-            }
+//            mDao.deleteAll();
+//            for (int i = 0; i < 10; i++) {
+//                ApplicantForum applicant = new ApplicantForum();
+//                applicant.setMail("mail" + i + "@mail.com");
+//                applicant.setName("name" + i);
+//                applicant.setSurname("surname" + i);
+//                applicant.setPersonInChargeMail("inchargeMail@mail.com");
+//                applicant.setHighestDiploma("ALTEN SCHOOL");
+//                applicant.setHighestDiplomaYear("23/07/2019");
+//                applicant.setGrade("+++");
+//                applicant.setStartAt("01/01/2020");
+//                applicant.setMobilities(Arrays.asList(new Mobility(),new Mobility()));
+//                mDao.insert(applicant);
+//            }
             return null;
         }
     }

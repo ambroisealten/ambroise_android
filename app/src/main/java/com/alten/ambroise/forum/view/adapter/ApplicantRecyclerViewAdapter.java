@@ -99,12 +99,7 @@ public class ApplicantRecyclerViewAdapter extends RecyclerView.Adapter<Applicant
         }
 
         void bind(final ApplicantForum applicant, final ApplicantRecyclerViewAdapter.OnItemClickListener listener) {
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onItemClick(applicant);
-                }
-            });
+            itemView.setOnClickListener(v -> listener.onItemClick(applicant));
         }
 
         @NonNull

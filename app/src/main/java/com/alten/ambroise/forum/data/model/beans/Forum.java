@@ -12,13 +12,12 @@ import com.alten.ambroise.forum.utils.converter.Converters;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity(tableName = "forum_table")
 public class Forum implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
-    private long _id;
+    private Long _id;
     @NonNull
     private String name;
     @NonNull
@@ -51,11 +50,11 @@ public class Forum implements Parcelable {
         }
     };
 
-    public long get_id() {
+    public Long get_id() {
         return _id;
     }
 
-    public void set_id(long _id) {
+    public void set_id(Long _id) {
         this._id = _id;
     }
 
@@ -107,7 +106,7 @@ public class Forum implements Parcelable {
         this.applicants = applicants;
     }
 
-    public void putApplicantId(long id){
+    public void putApplicantId(Long id){
         this.applicants.add(id);
     }
 }
