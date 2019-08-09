@@ -1,6 +1,8 @@
 package com.alten.ambroise.forum.view.activity;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -25,6 +27,7 @@ import androidx.preference.PreferenceManager;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.model.viewModel.ApplicantForumViewModel;
+import com.alten.ambroise.forum.data.model.viewModel.ForumViewModel;
 import com.alten.ambroise.forum.view.fragmentSwitcher.RGPDFragmentSwitcher;
 import com.alten.ambroise.forum.view.fragments.GradeAndSendFragment;
 import com.alten.ambroise.forum.view.fragments.RGPDTextFragment;
@@ -45,6 +48,7 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
     private ApplicantForum applicant;
     private ApplicantForumViewModel applicantForumViewModel;
     private RGPDFragmentSwitcher rgpdFragmentSwitcher;
+    private long forumId;
 
 
     @Override
@@ -53,6 +57,7 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
         applicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
 
         Intent intent = getIntent();
+        this.forumId = intent.getLongExtra(ForumActivity.STATE_FORUM,-1);
         this.applicant = applicantForumViewModel.getApplicant(intent.getLongExtra(STATE_APPLICANT, -1));
 
 
@@ -64,7 +69,20 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
     }
 
     private void stopProcess() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.alert_process_title)
+                .setMessage(R.string.alert_process_message)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> {
+                    applicantForumViewModel.delete(applicant);
 
+                    Intent intent = new Intent(this, ForumActivity.class);
+                    ForumViewModel mForumViewModel = ViewModelProviders.of(this).get(ForumViewModel.class);
+                    mForumViewModel.getForum(this.forumId);
+                    intent.putExtra(ForumActivity.STATE_FORUM,mForumViewModel.getForum(this.forumId));
+                    startActivity(intent);
+                })
+                .setNegativeButton(android.R.string.no, null).show();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

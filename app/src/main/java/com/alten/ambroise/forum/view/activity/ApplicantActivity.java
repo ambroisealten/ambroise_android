@@ -1,5 +1,6 @@
 package com.alten.ambroise.forum.view.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.model.viewModel.ApplicantForumViewModel;
+import com.alten.ambroise.forum.data.model.viewModel.ForumViewModel;
 import com.alten.ambroise.forum.view.adapter.ViewPagerAdapter;
 import com.alten.ambroise.forum.view.fragments.ApplicantComplementFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantContractFragment;
@@ -33,6 +35,7 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
     private int currentPosition;
     private Fragment fragment;
     private ApplicantForumViewModel applicantForumViewModel;
+    private long forumId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,17 +44,23 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
         applicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
 
         Intent intent = getIntent();
+
+        this.forumId = intent.getLongExtra(ForumActivity.STATE_FORUM,-1);
         this.applicant = applicantForumViewModel.getApplicant(intent.getLongExtra(STATE_APPLICANT, -1));
 
         setContentView(R.layout.activity_applicant);
 
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar mToolbar = findViewById(R.id.toolbar);
+        mToolbar.setTitle(applicant.getSurname() + " " + applicant.getName());
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+        mToolbar.setNavigationOnClickListener(view -> stopProcess());
         setSupportActionBar(toolbar);
 
         FloatingActionButton validateButton = findViewById(R.id.save_applicant);
         validateButton.setOnClickListener(v -> {
             Intent intent1 = new Intent(getBaseContext(), RGPDActivity.class);
             intent1.putExtra(RGPDActivity.STATE_APPLICANT, applicant.get_id());
+            intent1.putExtra(ForumActivity.STATE_FORUM,this.forumId);
             startActivity(intent1);
         });
 
@@ -133,6 +142,23 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
         adapter.addFragment(fragment, getString(R.string.more));
 
         viewPager.setAdapter(adapter);
+    }
+
+    private void stopProcess() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.alert_process_title)
+                .setMessage(R.string.alert_process_message)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> {
+                    applicantForumViewModel.delete(applicant);
+
+                    Intent intent = new Intent(this, ForumActivity.class);
+                    ForumViewModel mForumViewModel = ViewModelProviders.of(this).get(ForumViewModel.class);
+                    mForumViewModel.getForum(this.forumId);
+                    intent.putExtra(ForumActivity.STATE_FORUM,mForumViewModel.getForum(this.forumId));
+                    startActivity(intent);
+                })
+                .setNegativeButton(android.R.string.no, null).show();
     }
 
     @Override

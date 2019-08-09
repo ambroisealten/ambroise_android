@@ -10,6 +10,7 @@ import com.alten.ambroise.forum.data.dao.roomDatabase.ForumRoomDatabase;
 import com.alten.ambroise.forum.data.model.beans.Forum;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class ForumRepository {
 
@@ -29,6 +30,30 @@ public class ForumRepository {
 
     public void insert(Forum forum) {
         new insertAsyncTask(mForumDao).execute(forum);
+    }
+
+    public Forum getForum(long forumId) {
+        try {
+            return new getAsyncTask(mForumDao).execute(forumId).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static class getAsyncTask extends AsyncTask<Long, Void, Forum> {
+        private final ForumDao mAsyncTaskDao;
+
+        getAsyncTask(ForumDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Forum doInBackground(Long... id) {
+            return mAsyncTaskDao.getForum(id[0]);
+        }
     }
 
     private static class insertAsyncTask extends AsyncTask<Forum, Void, Void> {

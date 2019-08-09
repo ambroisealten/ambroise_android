@@ -38,11 +38,12 @@ public class ForumActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum);
+        Intent intent = getIntent();
+        forum = intent.getParcelableExtra(STATE_FORUM);
         //If is not a restored activity
         if (savedInstanceState == null) {
             this.applicantFragmentSwitcher = new ApplicantFragmentSwitcher(this);
-            Intent intent = getIntent();
-            forum = intent.getParcelableExtra(STATE_FORUM);
+
         } else {
             this.forum = savedInstanceState.getParcelable(STATE_FORUM);
             this.applicantFragmentSwitcher = savedInstanceState.getParcelable(STATE_APPLICANT_FRAGMENT_SWITCHER) != null
@@ -54,12 +55,7 @@ public class ForumActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab_forum);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.ADD_APPLICANT_TAG);
-            }
-        });
+        fab.setOnClickListener(view -> applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.ADD_APPLICANT_TAG));
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -69,12 +65,7 @@ public class ForumActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.ADD_APPLICANT_TAG);
-            }
-        });
+        fab.setOnClickListener(view -> applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.ADD_APPLICANT_TAG));
     }
 
     @Override
@@ -176,5 +167,9 @@ public class ForumActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(ApplicantForum applicant) {
+    }
+
+    public long getForumId(){
+        return forum.get_id();
     }
 }
