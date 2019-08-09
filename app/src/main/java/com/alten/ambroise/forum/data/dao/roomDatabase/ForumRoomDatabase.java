@@ -51,14 +51,14 @@ public abstract class ForumRoomDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(final Void... params) {
-            mDao.deleteAll();
-            for (int i = 0; i < 10; i++) {
-                Forum forum = new Forum();
-                forum.setDate("10/07/2019");
-                forum.setName("name" + i);
-                forum.setPlace("place" + i);
-                mDao.insert(forum);
-            }
+//            mDao.deleteAll();
+//            for (int i = 0; i < 10; i++) {
+//                Forum forum = new Forum();
+//                forum.setDate("10/07/2019");
+//                forum.setName("name" + i);
+//                forum.setPlace("place" + i);
+//                mDao.insert(forum);
+//            }
             return null;
         }
     }

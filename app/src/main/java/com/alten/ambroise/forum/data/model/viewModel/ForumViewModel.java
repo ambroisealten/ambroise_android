@@ -12,14 +12,14 @@ import java.util.List;
 
 public class ForumViewModel extends AndroidViewModel {
 
-    private final ForumRepository mRepository;
+    private final ForumRepository mForumRepository;
 
     private final LiveData<List<Forum>> mAllForums;
 
     public ForumViewModel(Application application) {
         super(application);
-        mRepository = new ForumRepository(application);
-        mAllForums = mRepository.getAllForums();
+        mForumRepository = new ForumRepository(application);
+        mAllForums = mForumRepository.getAllForums();
     }
 
     public LiveData<List<Forum>> getAllForums() {
@@ -27,10 +27,14 @@ public class ForumViewModel extends AndroidViewModel {
     }
 
     public void insert(Forum forum) {
-        mRepository.insert(forum);
+        mForumRepository.insert(forum);
     }
 
     public Forum getForum(long forumId) {
-        return mRepository.getForum(forumId);
+        return mForumRepository.getForum(forumId);
+    }
+
+    public void update(final Forum forum) {
+        mForumRepository.update(forum);
     }
 }

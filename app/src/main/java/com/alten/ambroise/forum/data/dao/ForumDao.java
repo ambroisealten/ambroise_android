@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.alten.ambroise.forum.data.model.beans.Forum;
 
@@ -23,4 +24,7 @@ public interface ForumDao {
 
     @Query("SELECT * from forum_table WHERE _id = :id")
     Forum getForum(Long id);
+
+    @Update
+    void update(Forum... forum);
 }
