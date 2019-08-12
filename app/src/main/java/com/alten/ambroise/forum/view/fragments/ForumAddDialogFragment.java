@@ -132,7 +132,7 @@ public class ForumAddDialogFragment extends DialogFragment {
             newForum.setPlace(inputPlace.getText().toString());
             // Check if day and month have only one digit. If it's the case, then add 0 before the digit to match with xx format
             String day = inputDate.getDayOfMonth() <= 9 ? "0" + inputDate.getDayOfMonth() : String.valueOf(inputDate.getDayOfMonth());
-            String month = inputDate.getMonth() <= 9 ? "0" + inputDate.getMonth() + 1 : String.valueOf(inputDate.getMonth() + 1);
+            String month = inputDate.getMonth() <= 9 ? "0" + (inputDate.getMonth() + 1) : String.valueOf(inputDate.getMonth() + 1);
             newForum.setDate(day + "/" + month + "/" + inputDate.getYear());
             forumFragmentSwitcher.addNewForum(newForum);
         });
