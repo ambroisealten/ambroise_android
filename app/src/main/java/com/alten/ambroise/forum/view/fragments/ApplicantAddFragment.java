@@ -26,7 +26,6 @@ import androidx.fragment.app.Fragment;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
-import com.alten.ambroise.forum.view.activity.ForumActivity;
 import com.alten.ambroise.forum.view.fragmentSwitcher.ApplicantFragmentSwitcher;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -158,7 +157,7 @@ public class ApplicantAddFragment extends Fragment {
         if (savedInstanceState != null) {
             cvDisplay.setImageURI(Uri.fromFile(new File(currentPhotoPath)));
         } else {
-            cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_menu_camera));
+            cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_camera));
             button_start.setEnabled(false);
         }
 
@@ -305,7 +304,7 @@ public class ApplicantAddFragment extends Fragment {
                     checkIfStartAllowed();
                 } else {
                     if (cvDisplay.getDrawable() == null) {
-                        cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_menu_camera));
+                        cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_camera));
                     } else {
                         this.currentPhotoPath = this.temp;
                         this.temp = null;

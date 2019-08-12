@@ -5,33 +5,37 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/nav_forum"
+            android:icon="@drawable/ic_menu_forum"
+            android:title="@string/forum" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/nav_mission"
+            android:icon="@drawable/ic_menu_mission"
+            android:title="@string/mission"
+            android:enabled="false"/>
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
-        <item
-            android:id="@+id/nav_tools"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_tools" />
+            android:id="@+id/nav_competence"
+            android:icon="@drawable/ic_menu_competence"
+            android:title="@string/competence"
+            android:enabled="false"/>
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/action">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_share" />
+                android:id="@+id/nav_forum_list"
+                android:icon="@drawable/ic_menu_forum_list"
+                android:title="@string/menu_forum_list" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/menu_send" />
+                android:id="@+id/nav_applicant_list"
+                android:icon="@drawable/ic_menu_applicant_list"
+                android:title="@string/menu_applicant_list" />
+        </menu>
+    </item>
+
+    <item android:title="@string/document">
+        <menu>
+
         </menu>
     </item>
 
