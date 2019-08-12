@@ -19,14 +19,13 @@ import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.model.beans.Forum;
 import com.alten.ambroise.forum.view.fragmentSwitcher.ApplicantFragmentSwitcher;
 import com.alten.ambroise.forum.view.fragments.ApplicantAddFragment;
-import com.alten.ambroise.forum.view.fragments.ApplicantListFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
 public class ForumActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ApplicantListFragment.OnListFragmentInteractionListener, ApplicantAddFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ApplicantAddFragment.OnFragmentInteractionListener {
 
     public static final String STATE_FORUM = "forum";
     private static final String STATE_APPLICANT_FRAGMENT_SWITCHER = "applicantFragmentSwitcher";
@@ -135,7 +134,7 @@ public class ForumActivity extends AppCompatActivity
                 super.onBackPressed();
                 findViewById(R.id.forum_fragment).setTag(getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName());
                 if (findViewById(R.id.forum_fragment).getTag() == null) {
-                    this.applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG,this.getForumId());
+                    this.applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG, this.getForumId());
                 }
                 if (findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
                     findViewById(R.id.fab_forum).setVisibility(View.VISIBLE);
@@ -147,18 +146,22 @@ public class ForumActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
+            case R.id.nav_forum:
+                Intent intentForum = new Intent(this, MainActivity.class);
+                startActivity(intentForum);
+                break;
             case R.id.nav_new_applicant:
                 applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.ADD_APPLICANT_TAG);
+                break;
+            case R.id.nav_forum_list:
+                Intent intentForumList = new Intent(this, MainActivity.class);
+                startActivity(intentForumList);
                 break;
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Override
-    public void onListFragmentInteraction(ApplicantForum item) {
     }
 
     @Override

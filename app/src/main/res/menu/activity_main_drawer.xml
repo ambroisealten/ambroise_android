@@ -23,10 +23,6 @@
     <item android:title="@string/action">
         <menu>
             <item
-                android:id="@+id/nav_forum_list"
-                android:icon="@drawable/ic_menu_forum_list"
-                android:title="@string/menu_forum_list" />
-            <item
                 android:id="@+id/nav_applicant_list"
                 android:icon="@drawable/ic_menu_applicant_list"
                 android:title="@string/menu_applicant_list" />

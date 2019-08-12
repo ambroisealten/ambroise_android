@@ -100,7 +100,6 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
@@ -116,6 +115,9 @@ public class MainActivity extends AppCompatActivity
         switch (item.getItemId()){
             case R.id.nav_new_forum:
                 forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.ADD_FORUM_TAG);
+                break;
+            case R.id.nav_applicant_list:
+                forumFragmentSwitcher.switchFragment(getSupportFragmentManager(),ForumFragmentSwitcher.APPLICANT_LIST_TAG);
                 break;
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

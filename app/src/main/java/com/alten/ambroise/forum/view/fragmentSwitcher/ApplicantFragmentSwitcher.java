@@ -25,6 +25,7 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
 
     public static final String APPLICANT_LIST_TAG = "applicantListTag";
     public static final String ADD_APPLICANT_TAG = "addApplicantTag";
+
     public static final Creator<ApplicantFragmentSwitcher> CREATOR = new Creator<ApplicantFragmentSwitcher>() {
         @Override
         public ApplicantFragmentSwitcher createFromParcel(Parcel in) {
@@ -36,7 +37,6 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
             return new ApplicantFragmentSwitcher[size];
         }
     };
-    private static final String APPLICANT_TAB_TAG = "applicantTabTag";
     private Activity activity;
 
     public ApplicantFragmentSwitcher(Activity activity) {

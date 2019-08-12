@@ -81,6 +81,11 @@ public class RGPDFragmentSwitcher implements FragmentSwitcher, Parcelable {
         fTransaction.addToBackStack(tag).commit();
     }
 
+    @Override
+    public void onItemClick(final ApplicantForum applicant) {
+
+    }
+
     private RGPDTextFragment switchRGPDTextFragment(FragmentManager fm) {
         RGPDTextFragment rgpdTextFragment = (RGPDTextFragment) fm.findFragmentByTag(RGPD_TEXT_TAG);
         if (rgpdTextFragment == null) {

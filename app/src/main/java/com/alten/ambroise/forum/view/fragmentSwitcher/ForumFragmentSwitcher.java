@@ -6,23 +6,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.alten.ambroise.forum.R;
+import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.model.beans.Forum;
 import com.alten.ambroise.forum.data.model.viewModel.ForumViewModel;
 import com.alten.ambroise.forum.view.activity.ForumActivity;
+import com.alten.ambroise.forum.view.adapter.ForumRecyclerViewAdapter;
+import com.alten.ambroise.forum.view.fragments.ApplicantListFragment;
 import com.alten.ambroise.forum.view.fragments.ForumAddDialogFragment;
 import com.alten.ambroise.forum.view.fragments.ForumListFragment;
-import com.alten.ambroise.forum.view.adapter.ForumRecyclerViewAdapter;
 
 public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerViewAdapter.OnItemClickListener, Parcelable {
 
     public static final String FORUM_LIST_TAG = "forumListTag";
     public static final String ADD_FORUM_TAG = "addForumTag";
+    public static final String APPLICANT_LIST_TAG = "applicantListTag";
 
     public static final Creator<ForumFragmentSwitcher> CREATOR = new Creator<ForumFragmentSwitcher>() {
         @Override
@@ -55,7 +59,10 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
                     break;
                 case ADD_FORUM_TAG:
                     switchForumAddFragment(fm);
-                    return; //Just in this cas because we open a dialog (fragment dialog)
+                    return; //Just in this case because we open a dialog (fragment dialog)
+                case APPLICANT_LIST_TAG:
+                    fragment = switchApplicantListFragment(fm);
+                    break;
                 default:
                     fragment = switchForumListFragment(fm);
                     break;
@@ -72,6 +79,27 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
         }
         // Remplacez, ajoutez à la backstack et commit
         fTransaction.addToBackStack(tag).commit();
+    }
+
+    @Override
+    public void onItemClick(ApplicantForum applicant) {
+        Toast.makeText(activity, "CLICK SUR CANDIDAT" + applicant.getMail(), Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(activity.getBaseContext(), ForumActivity.class);
+//        intent.putExtra("forum",forum);
+//        activity.startActivity(intent);
+    }
+
+    private ApplicantListFragment switchApplicantListFragment(FragmentManager fm) {
+        ApplicantListFragment applicantListFragment = (ApplicantListFragment) fm.findFragmentByTag(APPLICANT_LIST_TAG);
+        if (applicantListFragment == null) {
+            applicantListFragment = new ApplicantListFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt(ApplicantListFragment.STATE_COLUMN_COUNT,1);
+            bundle.putLong(ForumActivity.STATE_FORUM, -1); //-1 because we want all applicant of all forums
+            applicantListFragment.setArguments(bundle);
+            applicantListFragment.setSwitcher(this);
+        }
+        return applicantListFragment;
     }
 
     private ForumListFragment switchForumListFragment(FragmentManager fm) {
