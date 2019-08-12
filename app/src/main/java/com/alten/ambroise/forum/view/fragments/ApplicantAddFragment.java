@@ -116,36 +116,28 @@ public class ApplicantAddFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_applicant_add, container, false);
         //Add take picture action
-        view.findViewById(R.id.cv_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dispatchTakePictureIntent();
-            }
-        });
+        view.findViewById(R.id.cv_button).setOnClickListener(v -> dispatchTakePictureIntent());
         button_start = view.findViewById(R.id.button_start);
-        button_start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ApplicantForum newApplicant = new ApplicantForum();
-                long newId = System.currentTimeMillis();
+        button_start.setOnClickListener(v -> {
+            ApplicantForum newApplicant = new ApplicantForum();
+            long newId = System.currentTimeMillis();
 
-                newApplicant.setSurname(surname.length() == 0 ? "Candidat#" + newId : surname.getText().toString());
-                newApplicant.setName(name.length() == 0 ? "Candidat#" + newId : name.getText().toString());
-                newApplicant.setMail(mail.length() == 0 ? "Candidat#" + newId + R.string.noMail : surname.getText().toString());
+            newApplicant.setSurname(surname.length() == 0 ? "Candidat#" + newId : surname.getText().toString());
+            newApplicant.setName(name.length() == 0 ? "Candidat#" + newId : name.getText().toString());
+            newApplicant.setMail(mail.length() == 0 ? "Candidat#" + newId + R.string.noMail : surname.getText().toString());
 
-                final Drawable drawable = cvDisplay.getDrawable();
-                if(drawable != null) {
-                    Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                    byte[] bitMapData = stream.toByteArray();
+            final Drawable drawable = cvDisplay.getDrawable();
+            if(drawable != null) {
+                Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] bitMapData = stream.toByteArray();
 
-                    newApplicant.setCvPerson(Base64.encodeToString(bitMapData, Base64.DEFAULT));
-                }else{
-                    newApplicant.setCvPerson(null);
-                }
-                switcher.startNewApplicantProcess(newApplicant,getActivity().getSupportFragmentManager());
+                newApplicant.setCvPerson(Base64.encodeToString(bitMapData, Base64.DEFAULT));
+            }else{
+                newApplicant.setCvPerson(null);
             }
+            switcher.startNewApplicantProcess(newApplicant,getActivity().getSupportFragmentManager());
         });
 
         cvDisplay = view.findViewById(R.id.cv_display);
@@ -218,21 +210,18 @@ public class ApplicantAddFragment extends Fragment {
             }
         });
         //add preview picture action
-        cvDisplay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (cvDisplay.getDrawable() != null) {
-                    Uri uri = FileProvider.getUriForFile(getActivity(),
-                            "com.alten.ambroise.forum.fileprovider",
-                            new File(currentPhotoPath));
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_QUICK_VIEW);
-                    intent.setDataAndType(uri, "image/*");
-                    intent.setFlags(FLAG_GRANT_READ_URI_PERMISSION | FLAG_GRANT_WRITE_URI_PERMISSION);
-                    startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
-                } else {
-                    dispatchTakePictureIntent();
-                }
+        cvDisplay.setOnClickListener(v -> {
+            if (cvDisplay.getDrawable() != null) {
+                Uri uri = FileProvider.getUriForFile(getActivity(),
+                        "com.alten.ambroise.forum.fileprovider",
+                        new File(currentPhotoPath));
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_QUICK_VIEW);
+                intent.setDataAndType(uri, "image/*");
+                intent.setFlags(FLAG_GRANT_READ_URI_PERMISSION | FLAG_GRANT_WRITE_URI_PERMISSION);
+                startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
+            } else {
+                dispatchTakePictureIntent();
             }
         });
         return view;
