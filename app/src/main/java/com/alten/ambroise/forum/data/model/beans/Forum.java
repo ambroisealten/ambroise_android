@@ -20,6 +20,12 @@ public class Forum implements Parcelable {
     private Long _id;
     @NonNull
     private String name;
+
+    @Override
+    public String toString() {
+        return name +" " + date;
+    }
+
     @NonNull
     private String date;
     @NonNull

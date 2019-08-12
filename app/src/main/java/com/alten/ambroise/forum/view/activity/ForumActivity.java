@@ -52,7 +52,7 @@ public class ForumActivity extends AppCompatActivity
                     : new ApplicantFragmentSwitcher(this);
             this.applicantFragmentSwitcher.setActivity(this);
         }
-        this.setTitle(Objects.requireNonNull(forum).getName());
+        this.setTitle(Objects.requireNonNull(forum).toString());
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         fab = findViewById(R.id.fab_forum);
