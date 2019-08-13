@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
@@ -15,6 +17,7 @@ import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.model.viewModel.ApplicantForumViewModel;
 import com.alten.ambroise.forum.data.model.viewModel.ForumViewModel;
+import com.alten.ambroise.forum.view.ApplicantProcessService;
 import com.alten.ambroise.forum.view.adapter.ViewPagerAdapter;
 import com.alten.ambroise.forum.view.fragments.ApplicantComplementFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantContractFragment;
@@ -41,12 +44,17 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         applicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
 
         Intent intent = getIntent();
 
-        this.forumId = intent.getLongExtra(ForumActivity.STATE_FORUM,-1);
+        this.forumId = intent.getLongExtra(ForumActivity.STATE_FORUM, -1);
         this.applicant = applicantForumViewModel.getApplicant(intent.getLongExtra(STATE_APPLICANT, -1));
+
+        Intent serviceIntent = new Intent(this, ApplicantProcessService.class);
+        serviceIntent.putExtra("ApplicantID", applicant.get_id());
+        startService(serviceIntent);
 
         setContentView(R.layout.activity_applicant);
 
@@ -60,7 +68,7 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
         validateButton.setOnClickListener(v -> {
             Intent intent1 = new Intent(getBaseContext(), RGPDActivity.class);
             intent1.putExtra(RGPDActivity.STATE_APPLICANT, applicant.get_id());
-            intent1.putExtra(ForumActivity.STATE_FORUM,this.forumId);
+            intent1.putExtra(ForumActivity.STATE_FORUM, this.forumId);
             startActivity(intent1);
         });
 
@@ -74,7 +82,7 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
             @Override
             public void onPageSelected(final int position) {
                 //Get the view pager adapter to get the corresponding fragment and fire save process. Then, save new position to current
-                ((ApplicantInfo) ((ViewPagerAdapter) viewPager.getAdapter()).getItem(currentPosition)).saveInformation(applicant);
+                askToSave();
                 currentPosition = position;
             }
 
@@ -90,7 +98,7 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
-                fragment = ((ViewPagerAdapter)viewPager.getAdapter()).getItem(currentPosition);
+                fragment = ((ViewPagerAdapter) viewPager.getAdapter()).getItem(currentPosition);
 
                 fTransaction.attach(fragment);
             }
@@ -111,6 +119,13 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
         tabLayout.setupWithViewPager(viewPager);
 
         setIcon();
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    public void askToSave() {
+        if (isFinishing()) {
+            ((ApplicantInfo) ((ViewPagerAdapter) viewPager.getAdapter()).getItem(currentPosition)).saveInformation(applicant);
+        }
     }
 
     private void setIcon() {
@@ -155,7 +170,7 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
                     Intent intent = new Intent(this, ForumActivity.class);
                     ForumViewModel mForumViewModel = ViewModelProviders.of(this).get(ForumViewModel.class);
                     mForumViewModel.getForum(this.forumId);
-                    intent.putExtra(ForumActivity.STATE_FORUM,mForumViewModel.getForum(this.forumId));
+                    intent.putExtra(ForumActivity.STATE_FORUM, mForumViewModel.getForum(this.forumId));
                     startActivity(intent);
                 })
                 .setNegativeButton(android.R.string.no, null).show();
@@ -166,9 +181,8 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
         applicantForumViewModel.update(applicant);
     }
 
-
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         this.stopProcess();
     }
 }
