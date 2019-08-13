@@ -2,8 +2,6 @@ package com.alten.ambroise.forum.view.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -14,19 +12,17 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.GridView;
 
+import androidx.fragment.app.Fragment;
+
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.view.adapter.CustomGridStringAdapter;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ApplicantSkillsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- */
 public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
+    private static final String STATE_ALL_SKILLS_REPRESENTATION = "allSkillsRepresentation";
+    private static final String STATE_ALL_SKILLS = "allSkills";
 
     private AutoCompleteTextView skillsAutoComplete;
     private ArrayList<String> allSkillsRepresentation = new ArrayList<String>();
@@ -94,12 +90,23 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
             }
         });
 
+        if(savedInstanceState != null){
+            this.allSkills = savedInstanceState.getStringArrayList(STATE_ALL_SKILLS);
+            this.allSkillsRepresentation = savedInstanceState.getStringArrayList(STATE_ALL_SKILLS_REPRESENTATION);
+        }
         this.gridView = view.findViewById(R.id.skills_grid_view);
-
         this.refreshGridView();
 
         return view;
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putStringArrayList(STATE_ALL_SKILLS,allSkills);
+        savedInstanceState.putStringArrayList(STATE_ALL_SKILLS_REPRESENTATION,allSkillsRepresentation);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
 
     @Override
     public void onAttach(Context context) {
