@@ -55,22 +55,6 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
     private ForumViewModel forumViewModel;
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putParcelable(STATE_RGPD_FRAGMENT_SWITCHER, rgpdFragmentSwitcher);
-        savedInstanceState.putLong(STATE_FORUM_ID, this.forumId);
-        savedInstanceState.putParcelable(STATE_APPLICANT, this.applicant);
-        super.onSaveInstanceState(savedInstanceState);
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        this.rgpdFragmentSwitcher = savedInstanceState.getParcelable(STATE_RGPD_FRAGMENT_SWITCHER);
-        this.forumId = savedInstanceState.getLong(STATE_FORUM_ID);
-        this.applicant = savedInstanceState.getParcelable(STATE_APPLICANT);
-        super.onRestoreInstanceState(savedInstanceState);
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         applicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
@@ -90,6 +74,11 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
         setContentView(R.layout.activity_rgpd);
     }
 
+    @Override
+    public void onBackPressed(){
+        stopProcess();
+    }
+
     private void stopProcess() {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.alert_process_title)
@@ -107,6 +96,22 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
         Intent intent = new Intent(this, ForumActivity.class);
         intent.putExtra(ForumActivity.STATE_FORUM, forumViewModel.getForum(this.forumId));
         startActivity(intent);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putParcelable(STATE_RGPD_FRAGMENT_SWITCHER, rgpdFragmentSwitcher);
+        savedInstanceState.putLong(STATE_FORUM_ID, this.forumId);
+        savedInstanceState.putParcelable(STATE_APPLICANT, this.applicant);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        this.rgpdFragmentSwitcher = savedInstanceState.getParcelable(STATE_RGPD_FRAGMENT_SWITCHER);
+        this.forumId = savedInstanceState.getLong(STATE_FORUM_ID);
+        this.applicant = savedInstanceState.getParcelable(STATE_APPLICANT);
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
