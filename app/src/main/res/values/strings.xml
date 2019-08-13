@@ -8,12 +8,6 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
     <string name="forum_name">Forum name</string>
     <string name="forum_place">Forum place</string>
     <string name="save">Save</string>
@@ -229,6 +223,15 @@ Voici un CV qui devrait vous intéresser.
     <string name="cancel_error">Transaction didn\'t worked :/</string>
     <string name="alert_process_message">Do you really want to decline ? It will stop the process, and delete all your data within the application.</string>
     <string name="selectContract">Contract Type</string>
+    <string name="forum">Forum</string>
+    <string name="mission">Mission</string>
+    <string name="competence">Skillsheet</string>
+    <string name="menu_forum_list">Forum list</string>
+    <string name="menu_applicant_list">Applicant list</string>
+    <string name="action">Action</string>
+    <string name="document">Documents</string>
+    <string name="menu_add_forum">Create new forum</string>
+    <string name="menu_add_applicant">Create new applicant</string>
     <string name="separator">-</string>
     <string name="title_applicant">Applicant</string>
 </resources>

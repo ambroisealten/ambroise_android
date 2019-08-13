@@ -2,17 +2,14 @@ package com.alten.ambroise.forum.view.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,9 +23,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import static android.view.Gravity.CENTER;
 import static android.view.Gravity.CENTER_HORIZONTAL;
-import static android.view.Gravity.CENTER_VERTICAL;
 import static android.view.Gravity.HORIZONTAL_GRAVITY_MASK;
-import static android.view.Gravity.TOP;
 
 public class ForumAddDialogFragment extends DialogFragment {
     private ForumFragmentSwitcher forumFragmentSwitcher;
@@ -137,7 +132,7 @@ public class ForumAddDialogFragment extends DialogFragment {
             newForum.setPlace(inputPlace.getText().toString());
             // Check if day and month have only one digit. If it's the case, then add 0 before the digit to match with xx format
             String day = inputDate.getDayOfMonth() <= 9 ? "0" + inputDate.getDayOfMonth() : String.valueOf(inputDate.getDayOfMonth());
-            String month = inputDate.getMonth() <= 9 ? "0" + inputDate.getMonth() : String.valueOf(inputDate.getMonth());
+            String month = inputDate.getMonth() <= 9 ? "0" + (inputDate.getMonth() + 1) : String.valueOf(inputDate.getMonth() + 1);
             newForum.setDate(day + "/" + month + "/" + inputDate.getYear());
             forumFragmentSwitcher.addNewForum(newForum);
         });
@@ -153,7 +148,7 @@ public class ForumAddDialogFragment extends DialogFragment {
     private void updateTextPreview() {
         // Check if day and month have only one digit. If it's the case, then add 0 before the digit to match with xx format
         String day = inputDate.getDayOfMonth() <= 9 ? "0" + inputDate.getDayOfMonth() : String.valueOf(inputDate.getDayOfMonth());
-        String month = inputDate.getMonth() < 9 ? "0" + (inputDate.getMonth()+1) : String.valueOf(inputDate.getMonth()+1);
+        String month = inputDate.getMonth() < 9 ? "0" + (inputDate.getMonth() + 1) : String.valueOf(inputDate.getMonth() + 1);
         String name = inputName.getText().length() == 0 ? getResources().getString(R.string.unknown) : inputName.getText().toString();
         String place = inputPlace.getText().length() == 0 ? getResources().getString(R.string.unknown) : inputPlace.getText().toString();
         String text = new StringBuilder().append(name)

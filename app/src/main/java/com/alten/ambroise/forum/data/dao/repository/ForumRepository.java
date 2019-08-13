@@ -43,6 +43,16 @@ public class ForumRepository {
         return null;
     }
 
+    public void update(final Forum... forums) {
+        try {
+            new updateAsyncTask(mForumDao).execute(forums).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static class getAsyncTask extends AsyncTask<Long, Void, Forum> {
         private final ForumDao mAsyncTaskDao;
 
@@ -53,6 +63,21 @@ public class ForumRepository {
         @Override
         protected Forum doInBackground(Long... id) {
             return mAsyncTaskDao.getForum(id[0]);
+        }
+    }
+
+    private static class updateAsyncTask extends AsyncTask<Forum, Void, Void> {
+
+        private final ForumDao mAsyncTaskDao;
+
+        updateAsyncTask(ForumDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Forum... params) {
+            mAsyncTaskDao.update(params);
+            return null;
         }
     }
 

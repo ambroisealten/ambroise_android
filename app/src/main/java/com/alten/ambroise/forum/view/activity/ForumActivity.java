@@ -19,14 +19,13 @@ import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.model.beans.Forum;
 import com.alten.ambroise.forum.view.fragmentSwitcher.ApplicantFragmentSwitcher;
 import com.alten.ambroise.forum.view.fragments.ApplicantAddFragment;
-import com.alten.ambroise.forum.view.fragments.ApplicantListFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
 public class ForumActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ApplicantListFragment.OnListFragmentInteractionListener, ApplicantAddFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ApplicantAddFragment.OnFragmentInteractionListener {
 
     public static final String STATE_FORUM = "forum";
     private static final String STATE_APPLICANT_FRAGMENT_SWITCHER = "applicantFragmentSwitcher";
@@ -52,7 +51,7 @@ public class ForumActivity extends AppCompatActivity
                     : new ApplicantFragmentSwitcher(this);
             this.applicantFragmentSwitcher.setActivity(this);
         }
-        this.setTitle(Objects.requireNonNull(forum).getName());
+        this.setTitle(Objects.requireNonNull(forum).toString());
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         fab = findViewById(R.id.fab_forum);
@@ -65,12 +64,7 @@ public class ForumActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG, this.getForumId());
     }
 
     @Override
@@ -81,6 +75,11 @@ public class ForumActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         this.applicantFragmentSwitcher = savedInstanceState.getParcelable(STATE_APPLICANT_FRAGMENT_SWITCHER);
         this.forum = savedInstanceState.getParcelable(STATE_FORUM);
@@ -88,34 +87,11 @@ public class ForumActivity extends AppCompatActivity
     }
 
     @Override
-    public void onRestart(){
+    public void onRestart() {
         //if (findViewById(R.id.forum_fragment).getTag() != null && findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
-            fab.setVisibility(View.VISIBLE);
+        fab.setVisibility(View.VISIBLE);
         //}
         super.onRestart();
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            if (findViewById(R.id.forum_fragment).getTag() != null && findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
-                findViewById(R.id.forum_fragment).setTag(null);
-                super.onBackPressed();
-                super.onBackPressed();
-            } else {
-                super.onBackPressed();
-                findViewById(R.id.forum_fragment).setTag(getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName());
-                if (findViewById(R.id.forum_fragment).getTag() == null) {
-                    this.applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG);
-                }
-                if (findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
-                    findViewById(R.id.fab_forum).setVisibility(View.VISIBLE);
-                }
-            }
-        }
     }
 
     @Override
@@ -144,40 +120,55 @@ public class ForumActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            if (findViewById(R.id.forum_fragment).getTag() != null && findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
+                findViewById(R.id.forum_fragment).setTag(null);
+                super.onBackPressed();
+                super.onBackPressed();
+            } else {
+                super.onBackPressed();
+                findViewById(R.id.forum_fragment).setTag(getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName());
+                if (findViewById(R.id.forum_fragment).getTag() == null) {
+                    this.applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG, this.getForumId());
+                }
+                if (findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
+                    findViewById(R.id.fab_forum).setVisibility(View.VISIBLE);
+                }
+            }
+        }
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_tools) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        switch (item.getItemId()) {
+            case R.id.nav_forum:
+                Intent intentForum = new Intent(this, MainActivity.class);
+                startActivity(intentForum);
+                break;
+            case R.id.nav_new_applicant:
+                applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.ADD_APPLICANT_TAG);
+                break;
+            case R.id.nav_forum_list:
+                Intent intentForumList = new Intent(this, MainActivity.class);
+                startActivity(intentForumList);
+                break;
         }
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
     @Override
-    public void onListFragmentInteraction(ApplicantForum item) {
-    }
-
-    @Override
     public void onFragmentInteraction(ApplicantForum applicant) {
     }
 
-    public long getForumId(){
+    public long getForumId() {
         return forum.get_id();
     }
 }

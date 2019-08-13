@@ -85,7 +85,6 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
 
     private void goToListApplicant() {
         Intent intent = new Intent(this, ForumActivity.class);
-        forumViewModel.getForum(this.forumId);
         intent.putExtra(ForumActivity.STATE_FORUM, forumViewModel.getForum(this.forumId));
         startActivity(intent);
     }
@@ -114,6 +113,9 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
                 break;
             case RGPDFragmentSwitcher.RGPD_GRADE_AND_SEND_TAG:
                 this.applicant = applicant[0];
+                Forum forum = this.forumViewModel.getForum(this.forumId);
+                forum.putApplicantId(this.applicant.get_id());
+                this.forumViewModel.update(forum);
 
                 if (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -152,7 +154,7 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String cc = setToString(preferences.getStringSet("carbon_copied", null));
-        intent.setData(Uri.parse("mailto:" + mail + "?cc=" + cc)); //If more than 1 receiver, then use , (comma) to separate them, same for cc (carbon copied beceause EXTRA_CC not supported by SENDTO
+        intent.setData(Uri.parse("mailto:" + mail + "?cc=" + cc)); //If more than 1 receiver, then use , (comma) to separate them, same for cc (carbon copied because EXTRA_CC not supported by SENDTO
         intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.cv_that_will_interest_you));
         String body = new StringBuilder().append(getString(R.string.mail_hello_text)).append(System.lineSeparator())
                 .append(System.lineSeparator())
@@ -201,11 +203,7 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case MAIL_REQUEST_CODE:
-                if (resultCode == RESULT_CANCELED) {
-                    Forum forum = this.forumViewModel.getForum(this.forumId);
-                    forum.putApplicantId(this.applicant.get_id());
                     goToListApplicant();
-                }
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);

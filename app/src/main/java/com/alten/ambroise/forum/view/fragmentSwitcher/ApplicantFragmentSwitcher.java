@@ -25,6 +25,7 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
 
     public static final String APPLICANT_LIST_TAG = "applicantListTag";
     public static final String ADD_APPLICANT_TAG = "addApplicantTag";
+
     public static final Creator<ApplicantFragmentSwitcher> CREATOR = new Creator<ApplicantFragmentSwitcher>() {
         @Override
         public ApplicantFragmentSwitcher createFromParcel(Parcel in) {
@@ -36,7 +37,6 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
             return new ApplicantFragmentSwitcher[size];
         }
     };
-    private static final String APPLICANT_TAB_TAG = "applicantTabTag";
     private Activity activity;
 
     public ApplicantFragmentSwitcher(Activity activity) {
@@ -53,13 +53,13 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
         if (fragment == null) {
             switch (tag) {
                 case APPLICANT_LIST_TAG:
-                    fragment = switchApplicantListFragment(fm);
+                    fragment = switchApplicantListFragment(fm, (long) args[0]);
                     break;
                 case ADD_APPLICANT_TAG:
                     fragment = switchApplicantAddFragment(fm);
                     break;
                 default:
-                    fragment = switchApplicantListFragment(fm);
+                    fragment = switchApplicantListFragment(fm, 0);
                     break;
             }
             // Définissez les animations
@@ -90,12 +90,13 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
         return applicantAddFragment;
     }
 
-    private ApplicantListFragment switchApplicantListFragment(FragmentManager fm) {
+    private ApplicantListFragment switchApplicantListFragment(FragmentManager fm, long forumId) {
         ApplicantListFragment applicantListFragment = (ApplicantListFragment) fm.findFragmentByTag(APPLICANT_LIST_TAG);
         if (applicantListFragment == null) {
             applicantListFragment = new ApplicantListFragment();
             Bundle bundle = new Bundle();
             bundle.putInt(ApplicantListFragment.STATE_COLUMN_COUNT, 1);
+            bundle.putLong(ForumActivity.STATE_FORUM, forumId);
             applicantListFragment.setArguments(bundle);
             applicantListFragment.setSwitcher(this);
         }
@@ -132,7 +133,7 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
         Long id = applicantForumViewModel.insert(applicant);
         Intent intent = new Intent(activity.getBaseContext(), ApplicantActivity.class);
         intent.putExtra(ApplicantActivity.STATE_APPLICANT, id);
-        intent.putExtra(ForumActivity.STATE_FORUM,( (ForumActivity) activity).getForumId());
+        intent.putExtra(ForumActivity.STATE_FORUM, ((ForumActivity) activity).getForumId());
         activity.startActivity(intent);
     }
 

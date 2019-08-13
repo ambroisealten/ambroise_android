@@ -35,7 +35,7 @@ public class ApplicantForum implements Parcelable {
         }
     };
     @PrimaryKey(autoGenerate = true)
-    private long _id;
+    private Long _id;
     @NonNull
     private String mail;
     @NonNull
@@ -88,7 +88,7 @@ public class ApplicantForum implements Parcelable {
         grade = in.readString();
     }
 
-    public long get_id() {
+    public Long get_id() {
         return _id;
     }
 
@@ -273,17 +273,17 @@ public class ApplicantForum implements Parcelable {
 
     @Override
     public String toString() {
-        return new StringBuilder()
+                return new StringBuilder()
                 .append(surname).append(" ").append(name).append(System.lineSeparator())
-                .append("Mail: '").append(mail).append(System.lineSeparator())
-                .append("Phone number: '").append(phoneNumber).append(System.lineSeparator())
+                .append("Mail: ").append(mail).append(System.lineSeparator())
+                .append("Phone number: ").append(phoneNumber).append(System.lineSeparator())
                 .append("Mobilities: ").append(mobilitiesToString(mobilities)).append(System.lineSeparator())
-                .append("Contract type'").append(contractType).append(" duration: '").append(contractDuration).append(" startAt: '").append(startAt).append(System.lineSeparator())
-                .append("Highest diploma: '").append(highestDiploma).append(" ").append(highestDiplomaYear).append(System.lineSeparator())
+                .append("Contract type: ").append(contractType).append("; duration: ").append(contractDuration).append("; startAt: ").append(startAt).append(System.lineSeparator())
+                .append("Highest diploma: ").append(highestDiploma).append(" ").append(highestDiplomaYear).append(System.lineSeparator())
                 .append("Skills: ").append(skillsToString(skills)).append(System.lineSeparator())
-                .append("Has a vehicle ").append(vehicule).append(" Has a driver license: ").append(driverLicense).append(System.lineSeparator())
+                .append("Has a vehicle ").append(vehicule).append("; Has a driver license: ").append(driverLicense).append(System.lineSeparator())
                 .append("Nationality: ").append(nationality).append(System.lineSeparator())
-                .append("Grade='").append(grade).append(System.lineSeparator())
+                .append("Grade: ").append(grade).append(System.lineSeparator())
                 .toString();
     }
 
@@ -292,7 +292,7 @@ public class ApplicantForum implements Parcelable {
             return "";
         }
         final StringBuilder builder = new StringBuilder();
-        skills.forEach(builder::append);
+        skills.forEach(skill -> builder.append(skill).append(" "));
         return builder.toString();
     }
 
@@ -306,7 +306,7 @@ public class ApplicantForum implements Parcelable {
             Gson gson = new GsonBuilder().create();
             JsonObject jsonMobility = gson.toJsonTree(mobility).getAsJsonObject();
 
-            builder.append(gson.fromJson(jsonMobility, Mobility.class).toString());
+            builder.append(gson.fromJson(jsonMobility, Mobility.class).toString()+" ");
         });
         return builder.toString();
     }
