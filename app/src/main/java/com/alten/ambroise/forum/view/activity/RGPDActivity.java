@@ -44,6 +44,8 @@ import java.util.Set;
 public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragment.OnFragmentInteractionListener, ValidationFragment.OnFragmentInteractionListener, SignFragment.OnFragmentInteractionListener, RGPDTextFragment.OnFragmentInteractionListener {
 
     public static final String STATE_APPLICANT = "applicant";
+    private static final String STATE_RGPD_FRAGMENT_SWITCHER = "rgpdFragmentSwitcher";
+    public static final String STATE_FORUM_ID = "forumId";
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
     private static final int MAIL_REQUEST_CODE = 1;
     private ApplicantForum applicant;
@@ -51,6 +53,22 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
     private RGPDFragmentSwitcher rgpdFragmentSwitcher;
     private long forumId;
     private ForumViewModel forumViewModel;
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putParcelable(STATE_RGPD_FRAGMENT_SWITCHER, rgpdFragmentSwitcher);
+        savedInstanceState.putLong(STATE_FORUM_ID, this.forumId);
+        savedInstanceState.putParcelable(STATE_APPLICANT, this.applicant);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        this.rgpdFragmentSwitcher = savedInstanceState.getParcelable(STATE_RGPD_FRAGMENT_SWITCHER);
+        this.forumId = savedInstanceState.getLong(STATE_FORUM_ID);
+        this.applicant = savedInstanceState.getParcelable(STATE_APPLICANT);
+        super.onRestoreInstanceState(savedInstanceState);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

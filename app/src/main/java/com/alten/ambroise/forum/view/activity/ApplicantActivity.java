@@ -31,7 +31,8 @@ import com.google.android.material.tabs.TabLayout;
 public class ApplicantActivity extends AppCompatActivity implements ApplicantMobilityFragment.OnFragmentInteractionListener, ApplicantDiplomaFragment.OnFragmentInteractionListener, ApplicantSkillsFragment.OnFragmentInteractionListener, ApplicantComplementFragment.OnFragmentInteractionListener, ApplicantContractFragment.OnFragmentInteractionListener {
 
     public static final String STATE_APPLICANT = "applicant";
-    private Toolbar toolbar;
+    public static final String STATE_CURRENT_POSITION = "currentPosition";
+    public static final String STATE_FORUM_ID = "forumId";
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ApplicantForum applicant;
@@ -62,7 +63,7 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
         mToolbar.setTitle(applicant.getSurname() + " " + applicant.getName());
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         mToolbar.setNavigationOnClickListener(view -> stopProcess());
-        setSupportActionBar(toolbar);
+        setSupportActionBar(mToolbar);
 
         FloatingActionButton validateButton = findViewById(R.id.save_applicant);
         validateButton.setOnClickListener(v -> {
@@ -119,6 +120,22 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
         tabLayout.setupWithViewPager(viewPager);
 
         setIcon();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putInt(STATE_CURRENT_POSITION, currentPosition);
+        savedInstanceState.putLong(STATE_FORUM_ID, this.forumId);
+        savedInstanceState.putParcelable(STATE_APPLICANT, this.applicant);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        this.currentPosition = savedInstanceState.getInt(STATE_CURRENT_POSITION);
+        this.forumId = savedInstanceState.getLong(STATE_FORUM_ID);
+        this.applicant = savedInstanceState.getParcelable(STATE_APPLICANT);
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)

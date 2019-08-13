@@ -72,18 +72,6 @@ public class ApplicantAddFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment ApplicantAddFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ApplicantAddFragment newInstance() {
-        ApplicantAddFragment fragment = new ApplicantAddFragment();
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,11 +81,6 @@ public class ApplicantAddFragment extends Fragment {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putParcelable(STATE_SWITCHER, switcher);
         savedInstanceState.putString(STATE_APPLICANT_CURRENT_PHOTO_PATH, currentPhotoPath);
-        savedInstanceState.putString(STATE_APPLICANT_MAIL, mail.getText().toString());
-        savedInstanceState.putString(STATE_APPLICANT_NAME, name.getText().toString());
-        savedInstanceState.putString(STATE_APPLICANT_PHONE, phone.getText().toString());
-        savedInstanceState.putString(STATE_APPLICANT_SURNAME, surname.getText().toString());
-        savedInstanceState.putBoolean(STATE_BUTTON_START_ENABLE, button_start.isEnabled());
         super.onSaveInstanceState(savedInstanceState);
     }
 
@@ -107,11 +90,6 @@ public class ApplicantAddFragment extends Fragment {
         if (savedInstanceState != null) {
             this.switcher = savedInstanceState.getParcelable(STATE_SWITCHER);
             this.currentPhotoPath = savedInstanceState.getString(STATE_APPLICANT_CURRENT_PHOTO_PATH);
-            this.mail.setText(savedInstanceState.getString(STATE_APPLICANT_MAIL));
-            this.name.setText(savedInstanceState.getString(STATE_APPLICANT_NAME));
-            this.phone.setText(savedInstanceState.getString(STATE_APPLICANT_PHONE));
-            this.surname.setText(savedInstanceState.getString(STATE_APPLICANT_SURNAME));
-            this.button_start.setEnabled(savedInstanceState.getBoolean(STATE_BUTTON_START_ENABLE));
         }
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_applicant_add, container, false);
@@ -146,7 +124,7 @@ public class ApplicantAddFragment extends Fragment {
         phone = view.findViewById(R.id.phone_input_editText);
         mail = view.findViewById(R.id.mail_input_editText);
 
-        if (savedInstanceState != null) {
+        if (savedInstanceState != null && currentPhotoPath != null) {
             cvDisplay.setImageURI(Uri.fromFile(new File(currentPhotoPath)));
         } else {
             cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_camera));

@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.Switch;
 
@@ -68,20 +67,17 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
 
         addGeographics = view.findViewById(R.id.button_add_geographics);
         addGeographics.setEnabled(false);
-        addGeographics.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Mobility createdMobility = createNewMobility(geographicsInput.getText().toString(), Integer.parseInt(radiusInput.getText().toString()), currentUnit);
+        addGeographics.setOnClickListener(v -> {
+            Mobility createdMobility = createNewMobility(geographicsInput.getText().toString(), Integer.parseInt(radiusInput.getText().toString()), currentUnit);
 
-                if (!allGeographicsUsed.contains(geographicsInput.getText().toString().toLowerCase()) && !geographicsInput.getText().toString().equals("France") && !geographicsInput.getText().toString().equals("France without IDF") && !geographicsInput.getText().toString().equals("International") ) {
-                    allGeos.add(createdMobility);
-                    allGeographicsUsed.add(geographicsInput.getText().toString().toLowerCase());
-                }
-                refreshGridView();
-                geographicsInput.getText().clear();
-                radiusInput.getText().clear();
-                unitSwitch.setChecked(false);
+            if (!allGeographicsUsed.contains(geographicsInput.getText().toString().toLowerCase()) && !geographicsInput.getText().toString().equals("France") && !geographicsInput.getText().toString().equals("France without IDF") && !geographicsInput.getText().toString().equals("International") ) {
+                allGeos.add(createdMobility);
+                allGeographicsUsed.add(geographicsInput.getText().toString().toLowerCase());
             }
+            refreshGridView();
+            geographicsInput.getText().clear();
+            radiusInput.getText().clear();
+            unitSwitch.setChecked(false);
         });
 
         geographicsInput = view.findViewById(R.id.geographics_input_editText);
@@ -122,57 +118,47 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
         });
 
         unitSwitch = view.findViewById(R.id.switch2);
-        unitSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                currentUnit = isChecked ? "kms" : "mins";
-            }
-        });
+        unitSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> currentUnit = isChecked ? "kms" : "mins");
 
 
 
         buttonFrance = view.findViewById(R.id.buttonFrance);
         if(tagExists(PRESENT_FRANCE_TAG)) buttonFrance.setEnabled(false);
-        buttonFrance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!isFranceChecked && !tagExists(PRESENT_FRANCE_TAG)) {
-                    Mobility createdMobility = createNewMobility("France", 0, "kms");
-                    createdMobility.setTag(PRESENT_FRANCE_TAG);
+        buttonFrance.setOnClickListener(v -> {
+            if (!isFranceChecked && !tagExists(PRESENT_FRANCE_TAG)) {
+                Mobility createdMobility = createNewMobility("France", 0, "kms");
+                createdMobility.setTag(PRESENT_FRANCE_TAG);
 
-                    if (isIDFChecked) {
-                        deleteGeographic("France without IDF");
-                    }
-
-                    allGeos.add(createdMobility);
-                    isFranceChecked = true;
-                    isIDFChecked = false;
-                    buttonFrance.setEnabled(false);
-                    buttonFranceWithoutIDF.setEnabled(isFranceChecked);
-                    refreshGridView();
+                if (isIDFChecked) {
+                    deleteGeographic("France without IDF");
                 }
+
+                allGeos.add(createdMobility);
+                isFranceChecked = true;
+                isIDFChecked = false;
+                buttonFrance.setEnabled(false);
+                buttonFranceWithoutIDF.setEnabled(isFranceChecked);
+                refreshGridView();
             }
         });
 
         buttonFranceWithoutIDF = view.findViewById(R.id.buttonIDF);
         if(tagExists(PRESENT_IDF_TAG)) buttonFranceWithoutIDF.setEnabled(false);
-        buttonFranceWithoutIDF.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!isIDFChecked && !tagExists(PRESENT_IDF_TAG)) {
-                    Mobility createdMobility = createNewMobility("France without IDF", 0, "kms");
-                    createdMobility.setTag(PRESENT_IDF_TAG);
+        buttonFranceWithoutIDF.setOnClickListener(v -> {
+            if (!isIDFChecked && !tagExists(PRESENT_IDF_TAG)) {
+                Mobility createdMobility = createNewMobility("France without IDF", 0, "kms");
+                createdMobility.setTag(PRESENT_IDF_TAG);
 
-                    if (isFranceChecked) {
-                        deleteGeographic("France");
-                    }
-
-                    allGeos.add(createdMobility);
-                    isIDFChecked = true;
-                    isFranceChecked = false;
-                    buttonFranceWithoutIDF.setEnabled(false);
-                    buttonFrance.setEnabled(isIDFChecked);
-                    refreshGridView();
+                if (isFranceChecked) {
+                    deleteGeographic("France");
                 }
+
+                allGeos.add(createdMobility);
+                isIDFChecked = true;
+                isFranceChecked = false;
+                buttonFranceWithoutIDF.setEnabled(false);
+                buttonFrance.setEnabled(isIDFChecked);
+                refreshGridView();
             }
         });
 
