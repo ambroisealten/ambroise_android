@@ -65,6 +65,8 @@ public class GradeAndSendFragment extends Fragment {
         Button validate = view.findViewById(R.id.validation_and_send);
         validate.setOnClickListener(v -> {
             applicant.setGrade(((Spinner) view.findViewById(R.id.spinner_grade)).getSelectedItem().toString());
+            System.out.println("Validation post-RGPD");
+            System.out.println(applicant.toString());
             applicant.setPersonInChargeMail(((AutoCompleteTextView) view.findViewById(R.id.send_to)).getText().toString());
 
             mListener.onFragmentInteraction(true, RGPDFragmentSwitcher.RGPD_GRADE_AND_SEND_TAG, applicant);

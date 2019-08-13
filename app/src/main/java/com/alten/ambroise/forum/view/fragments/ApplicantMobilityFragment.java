@@ -221,16 +221,9 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
     }
 
 
-
     private void refreshGridView() {
-        AtomicReference<Integer> positionInternational = new AtomicReference<Integer>();
-        allGeos.forEach( mobility -> {
-            if(mobility.getGeographic() == "International") {
-                positionInternational.set(allGeos.indexOf(mobility));
-            }
-        });
+        allGeos.removeIf(mobility -> mobility.getGeographic().equals("International"));
 
-        allGeos.remove(positionInternational.get());
 
         CustomGridMobilityAdapter adapter = new CustomGridMobilityAdapter(getActivity(), allGeos, allRadius, this);
         this.gridView.setAdapter(adapter);

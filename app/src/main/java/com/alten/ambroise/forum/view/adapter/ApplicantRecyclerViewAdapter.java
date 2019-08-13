@@ -34,22 +34,31 @@ public class ApplicantRecyclerViewAdapter extends RecyclerView.Adapter<Applicant
 
     @Override
     public void onBindViewHolder(@NonNull ApplicantRecyclerViewAdapter.ApplicantListViewHolder holder, int position) {
+        System.out.println(mApplicants.get(position).toString());
         if (mApplicants != null) {
             final ApplicantForum applicant = mApplicants.get(position);
             holder.bind(applicant, listeners);
             holder.mItem = applicant;
             holder.mSurnameView.setText(applicant.getSurname());
             holder.mNameView.setText(applicant.getName());
-            holder.mGradeView.setText(applicant.getGrade());
-            holder.mHighestDiplomaView.setText(applicant.getHighestDiploma());
-            holder.mHighestDiplomaYearView.setText(applicant.getHighestDiplomaYear());
-            final String contractType = applicant.getContractType();
-            holder.mContractTypeView.setText(contractType);
-            if (contractType == null || contractType.equals("CDI")) {
-                holder.mStartAtView.setText(applicant.getStartAt());
-            } else {
-                holder.mStartAtView.setText(applicant.getContractDuration());
+            if(applicant.getGrade() == null){
+                holder.mGradeView.setText(R.string.none);
             }
+            else{
+                holder.mGradeView.setText(applicant.getGrade());
+            }
+            if(applicant.getHighestDiploma() == null){
+                holder.mHighestDiplomaView.setText(R.string.no_diploma);
+            }
+            else{
+                holder.mHighestDiplomaView.setText(applicant.getHighestDiploma());
+                holder.mHighestDiplomaYearView.setText(applicant.getHighestDiplomaYear());
+            }
+            final String contractRepresentation = applicant.getStartAt();
+            if(contractRepresentation == null){
+                holder.mContractTypeView.setText(R.string.no_contract_known);
+            }
+            holder.mContractTypeView.setText(contractRepresentation);
         } else {
             // Covers the case of data not being ready yet.
             holder.mSurnameView.setText("No Applicant");

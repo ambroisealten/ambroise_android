@@ -113,9 +113,12 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
                 break;
             case RGPDFragmentSwitcher.RGPD_GRADE_AND_SEND_TAG:
                 this.applicant = applicant[0];
+                this.applicantForumViewModel.update(this.applicant);
+
                 Forum forum = this.forumViewModel.getForum(this.forumId);
                 forum.putApplicantId(this.applicant.get_id());
                 this.forumViewModel.update(forum);
+
 
                 if (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
