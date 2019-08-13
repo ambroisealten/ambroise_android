@@ -230,4 +230,5 @@ Voici un CV qui devrait vous intéresser.
     <string name="alert_process_message">Do you really want to decline ? It will stop the process, and delete all your data within the application.</string>
     <string name="selectContract">Contract Type</string>
     <string name="separator">-</string>
+    <string name="title_applicant">Applicant</string>
 </resources>
