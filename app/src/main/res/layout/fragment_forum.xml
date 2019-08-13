@@ -31,14 +31,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="25sp" />
 
                 <TextView
                     android:id="@+id/forum_place"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="25sp"
+                    android:textColor="@color/colorPrimary"/>
             </LinearLayout>
 
             <TextView
@@ -46,7 +50,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"
-                android:textAppearance="?attr/textAppearanceListItem" />
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
