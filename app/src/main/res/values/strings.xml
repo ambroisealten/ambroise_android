@@ -232,4 +232,8 @@ Voici un CV qui devrait vous intéresser.
     <string name="document">Documents</string>
     <string name="menu_add_forum">Create new forum</string>
     <string name="menu_add_applicant">Create new applicant</string>
+    <string name="separator">-</string>
+    <string name="title_applicant">Applicant</string>
+    <string name="no_diploma">No known diploma</string>
+    <string name="no_contract_known">Contract\'s desire unknown</string>
 </resources>

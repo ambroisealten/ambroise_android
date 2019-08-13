@@ -74,6 +74,7 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
         });
 
         this.buttonAddSkill = view.findViewById(R.id.add_skills_button);
+        this.buttonAddSkill.setEnabled(false);
         this.buttonAddSkill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
