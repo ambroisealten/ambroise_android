@@ -238,4 +238,5 @@ Voici un CV qui devrait vous intéresser.
     <string name="no_contract_known">Contract\'s desire unknown</string>
     <string name="invalid_mail">Invalid mail</string>
     <string name="invalid_phone">Invalid phone number</string>
+    <string name="one_mail_is_invalid">One mail is invalid. Please, check each mail and be sure to separate them with a comma (\",\")</string>
 </resources>
