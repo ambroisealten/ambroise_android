@@ -3,6 +3,8 @@ package com.alten.ambroise.forum.utils;
 import android.text.TextUtils;
 import android.util.Patterns;
 
+import java.util.Calendar;
+
 public class UtilsMethods {
 
     public final static boolean isValidEmail(CharSequence target) {
@@ -21,5 +23,15 @@ public class UtilsMethods {
             }
         }
         return true;
+    }
+
+    public static boolean isYearValid(CharSequence target){
+        if(TextUtils.isEmpty(target)) {
+            return false;
+        }
+
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        int writtenYear = Integer.parseInt(target.toString());
+        return writtenYear <= (currentYear + 10) && writtenYear > (currentYear - 80);
     }
 }

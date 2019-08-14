@@ -19,9 +19,11 @@ import androidx.fragment.app.Fragment;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.utils.InputFilterMinMax;
+import com.alten.ambroise.forum.utils.UtilsMethods;
 import com.alten.ambroise.forum.view.adapter.CustomGridStringAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo {
 
@@ -78,13 +80,15 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if(that.allDiplomas.contains(s.toString())){
+                   diplomaAutoComplete.setError(getString(R.string.invalid_already_existing_diploma));
+                }
             }
         });
 
 
         this.inputEditDate = view.findViewById(R.id.date_edit_text);
-        this.inputEditDate.setFilters(new InputFilter[]{new InputFilterMinMax(0,2030)});
+        this.inputEditDate.setFilters(new InputFilter[]{new InputFilterMinMax(0, Calendar.getInstance().get(Calendar.YEAR)+10)});
         this.inputEditDate.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -98,7 +102,9 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if(!UtilsMethods.isYearValid(s)){
+                    inputEditDate.setError(getString(R.string.invalid_year));
+                }
             }
         });
 
@@ -110,7 +116,9 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
             that.saveNewDiploma(diploma, diplomaYear);
 
             that.inputEditDate.getText().clear();
+            that.inputEditDate.setError(null);
             that.diplomaAutoComplete.getText().clear();
+            that.diplomaAutoComplete.setError(null);
 
             that.refreshGridView();
         });
@@ -178,9 +186,8 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
 
     private void setEnableButton(){
         String currentDiploma = this.diplomaAutoComplete.getText().toString();
-        String currentDiplomaYear = this.inputEditDate.getText().toString();
 
-        if(currentDiploma.length() > 0 && currentDiplomaYear.length() > 0  && Integer.parseInt(currentDiplomaYear.toString()) > 1930) {
+        if(UtilsMethods.isYearValid(this.inputEditDate.getText()) && !allDiplomas.contains(currentDiploma)) {
             this.addButton.setEnabled(true);
         }
         else{
