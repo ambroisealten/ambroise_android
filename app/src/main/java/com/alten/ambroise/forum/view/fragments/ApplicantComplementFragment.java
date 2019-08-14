@@ -70,7 +70,6 @@ public class ApplicantComplementFragment extends Fragment implements ApplicantIn
 
     @Override
     public void saveInformation(ApplicantForum applicant) {
-
         applicant.setDriverLicense(((CheckBox) getView().findViewById(R.id.license_checkbox)).isChecked());
         applicant.setVehicule(((CheckBox) getView().findViewById(R.id.vehicle_checkbox)).isChecked());
 

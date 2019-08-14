@@ -140,9 +140,7 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     public void askToSave() {
-        if (isFinishing()) {
             ((ApplicantInfo) ((ViewPagerAdapter) viewPager.getAdapter()).getItem(currentPosition)).saveInformation(applicant);
-        }
     }
 
     private void setIcon() {
