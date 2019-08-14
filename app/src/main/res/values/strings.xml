@@ -236,4 +236,6 @@ Voici un CV qui devrait vous intéresser.
     <string name="title_applicant">Applicant</string>
     <string name="no_diploma">No known diploma</string>
     <string name="no_contract_known">Contract\'s desire unknown</string>
+    <string name="invalid_mail">Invalid mail</string>
+    <string name="invalid_phone">Invalid phone number</string>
 </resources>
