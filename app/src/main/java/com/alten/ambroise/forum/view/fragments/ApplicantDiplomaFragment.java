@@ -158,7 +158,6 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
         applicant.setHighestDiploma(this.highestDiploma);
         applicant.setHighestDiplomaYear(this.highestDiplomaYear.toString());
 
-
         mListener.onFragmentInteraction(applicant);
     }
 
@@ -172,6 +171,7 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
             this.highestDiploma = diploma;
             this.highestDiplomaYear = Integer.parseInt(diplomaYear);
         }
+
     }
 
     private void refreshGridView() {
