@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.view.fragments.ApplicantDiplomaFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantSkillsFragment;
+import com.alten.ambroise.forum.view.fragments.ApplicantViewFragment;
 
 import java.util.ArrayList;
 
@@ -20,12 +21,14 @@ public class CustomGridStringAdapter extends BaseAdapter{
     private final ArrayList<String> web;
     private final ApplicantDiplomaFragment parent;
     private final ApplicantSkillsFragment parentF;
+    private final ApplicantViewFragment parentV;
 
     public CustomGridStringAdapter(Context c, ArrayList<String> web, ApplicantDiplomaFragment parent ) {
         mContext = c;
         this.web = web;
         this.parent = parent;
         this.parentF = null;
+        this.parentV = null;
     }
 
     public CustomGridStringAdapter(Context c, ArrayList<String> web, ApplicantSkillsFragment parentF ) {
@@ -33,6 +36,15 @@ public class CustomGridStringAdapter extends BaseAdapter{
         this.web = web;
         this.parentF = parentF;
         this.parent = null;
+        this.parentV = null;
+    }
+
+    public CustomGridStringAdapter(Context c, ArrayList<String> web, ApplicantViewFragment parentV ) {
+        mContext = c;
+        this.web = web;
+        this.parentV = parentV;
+        this.parent = null;
+        this.parentF = null;
     }
 
     @Override
@@ -70,18 +82,21 @@ public class CustomGridStringAdapter extends BaseAdapter{
             textView.setText(web.get(position));
 
             ImageButton buttonDelete = grid.findViewById(R.id.imageButton);
-            buttonDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(that.parent != null){
-                        that.parent.deleteDiploma(web.get(position));
+            if(this.parentV != null) {
+                buttonDelete.setVisibility(View.INVISIBLE);
+            } else {
+                buttonDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(that.parent != null){
+                            that.parent.deleteDiploma(web.get(position));
+                        }
+                        else{
+                            that.parentF.deleteSkill(web.get(position));
+                        }
                     }
-                    else{
-                        that.parentF.deleteSkill(web.get(position));
-                    }
-                }
-            });
-
+                });
+            }
         } else {
             grid = convertView;
         }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.Mobility;
 import com.alten.ambroise.forum.view.fragments.ApplicantMobilityFragment;
+import com.alten.ambroise.forum.view.fragments.ApplicantViewFragment;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ public class CustomGridMobilityAdapter extends BaseAdapter{
     private Context mContext;
     private final ArrayList<Mobility> web;
     private final ApplicantMobilityFragment parent;
+    private final ApplicantViewFragment parentV;
     private final int[] Imageid;
 
     public CustomGridMobilityAdapter(Context c, ArrayList<Mobility> web, int[] Imageid, ApplicantMobilityFragment parent ) {
@@ -26,6 +28,14 @@ public class CustomGridMobilityAdapter extends BaseAdapter{
         this.Imageid = Imageid;
         this.web = web;
         this.parent = parent;
+        this.parentV = null;
+    }
+    public CustomGridMobilityAdapter(Context c, ArrayList<Mobility> web, int[] Imageid, ApplicantViewFragment parentV ) {
+        mContext = c;
+        this.Imageid = Imageid;
+        this.web = web;
+        this.parentV = parentV;
+        this.parent = null;
     }
 
     @Override
@@ -60,16 +70,20 @@ public class CustomGridMobilityAdapter extends BaseAdapter{
             grid = new View(mContext);
             grid = inflater.inflate(R.layout.mobility_capsule, null);
             TextView textView = grid.findViewById(R.id.mobility_resume);
-            textView.setText(web.get(position).toString());
+            String txt = web.get(position).toString();
+            textView.setText(txt);
 
             ImageButton buttonDelete = grid.findViewById(R.id.imageButton);
-            buttonDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    that.parent.deleteGeographic(web.get(position).getGeographic());
-                }
-            });
-
+            if(this.parentV != null) {
+                buttonDelete.setVisibility(View.INVISIBLE);
+            } else {
+                buttonDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        that.parent.deleteGeographic(web.get(position).getGeographic());
+                    }
+                });
+            }
         } else {
             grid = convertView;
         }
