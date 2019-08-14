@@ -103,19 +103,16 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
         });
 
         this.addButton = view.findViewById(R.id.add_skills_button);
-        this.addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String diploma = that.diplomaAutoComplete.getText().toString();
-                String diplomaYear = that.inputEditDate.getText().toString();
+        this.addButton.setOnClickListener(v -> {
+            String diploma = that.diplomaAutoComplete.getText().toString();
+            String diplomaYear = that.inputEditDate.getText().toString();
 
-                that.saveNewDiploma(diploma, diplomaYear);
+            that.saveNewDiploma(diploma, diplomaYear);
 
-                that.inputEditDate.getText().clear();
-                that.diplomaAutoComplete.getText().clear();
+            that.inputEditDate.getText().clear();
+            that.diplomaAutoComplete.getText().clear();
 
-                that.refreshGridView();
-            }
+            that.refreshGridView();
         });
 
 

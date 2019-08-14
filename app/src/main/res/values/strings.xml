@@ -71,9 +71,9 @@
     <string name="nationality">Nationality :</string>
     <string name="driving_license">Driving license</string>
     <string name="has_vehicle">Has a personnal vehicle</string>
-    <string name="french_nationality">French</string>
-    <string name="european_citizenship">European</string>
-    <string name="other_nationality">Other</string>
+    <string name="french_nationality">FRENCH</string>
+    <string name="european_citizenship">EUROPEAN</string>
+    <string name="other_nationality">OTHER</string>
     <string name="other_infos">Other informations</string>
     <string name="minRadius">1</string>
 

@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="UE"
+                android:tag="@string/european_citizenship"
                 android:text="@string/european_citizenship" />
 
             <RadioButton
@@ -78,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:tag="WORLD"
+                android:tag="@string/other_nationality"
                 android:text="@string/other_nationality" />
         </RadioGroup>
     </LinearLayout>
