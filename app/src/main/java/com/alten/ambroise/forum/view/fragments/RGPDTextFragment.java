@@ -16,7 +16,10 @@ import com.alten.ambroise.forum.view.fragmentSwitcher.RGPDFragmentSwitcher;
 
 public class RGPDTextFragment extends Fragment {
 
+    private static final String STATE_ACCEPT_ENABLE = "acceptEnable";
+    private static final String STATE_ACCEPT_VISIBILITY = "acceptVisibility";
     private OnFragmentInteractionListener mListener;
+    private Button accept;
 
     public RGPDTextFragment() {
         // Required empty public constructor
@@ -41,13 +44,25 @@ public class RGPDTextFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putBoolean(STATE_ACCEPT_ENABLE, accept.isEnabled());
+        savedInstanceState.putInt(STATE_ACCEPT_VISIBILITY,accept.getVisibility());
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_rgpd_text, container, false);
-        final Button accept = view.findViewById(R.id.accept_rgpd);
-        accept.setEnabled(false);
-        accept.setVisibility(View.GONE);
+        accept = view.findViewById(R.id.accept_rgpd);
+        if(savedInstanceState != null){
+            accept.setVisibility(savedInstanceState.getInt(STATE_ACCEPT_VISIBILITY));
+            accept.setEnabled(savedInstanceState.getBoolean(STATE_ACCEPT_ENABLE));
+        }else {
+            accept.setEnabled(false);
+            accept.setVisibility(View.GONE);
+        }
         Button decline = view.findViewById(R.id.decline_rgpd);
 
         final ScrollView scrollView = view.findViewById(R.id.scroll_text_rgpd);

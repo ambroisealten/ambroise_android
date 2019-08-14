@@ -59,6 +59,9 @@
             android:name=".view.activity.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
+
+    <service android:name=".view.ApplicantProcessService"
+        android:stopWithTask="false" />
     </application>
 
 </manifest>

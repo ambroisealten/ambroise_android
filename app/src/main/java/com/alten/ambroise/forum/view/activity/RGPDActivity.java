@@ -28,6 +28,7 @@ import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.model.beans.Forum;
 import com.alten.ambroise.forum.data.model.viewModel.ApplicantForumViewModel;
 import com.alten.ambroise.forum.data.model.viewModel.ForumViewModel;
+import com.alten.ambroise.forum.view.ApplicantProcessService;
 import com.alten.ambroise.forum.view.fragmentSwitcher.RGPDFragmentSwitcher;
 import com.alten.ambroise.forum.view.fragments.GradeAndSendFragment;
 import com.alten.ambroise.forum.view.fragments.RGPDTextFragment;
@@ -43,7 +44,8 @@ import java.util.Set;
 public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragment.OnFragmentInteractionListener, ValidationFragment.OnFragmentInteractionListener, SignFragment.OnFragmentInteractionListener, RGPDTextFragment.OnFragmentInteractionListener {
 
     public static final String STATE_APPLICANT = "applicant";
-    public static final String STATE_RGPD_FRAGMENT_SWITCHER = "rgpdFragmentSwitcher";
+    private static final String STATE_RGPD_FRAGMENT_SWITCHER = "rgpdFragmentSwitcher";
+    public static final String STATE_FORUM_ID = "forumId";
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
     private static final int MAIL_REQUEST_CODE = 1;
     private ApplicantForum applicant;
@@ -51,7 +53,6 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
     private RGPDFragmentSwitcher rgpdFragmentSwitcher;
     private long forumId;
     private ForumViewModel forumViewModel;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +63,20 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
         this.forumId = intent.getLongExtra(ForumActivity.STATE_FORUM, -1);
         this.applicant = applicantForumViewModel.getApplicant(intent.getLongExtra(STATE_APPLICANT, -1));
 
+        Intent serviceIntent = new Intent(this, ApplicantProcessService.class);
+        serviceIntent.putExtra("ApplicantID", applicant.get_id());
+        startService(serviceIntent);
 
         this.rgpdFragmentSwitcher = new RGPDFragmentSwitcher(this);
 
         this.rgpdFragmentSwitcher.switchFragment(getSupportFragmentManager(), RGPDFragmentSwitcher.RGPD_TEXT_TAG);
 
         setContentView(R.layout.activity_rgpd);
+    }
+
+    @Override
+    public void onBackPressed(){
+        stopProcess();
     }
 
     private void stopProcess() {
@@ -87,6 +96,22 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
         Intent intent = new Intent(this, ForumActivity.class);
         intent.putExtra(ForumActivity.STATE_FORUM, forumViewModel.getForum(this.forumId));
         startActivity(intent);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putParcelable(STATE_RGPD_FRAGMENT_SWITCHER, rgpdFragmentSwitcher);
+        savedInstanceState.putLong(STATE_FORUM_ID, this.forumId);
+        savedInstanceState.putParcelable(STATE_APPLICANT, this.applicant);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        this.rgpdFragmentSwitcher = savedInstanceState.getParcelable(STATE_RGPD_FRAGMENT_SWITCHER);
+        this.forumId = savedInstanceState.getLong(STATE_FORUM_ID);
+        this.applicant = savedInstanceState.getParcelable(STATE_APPLICANT);
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -113,9 +138,12 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
                 break;
             case RGPDFragmentSwitcher.RGPD_GRADE_AND_SEND_TAG:
                 this.applicant = applicant[0];
+                this.applicantForumViewModel.update(this.applicant);
+
                 Forum forum = this.forumViewModel.getForum(this.forumId);
                 forum.putApplicantId(this.applicant.get_id());
                 this.forumViewModel.update(forum);
+
 
                 if (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -132,20 +160,6 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
             default:
                 Toast.makeText(this, getString(R.string.not_implemented), Toast.LENGTH_SHORT).show();
                 break;
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if (requestCode == PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                sendMail();
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE);
-            }
         }
     }
 
@@ -184,10 +198,9 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
             intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch(NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -203,10 +216,24 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case MAIL_REQUEST_CODE:
-                    goToListApplicant();
+                goToListApplicant();
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE) {
+            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                sendMail();
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE);
+            }
+        }
     }
 
     private String setToString(final Set<String> stringSet) {

@@ -31,14 +31,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //If is not a restored activity
-        if (savedInstanceState == null) {
-            this.forumFragmentSwitcher = new ForumFragmentSwitcher(this);
-        } else {
-            this.forumFragmentSwitcher = savedInstanceState.getParcelable(STATE_FORUM_FRAGMENT_SWITCHER) != null
-                    ? (ForumFragmentSwitcher) savedInstanceState.getParcelable(STATE_FORUM_FRAGMENT_SWITCHER)
-                    : new ForumFragmentSwitcher(this);
-            this.forumFragmentSwitcher.setActivity(this);
-        }
+        this.forumFragmentSwitcher = new ForumFragmentSwitcher(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -54,6 +47,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void onDestroy() {
+        getExternalFilesDir(Environment.DIRECTORY_PICTURES).deleteOnExit();
+        super.onDestroy();
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putParcelable(STATE_FORUM_FRAGMENT_SWITCHER, this.forumFragmentSwitcher);
         super.onSaveInstanceState(savedInstanceState);
@@ -61,29 +60,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
-        this.forumFragmentSwitcher = savedInstanceState.getParcelable(STATE_FORUM_FRAGMENT_SWITCHER);
+        this.forumFragmentSwitcher = savedInstanceState.getParcelable(STATE_FORUM_FRAGMENT_SWITCHER) != null
+                ? (ForumFragmentSwitcher) savedInstanceState.getParcelable(STATE_FORUM_FRAGMENT_SWITCHER)
+                : new ForumFragmentSwitcher(this);
+        this.forumFragmentSwitcher.setActivity(this);
         super.onRestoreInstanceState(savedInstanceState);
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            //We pop the backstack.
-            super.onBackPressed();
-            //If when we pop the first element of backstack, this activity don't have fragment, we add List fragment to dont have empty activity
-            if (findViewById(R.id.main_fragment).getTag() == null) {
-                super.onBackPressed();
-            }
-        }
-    }
-
-    @Override
-    public void onDestroy(){
-        getExternalFilesDir(Environment.DIRECTORY_PICTURES).deleteOnExit();
-        super.onDestroy();
     }
 
     @Override
@@ -110,14 +91,29 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            //We pop the backstack.
+            super.onBackPressed();
+            //If when we pop the first element of backstack, this activity don't have fragment, we add List fragment to dont have empty activity
+            if (findViewById(R.id.main_fragment).getTag() == null) {
+                super.onBackPressed();
+            }
+        }
+    }
+
+    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.nav_new_forum:
                 forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.ADD_FORUM_TAG);
                 break;
             case R.id.nav_applicant_list:
-                forumFragmentSwitcher.switchFragment(getSupportFragmentManager(),ForumFragmentSwitcher.APPLICANT_LIST_TAG);
+                forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.APPLICANT_LIST_TAG);
                 break;
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

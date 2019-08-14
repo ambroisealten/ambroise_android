@@ -23,61 +23,34 @@ import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.utils.InputFilterMinMax;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ApplicantContractFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ApplicantContractFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ApplicantContractFragment extends Fragment implements ApplicantInfo {
 
+    private static final String STATE_DATE_DAY = "dateDay";
+    private static final String STATE_DATE_MONTH = "dateMonth";
+    private static final String STATE_DATE_YEAR = "dateYear";
+    private static final String STATE_WITHIN = "within";
+    private static final String STATE_DURATION = "duration";
+
     private Spinner contractSpinner;
-    private String contractType = "Internship";
 
     private DatePicker datePicker;
-    private String beginningDate = "";
 
     private TextView abstractTextView;
 
     private Spinner optionalSpinner;
     private EditText optionalDuration;
-    private Integer duration = null;
-    private String durationType = "days";
 
     private EditText withinMonths;
-    private Integer monthsUntil = null;
-
-    private String dateRepresentation = "";
-
 
     private OnFragmentInteractionListener mListener;
+    private boolean configurationChange = false;
 
     public ApplicantContractFragment() {
         // Required empty public constructor
     }
 
-    public static ApplicantContractFragment newInstance(String param1, String param2) {
-        ApplicantContractFragment fragment = new ApplicantContractFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    private void refreshAllVars() {
-        this.beginningDate = "";
-        this.monthsUntil = null;
-        this.duration = null;
-        this.withinMonths.clearFocus();
-        this.withinMonths.getText().clear();
-        this.optionalDuration.clearFocus();
-        this.optionalDuration.getText().clear();
-        this.setAbstractText();
-    }
-
     private void refreshView() {
-        if (this.contractType.equals("Internship") || this.contractType.equals("CDD")) {
+        if (this.contractSpinner.getSelectedItem().equals("Internship") || this.contractSpinner.getSelectedItem().equals("CDD")) {
             this.optionalSpinner.setFocusable(true);
             this.optionalSpinner.setEnabled(true);
             this.optionalDuration.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -85,7 +58,6 @@ public class ApplicantContractFragment extends Fragment implements ApplicantInfo
             this.optionalSpinner.setFocusable(false);
             this.optionalSpinner.setEnabled(false);
             this.optionalDuration.setInputType(InputType.TYPE_NULL);
-
         }
     }
 
@@ -103,8 +75,6 @@ public class ApplicantContractFragment extends Fragment implements ApplicantInfo
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -116,47 +86,39 @@ public class ApplicantContractFragment extends Fragment implements ApplicantInfo
 
         this.abstractTextView = view.findViewById(R.id.abstractText);
 
-        final String[] contractArray = getResources().getStringArray(R.array.contract_type);
-        final String[] contractDurationArray = getResources().getStringArray(R.array.contract_duration_type);
-
         this.contractSpinner = view.findViewById(R.id.contractSpinner);
 
         this.withinMonths = view.findViewById(R.id.withinMonths);
 
-        this.optionalSpinner = view.findViewById(R.id.optionnalSpinner);
+        this.optionalSpinner = view.findViewById(R.id.optionalSpinner);
         this.optionalSpinner.setEnabled(false);
         this.optionalSpinner.setFocusable(false);
 
-        this.optionalDuration = view.findViewById(R.id.optionnalDuration);
+        this.optionalDuration = view.findViewById(R.id.optionalDuration);
         this.optionalDuration.setInputType(InputType.TYPE_NULL);
-
-        final ApplicantContractFragment that = this;
 
         contractSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                that.contractType = contractArray[position];
-                that.refreshAllVars();
+                if(configurationChange){
+                    configurationChange = false;
+                }else{
+                    optionalDuration.getText().clear();
+                    withinMonths.getText().clear();
+                }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                that.contractType = "";
-                that.refreshAllVars();
             }
         });
 
         this.datePicker = view.findViewById(R.id.datePicker);
 
         this.datePicker.setMinDate(System.currentTimeMillis() - 1000);
-        this.datePicker.setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
-            @Override
-            public void onDateChanged(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                that.beginningDate = dayOfMonth + "/" + (month + 1) + "/" + year;
-                that.monthsUntil = null;
-                that.withinMonths.clearComposingText();
-                that.setAbstractText();
-            }
+        this.datePicker.setOnDateChangedListener((datePicker, year, month, dayOfMonth) -> {
+            withinMonths.getText().clear();
+            setAbstractText();
         });
 
         this.withinMonths.setFilters(new InputFilter[]{new InputFilterMinMax("1", "24")});
@@ -168,14 +130,7 @@ public class ApplicantContractFragment extends Fragment implements ApplicantInfo
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().equals("")) {
-                    that.monthsUntil = null;
-                } else {
-                    that.monthsUntil = Integer.parseInt((s.toString()));
-                    that.beginningDate = "";
-                }
-                that.setAbstractText();
-
+                setAbstractText();
             }
 
             @Override
@@ -192,14 +147,7 @@ public class ApplicantContractFragment extends Fragment implements ApplicantInfo
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().equals("")) {
-                    that.duration = null;
-                } else if (that.contractType.equals("Internship") || that.contractType.equals("CDD")) {
-                    that.duration = Integer.parseInt(s.toString());
-                } else {
-                    that.duration = null;
-                }
-                that.setAbstractText();
+                setAbstractText();
             }
 
             @Override
@@ -211,18 +159,35 @@ public class ApplicantContractFragment extends Fragment implements ApplicantInfo
         this.optionalSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                that.durationType = contractDurationArray[position].toLowerCase();
-                that.setAbstractText();
+                setAbstractText();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                that.durationType = "days";
-                that.setAbstractText();
+                setAbstractText();
             }
         });
 
+        if (savedInstanceState != null) {
+            this.configurationChange = true;
+            int day = savedInstanceState.getInt(STATE_DATE_DAY);
+            int month = savedInstanceState.getInt(STATE_DATE_MONTH);
+            int year = savedInstanceState.getInt(STATE_DATE_YEAR);
+            this.datePicker.updateDate(year, month, day);
+            this.withinMonths.setText(savedInstanceState.getString(STATE_WITHIN));
+            this.optionalDuration.setText(savedInstanceState.getString(STATE_DURATION));
+        }
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putInt(STATE_DATE_DAY, datePicker.getDayOfMonth());
+        savedInstanceState.putInt(STATE_DATE_MONTH, datePicker.getMonth());
+        savedInstanceState.putInt(STATE_DATE_YEAR, datePicker.getYear());
+        savedInstanceState.putString(STATE_WITHIN,withinMonths.getText().toString());
+        savedInstanceState.putString(STATE_DURATION,optionalDuration.getText().toString());
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override
@@ -231,42 +196,31 @@ public class ApplicantContractFragment extends Fragment implements ApplicantInfo
         mListener = null;
     }
 
-    public void setAbstractText() {
-        if (this.monthsUntil == null) {
-            if (this.beginningDate.length() > 0) {
-                if (this.duration != null) {
-                    this.dateRepresentation = this.contractType + ", beginning the " + this.beginningDate + ", for " + this.duration + " " + this.durationType;
-                } else {
-                    this.dateRepresentation = this.contractType + ", beginning the " + this.beginningDate;
-                }
-            } else {
-                if (this.duration != null) {
-                    this.dateRepresentation = this.contractType + ", for " + this.duration + " " + this.durationType;
-                } else {
-                    this.dateRepresentation = this.contractType;
-                }
-            }
-        } else {
-            if (this.duration != null) {
-                this.dateRepresentation = this.contractType + ", within " + this.monthsUntil + " months, for " + this.duration + " " + this.durationType;
-            } else {
-                this.dateRepresentation = this.contractType + ", within " + this.monthsUntil + " months";
-            }
-        }
+    private String getBeginningDate() {
+        String day = datePicker.getDayOfMonth() <= 9 ? "0" + datePicker.getDayOfMonth() : String.valueOf(datePicker.getDayOfMonth());
+        String month = datePicker.getMonth() < 9 ? "0" + (datePicker.getMonth() + 1) : String.valueOf(datePicker.getMonth() + 1);
+        return day + "/" + month + "/" + datePicker.getYear();
+    }
 
+    private void setAbstractText() {
+        final Editable durationString = optionalDuration.getText();
+        int duration = durationString.length() > 0 ? Integer.valueOf(durationString.toString()) : 0;
+        final Editable withinMonths = this.withinMonths.getText();
+        String dateRepresentation;
+        if (withinMonths.length() <= 0) {
+            dateRepresentation = duration > 0 ? this.contractSpinner.getSelectedItem() + ", beginning the " + getBeginningDate() + ", for " + duration + " " + this.optionalSpinner.getSelectedItem() : this.contractSpinner.getSelectedItem() + ", beginning the " + getBeginningDate();
+        } else {
+            dateRepresentation = duration > 0 ? this.contractSpinner.getSelectedItem() + ", within " + withinMonths + " months, for " + duration + " " + this.optionalSpinner.getSelectedItem() : this.contractSpinner.getSelectedItem() + ", within " + withinMonths + " months";
+        }
         this.abstractTextView.setText(dateRepresentation);
         refreshView();
     }
 
     @Override
     public void saveInformation(ApplicantForum applicant) {
-        applicant.setContractType(contractType);
-        if (duration != null) {
-            applicant.setContractDuration(String.valueOf(duration));
-        } else {
-            applicant.setContractDuration("");
-        }
-        applicant.setStartAt(this.dateRepresentation);
+        applicant.setContractType((String) this.contractSpinner.getSelectedItem());
+        applicant.setContractDuration(optionalDuration.getText().toString());
+        applicant.setStartAt(this.abstractTextView.getText().toString());
         mListener.onFragmentInteraction(applicant);
     }
 

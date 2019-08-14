@@ -2,8 +2,6 @@ package com.alten.ambroise.forum.view.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -16,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 
+import androidx.fragment.app.Fragment;
+
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.utils.InputFilterMinMax;
@@ -23,14 +23,10 @@ import com.alten.ambroise.forum.view.adapter.CustomGridStringAdapter;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ApplicantDiplomaFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- */
 public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo {
 
+    private static final String STATE_ALL_DIPLOMAS_REPRESENTATION = "allDiplomasRepresentation";
+    private static final String STATE_ALL_DIPLOMA = "allDiplomas";
     private AutoCompleteTextView diplomaAutoComplete;
     private ArrayList<String> allDiplomasRepresentation = new ArrayList<String>();
     private ArrayList<String> allDiplomas = new ArrayList<String>();
@@ -122,10 +118,22 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
             }
         });
 
+
+        if(savedInstanceState != null){
+            this.allDiplomas = savedInstanceState.getStringArrayList(STATE_ALL_DIPLOMA);
+            this.allDiplomasRepresentation = savedInstanceState.getStringArrayList(STATE_ALL_DIPLOMAS_REPRESENTATION);
+        }
         this.gridView = view.findViewById(R.id.diplomas_grid_view);
         this.refreshGridView();
 
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putStringArrayList(STATE_ALL_DIPLOMA,allDiplomas);
+        savedInstanceState.putStringArrayList(STATE_ALL_DIPLOMAS_REPRESENTATION,allDiplomasRepresentation);
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override

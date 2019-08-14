@@ -26,6 +26,11 @@ import static android.view.Gravity.CENTER_HORIZONTAL;
 import static android.view.Gravity.HORIZONTAL_GRAVITY_MASK;
 
 public class ForumAddDialogFragment extends DialogFragment {
+    private static final String STATE_NAME = "name";
+    private static final String STATE_PLACE = "place";
+    private static final String STATE_DATE_DAY = "dateDay";
+    private static final String STATE_DATE_MONTH = "dateMonth";
+    private static final String STATE_DATE_YEAR = "dateYear";
     private ForumFragmentSwitcher forumFragmentSwitcher;
     private TextInputEditText inputName;
     private TextInputEditText inputPlace;
@@ -142,7 +147,26 @@ public class ForumAddDialogFragment extends DialogFragment {
             }
         });
 
+        if (savedInstanceState != null) {
+            this.inputName.setText(savedInstanceState.getString(STATE_NAME));
+            this.inputPlace.setText(savedInstanceState.getString(STATE_PLACE));
+            int day = savedInstanceState.getInt(STATE_DATE_DAY);
+            int month = savedInstanceState.getInt(STATE_DATE_MONTH);
+            int year = savedInstanceState.getInt(STATE_DATE_YEAR);
+            this.inputDate.updateDate(year, month, day);
+        }
         return alertDialogBuilder.create();
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putString(STATE_NAME, String.valueOf(inputName.getText()));
+        savedInstanceState.putString(STATE_PLACE, String.valueOf(inputPlace.getText()));
+        savedInstanceState.putInt(STATE_DATE_DAY, inputDate.getDayOfMonth());
+        savedInstanceState.putInt(STATE_DATE_MONTH, inputDate.getMonth());
+        savedInstanceState.putInt(STATE_DATE_YEAR, inputDate.getYear());
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     private void updateTextPreview() {
