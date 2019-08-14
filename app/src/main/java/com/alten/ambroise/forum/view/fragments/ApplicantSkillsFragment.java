@@ -47,6 +47,7 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setRetainInstance(true);
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_applicant_skills, container, false);
 
