@@ -29,7 +29,8 @@
         <activity
             android:name=".view.activity.ApplicantActivity"
             android:label="@string/title_activity_applicant"
-            android:noHistory="true"/>
+            android:noHistory="true"
+            android:screenOrientation="portrait"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
