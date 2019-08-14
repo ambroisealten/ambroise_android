@@ -67,6 +67,9 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
 
         FloatingActionButton validateButton = findViewById(R.id.save_applicant);
         validateButton.setOnClickListener(v -> {
+            //The current fragment will save automatically its content
+            askToSave();
+
             Intent intent1 = new Intent(getBaseContext(), RGPDActivity.class);
             intent1.putExtra(RGPDActivity.STATE_APPLICANT, applicant.get_id());
             intent1.putExtra(ForumActivity.STATE_FORUM, this.forumId);
@@ -140,9 +143,7 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     public void askToSave() {
-        if (isFinishing()) {
-            ((ApplicantInfo) ((ViewPagerAdapter) viewPager.getAdapter()).getItem(currentPosition)).saveInformation(applicant);
-        }
+        ((ApplicantInfo) ((ViewPagerAdapter) viewPager.getAdapter()).getItem(currentPosition)).saveInformation(applicant);
     }
 
     private void setIcon() {

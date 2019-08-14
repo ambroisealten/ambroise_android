@@ -34,7 +34,6 @@ public class ApplicantRecyclerViewAdapter extends RecyclerView.Adapter<Applicant
 
     @Override
     public void onBindViewHolder(@NonNull ApplicantRecyclerViewAdapter.ApplicantListViewHolder holder, int position) {
-        System.out.println(mApplicants.get(position).toString());
         if (mApplicants != null) {
             final ApplicantForum applicant = mApplicants.get(position);
             holder.bind(applicant, listeners);

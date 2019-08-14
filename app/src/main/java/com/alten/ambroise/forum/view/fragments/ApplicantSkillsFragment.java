@@ -69,26 +69,26 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if(allSkills.contains(s.toString().toLowerCase())){
+                    skillsAutoComplete.setError(getString(R.string.invalid_already_existing_skill));
+                }
             }
         });
 
         this.buttonAddSkill = view.findViewById(R.id.add_skills_button);
         this.buttonAddSkill.setEnabled(false);
-        this.buttonAddSkill.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String newSkill = that.skillsAutoComplete.getText().toString();
+        this.buttonAddSkill.setOnClickListener(v -> {
+            String newSkill = that.skillsAutoComplete.getText().toString();
 
-                if( !that.allSkills.contains(newSkill.toLowerCase())){
-                    that.allSkillsRepresentation.add(newSkill);
-                    that.allSkills.add(newSkill.toLowerCase());
-                }
-
-                that.skillsAutoComplete.getText().clear();
-
-                that.refreshGridView();
+            if( !that.allSkills.contains(newSkill.toLowerCase())){
+                that.allSkillsRepresentation.add(newSkill);
+                that.allSkills.add(newSkill.toLowerCase());
             }
+
+            that.skillsAutoComplete.getText().clear();
+            that.skillsAutoComplete.setError(null);
+
+            that.refreshGridView();
         });
 
         if(savedInstanceState != null){
@@ -152,6 +152,8 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
     @Override
     public void saveInformation(ApplicantForum applicant) {
         applicant.setSkills(allSkillsRepresentation);
+
+        System.out.println(mListener);
 
         mListener.onFragmentInteraction(applicant);
     }

@@ -50,14 +50,17 @@ public class ApplicantContractFragment extends Fragment implements ApplicantInfo
     }
 
     private void refreshView() {
+        System.out.println(this.contractSpinner.getSelectedItem());
         if (this.contractSpinner.getSelectedItem().equals("Internship") || this.contractSpinner.getSelectedItem().equals("CDD")) {
             this.optionalSpinner.setFocusable(true);
             this.optionalSpinner.setEnabled(true);
             this.optionalDuration.setInputType(InputType.TYPE_CLASS_NUMBER);
+            this.optionalDuration.setFocusable(true);
         } else {
             this.optionalSpinner.setFocusable(false);
             this.optionalSpinner.setEnabled(false);
             this.optionalDuration.setInputType(InputType.TYPE_NULL);
+            this.optionalDuration.setFocusable(false);
         }
     }
 
@@ -105,6 +108,7 @@ public class ApplicantContractFragment extends Fragment implements ApplicantInfo
                 }else{
                     optionalDuration.getText().clear();
                     withinMonths.getText().clear();
+                    setAbstractText();
                 }
             }
 

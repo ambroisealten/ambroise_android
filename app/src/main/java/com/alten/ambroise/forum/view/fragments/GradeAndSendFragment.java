@@ -2,6 +2,8 @@ package com.alten.ambroise.forum.view.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.model.viewModel.ApplicantForumViewModel;
+import com.alten.ambroise.forum.utils.UtilsMethods;
 import com.alten.ambroise.forum.view.fragmentSwitcher.RGPDFragmentSwitcher;
 
 import static com.alten.ambroise.forum.view.activity.RGPDActivity.STATE_APPLICANT;
@@ -62,20 +65,39 @@ public class GradeAndSendFragment extends Fragment {
         toolbar.setSubtitle(this.applicant.getName() + " " + this.applicant.getSurname());
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
+        final AutoCompleteTextView mails = view.findViewById(R.id.send_to);
+        mails.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(final Editable s) {
+                if (!UtilsMethods.isValidMultipleEmail(s,",")) {
+                    mails.setError(getString(R.string.one_mail_is_invalid));
+                }else {
+                    mails.setError(null);
+                }
+            }
+        });
+
         Button validate = view.findViewById(R.id.validation_and_send);
         validate.setOnClickListener(v -> {
             applicant.setGrade(((Spinner) view.findViewById(R.id.spinner_grade)).getSelectedItem().toString());
-            System.out.println("Validation post-RGPD");
-            System.out.println(applicant.toString());
-            applicant.setPersonInChargeMail(((AutoCompleteTextView) view.findViewById(R.id.send_to)).getText().toString());
+            applicant.setPersonInChargeMail(mails.getText().toString());
 
             mListener.onFragmentInteraction(true, RGPDFragmentSwitcher.RGPD_GRADE_AND_SEND_TAG, applicant);
         });
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
                 R.layout.array_adapter, getResources().getStringArray(R.array.managers));
-        AutoCompleteTextView textView = view.findViewById(R.id.send_to);
-        textView.setAdapter(adapter);
+        mails.setAdapter(adapter);
 
         return view;
     }
