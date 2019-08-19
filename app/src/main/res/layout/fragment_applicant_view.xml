@@ -17,8 +17,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
+            android:layout_weight="2"
             android:text="name surname"
-            android:textSize="40sp" />
+            android:textSize="30dp" />
 
         <Button
             android:id="@+id/applicant_view_share"
