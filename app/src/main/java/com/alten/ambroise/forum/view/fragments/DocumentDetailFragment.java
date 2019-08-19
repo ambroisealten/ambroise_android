@@ -10,9 +10,9 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.alten.ambroise.forum.R;
+import com.alten.ambroise.forum.data.model.beans.Document;
 import com.alten.ambroise.forum.view.activity.DocumentDetailActivity;
 import com.alten.ambroise.forum.view.activity.DocumentListActivity;
-import com.alten.ambroise.forum.view.activity.dummy.DummyContent;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 /**
@@ -23,15 +23,15 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
  */
 public class DocumentDetailFragment extends Fragment {
     /**
-     * The fragment argument representing the item ID that this fragment
+     * The fragment argument representing the item that this fragment
      * represents.
      */
-    public static final String ARG_ITEM_ID = "item_id";
+    public static final String ARG_ITEM = "item";
 
     /**
-     * The dummy content this fragment is presenting.
+     * The dummy title this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    private Document mItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -44,16 +44,16 @@ public class DocumentDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
+        if (getArguments().containsKey(ARG_ITEM)) {
+            // Load the dummy title specified by the fragment
             // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            // to load title from a title provider.
+            mItem = getArguments().getParcelable(ARG_ITEM);
 
             Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+            CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
+                appBarLayout.setTitle(mItem.title);
             }
         }
     }
@@ -63,9 +63,9 @@ public class DocumentDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.document_detail, container, false);
 
-        // Show the dummy content as text in a TextView.
+        // Show the dummy title as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.document_detail)).setText(mItem.details);
+            ((TextView) rootView.findViewById(R.id.document_detail)).setText(mItem.uri);
         }
 
         return rootView;

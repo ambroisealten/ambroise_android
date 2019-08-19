@@ -16,7 +16,7 @@ import com.google.android.material.snackbar.Snackbar;
 /**
  * An activity representing a single document detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
- * item details are presented side-by-side with a list of items
+ * item uri are presented side-by-side with a list of items
  * in a {@link DocumentListActivity}.
  */
 public class DocumentDetailActivity extends AppCompatActivity {
@@ -51,8 +51,8 @@ public class DocumentDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(DocumentDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(DocumentDetailFragment.ARG_ITEM_ID));
+            arguments.putParcelable(DocumentDetailFragment.ARG_ITEM,
+                    getIntent().getParcelableExtra(DocumentDetailFragment.ARG_ITEM));
             DocumentDetailFragment fragment = new DocumentDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
@@ -64,10 +64,11 @@ public class DocumentDetailActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == android.R.id.home) {
+        switch (id){
+            case android.R.id.home:
             // This ID represents the Home or Up button. In the case of this
             // activity, the Up button is shown. For
-            // more details, see the Navigation pattern on Android Design:
+            // more uri, see the Navigation pattern on Android Design:
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //

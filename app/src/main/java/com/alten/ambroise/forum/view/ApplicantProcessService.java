@@ -34,7 +34,7 @@ public class ApplicantProcessService extends Service {
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        //Perfom here want you want to do when app gets kill
+        //Perfom here want you want to do when App gets kill
         applicantForumViewModel.delete(applicantForumViewModel.getApplicant(applicantId));
         stopSelf();
     }

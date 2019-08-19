@@ -153,9 +153,6 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
     @Override
     public void saveInformation(ApplicantForum applicant) {
         applicant.setSkills(allSkillsRepresentation);
-
-        System.out.println(mListener);
-
         mListener.onFragmentInteraction(applicant);
     }
 
