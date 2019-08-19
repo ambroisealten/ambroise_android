@@ -96,10 +96,17 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            //We pop the backstack.
+            Object tag = findViewById(R.id.main_fragment).getTag();
+            System.out.println(tag);
+            //            //We pop the backstack.
             super.onBackPressed();
             //If when we pop the first element of backstack, this activity don't have fragment, we add List fragment to dont have empty activity
-            if (findViewById(R.id.main_fragment).getTag() == null) {
+            if(tag == ForumFragmentSwitcher.APPLICANT_LIST_TAG){
+                forumFragmentSwitcher.switchFragment(getSupportFragmentManager(),ForumFragmentSwitcher.FORUM_LIST_TAG);
+            }
+            //If we are on the main fragment, quit the app
+            else if (tag == ForumFragmentSwitcher.FORUM_LIST_TAG) {
+                super.onBackPressed();
                 super.onBackPressed();
             }
         }

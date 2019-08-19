@@ -79,6 +79,7 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
         }
         // Remplacez, ajoutez à la backstack et commit
         fTransaction.addToBackStack(tag).commit();
+        activity.findViewById(R.id.main_fragment).setTag(tag);
     }
 
     @Override

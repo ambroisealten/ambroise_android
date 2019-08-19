@@ -129,12 +129,20 @@ public class ForumActivity extends AppCompatActivity
                 super.onBackPressed();
             } else {
                 super.onBackPressed();
-                findViewById(R.id.forum_fragment).setTag(getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName());
-                if (findViewById(R.id.forum_fragment).getTag() == null) {
-                    this.applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG, this.getForumId());
+                try{
+                    findViewById(R.id.forum_fragment).setTag(getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() -1).getName());
+                    if (findViewById(R.id.forum_fragment).getTag() == null) {
+                        this.applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG, this.getForumId());
+                    }
+                    if (findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
+                        findViewById(R.id.fab_forum).setVisibility(View.VISIBLE);
+                    }
                 }
-                if (findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
-                    findViewById(R.id.fab_forum).setVisibility(View.VISIBLE);
+                catch (ArrayIndexOutOfBoundsException e){
+                    Intent newIntent = new Intent(this,MainActivity.class);
+                    newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(newIntent);
                 }
             }
         }
