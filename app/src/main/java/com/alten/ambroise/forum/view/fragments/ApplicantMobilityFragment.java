@@ -25,7 +25,6 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo {
     private static final String PRESENT_FRANCE_TAG = "France_present";
@@ -98,7 +97,8 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        setRetainInstance(true);
+// Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_applicant_mobility, container, false);
         this.gridView = view.findViewById(R.id.gridView1);
 
@@ -202,7 +202,7 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
             }
         });
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             this.isFranceChecked = savedInstanceState.getBoolean(STATE_FRANCE_CHECKED);
             this.isIDFChecked = savedInstanceState.getBoolean(STATE_IDF_CHECKED);
             this.allRadius = savedInstanceState.getIntArray(STATE_ALL_RADIUS);

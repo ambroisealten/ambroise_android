@@ -8,6 +8,7 @@ import android.os.Parcelable;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -20,11 +21,14 @@ import com.alten.ambroise.forum.view.activity.ForumActivity;
 import com.alten.ambroise.forum.view.adapter.ApplicantRecyclerViewAdapter;
 import com.alten.ambroise.forum.view.fragments.ApplicantAddFragment;
 import com.alten.ambroise.forum.view.fragments.ApplicantListFragment;
+import com.alten.ambroise.forum.view.fragments.ApplicantViewFragment;
 
 public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRecyclerViewAdapter.OnItemClickListener, Parcelable {
 
     public static final String APPLICANT_LIST_TAG = "applicantListTag";
     public static final String ADD_APPLICANT_TAG = "addApplicantTag";
+    private static final String APPLICANT_VIEW_TAG = "applicantViewTag";
+
 
     public static final Creator<ApplicantFragmentSwitcher> CREATOR = new Creator<ApplicantFragmentSwitcher>() {
         @Override
@@ -57,6 +61,9 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
                     break;
                 case ADD_APPLICANT_TAG:
                     fragment = switchApplicantAddFragment(fm);
+                    break;
+                case APPLICANT_VIEW_TAG:
+                    fragment = switchApplicantViewFragment(fm, (long) args[0]);
                     break;
                 default:
                     fragment = switchApplicantListFragment(fm, 0);
@@ -106,12 +113,28 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
         return applicantListFragment;
     }
 
+    private ApplicantViewFragment switchApplicantViewFragment(FragmentManager fm, long applicantId) {
+        ApplicantViewFragment applicantViewFragment = (ApplicantViewFragment) fm.findFragmentByTag(APPLICANT_VIEW_TAG);
+        if (applicantViewFragment == null) {
+            applicantViewFragment = new ApplicantViewFragment();
+            Bundle bundle = new Bundle();
+            bundle.putLong(ApplicantViewFragment.STATE_APPLICANT, applicantId);
+            applicantViewFragment.setArguments(bundle);
+            applicantViewFragment.setSwitcher(this);
+        }
+        //Deactivate fab add button
+        activity.findViewById(R.id.fab_forum).setVisibility(View.GONE);
+        activity.findViewById(R.id.forum_fragment).setTag(ADD_APPLICANT_TAG);
+        return applicantViewFragment;
+    }
+
     @Override
     public void onItemClick(ApplicantForum applicant) {
-        Toast.makeText(activity, "CLICK SUR CANDIDAT" + applicant.getMail(), Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(activity.getBaseContext(), ForumActivity.class);
-//        intent.putExtra("forum",forum);
-//        activity.startActivity(intent);
+        //Toast.makeText(activity, "CLICK SUR CANDIDAT" + applicant.getMail(), Toast.LENGTH_SHORT).show();
+       // Intent intent = new Intent(activity.getBaseContext(), ApplicantActivity.class);
+        //intent.putExtra("applicant",applicant);
+        //activity.startActivity(intent);
+        switchFragment(((AppCompatActivity)activity).getSupportFragmentManager(), APPLICANT_VIEW_TAG, applicant.get_id());
     }
 
     @Override
