@@ -55,7 +55,7 @@ public class ApplicantContractFragment extends Fragment implements ApplicantInfo
             this.optionalSpinner.setFocusable(true);
             this.optionalSpinner.setEnabled(true);
             this.optionalDuration.setInputType(InputType.TYPE_CLASS_NUMBER);
-            this.optionalDuration.setFocusable(true);
+            this.optionalDuration.setFocusableInTouchMode(true);
         } else {
             this.optionalSpinner.setFocusable(false);
             this.optionalSpinner.setEnabled(false);
