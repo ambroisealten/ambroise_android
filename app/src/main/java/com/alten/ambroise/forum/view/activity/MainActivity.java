@@ -115,6 +115,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_applicant_list:
                 forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.APPLICANT_LIST_TAG);
                 break;
+            case R.id.nav_document_list:
+                Intent intent = new Intent(getBaseContext(),DocumentListActivity.class);
+                startActivity(intent);
+                break;
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

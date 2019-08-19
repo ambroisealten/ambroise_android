@@ -21,16 +21,30 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".view.activity.DocumentListActivity"
+            android:label="@string/title_document_list"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+        <activity
+            android:name=".view.activity.DocumentDetailActivity"
+            android:label="@string/title_document_detail"
+            android:parentActivityName=".view.activity.DocumentListActivity"
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.alten.ambroise.forum.view.activity.DocumentListActivity" />
+        </activity>
+        <activity
             android:name=".view.activity.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".view.activity.RGPDActivity"
-            android:noHistory="true"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.activity.RGPDActivity"
+            android:noHistory="true" />
         <activity
             android:name=".view.activity.ApplicantActivity"
             android:label="@string/title_activity_applicant"
             android:noHistory="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -61,8 +75,9 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
 
-    <service android:name=".view.ApplicantProcessService"
-        android:stopWithTask="false" />
+        <service
+            android:name=".view.ApplicantProcessService"
+            android:stopWithTask="false" />
     </application>
 
 </manifest>
