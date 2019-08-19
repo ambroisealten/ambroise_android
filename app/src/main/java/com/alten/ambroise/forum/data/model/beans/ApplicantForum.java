@@ -60,7 +60,7 @@ public class ApplicantForum implements Parcelable {
     private Nationality nationality;
     private String sign;
     private String grade;
-
+    private Integer wageExpectations;
 
     public ApplicantForum() {
         this.mobilities = new ArrayList<Mobility>();
@@ -86,6 +86,7 @@ public class ApplicantForum implements Parcelable {
         driverLicense = in.readByte() != 0;
         sign = in.readString();
         grade = in.readString();
+        wageExpectations = in.readInt();
     }
 
     public Long get_id() {
@@ -244,6 +245,14 @@ public class ApplicantForum implements Parcelable {
         this.grade = grade;
     }
 
+    public Integer getWageExpectations() {
+        return wageExpectations;
+    }
+
+    public void setWageExpectations(Integer wageExpectations) {
+        this.wageExpectations = wageExpectations;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -269,6 +278,7 @@ public class ApplicantForum implements Parcelable {
         dest.writeByte((byte) (driverLicense ? 1 : 0));
         dest.writeString(sign);
         dest.writeString(grade);
+        dest.writeInt(wageExpectations);
     }
 
     @Override
@@ -284,6 +294,7 @@ public class ApplicantForum implements Parcelable {
                 .append("Has a vehicle ").append(vehicule).append("; Has a driver license: ").append(driverLicense).append(System.lineSeparator())
                 .append("Nationality: ").append(nationality).append(System.lineSeparator())
                 .append("Grade: ").append(grade).append(System.lineSeparator())
+                .append("Wage expectations :").append(wageExpectations).append(System.lineSeparator())
                 .toString();
     }
 

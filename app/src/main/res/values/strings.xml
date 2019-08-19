@@ -242,4 +242,6 @@ Voici un CV qui devrait vous intéresser.
     <string name="invalid_already_existing_diploma">This diploma already exists</string>
     <string name="invalid_year">Invalid year (not in bound)</string>
     <string name="invalid_already_existing_skill">This skill already exists</string>
+    <string name="skillIT">IT Skill</string>
+    <string name="skillTechno">Techno skill</string>
 </resources>
