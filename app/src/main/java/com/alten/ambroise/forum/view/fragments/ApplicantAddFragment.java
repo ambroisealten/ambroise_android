@@ -143,7 +143,7 @@ public class ApplicantAddFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_applicant_add, container, false);
         //Add take picture action
-        view.findViewById(R.id.cv_button).setOnClickListener(v -> dispatchTakePictureIntent());
+        //view.findViewById(R.id.cv_button).setOnClickListener(v -> dispatchTakePictureIntent());
         button_start = view.findViewById(R.id.button_start);
         button_start.setOnClickListener(v -> {
             ApplicantForum newApplicant = new ApplicantForum();
