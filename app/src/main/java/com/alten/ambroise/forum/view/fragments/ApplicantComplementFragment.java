@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import androidx.fragment.app.Fragment;
@@ -81,6 +82,12 @@ public class ApplicantComplementFragment extends Fragment implements ApplicantIn
         }
         else{
             applicant.setNationality(Nationality.NONE);
+        }
+
+        String wage_expectation = ((EditText) getView().findViewById(R.id.wage_expectation)).getText().toString();
+
+        if(wage_expectation.length() > 0){
+            applicant.setWageExpectations(Integer.parseInt(wage_expectation));
         }
 
         mListener.onFragmentInteraction(applicant);
