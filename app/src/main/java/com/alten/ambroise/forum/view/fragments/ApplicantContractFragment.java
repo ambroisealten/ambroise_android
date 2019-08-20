@@ -50,7 +50,6 @@ public class ApplicantContractFragment extends Fragment implements ApplicantInfo
     }
 
     private void refreshView() {
-        System.out.println(this.contractSpinner.getSelectedItem());
         if (this.contractSpinner.getSelectedItem().equals("Internship") || this.contractSpinner.getSelectedItem().equals("CDD")) {
             this.optionalSpinner.setFocusable(true);
             this.optionalSpinner.setEnabled(true);

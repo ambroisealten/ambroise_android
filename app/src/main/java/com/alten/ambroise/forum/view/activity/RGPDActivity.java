@@ -206,7 +206,7 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
             e.printStackTrace();
         }
 
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your app, your app is displayed, instead of the email app.
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // this will make such that when user returns to your App, your App is displayed, instead of the email App.
         try {
             startActivityForResult(Intent.createChooser(intent, getString(R.string.send_email_using)), MAIL_REQUEST_CODE);
         } catch (android.content.ActivityNotFoundException ex) {

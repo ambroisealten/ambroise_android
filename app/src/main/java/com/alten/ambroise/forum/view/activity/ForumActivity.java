@@ -86,7 +86,7 @@ public class ForumActivity extends AppCompatActivity
 
     @Override
     public void onRestart() {
-        //if (findViewById(R.id.forum_fragment).getTag() != null && findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
+        //if (findViewById(R._id.forum_fragment).getTag() != null && findViewById(R._id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
         fab.setVisibility(View.VISIBLE);
         //}
         super.onRestart();

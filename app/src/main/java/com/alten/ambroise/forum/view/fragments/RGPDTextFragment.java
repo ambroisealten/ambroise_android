@@ -67,16 +67,13 @@ public class RGPDTextFragment extends Fragment {
 
         final ScrollView scrollView = view.findViewById(R.id.scroll_text_rgpd);
 
-        scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(final View v, final int scrollX, final int scrollY, final int oldScrollX, final int oldScrollY) {
-                View view = scrollView.getChildAt(scrollView.getChildCount() - 1);
-                int diff = (view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY()));
+        scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            View view1 = scrollView.getChildAt(scrollView.getChildCount() - 1);
+            int diff = (view1.getBottom() - (scrollView.getHeight() + scrollView.getScrollY()));
 
-                if (diff == 0) {
-                    accept.setVisibility(View.VISIBLE);
-                    accept.setEnabled(true);
-                }
+            if (diff == 0) {
+                accept.setVisibility(View.VISIBLE);
+                accept.setEnabled(true);
             }
         });
 

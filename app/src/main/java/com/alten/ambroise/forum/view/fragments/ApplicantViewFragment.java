@@ -87,7 +87,6 @@ public class ApplicantViewFragment extends Fragment {
         //Instantiate applicant forum view model
         ApplicantForumViewModel mApplicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
         this.applicant = mApplicantForumViewModel.getApplicant(this.applicantId);
-        //System.out.println(this.applicant);
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_applicant_view, container, false);

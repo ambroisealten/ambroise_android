@@ -67,7 +67,7 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
 
         FloatingActionButton validateButton = findViewById(R.id.save_applicant);
         validateButton.setOnClickListener(v -> {
-            //The current fragment will save automatically its content
+            //The current fragment will save automatically its title
             askToSave();
 
             Intent intent1 = new Intent(getBaseContext(), RGPDActivity.class);
