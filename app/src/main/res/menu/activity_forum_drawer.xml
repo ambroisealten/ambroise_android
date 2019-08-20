@@ -34,9 +34,12 @@
     </item>
 
     <item android:title="@string/document">
-        <menu>
-
-        </menu>
+        <group android:id="@+id/nav_document">
+            <item
+                android:id="@+id/nav_document_list"
+                android:icon="@drawable/ic_storage_black_24dp"
+                android:title="@string/menu_document_list" />
+        </group>
     </item>
 
 </menu>

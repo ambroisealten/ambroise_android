@@ -58,7 +58,6 @@ public class SimpleItemRecyclerViewAdapter
                 Context context = view.getContext();
                 Intent intent = new Intent(context, DocumentDetailActivity.class);
                 intent.putExtra(DocumentDetailFragment.ARG_ITEM, document);
-
                 context.startActivity(intent);
             }
         });

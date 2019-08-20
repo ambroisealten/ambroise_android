@@ -34,11 +34,11 @@
     </item>
 
     <item android:title="@string/document">
-        <menu>
-            <item
+            <group android:id="@+id/nav_document">
+                <item
                 android:id="@+id/nav_document_list"
-                android:icon="@drawable/ic_menu_applicant_list"
+                android:icon="@drawable/ic_storage_black_24dp"
                 android:title="@string/menu_document_list" />
-        </menu>
+            </group>
     </item>
 </menu>
