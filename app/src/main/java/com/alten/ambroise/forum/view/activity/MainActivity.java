@@ -5,19 +5,26 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.alten.ambroise.forum.R;
+import com.alten.ambroise.forum.data.model.beans.Document;
 import com.alten.ambroise.forum.data.model.beans.Forum;
+import com.alten.ambroise.forum.data.model.viewModel.DocumentViewModel;
 import com.alten.ambroise.forum.view.fragmentSwitcher.ForumFragmentSwitcher;
+import com.alten.ambroise.forum.view.fragments.DocumentDetailFragment;
 import com.alten.ambroise.forum.view.fragments.ForumListFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ForumListFragment.OnListFragmentInteractionListener {
@@ -25,6 +32,7 @@ public class MainActivity extends AppCompatActivity
     private static final String STATE_FORUM_FRAGMENT_SWITCHER = "forumFragmentSwitcher";
 
     private ForumFragmentSwitcher forumFragmentSwitcher;
+    private HashMap<Integer, Document> documentsMenu = new HashMap<Integer, Document>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +52,18 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.FORUM_LIST_TAG);
         fab.setOnClickListener(view -> forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.ADD_FORUM_TAG));
+
+        DocumentViewModel mDocumentViewModel = ViewModelProviders.of(this).get(DocumentViewModel.class);
+        mDocumentViewModel.getAllDocuments().observe(this, documents -> {
+            for (int i = 0; i < documents.size(); i++) {
+                final Document document = documents.get(i);
+                if (!documentsMenu.containsValue(document)) {
+                    final int generateViewId = View.generateViewId();
+                    documentsMenu.put(generateViewId, document);
+                    navigationView.getMenu().add(R.id.nav_document, generateViewId, i, document.title);
+                }
+            }
+        });
     }
 
     @Override
@@ -101,8 +121,8 @@ public class MainActivity extends AppCompatActivity
             //            //We pop the backstack.
             super.onBackPressed();
             //If when we pop the first element of backstack, this activity don't have fragment, we add List fragment to dont have empty activity
-            if(tag == ForumFragmentSwitcher.APPLICANT_LIST_TAG){
-                forumFragmentSwitcher.switchFragment(getSupportFragmentManager(),ForumFragmentSwitcher.FORUM_LIST_TAG);
+            if (tag == ForumFragmentSwitcher.APPLICANT_LIST_TAG) {
+                forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.FORUM_LIST_TAG);
             }
             //If we are on the main fragment, quit the app
             else if (tag == ForumFragmentSwitcher.FORUM_LIST_TAG) {
@@ -123,8 +143,14 @@ public class MainActivity extends AppCompatActivity
                 forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.APPLICANT_LIST_TAG);
                 break;
             case R.id.nav_document_list:
-                Intent intent = new Intent(getBaseContext(),DocumentListActivity.class);
+                Intent intent = new Intent(getBaseContext(), DocumentListActivity.class);
                 startActivity(intent);
+                break;
+            default:
+                Document document = documentsMenu.get(item.getItemId());
+                Intent intent1 = new Intent(getBaseContext(), DocumentDetailActivity.class);
+                intent1.putExtra(DocumentDetailFragment.ARG_ITEM, document);
+                startActivity(intent1);
                 break;
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

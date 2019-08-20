@@ -13,13 +13,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.alten.ambroise.forum.R;
+import com.alten.ambroise.forum.data.model.beans.Document;
 import com.alten.ambroise.forum.data.model.beans.Forum;
+import com.alten.ambroise.forum.data.model.viewModel.DocumentViewModel;
 import com.alten.ambroise.forum.view.fragmentSwitcher.ApplicantFragmentSwitcher;
+import com.alten.ambroise.forum.view.fragments.DocumentDetailFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 public class ForumActivity extends AppCompatActivity
@@ -31,6 +36,7 @@ public class ForumActivity extends AppCompatActivity
     private Forum forum;
     private ApplicantFragmentSwitcher applicantFragmentSwitcher;
     private FloatingActionButton fab;
+    private HashMap<Integer, Document> documentsMenu = new HashMap<Integer, Document>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +67,17 @@ public class ForumActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
+        DocumentViewModel mDocumentViewModel = ViewModelProviders.of(this).get(DocumentViewModel.class);
+        mDocumentViewModel.getAllDocuments().observe(this, documents -> {
+            for (int i = 0; i < documents.size(); i++) {
+                final Document document = documents.get(i);
+                if (!documentsMenu.containsValue(document)) {
+                    final int generateViewId = View.generateViewId();
+                    documentsMenu.put(generateViewId, document);
+                    navigationView.getMenu().add(R.id.nav_document, generateViewId, i, document.title);
+                }
+            }
+        });
         applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG, this.getForumId());
     }
 
@@ -162,6 +178,16 @@ public class ForumActivity extends AppCompatActivity
             case R.id.nav_forum_list:
                 Intent intentForumList = new Intent(this, MainActivity.class);
                 startActivity(intentForumList);
+                break;
+            case R.id.nav_document_list:
+                Intent intent = new Intent(getBaseContext(),DocumentListActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                Document document = documentsMenu.get(item.getItemId());
+                Intent intent1 = new Intent(getBaseContext(), DocumentDetailActivity.class);
+                intent1.putExtra(DocumentDetailFragment.ARG_ITEM, document);
+                startActivity(intent1);
                 break;
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
