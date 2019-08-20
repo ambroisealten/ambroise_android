@@ -63,7 +63,7 @@ public abstract class DocumentRoomDatabase extends RoomDatabase {
                 for (final String document : documents) {
                     final Document doc = new Document();
                     doc.setTitle(document);
-                    doc.setUri("file:///android_asset/"+document);
+                    doc.setUri("file:///android_asset/documents/"+document);
                     mDao.insert(doc);
                 }
             } catch (IOException e) {

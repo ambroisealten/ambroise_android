@@ -1,11 +1,14 @@
 package com.alten.ambroise.forum.view.fragments;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import androidx.fragment.app.Fragment;
 
@@ -13,6 +16,7 @@ import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.Document;
 import com.alten.ambroise.forum.view.activity.DocumentDetailActivity;
 import com.alten.ambroise.forum.view.activity.DocumentListActivity;
+import com.github.barteksc.pdfviewer.PDFView;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 /**
@@ -65,9 +69,36 @@ public class DocumentDetailFragment extends Fragment {
 
         // Show the dummy title as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.document_detail)).setText(mItem.uri);
-        }
+            PDFView pdfView = rootView.findViewById(R.id.pdfv);
+            WebView webview = rootView.findViewById(R.id.document_detail);
+            if (mItem.getUri().substring(mItem.getUri().lastIndexOf(".") + 1).equals("pdf")) {
+                webview.setVisibility(View.GONE);
+                pdfView.fromAsset("documents/" + mItem.getTitle()).load();
+            } else {
+                pdfView.setVisibility(View.GONE);
+                webview.getSettings().setJavaScriptEnabled(true);
+                webview.getSettings().setSupportZoom(true);
+                webview.loadUrl(mItem.uri);
+                webview.getSettings().setBuiltInZoomControls(true);
+                webview.requestFocus();
 
+                final ProgressDialog progressDialog = new ProgressDialog(getContext());
+                progressDialog.setMessage(getString(R.string.loading));
+                progressDialog.setCancelable(true);
+                progressDialog.show();
+
+                webview.setWebViewClient(new WebViewClient() {
+                    public void onPageFinished(WebView view, String url) {
+                        try {
+                            progressDialog.dismiss();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                webview.setWebChromeClient(new WebChromeClient());
+            }
+        }
         return rootView;
     }
 }

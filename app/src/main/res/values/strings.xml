@@ -245,4 +245,5 @@ Voici un CV qui devrait vous intéresser.
     <string name="title_document_list">documents</string>
     <string name="title_document_detail">document Detail</string>
     <string name="menu_document_list">Documents list</string>
+    <string name="loading">Loading...</string>
 </resources>

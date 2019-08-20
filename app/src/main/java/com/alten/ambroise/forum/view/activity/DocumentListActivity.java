@@ -52,7 +52,7 @@ public class DocumentListActivity extends AppCompatActivity {
         }
 
         adapter = new SimpleItemRecyclerViewAdapter(this, mTwoPane);
-        
+
         DocumentViewModel mDocumentViewModel = ViewModelProviders.of(this).get(DocumentViewModel.class);
         mDocumentViewModel.getAllDocuments().observe(this, documents -> this.adapter.setDocuments(documents));
 
