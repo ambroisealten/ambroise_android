@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.util.Patterns;
 
 import java.util.Calendar;
+import java.util.Set;
 
 public class UtilsMethods {
 
@@ -33,5 +34,19 @@ public class UtilsMethods {
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         int writtenYear = Integer.parseInt(target.toString());
         return writtenYear <= (currentYear + 10) && writtenYear > (currentYear - 80);
+    }
+
+    public static String setToString(final Set<String> stringSet) {
+        if (stringSet == null || stringSet.size() == 0) {
+            return "";
+        }
+        StringBuilder builder = new StringBuilder();
+        for (final String s : stringSet) {
+            if (builder.length() != 0) {
+                builder.append(",");
+            }
+            builder.append(s);
+        }
+        return builder.toString();
     }
 }

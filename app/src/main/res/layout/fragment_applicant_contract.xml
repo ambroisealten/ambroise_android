@@ -13,6 +13,7 @@
         android:textSize="25sp"
         android:textColor="@color/colorPrimary"
         android:textAlignment="center"
+        android:layout_marginTop="18dp"
         />
 
     <androidx.cardview.widget.CardView

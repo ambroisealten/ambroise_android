@@ -41,6 +41,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Set;
 
+import static com.alten.ambroise.forum.utils.UtilsMethods.setToString;
+
 public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragment.OnFragmentInteractionListener, ValidationFragment.OnFragmentInteractionListener, SignFragment.OnFragmentInteractionListener, RGPDTextFragment.OnFragmentInteractionListener {
 
     public static final String STATE_APPLICANT = "applicant";
@@ -234,20 +236,6 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
                         PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE);
             }
         }
-    }
-
-    private String setToString(final Set<String> stringSet) {
-        if (stringSet == null || stringSet.size() == 0) {
-            return "";
-        }
-        StringBuilder builder = new StringBuilder();
-        for (final String s : stringSet) {
-            if (builder.length() != 0) {
-                builder.append(",");
-            }
-            builder.append(s);
-        }
-        return builder.toString();
     }
 }
 

@@ -76,6 +76,7 @@
     <string name="other_nationality">OTHER</string>
     <string name="other_infos">Other informations</string>
     <string name="minRadius">1</string>
+    <string name="send_email_applicant">Send by email</string>
 
     <!-- Arrays for spinners -->
     <string-array name="contract_type">
