@@ -2,18 +2,23 @@ package com.alten.ambroise.forum.view.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
+import com.alten.ambroise.forum.utils.InputFilterMinMax;
 import com.alten.ambroise.forum.utils.Nationality;
+
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +54,9 @@ public class ApplicantComplementFragment extends Fragment implements ApplicantIn
         setRetainInstance(true);
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_applicant_complement, container, false);
+
+        TextView txtView = view.findViewById(R.id.wage_expectation);
+        txtView.setFilters(new InputFilter[]{new InputFilterMinMax(0, 1000000)});
 
         return view;
     }

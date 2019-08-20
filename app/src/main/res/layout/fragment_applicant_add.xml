@@ -150,6 +150,12 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
+                <Button
+                    android:id="@+id/cv_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/take_cv_picture" />
+
                 <ImageView
                     android:id="@+id/cv_display"
                     android:layout_width="match_parent"
@@ -157,15 +163,11 @@
                     android:layout_marginTop="15dp"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/cv_picture_description"
-                    android:maxHeight="200dp"
-                    android:maxWidth="150dp"
-                    android:scaleType="fitCenter" />
-
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cancel" />
+                    android:maxWidth="125dp"
+                    android:maxHeight="175dp"
+                    android:scaleType="fitCenter"
+                    android:tag="@string/add_CV"
+                    app:srcCompat="@drawable/ic_add_picture_background" />
 
             </LinearLayout>
 

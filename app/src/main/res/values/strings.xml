@@ -252,4 +252,5 @@ Voici un CV qui devrait vous intéresser.
     <string name="wage_expectation">Wage expectation</string>
     <string name="wage_currency">€</string>
     <string name="new_applicant">New Applicant</string>
+    <string name="add_CV">CV_ADD</string>
 </resources>

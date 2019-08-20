@@ -113,11 +113,12 @@ public class ApplicantAddFragment extends Fragment {
             case REQUEST_IMAGE_CAPTURE:
                 if (resultCode == Activity.RESULT_OK) {
                     cvDisplay.setImageURI(Uri.fromFile(new File(currentPhotoPath)));
+                    cvDisplay.setTag("CV_PIC_TAKEN");
                     this.temp = null;
                     checkIfStartAllowed();
                 } else {
                     if (cvDisplay.getDrawable() == null) {
-                        cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_add_picture_background));
+                        //cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_add_picture_background));
                     } else {
                         this.currentPhotoPath = this.temp;
                         this.temp = null;
@@ -143,7 +144,7 @@ public class ApplicantAddFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_applicant_add, container, false);
         //Add take picture action
-        //view.findViewById(R.id.cv_button).setOnClickListener(v -> dispatchTakePictureIntent());
+        view.findViewById(R.id.cv_button).setOnClickListener(v -> dispatchTakePictureIntent());
         button_start = view.findViewById(R.id.button_start);
         button_start.setOnClickListener(v -> {
             ApplicantForum newApplicant = new ApplicantForum();
@@ -177,7 +178,7 @@ public class ApplicantAddFragment extends Fragment {
         if (savedInstanceState != null && currentPhotoPath != null) {
             cvDisplay.setImageURI(Uri.fromFile(new File(currentPhotoPath)));
         } else {
-            cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_add_picture_background));
+            //cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_add_picture_background));
             button_start.setEnabled(false);
         }
 
@@ -247,7 +248,7 @@ public class ApplicantAddFragment extends Fragment {
         });
         //add preview picture action
         cvDisplay.setOnClickListener(v -> {
-            if (cvDisplay.getDrawable() != null) {
+            if (cvDisplay.getDrawable() != null && !cvDisplay.getTag().toString().equals("CV_ADD")) {
                 Uri uri = FileProvider.getUriForFile(getActivity(),
                         "com.alten.ambroise.forum.fileprovider",
                         new File(currentPhotoPath));
