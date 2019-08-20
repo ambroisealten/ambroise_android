@@ -25,6 +25,14 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/new_applicant"
+                android:textColor="@color/text_color"
+                android:textSize="36sp" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/surname_input_layout"
                 android:layout_width="450dp"
@@ -43,10 +51,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/name_input_layout"
-                android:layout_height="wrap_content"
-                android:textColorHint="#11618F"
                 android:layout_width="450dp"
-                android:hint="@string/name">
+                android:layout_height="wrap_content"
+                android:hint="@string/name"
+                android:textColorHint="#11618F">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/name_input_editText"
@@ -57,10 +65,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/phone_input_layout"
-                android:layout_height="wrap_content"
-                android:textColorHint="#11618F"
                 android:layout_width="450dp"
-                android:hint="@string/phone">
+                android:layout_height="wrap_content"
+                android:hint="@string/phone"
+                android:textColorHint="#11618F">
 
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -74,10 +82,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/mail_input_layout"
-                android:layout_height="wrap_content"
-                android:textColorHint="#11618F"
                 android:layout_width="450dp"
-                android:hint="@string/mail">
+                android:layout_height="wrap_content"
+                android:hint="@string/mail"
+                android:textColorHint="#11618F">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/mail_input_editText"
@@ -118,38 +126,71 @@
             android:elevation="3dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/cvText"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/cv_picture"
-                android:textColor="#11618F" />
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/cvText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/cv_picture"
+                    android:textColor="#11618F"
+                    android:textSize="36sp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center">
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/cv_display"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="15dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/cv_picture_description" />
+                    android:layout_marginTop="15dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/cv_picture_description"
+                    android:maxHeight="200dp"
+                    android:maxWidth="150dp"
+                    android:scaleType="fitCenter" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cancel" />
+
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center|top"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button_start"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15sp"
+                    android:background="@drawable/rounded_button"
+                    android:elevation="1dp"
+                    android:padding="15dp"
+                    android:text="@string/start_interview"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-    <Button
-        android:id="@+id/button_start"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:background="@drawable/rounded_button"
-        android:elevation="1dp"
-        android:text="@string/start_interview"
-        android:textColor="#11618F" />
 
 </LinearLayout>

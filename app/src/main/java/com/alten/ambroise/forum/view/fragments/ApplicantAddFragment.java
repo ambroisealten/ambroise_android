@@ -117,7 +117,7 @@ public class ApplicantAddFragment extends Fragment {
                     checkIfStartAllowed();
                 } else {
                     if (cvDisplay.getDrawable() == null) {
-                        cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_camera));
+                        cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_add_picture_background));
                     } else {
                         this.currentPhotoPath = this.temp;
                         this.temp = null;
@@ -177,7 +177,7 @@ public class ApplicantAddFragment extends Fragment {
         if (savedInstanceState != null && currentPhotoPath != null) {
             cvDisplay.setImageURI(Uri.fromFile(new File(currentPhotoPath)));
         } else {
-            cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_camera));
+            cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_add_picture_background));
             button_start.setEnabled(false);
         }
 

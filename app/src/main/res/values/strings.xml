@@ -23,7 +23,7 @@
     <string name="surname">Surname</string>
     <string name="phone">Phone number</string>
     <string name="mail">Mail</string>
-    <string name="cv_picture">Cv\'s picture</string>
+    <string name="cv_picture">Applicant\'s CV</string>
     <string name="start_interview">Start interview</string>
     <string name="take_cv_picture">CV</string>
     <string name="cv_picture_description">CV picture</string>
@@ -251,4 +251,5 @@ Voici un CV qui devrait vous intéresser.
     <string name="skillTechno">Techno skill</string>
     <string name="wage_expectation">Wage expectation</string>
     <string name="wage_currency">€</string>
+    <string name="new_applicant">New Applicant</string>
 </resources>

@@ -60,7 +60,7 @@
         <activity
             android:name=".view.activity.ForumActivity"
             android:label="@string/title_activity_forum"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.SplashScreen"
             android:label="@string/title_activity_main"
