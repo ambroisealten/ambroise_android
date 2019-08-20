@@ -69,11 +69,21 @@ public class DocumentDetailFragment extends Fragment {
 
         // Show the dummy title as text in a TextView.
         if (mItem != null) {
+            final ProgressDialog progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage(getString(R.string.loading));
+            progressDialog.setCancelable(true);
+            progressDialog.show();
             PDFView pdfView = rootView.findViewById(R.id.pdfv);
             WebView webview = rootView.findViewById(R.id.document_detail);
             if (mItem.getUri().substring(mItem.getUri().lastIndexOf(".") + 1).equals("pdf")) {
                 webview.setVisibility(View.GONE);
-                pdfView.fromAsset("documents/" + mItem.getTitle()).load();
+                pdfView.fromAsset("documents/" + mItem.getTitle())
+                        .enableSwipe(true)
+                        .onRender((i, v, v1) -> progressDialog.dismiss())
+                        .enableAntialiasing(true)
+                        .spacing(2)
+                        .load();
+                pdfView.documentFitsView();
             } else {
                 pdfView.setVisibility(View.GONE);
                 webview.getSettings().setJavaScriptEnabled(true);
@@ -81,11 +91,6 @@ public class DocumentDetailFragment extends Fragment {
                 webview.loadUrl(mItem.uri);
                 webview.getSettings().setBuiltInZoomControls(true);
                 webview.requestFocus();
-
-                final ProgressDialog progressDialog = new ProgressDialog(getContext());
-                progressDialog.setMessage(getString(R.string.loading));
-                progressDialog.setCancelable(true);
-                progressDialog.show();
 
                 webview.setWebViewClient(new WebViewClient() {
                     public void onPageFinished(WebView view, String url) {

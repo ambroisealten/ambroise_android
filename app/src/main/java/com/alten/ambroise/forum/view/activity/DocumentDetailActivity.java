@@ -10,8 +10,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.view.fragments.DocumentDetailFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 /**
  * An activity representing a single document detail screen. This
@@ -27,10 +25,6 @@ public class DocumentDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_document_detail);
         Toolbar toolbar = findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
 
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();

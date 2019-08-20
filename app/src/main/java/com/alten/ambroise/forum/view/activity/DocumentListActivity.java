@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.viewModel.DocumentViewModel;
 import com.alten.ambroise.forum.view.adapter.SimpleItemRecyclerViewAdapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 /**
  * An activity representing a list of documents. This activity
@@ -38,10 +36,6 @@ public class DocumentListActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
 
         if (findViewById(R.id.document_detail_container) != null) {
             // The detail container view will be present only in the
