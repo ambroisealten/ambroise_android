@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.RadioGroup;
 
 import androidx.fragment.app.Fragment;
 
@@ -70,16 +71,61 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(allSkills.contains(s.toString().toLowerCase())){
+                String testSkill = s.toString();
+
+                int id = ((RadioGroup) getView().findViewById(R.id.skill_type)).getCheckedRadioButtonId();
+
+                String skillType = getView().findViewById(id).getTag().toString();
+
+                testSkill += " - "+skillType;
+
+                if(allSkills.contains(testSkill.toLowerCase())){
                     skillsAutoComplete.setError(getString(R.string.invalid_already_existing_skill));
+                    buttonAddSkill.setEnabled(false);
+                }
+                else{
+                    skillsAutoComplete.setError(null);
+                    setEnableButton();
                 }
             }
         });
+
+        RadioGroup rdGroup = view.findViewById(R.id.skill_type);
+
+        rdGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                String testSkill = skillsAutoComplete.getText().toString();
+
+                int id = ((RadioGroup) getView().findViewById(R.id.skill_type)).getCheckedRadioButtonId();
+
+                String skillType = getView().findViewById(id).getTag().toString();
+
+                testSkill += " - "+skillType;
+
+                if(allSkills.contains(testSkill.toLowerCase())){
+                    skillsAutoComplete.setError(getString(R.string.invalid_already_existing_skill));
+                    buttonAddSkill.setEnabled(false);
+                }
+                else{
+                    skillsAutoComplete.setError(null);
+                    setEnableButton();
+                }
+            }
+        });
+
 
         this.buttonAddSkill = view.findViewById(R.id.add_skills_button);
         this.buttonAddSkill.setEnabled(false);
         this.buttonAddSkill.setOnClickListener(v -> {
             String newSkill = that.skillsAutoComplete.getText().toString();
+
+            int id = ((RadioGroup) getView().findViewById(R.id.skill_type)).getCheckedRadioButtonId();
+
+            String skillType = getView().findViewById(id).getTag().toString();
+
+            newSkill += " - "+skillType;
+
 
             if( !that.allSkills.contains(newSkill.toLowerCase())){
                 that.allSkillsRepresentation.add(newSkill);

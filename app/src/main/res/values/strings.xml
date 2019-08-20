@@ -244,4 +244,6 @@ Voici un CV qui devrait vous intéresser.
     <string name="invalid_already_existing_skill">This skill already exists</string>
     <string name="skillIT">IT Skill</string>
     <string name="skillTechno">Techno skill</string>
+    <string name="wage_expectation">Wage expectation</string>
+    <string name="wage_currency">€</string>
 </resources>
