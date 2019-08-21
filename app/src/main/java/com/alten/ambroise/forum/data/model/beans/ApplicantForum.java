@@ -9,6 +9,8 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import com.alten.ambroise.forum.App;
+import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.Mobility;
 import com.alten.ambroise.forum.utils.Nationality;
 import com.alten.ambroise.forum.utils.converter.Converters;
@@ -283,19 +285,23 @@ public class ApplicantForum implements Parcelable {
 
     @Override
     public String toString() {
-                return new StringBuilder()
+        return new StringBuilder()
                 .append(surname).append(" ").append(name).append(System.lineSeparator())
-                .append("Mail: ").append(mail).append(System.lineSeparator())
-                .append("Phone number: ").append(phoneNumber).append(System.lineSeparator())
-                .append("Mobilities: ").append(mobilitiesToString(mobilities)).append(System.lineSeparator())
-                .append("Contract type: ").append(contractType).append("; duration: ").append(contractDuration).append("; startAt: ").append(startAt).append(System.lineSeparator())
-                .append("Highest diploma: ").append(highestDiploma).append(" ").append(highestDiplomaYear).append(System.lineSeparator())
-                .append("Skills: ").append(skillsToString(skills)).append(System.lineSeparator())
-                .append("Has a vehicle ").append(vehicule).append("; Has a driver license: ").append(driverLicense).append(System.lineSeparator())
-                .append("Nationality: ").append(nationality).append(System.lineSeparator())
-                .append("Grade: ").append(grade).append(System.lineSeparator())
-                .append("Wage expectations :").append(wageExpectations).append(System.lineSeparator())
+                .append(getString(R.string.mail)).append(": ").append(mail).append(System.lineSeparator())
+                .append(getString(R.string.phone)).append(": ").append(phoneNumber).append(System.lineSeparator())
+                .append(getString(R.string.mobilites)).append(": ").append(mobilitiesToString(mobilities)).append(System.lineSeparator())
+                .append(getString(R.string.contract)).append(": ").append(contractType).append("; duration: ").append(contractDuration).append("; startAt: ").append(startAt).append(System.lineSeparator())
+                .append(getString(R.string.diploma)).append(": ").append(highestDiploma).append(" ").append(highestDiplomaYear).append(System.lineSeparator())
+                .append(getString(R.string.skills)).append(": ").append(skillsToString(skills)).append(System.lineSeparator())
+                .append(getString(R.string.has_vehicle)).append(" ").append(vehicule).append("; Has a driver license: ").append(driverLicense).append(System.lineSeparator())
+                .append(getString(R.string.nationality)).append(": ").append(nationality).append(System.lineSeparator())
+                .append(getString(R.string.opinion)).append(": ").append(grade).append(System.lineSeparator())
+                .append(getString(R.string.wage_expectation)).append(":").append(wageExpectations).append(getString(R.string.wage_currency)).append(System.lineSeparator())
                 .toString();
+    }
+
+    private String getString(final int p) {
+        return App.getContext().getString(p);
     }
 
     private String skillsToString(final List<String> skills) {
@@ -317,7 +323,7 @@ public class ApplicantForum implements Parcelable {
             Gson gson = new GsonBuilder().create();
             JsonObject jsonMobility = gson.toJsonTree(mobility).getAsJsonObject();
 
-            builder.append(gson.fromJson(jsonMobility, Mobility.class).toString()+" ");
+            builder.append(gson.fromJson(jsonMobility, Mobility.class).toString() + " ");
         });
         return builder.toString();
     }

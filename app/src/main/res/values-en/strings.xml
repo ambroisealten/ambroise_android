@@ -177,4 +177,15 @@ La présente politique a été mise à jour le 10/07/2018.
     <string name="wage_currency">€</string>
     <string name="wage_expectation">Expected wage</string>
     <string name="withinMonths">Within</string>
+    <string name="years">Years</string>
+    <string name="techno">Techno</string>
+    <string name="subcontracting">Subcontracting</string>
+    <string name="reconversion">Reconversion</string>
+    <string name="mobilites">Mobilities</string>
+    <string name="internship">Internship</string>
+    <string name="freelance">Freelance</string>
+    <string name="days">Days</string>
+    <string name="IT">IT</string>
+    <string name="CDI">Permanent contract</string>
+    <string name="CDD">Fixed-term contract</string>
 </resources>
