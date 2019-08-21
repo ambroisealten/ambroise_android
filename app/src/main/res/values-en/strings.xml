@@ -44,7 +44,7 @@
     <string name="international">International</string>
     <string name="invalid_already_existing_diploma">This diploma already exists</string>
     <string name="invalid_already_existing_skill">This skill already exists</string>
-    <string name="invalid_mail">Invalid email adress</string>
+    <string name="invalid_mail">Invalid email address</string>
     <string name="invalid_phone">Invalid phone number</string>
     <string name="invalid_year">Invalid year (not in bound)</string>
     <string name="kilometers">Kms</string>
