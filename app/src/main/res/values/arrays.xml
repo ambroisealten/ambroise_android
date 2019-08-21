@@ -52,7 +52,6 @@
     </string-array>
     
     <string name="none">None</string>
-    <!-- Reply Preference -->
 
     <string-array name="carbon_copied_mail_default" />
     <!-- Value display in preference dialog -->
