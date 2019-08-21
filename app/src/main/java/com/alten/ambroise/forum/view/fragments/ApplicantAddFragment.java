@@ -248,7 +248,7 @@ public class ApplicantAddFragment extends Fragment {
         });
         //add preview picture action
         cvDisplay.setOnClickListener(v -> {
-            if (cvDisplay.getDrawable() != null && !cvDisplay.getTag().toString().equals("CV_ADD")) {
+            if (cvDisplay.getDrawable() != null && !cvDisplay.getTag().toString().equals(getResources().getString(R.string.add_CV))) {
                 Uri uri = FileProvider.getUriForFile(getActivity(),
                         "com.alten.ambroise.forum.fileprovider",
                         new File(currentPhotoPath));

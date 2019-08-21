@@ -65,23 +65,8 @@
     <string name="french_nationality">FRENCH</string>
     <string name="european_citizenship">EUROPEAN</string>
     <string name="other_nationality">OTHER</string>
-    <string name="other_infos">Other information</string>
+    <string name="other_infos">Other informations</string>
     <string name="send_email_applicant">Send by email</string>
-
-    <!-- Arrays for spinners -->
-    <string-array name="contract_type">
-        <item>Internship</item>
-        <item>CDD</item>
-        <item>CDI</item>
-        <item>Freelance</item>
-        <item>Subcontracting</item>
-        <item>Reconversion</item>
-    </string-array>
-    <string-array name="contract_duration_type">
-        <item>Days</item>
-        <item>Months</item>
-        <item>Years</item>
-    </string-array>
 
 
     <string name="rgpd_warning">!Applicant must read RGPD and accept it!</string>
@@ -150,4 +135,14 @@ Here is a CV that should interest you.
     <string name="wage_currency">€</string>
     <string name="new_applicant">New Applicant</string>
     <string name="add_CV">CV_ADD</string>
+    <string name="none">None</string>
+    <string name="internship">Internship</string>
+    <string name="CDD">CDD</string>
+    <string name="CDI">CDI</string>
+    <string name="freelance">Freelance</string>
+    <string name="subcontracting">Subcontracting</string>
+    <string name="reconversion">Reconversion</string>
+    <string name="IT">IT</string>
+    <string name="techno">Techno</string>
+
 </resources>

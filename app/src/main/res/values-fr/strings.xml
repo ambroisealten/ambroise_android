@@ -94,7 +94,7 @@ Les données collectées sont indispensables à ces traitements et sont destiné
 
 Pour en savoir plus, consultez la politique de protection des données personnelles d’ALTEN
 .          PROTECTION DE VOS DONNÉES PERSONNELLES  La protection de vos données à caractère personnel est d’une grande importance pour le Groupe ALTEN. ALTEN prend toutes les précautions nécessaires pour s’assurer que vos données personnelles soient traitées en toute sécurité et en conformité avec la réglementation. Vous trouverez ci-dessous des informations détaillées sur le traitement de vos données personnelles dans le     cadre de l’utilisation de ce site internet.          Qui est le responsable de traitement de vos données personnelles ?  Vos données personnelles sont traitées par ALTEN en qualité de responsable de traitement. La société ALTEN est située au 40, avenue André Morizet 92100 Boulogne-Billancourt. Les coordonnées de son     délégué à la protection des données personnelles sont les suivantes : <u>dpo@alten.com</u>.          Quelle utilisation de vos données ?  Vos données sont utilisées par ALTEN pour les finalités suivantes: - Répondre et traiter vos messages pour toute question ou demande d’information - Gérer vos candidatures et la procédure de recrutement, - Garantir la sécurité de notre site internet, - Comprendre la navigation des utilisateurssur notre site Web, mais d’une manière non personnalisée. ALTEN utilise aussi des cookies pendant que vous naviguez sur son site Web. Vous pouvez en savoir plus sur l’utilisation des cookies par ALTEN en cliquant ici. Notez que les traitements de données personnelles visés ci-dessus sont basés sur l’intérêt légitime d’ALTEN.          Qui a accès à vos données ?  Les informations que nous recueillons sont exclusivement destinées à la Direction de la Communication et à la Direction des Ressources humaines d’ALTEN. Aucune donnée personnelle vous concernant n’est cédée à des tiers.  Quelle est la durée de conservation des données ? Les données personnelles seront conservées :     - Pour la rubrique « Contact », le temps de traiter la demande     - Pour traiter vos candidatures et gérer la procédure de recrutement, 2 ans après notre dernier contact avec vous     - Pour garantir la sécurité de notre site Web, les données relatives aux comptes utilisateurs sont conservées 1 an     - Les données de navigation des utilisateurssur notre site Web sont conservées jusqu’à 13 mois.          Quels sont vos droits ?  Vous disposez d\'un droit d\'accès, de modification et de suppression sur les données qui vous concernent, d’un droit de limitation, à la portabilité, à l’effacement et d’opposition pour des motifs légitimes, ainsi que du droit de définir des directives relatives au sort de vos données en cas de décès que vous pouvez exercer en adressant un e-mail au Délégué à la Protection des données d’ALTEN à l’adresse suivante : dpo@alten.com. Vous disposez par ailleurs, du droit d’introduire une réclamation auprès de la Commission Nationale de     l’Informatique et des Libertés (CNIL), notamment sur son site internet www.cnil.fr.          Modification de la politique  La présente politique a été mise à jour le 10/07/2018.     En cas de modification ou mise à jour de la présente politique, vous serez informés par un affichage sur le site.]]></string>
-    <string name="other_infos">Autre information</string>
+    <string name="other_infos">Autres informations</string>
     <string name="other_nationality">AUTRE</string>
     <string name="phone">Numéro de téléhpone</string>
     <string name="preview">Pré-visualisation</string>
@@ -131,4 +131,14 @@ Pour en savoir plus, consultez la politique de protection des données personnel
     <string name="wage_currency">€</string>
     <string name="wage_expectation">Prétention salariale</string>
     <string name="withinMonths">Dans</string>
+    <string name="subcontracting">Sous-traitance</string>
+    <string name="reconversion">Reconversion</string>
+    <string name="internship">Stage</string>
+    <string name="freelance">Free-lance</string>
+    <string name="CDD">CDD</string>
+    <string name="CDI">CDI</string>
+    <string name="IT">IT</string>
+    <string name="techno">Techno</string>
+    <string name="years">Ans</string>
+    <string name="days">Jours</string>
 </resources>
