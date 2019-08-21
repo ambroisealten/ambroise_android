@@ -156,7 +156,7 @@ public class ApplicantAddFragment extends Fragment {
             newApplicant.setPhoneNumber(phone.length() == 0 ? "0000000000" : phone.getText().toString());
 
             final Drawable drawable = cvDisplay.getDrawable();
-            if (drawable != null) {
+            if (drawable != null && !cvDisplay.getTag().toString().equals("CV_ADD")) {
                 Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
@@ -248,7 +248,7 @@ public class ApplicantAddFragment extends Fragment {
         });
         //add preview picture action
         cvDisplay.setOnClickListener(v -> {
-            if (cvDisplay.getDrawable() != null && !cvDisplay.getTag().toString().equals("CV_ADD")) {
+            if (cvDisplay.getDrawable() != null && !cvDisplay.getTag().toString().equals(getResources().getString(R.string.add_CV))) {
                 Uri uri = FileProvider.getUriForFile(getActivity(),
                         "com.alten.ambroise.forum.fileprovider",
                         new File(currentPhotoPath));

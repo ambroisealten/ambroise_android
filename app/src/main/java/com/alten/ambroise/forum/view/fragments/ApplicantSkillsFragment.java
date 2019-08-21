@@ -75,7 +75,11 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
 
                 int id = ((RadioGroup) getView().findViewById(R.id.skill_type)).getCheckedRadioButtonId();
 
+                System.out.println(id);
+
                 String skillType = getView().findViewById(id).getTag().toString();
+
+                System.out.println(skillType);
 
                 testSkill += " - "+skillType;
 
@@ -92,25 +96,26 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
 
         RadioGroup rdGroup = view.findViewById(R.id.skill_type);
 
-        rdGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                String testSkill = skillsAutoComplete.getText().toString();
+        rdGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            String testSkill = skillsAutoComplete.getText().toString();
 
-                int id = ((RadioGroup) getView().findViewById(R.id.skill_type)).getCheckedRadioButtonId();
+            int id = ((RadioGroup) getView().findViewById(R.id.skill_type)).getCheckedRadioButtonId();
 
-                String skillType = getView().findViewById(id).getTag().toString();
+            System.out.println(id);
 
-                testSkill += " - "+skillType;
+            String skillType = getView().findViewById(id).getTag().toString();
 
-                if(allSkills.contains(testSkill.toLowerCase())){
-                    skillsAutoComplete.setError(getString(R.string.invalid_already_existing_skill));
-                    buttonAddSkill.setEnabled(false);
-                }
-                else{
-                    skillsAutoComplete.setError(null);
-                    setEnableButton();
-                }
+            System.out.println(skillType);
+
+            testSkill += " - "+skillType;
+
+            if(allSkills.contains(testSkill.toLowerCase())){
+                skillsAutoComplete.setError(getString(R.string.invalid_already_existing_skill));
+                buttonAddSkill.setEnabled(false);
+            }
+            else{
+                skillsAutoComplete.setError(null);
+                setEnableButton();
             }
         });
 

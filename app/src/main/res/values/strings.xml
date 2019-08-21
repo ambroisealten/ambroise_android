@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">Ambroise-forum</string>
+    <string name="app_name" translatable="false">Ambroise-forum</string>
     <string name="title_activity_main">Forum</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">ALTEN: Application Ambroise</string>
+    <string name="nav_header_title">ALTEN: Ambroise Application</string>
     <string name="nav_header_subtitle">Module Forum</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
@@ -12,13 +12,10 @@
     <string name="forum_place">Forum place</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
-    <string name="new_forum">New forum</string>
     <string name="unknown">Unknown</string>
     <string name="preview">Preview</string>
     <string name="title_activity_forum">ForumActivity</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="name">Name</string>
     <string name="surname">Surname</string>
     <string name="phone">Phone number</string>
@@ -29,9 +26,6 @@
     <string name="cv_picture_description">CV picture</string>
     <string name="error_creating_file">An error occurred while creating the File</string>
     <string name="noMail">\@noMail.alten.com</string>
-    <string name="title_activity_blbl">blbl</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
     <string name="mobility">Mobility</string>
     <string name="contract">Contract</string>
     <string name="diploma">Diploma</string>
@@ -50,10 +44,8 @@
     <string name="sign_hint">Sign here</string>
     <string name="decline">Decline</string>
     <string name="accept">Accept</string>
-    <string name="sign">Signature</string>
     <string name="francemobility">Mobility for France ?</string>
     <string name="begin_at">Beginning at</string>
-    <string name="dateBegin">Beginning date</string>
     <string name="withinMonths">Within</string>
     <string name="months">months</string>
     <string name="number_of_months">Number of months</string>
@@ -62,130 +54,77 @@
     <string name="defaultTextMobility">Mobility, within 100 kms</string>
     <string name="add_geographic">Add</string>
     <string name="not_implemented">Tab not implemented yet</string>
-    <string name="diplomas">Diplomas</string>
-    <string name="graduatingYear">Year of obtention</string>
+    <string name="graduatingYear">Year of graduation</string>
     <string name="diplomaAdd">Add Diploma</string>
     <string name="allDiplomas">All Diplomas</string>
     <string name="skillsAdd">Add Skill</string>
     <string name="allSkills">All Skills</string>
     <string name="nationality">Nationality :</string>
     <string name="driving_license">Driving license</string>
-    <string name="has_vehicle">Has a personnal vehicle</string>
+    <string name="has_vehicle">Has a personal vehicle</string>
     <string name="french_nationality">FRENCH</string>
     <string name="european_citizenship">EUROPEAN</string>
     <string name="other_nationality">OTHER</string>
     <string name="other_infos">Other informations</string>
-    <string name="minRadius">1</string>
     <string name="send_email_applicant">Send by email</string>
-
-    <!-- Arrays for spinners -->
-    <string-array name="contract_type">
-        <item>Internship</item>
-        <item>CDD</item>
-        <item>CDI</item>
-        <item>Freelance</item>
-        <item>Subcontracting</item>
-        <item>Reconversion</item>
-    </string-array>
-    <string-array name="contract_duration_type">
-        <item>Days</item>
-        <item>Months</item>
-        <item>Years</item>
-    </string-array>
 
 
     <string name="rgpd_warning">!Applicant must read RGPD and accept it!</string>
     <string name="rgpd_accept">Do you accept that your data is saved?</string>
-    <string name="rgpd_text"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas magna sapien, volutpat nec dui eget, lacinia consequat lectus. Vivamus at volutpat velit. Proin ac turpis accumsan, lobortis tellus venenatis, sollicitudin felis. Phasellus eleifend velit eget massa posuere placerat. Duis tincidunt, urna vitae cursus finibus, elit tortor faucibus tellus, vel luctus libero diam sit amet massa. Aenean vitae lacinia sapien, sit amet facilisis lorem. Phasellus feugiat tortor vel ante pulvinar pulvinar.
+    <string name="rgpd_text"><![CDATA[Pursuant to your discussion with ALTEN, you have given consent to participate in the recruitment process and in the improvement thereof, involving the computer processing of your personal data by ALTEN. Your data may be forwarded to the Group\'s various entities for the same purposes. We remind you that you have a right of access, correction and deletion for the data relating to you, a right of limitation, portability, erasure and opposition for legitimate reasons that you may exercise by sending an email to our DPO at the following address:<u>dpo@alten.com</u>.
+The data collected is indispensable for this processing and is intended for the authorised departments of ALTEN. It will be retained for a period of 2 years as from our final contact.
 
-Integer et urna quis nisl sollicitudin venenatis. Quisque interdum consequat ornare. Curabitur ullamcorper odio libero, a auctor velit tristique at. Quisque molestie massa vitae sem laoreet feugiat. Sed at erat id quam lacinia cursus et et nunc. Integer lectus quam, efficitur eget eleifend nec, luctus et mauris. Proin a massa tellus. Vestibulum porta, enim quis porta tincidunt, quam turpis vehicula felis, in vestibulum urna augue condimentum enim. Aenean ut ullamcorper leo. Curabitur auctor lorem vitae nisi consequat, ac sodales nisl imperdiet. Aenean mauris erat, gravida eget commodo nec, luctus nec eros. Nam consectetur ultricies ultricies.
+        For further details, please consult the ALTEN privacy policy.
 
-Vivamus nec libero sit amet tellus semper venenatis a auctor eros. Praesent at accumsan elit. Phasellus pretium ornare purus, id pretium ante pellentesque in. Curabitur pulvinar mauris et magna vestibulum posuere. Nullam varius bibendum risus vitae elementum. Aenean finibus posuere nisl eget sagittis. Pellentesque hendrerit ex mi, nec ornare nisi tincidunt id. Nullam quis malesuada leo, quis lacinia eros. Donec in diam auctor, dictum magna maximus, auctor tortor. Nunc ut condimentum orci, in vulputate libero. Ut at nisi a ex malesuada tempor. Donec lacinia justo eleifend, porta nisi ac, pharetra mi. Aliquam vitae diam ipsum. Vestibulum mollis feugiat ipsum. Integer eget nunc ut dui imperdiet convallis in at augue. Integer egestas metus consequat risus ultricies, id luctus sem bibendum.
+        PROTECTION DE VOS DONNÉES PERSONNELLES
 
-In molestie auctor ultrices. Praesent vitae leo id neque aliquet vulputate euismod eu risus. Fusce vestibulum felis eu ipsum interdum fringilla. Mauris cursus neque ac nunc euismod, vel aliquet neque iaculis. Praesent cursus lectus non vulputate facilisis. Etiam a nibh nec mauris scelerisque pharetra vel at odio. Vivamus iaculis magna id tristique sodales. Proin at nisl a enim iaculis laoreet. Donec molestie arcu urna, quis dignissim purus tristique sit amet. Cras tempus bibendum purus at congue.
+La protection de vos données à caractère personnel est d’une grande importance pour le Groupe ALTEN.
+ALTEN prend toutes les précautions nécessaires pour s’assurer que vos données personnelles soient traitées en
+toute sécurité et en conformité avec la réglementation.
+Vous trouverez ci-dessous des informations détaillées sur le traitement de vos données personnelles dans le
+    cadre de l’utilisation de ce site internet.
 
-Mauris lacinia lectus at ullamcorper consequat. Fusce non ipsum sem. Suspendisse potenti. Aliquam nec neque nisi. Pellentesque diam turpis, hendrerit vel nisi quis, rhoncus consequat leo. Donec at ligula nibh. Aliquam eleifend vel dolor sit amet pulvinar.
+        Qui est le responsable de traitement de vos données personnelles ?
 
-Vivamus eu ante porttitor, molestie nisi a, rutrum lectus. Nullam felis lectus, tempor non sagittis ac, dignissim id ex. Suspendisse eleifend nisi in efficitur ultricies. Mauris condimentum ultricies odio nec imperdiet. Donec accumsan mi at nibh lacinia dapibus sit amet in justo. Ut risus mi, ullamcorper eget blandit id, porttitor condimentum lectus. Nulla ac tellus et nisi lobortis feugiat. Vestibulum ut nisl ex. Praesent fringilla lacinia venenatis. Proin et gravida ex.
+Vos données personnelles sont traitées par ALTEN en qualité de responsable de traitement.
+La société ALTEN est située au 40, avenue André Morizet 92100 Boulogne-Billancourt. Les coordonnées de son
+    délégué à la protection des données personnelles sont les suivantes : <u>dpo@alten.com</u>.
 
-Nullam at finibus lorem, dictum cursus enim. Fusce ante nisl, auctor sed semper at, egestas quis risus. Pellentesque dictum mauris et dui rutrum, ac pharetra tortor tristique. Sed quis enim metus. Cras massa sem, laoreet nec consectetur a, volutpat eu urna. Donec imperdiet ultricies dui in vestibulum. Donec id purus odio. Nulla ut dui neque. Pellentesque elementum commodo enim a semper. Sed porttitor elementum sapien, nec lacinia dui dapibus non. Nullam imperdiet, dui nec fringilla pellentesque, leo arcu ornare orci, nec aliquet ipsum neque in mi. Phasellus scelerisque iaculis sapien ultrices ultricies. Duis purus erat, tempor in diam vitae, sodales sagittis purus. Ut tristique eu turpis vel rhoncus. Nam fringilla hendrerit orci quis blandit.
+        Quelle utilisation de vos données ?
 
-Nulla sed tempus magna. Fusce quis neque sit amet lectus lobortis luctus non non enim. Sed venenatis rhoncus sapien, vitae placerat dui tristique in. Sed viverra augue id nisi scelerisque dictum. Morbi porttitor sodales tortor sit amet lobortis. Donec faucibus elit in tristique mollis. Integer accumsan augue nibh, a elementum lorem maximus et.
+Vos données sont utilisées par ALTEN pour les finalités suivantes:
+    - Répondre et traiter vos messages pour toute question ou demande d’information
+    - Gérer vos candidatures et la procédure de recrutement,
+    - Garantir la sécurité de notre site internet,
+    - Comprendre la navigation des utilisateurssur notre site Web, mais d’une manière non personnalisée.
+ALTEN utilise aussi des cookies pendant que vous naviguez sur son site Web. Vous pouvez en savoir plus sur l’utilisation
+des cookies par ALTEN en cliquant ici.
+Notez que les traitements de données personnelles visés ci-dessus sont basés sur l’intérêt légitime d’ALTEN.
 
-Sed faucibus enim eu sapien faucibus, in efficitur libero condimentum. Praesent gravida lacus quis enim pulvinar ullamcorper. Aenean vulputate malesuada vestibulum. Proin dapibus tellus nec justo maximus, nec viverra purus convallis. Quisque auctor volutpat ex ac pulvinar. In hac habitasse platea dictumst. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer in lectus consectetur diam euismod fringilla. Morbi eget diam a metus vulputate laoreet. Nullam rutrum accumsan hendrerit. Nulla laoreet eleifend augue vitae gravida. Nunc a feugiat dui. Phasellus ipsum nisl, auctor vitae dui ut, efficitur pulvinar nisi. Duis vulputate nibh et ante sagittis, ac hendrerit ex porta. Nam aliquet dolor eu viverra egestas.
+        Qui a accès à vos données ?
 
-Praesent in velit libero. Maecenas eget cursus felis. Sed sodales, turpis et luctus porta, lectus orci fringilla metus, at eleifend nisl urna vitae eros. Integer egestas mauris eget hendrerit tristique. Vestibulum dapibus mauris lacus, in lacinia risus ultrices vehicula. Vivamus accumsan vehicula maximus. Cras laoreet est diam, eget molestie libero gravida sed. Praesent molestie augue porta consectetur aliquet. Aenean rhoncus eleifend dignissim.
+Les informations que nous recueillons sont exclusivement destinées à la Direction de la Communication et à la
+Direction des Ressources humaines d’ALTEN. Aucune donnée personnelle vous concernant n’est cédée à des tiers.
+Quelle est la durée de conservation des données ?
+Les données personnelles seront conservées :
+    - Pour la rubrique « Contact », le temps de traiter la demande
+    - Pour traiter vos candidatures et gérer la procédure de recrutement, 2 ans après notre dernier contact avec vous
+    - Pour garantir la sécurité de notre site Web, les données relatives aux comptes utilisateurs sont conservées 1 an
+    - Les données de navigation des utilisateurssur notre site Web sont conservées jusqu’à 13 mois.
 
-Suspendisse eget ultricies magna, nec ultrices ipsum. Fusce aliquet tempor sapien, id pulvinar leo elementum ac. Pellentesque urna sapien, molestie in risus nec, placerat accumsan nibh. Integer et elementum velit. Morbi imperdiet dolor felis. Phasellus aliquet diam nunc, at euismod nibh viverra ut. Pellentesque ut porttitor sem, quis commodo enim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque sodales id dui sed faucibus. Mauris sodales sed mi nec semper.
+        Quels sont vos droits ?
 
-Maecenas nec ligula arcu. Nulla a diam velit. Integer sit amet sem mi. Curabitur elementum eget leo nec hendrerit. Etiam dolor nibh, tempus vel libero at, facilisis ornare lectus. Sed eros orci, molestie id ullamcorper at, laoreet tempus quam. Nunc tristique dui id neque tempor fermentum. Aenean semper nibh sed justo pulvinar, ac finibus augue pretium.
+Vous disposez d\'un droit d\'accès, de modification et de suppression sur les données qui vous concernent, d’un
+droit de limitation, à la portabilité, à l’effacement et d’opposition pour des motifs légitimes, ainsi que du droit
+de définir des directives relatives au sort de vos données en cas de décès que vous pouvez exercer en adressant
+un e-mail au Délégué à la Protection des données d’ALTEN à l’adresse suivante : dpo@alten.com.
+Vous disposez par ailleurs, du droit d’introduire une réclamation auprès de la Commission Nationale de
+    l’Informatique et des Libertés (CNIL), notamment sur son site internet www.cnil.fr.
 
-Nam convallis urna eu metus porttitor iaculis. Nam placerat libero nec ligula molestie, suscipit mattis risus iaculis. Aliquam tristique, tellus vel posuere vestibulum, dui turpis aliquam ante, eu condimentum arcu velit eu dui. Vestibulum augue nisl, gravida quis tincidunt sit amet, malesuada at neque. Nullam vulputate lorem vitae consequat feugiat. Phasellus porta neque a augue viverra consectetur. Aenean tempus metus at vestibulum rutrum. Nam porttitor condimentum tortor, at convallis elit venenatis in. Ut tortor neque, vestibulum in mauris non, faucibus varius arcu. Integer semper sollicitudin tellus sit amet porttitor. Aenean vitae metus scelerisque, euismod nunc auctor, feugiat dolor.
+        Modification de la politique
 
-Sed pharetra tristique mauris, et faucibus tellus maximus ut. Aliquam non risus eros. Curabitur sodales volutpat velit, sed pulvinar mauris luctus dignissim. Quisque mauris mauris, consectetur vel neque a, mattis luctus urna. Mauris egestas sapien ipsum, sed auctor quam finibus feugiat. Nullam id sodales elit. Etiam interdum varius iaculis. Nullam sit amet massa orci. Donec bibendum ultricies efficitur. Sed pretium tempus erat et tempus. Quisque blandit fringilla est. Proin at iaculis nulla, vel auctor mi. Aenean volutpat imperdiet sapien, eget auctor ex elementum ut. Phasellus a maximus ipsum, nec suscipit dui. Sed dapibus nunc eu lectus bibendum porttitor non non lectus.
-
-Phasellus eget commodo enim. Nunc et congue odio, at luctus eros. Phasellus eget mauris massa. Sed facilisis felis velit, id tristique eros eleifend vitae. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec elementum non leo quis commodo. Vivamus consectetur suscipit neque at condimentum. Proin fermentum in ligula ac venenatis. Cras sed ex non libero congue elementum.
-
-Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer fermentum ligula vitae elementum sodales. Mauris luctus mattis nisl. Proin maximus sed mi non iaculis. Vestibulum aliquet lectus et nunc finibus dapibus. Fusce efficitur sed orci ac finibus. Sed non fermentum lectus, eu pretium neque. Nunc sagittis nibh eu arcu imperdiet, nec congue neque venenatis. In quis velit sed ipsum laoreet vulputate et quis leo.
-
-Vestibulum mattis, nulla ac dictum luctus, leo orci posuere elit, a rhoncus ex augue gravida ante. Etiam scelerisque justo quis ligula imperdiet sagittis. Quisque magna quam, tempor ultrices volutpat aliquet, lobortis at ipsum. Proin at hendrerit metus. Sed vehicula, ligula sit amet sollicitudin tristique, massa quam sagittis nibh, venenatis ullamcorper justo neque eget leo. Nunc eu odio aliquam, lacinia diam et, hendrerit metus. Sed ultricies pellentesque nibh, sit amet placerat lectus fringilla non. Etiam faucibus ultrices est, non porta lectus mattis vitae. Nulla ultrices odio tempus tempor luctus. Sed ut felis quis libero fermentum iaculis a eu nibh. Morbi eu dui placerat, faucibus nunc vel, tristique arcu. Ut nisl ante, vehicula vel turpis non, mattis consectetur leo.
-
-Aenean congue sem at mi congue, ac imperdiet ex ullamcorper. Nullam ultrices sapien purus, ut rutrum dui pretium a. Nullam ultrices nisl et ligula commodo ornare. Sed blandit eu purus eget interdum. Donec finibus dictum gravida. Aliquam tempor bibendum purus, in rutrum orci laoreet eget. Suspendisse laoreet aliquam sagittis. Nulla fermentum metus eu elit aliquet, cursus tempor mauris laoreet. Vivamus hendrerit, diam id venenatis volutpat, orci tellus efficitur urna, sed eleifend turpis mi ut eros.
-
-Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse tempus bibendum metus eu dapibus. Maecenas congue tristique efficitur. Maecenas non felis in nunc ultrices pharetra sed vel felis. Fusce sodales quam quis sem ullamcorper placerat. Curabitur vehicula blandit velit, eget aliquam ex malesuada quis. Maecenas tristique, odio id consequat condimentum, dolor sem bibendum sapien, nec pellentesque tellus massa a augue.
-
-Pellentesque at tellus est. Donec elementum accumsan dignissim. Donec id tristique dui. Fusce quis ligula finibus, eleifend justo in, rhoncus quam. Donec non mauris sed lectus facilisis accumsan quis ut dolor. Morbi faucibus magna quam, ac vehicula justo iaculis sit amet. Morbi sit amet nunc ultricies, lobortis lacus at, porttitor arcu. Vestibulum tempus tortor scelerisque, sollicitudin nulla sed, luctus urna. Mauris at mollis massa, et ultricies purus. Nulla facilisi.
-
-Donec eu auctor lacus. Cras efficitur ultrices sapien. Curabitur vel orci auctor, suscipit nibh vitae, tristique nisl. Morbi convallis, felis iaculis cursus tristique, neque massa tincidunt eros, vel semper nunc libero vitae nisl. Sed sagittis ipsum turpis, eu vulputate ante vulputate sit amet. Donec sollicitudin elementum tincidunt. Nullam ut tincidunt mauris. Pellentesque eu ligula porta, tristique eros et, fermentum tellus. Etiam ornare augue sed magna pulvinar, in malesuada eros scelerisque. Phasellus at magna porttitor, tincidunt mi a, feugiat nibh.
-
-Maecenas luctus eros eu purus mattis sollicitudin. Pellentesque vel ex ac est feugiat posuere. Nam vel ullamcorper quam. Curabitur laoreet eros nec lorem cursus accumsan. Donec non convallis ligula. Maecenas varius tortor fringilla enim dapibus, a dictum est cursus. Morbi ut fringilla leo.
-
-Vivamus vehicula et ex vitae accumsan. Pellentesque mollis metus nibh, id viverra justo posuere et. Donec lacinia diam vitae libero facilisis, sed malesuada nibh venenatis. Vestibulum eget vestibulum diam, eget consequat lorem. Nam sed varius purus. Phasellus porta fringilla placerat. Phasellus quam magna, venenatis id aliquet in, dictum nec eros. Nulla suscipit odio in dolor sodales, id varius enim tempor. Suspendisse potenti.
-
-Praesent felis dolor, volutpat quis augue at, pellentesque consequat dui. Integer ex lorem, lacinia ultrices mollis eu, dictum viverra est. Aliquam pretium iaculis sem, non eleifend libero. In consequat dui ac diam dictum fringilla. Morbi quis fringilla elit, et ornare dolor. Proin bibendum ligula sed egestas dictum. Mauris odio nisi, interdum non eros eget, mollis porta leo. Pellentesque sodales rhoncus elit, vitae efficitur metus imperdiet fermentum. Etiam sem turpis, iaculis vehicula sem vitae, faucibus tincidunt eros. Quisque in nibh non ipsum sagittis egestas. Sed at justo ut lacus commodo fringilla in id lectus.
-
-Integer accumsan odio viverra, gravida leo id, venenatis urna. Fusce venenatis sem et faucibus condimentum. Donec non sem sed lacus porta rhoncus dapibus a risus. Quisque orci lorem, elementum quis neque a, porta tempus erat. Phasellus dignissim interdum nisl nec ullamcorper. Ut a egestas urna, at feugiat erat. Aliquam iaculis dolor diam, ut varius erat tempus non.
-
-Sed suscipit ex eget rhoncus pharetra. Quisque viverra metus ac lectus feugiat facilisis. Fusce pharetra mauris libero, et fringilla urna convallis sed. Fusce at mattis lectus, eget ultrices mauris. Praesent sed mollis lacus. Ut eleifend porttitor nisl id lobortis. Suspendisse rhoncus nisl a eros viverra molestie. In gravida placerat facilisis.
-
-In ac augue sed felis blandit posuere. Morbi porta nibh erat, mattis tempor enim dignissim ut. Nunc ornare, sapien ac imperdiet molestie, ligula mi aliquet neque, bibendum tincidunt tellus odio convallis massa. Fusce turpis odio, congue at neque sit amet, facilisis rutrum mauris. Nulla facilisi. Curabitur tempor, augue ac ultricies lacinia, ligula leo eleifend urna, sit amet euismod lorem neque a mauris. Suspendisse posuere tincidunt orci. Nulla a porta quam, sit amet commodo dui. Sed et erat et nisl sagittis aliquet vitae et libero.
-
-Cras porttitor rutrum dignissim. Quisque vel purus quis leo venenatis eleifend. Sed non nisl velit. Maecenas vel vehicula velit, vitae maximus ex. Nunc sagittis maximus lectus interdum lobortis. Phasellus magna ipsum, cursus ac molestie id, pharetra eu sem. Maecenas lacinia velit tortor, et tincidunt erat volutpat et. Sed id leo sapien. Proin ultricies augue vitae congue mollis. Duis sit amet dapibus ligula, nec dignissim nisi. Cras quis bibendum enim. Mauris laoreet orci sit amet congue sagittis. Fusce a orci in libero euismod consectetur eu nec tellus. Phasellus condimentum justo vitae lobortis sodales. Aenean luctus nunc nec fermentum vehicula. In commodo eu felis a suscipit.
-
-Etiam eleifend enim vitae turpis tempus commodo. Nulla tempor mattis ipsum, ac blandit erat convallis tempus. Praesent blandit quam faucibus, tempus quam ut, consectetur ligula. Proin accumsan cursus neque eu elementum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In ac arcu id dolor eleifend suscipit vel at arcu. Nullam diam felis, placerat vitae tempor quis, blandit in augue. Suspendisse hendrerit odio leo, ac tristique nulla luctus vitae. Nullam condimentum id lectus accumsan congue. Morbi nibh ipsum, pellentesque eu odio ac, ultricies dapibus arcu. Suspendisse est lectus, tincidunt non lectus ut, posuere rutrum tellus.
-
-Pellentesque ornare laoreet risus, vulputate viverra eros posuere ac. Cras ullamcorper eleifend eleifend. In condimentum tellus eget purus varius porttitor. Nam et nisl tortor. Sed pharetra aliquam dignissim. Donec efficitur a nisi id laoreet. Vestibulum in gravida lectus.
-
-Vivamus semper lectus et imperdiet molestie. Nam fringilla dignissim nisl rhoncus porttitor. Nullam hendrerit lectus vitae erat maximus, at cursus odio pulvinar. Proin auctor massa eros, et tempus justo malesuada et. Aenean sed imperdiet neque. Fusce ac augue at odio facilisis scelerisque. Nunc malesuada sed lacus id sodales. Duis commodo mi est. In sit amet urna iaculis, posuere massa non, dapibus ligula. Aliquam tempor venenatis tincidunt. Donec non condimentum nisi, ultrices imperdiet mauris. Ut viverra ut velit vel consequat. Nullam pretium non purus a scelerisque.
-
-Duis in lorem ex. Fusce augue quam, luctus eget elementum aliquam, feugiat eget lorem. Quisque tincidunt arcu et nisi ornare, a consequat risus euismod. Proin maximus dui in ipsum mollis tincidunt. Aenean at magna id lorem tempus blandit. Ut lacinia arcu orci, eget tristique sem convallis nec. Nam leo augue, consectetur ac urna quis, congue semper ante. Praesent facilisis eleifend nulla eu interdum. Nam imperdiet euismod dui, eu mattis est tempor sed. Quisque vel blandit leo. Duis nisi ligula, condimentum quis tempor sit amet, vulputate vitae nulla. Proin lorem velit, malesuada id leo eget, elementum pretium neque. Phasellus ut libero a tellus scelerisque hendrerit. Aenean magna nulla, tincidunt ut imperdiet eget, pellentesque bibendum nulla. Sed non purus quis turpis porta viverra.
-
-Pellentesque hendrerit gravida luctus. Quisque commodo mollis vehicula. Aliquam erat volutpat. Sed scelerisque vulputate nunc nec elementum. Maecenas quis mauris quis dolor hendrerit facilisis quis vel arcu. Nunc pretium, urna sed gravida posuere, mauris odio malesuada orci, non lobortis tellus enim ut est. Sed aliquet, quam eget porttitor euismod, lacus ante sagittis augue, et tincidunt dolor lacus accumsan mi. Curabitur sed ultricies tellus. Cras sit amet odio cursus turpis laoreet elementum viverra sit amet diam. Aliquam consectetur leo et fringilla cursus. Nunc at arcu non lorem sodales accumsan ut facilisis arcu. Sed aliquet vehicula felis nec cursus. Phasellus blandit viverra turpis, euismod consequat diam sodales quis. Sed tempus pharetra orci ut dignissim. Vivamus fringilla, massa ut bibendum laoreet, neque nulla accumsan est, id auctor dolor felis a velit. Ut ligula lectus, dignissim quis malesuada quis, consectetur sed sapien.
-
-Vestibulum a tortor felis. Cras vehicula varius metus, a sollicitudin nisi ultrices in. Mauris id dolor lorem. Sed hendrerit lobortis neque, quis efficitur neque ullamcorper quis. Fusce interdum velit ex, id congue risus mollis at. Vivamus sit amet augue eget diam auctor efficitur. Praesent at eros consequat, fringilla enim nec, tincidunt nibh. Sed egestas sollicitudin tellus et rutrum. Nulla in augue sodales, suscipit augue ut, efficitur ipsum. Suspendisse dictum vulputate purus in vulputate. Aenean vel ipsum in justo hendrerit condimentum in ac velit. Donec eleifend sapien nec porttitor sollicitudin. Nam pretium tincidunt arcu, eu consequat quam vestibulum ut. Nulla convallis eleifend lectus id pellentesque. Vestibulum ac arcu lobortis, consequat tellus quis, molestie mi.
-
-Vivamus nec urna at enim consequat maximus quis bibendum felis. Ut tincidunt massa sed nisi consequat, eget tincidunt augue dictum. Mauris id porttitor lacus. Aliquam facilisis vitae lacus ut dictum. Fusce efficitur efficitur ipsum quis volutpat. Suspendisse non sollicitudin dolor. Duis aliquam, ex sed euismod vehicula, libero tellus porttitor augue, vel malesuada justo dui id neque. Donec semper, nisi sed porttitor imperdiet, lacus tellus condimentum eros, et finibus justo orci sit amet nisl. Nam et eros tristique, consectetur erat quis, iaculis leo. Vivamus congue porttitor ipsum, at mollis purus sodales sit amet. Maecenas nec purus a enim tempus finibus. Nullam mattis placerat orci id aliquam. Nam vitae faucibus arcu, vitae ornare urna.
-
-In sagittis tempor velit, non dapibus quam malesuada vel. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam blandit dolor magna, vel vulputate lacus pretium et. In consequat consequat nibh, ut ultrices orci eleifend vitae. Phasellus non molestie lacus, nec maximus velit. Nullam a mi dui. Cras gravida urna eu leo varius placerat. Nulla rutrum auctor nisi. Aliquam ornare orci ut est posuere, sed eleifend justo maximus. Maecenas eget lacus libero. Nullam fermentum laoreet nulla, sit amet sagittis diam viverra consequat. Vivamus ut consectetur velit. Mauris euismod augue luctus arcu maximus, eget lobortis nisi rutrum. Morbi accumsan nisl ac eros malesuada, sagittis porttitor dui eleifend. Proin luctus congue elit non sagittis. Vestibulum rhoncus enim id erat cursus, ut sodales arcu viverra.
-
-Curabitur rhoncus massa nibh, et rhoncus eros ultricies ac. Nunc euismod, dolor tempor posuere cursus, erat ipsum feugiat erat, at semper erat nisi quis ex. Phasellus at libero blandit, vulputate ligula tempor, dictum libero. Aenean nec mauris tincidunt, vestibulum quam eget, lacinia elit. Etiam imperdiet neque lorem, eget semper dui cursus ullamcorper. Fusce eget lobortis risus, vitae posuere neque. In dictum lacus vel orci consectetur consequat. Aliquam erat volutpat. Pellentesque ullamcorper finibus tellus in sagittis. Nam id tellus vehicula, imperdiet sapien sed, interdum leo. Integer egestas tristique quam. Cras et massa eget dui tristique faucibus at quis orci.
-
-Proin et nisl felis. Cras ornare felis libero, vel imperdiet dolor suscipit id. Donec rhoncus enim eu orci convallis, porta commodo augue pretium. Mauris consectetur urna viverra, facilisis nisi in, lobortis orci. Duis sed nibh eu augue pharetra eleifend. Aliquam quis iaculis metus. Nam tristique ultricies mi. Nullam sit amet vestibulum lectus. Suspendisse in sapien a quam vulputate ullamcorper at quis elit. Proin iaculis vitae turpis faucibus porttitor. Nullam ullamcorper feugiat arcu at luctus.
-
-Curabitur a elit pharetra, egestas enim a, dapibus ante. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent imperdiet nibh at leo lobortis laoreet. Aenean facilisis semper orci, a facilisis erat laoreet vel. Donec diam nisi, dictum et eros a, mollis ullamcorper lorem. Quisque rhoncus elementum ligula, in bibendum erat. Vestibulum malesuada lacinia tellus, eu consequat tortor molestie sodales. Donec quis elit sed libero finibus vulputate eget in est. Quisque rhoncus augue et dolor fringilla imperdiet. Vestibulum sit amet faucibus turpis, a sagittis massa. Pellentesque consectetur ac tellus eget laoreet. Fusce sit amet turpis sed ipsum porta dignissim. Proin maximus tristique eros a eleifend. Vestibulum nibh lorem, accumsan ut vehicula euismod, porta vitae leo.
-
-Cras et porta nisi, ut placerat mi. Pellentesque posuere massa sit amet leo varius vestibulum vitae id sapien. Nunc gravida tristique tellus, quis maximus nisi euismod eu. Maecenas feugiat nec est in finibus. Nam lacinia augue lacus, nec auctor nulla gravida at. Donec elementum odio finibus scelerisque malesuada. Maecenas sagittis ligula eu risus malesuada, porttitor hendrerit mi convallis. Curabitur in condimentum ipsum. Cras tortor elit, tincidunt sed orci ut, faucibus tincidunt dolor.
-
-Duis interdum dui vel justo consectetur, sit amet hendrerit libero ullamcorper. Suspendisse eu facilisis mauris. Suspendisse consequat finibus justo. Fusce ante velit, dapibus et magna eu, commodo molestie enim. In cursus ante euismod rutrum ultricies. Sed mattis, magna sit amet gravida sodales, ex lacus vehicula ipsum, ac pellentesque nisl libero sed felis. Suspendisse aliquet blandit porttitor. Aliquam metus quam, cursus non purus sed, pulvinar luctus nibh. Vestibulum turpis ante, luctus quis venenatis vel, pharetra in purus. Duis nec turpis imperdiet mi posuere bibendum. Cras nec ligula nec enim porta lacinia. Nunc tristique tellus nisi, et bibendum purus congue vitae. Nullam pellentesque ultrices magna, ut ultricies elit posuere ac.
-
-Donec nec nisi vitae justo varius venenatis maximus at risus. Aliquam lectus risus, hendrerit sed sagittis quis, eleifend sed augue. Ut vitae tincidunt metus. Nam maximus, mauris vel gravida bibendum, urna ex pulvinar magna, sed egestas urna felis gravida nisi. In eu dui condimentum, dictum dui a, imperdiet mi. Nunc ligula turpis, placerat sed enim ut, ultricies vestibulum erat. Duis fermentum dolor at libero pulvinar tempus.
-
-Aenean cursus metus et odio consectetur, eu feugiat turpis tincidunt. Integer mi lorem, ultricies at sagittis et, volutpat non tortor. Curabitur elementum orci eget leo mollis euismod. In hac habitasse platea dictumst. Curabitur vel mauris libero. Maecenas eleifend mollis neque, iaculis efficitur dui egestas sed. Nullam mollis ligula fermentum blandit vestibulum. Maecenas nec scelerisque eros, vel pharetra mi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce interdum placerat luctus. Mauris egestas eleifend velit sed condimentum.
-
-Pellentesque diam arcu, ornare sit amet nunc in, ornare euismod lectus. Nam vestibulum orci in dignissim posuere. Curabitur ornare nunc eu cursus gravida. Nam finibus vestibulum quam, consequat sodales ipsum hendrerit mollis. Maecenas lacus mi, pulvinar cursus laoreet ac, elementum ut orci. Sed id tempus ligula. Sed vel libero commodo, sagittis nisl quis, luctus metus. Proin aliquet vitae massa non viverra. Vestibulum metus risus, tempus ac aliquet at, iaculis vehicula lorem. Vestibulum lobortis enim sit amet ipsum tempor, ac vestibulum libero maximus. Donec erat lectus, auctor a justo ac, interdum rutrum ligula. Sed sollicitudin libero erat, sed vehicula est tempor ut. Vivamus in volutpat augue. Pellentesque pharetra felis eleifend nulla fermentum dapibus sed eu nisl. Maecenas mollis ex ultrices dictum facilisis. In vitae varius elit.
-
-Suspendisse potenti. Nunc eu aliquet eros, nec luctus quam. Curabitur nec laoreet nisi, sit amet semper quam. Proin vehicula luctus lectus, nec bibendum magna hendrerit ut. Morbi sodales odio purus, id aliquam tellus pulvinar quis. Cras pretium nisi non ultricies vulputate. Donec elementum nibh nec est suscipit gravida. Proin id nulla eget tortor laoreet tincidunt. Sed lectus urna, bibendum id eros efficitur, eleifend tristique justo. Morbi non libero luctus, feugiat massa ut, vulputate sem. Cras ante est, finibus eget iaculis non, viverra et metus. Maecenas commodo at quam nec tristique. Ut in lobortis nunc.
-    ]]></string>
+La présente politique a été mise à jour le 10/07/2018.
+    En cas de modification ou mise à jour de la présente politique, vous serez informés par un affichage sur le site.]]></string>
     <string name="dialog_forum">New Forum</string>
     <string name="applicant_accepted_and_validated">Applicant sheet created and validated</string>
     <string name="proceed">Proceed</string>
@@ -195,20 +134,17 @@ Suspendisse potenti. Nunc eu aliquet eros, nec luctus quam. Curabitur nec laoree
     <string name="sendToHint">(separate each person by a comma \",\")</string>
     <string name="validate">Validate</string>
     <string name="send_email_using">Send email using…</string>
-    <string name="no_client_mail">No email clients installed.</string>
     <string name="end_of_process">End of process</string>
     <string name="diplomaName">Diploma\'s name</string>
     <string name="mail_hello_text">
         <![CDATA[
-Bonjour,
+Hello,
 
-Voici un CV qui devrait vous intéresser.
+Here is a CV that should interest you.
         ]]>
     </string>
-    <string name="mail_bye_text">
-        <![CDATA[Cordialement,
-        ]]>
-    </string>
+    <string name="mail_bye_text">"\n        <![CDATA[Sincerely,
+        ]]>\n    "</string>
     <string name="cv_that_will_interest_you">Cv that will interest you</string>
     <string name="title_activity_settings">Settings</string>
 
@@ -221,7 +157,6 @@ Voici un CV qui devrait vous intéresser.
     <string name="not_defined">No value defined</string>
 
     <string name="alert_process_title">Need confirmation</string>
-    <string name="cancel_error">Transaction didn\'t worked :/</string>
     <string name="alert_process_message">Do you really want to decline ? It will stop the process, and delete all your data within the application.</string>
     <string name="selectContract">Contract Type</string>
     <string name="forum">Forum</string>
@@ -233,8 +168,7 @@ Voici un CV qui devrait vous intéresser.
     <string name="document">Documents</string>
     <string name="menu_add_forum">Create new forum</string>
     <string name="menu_add_applicant">Create new applicant</string>
-    <string name="separator">-</string>
-    <string name="title_applicant">Applicant</string>
+    <string name="separator" translatable="false">-</string>
     <string name="no_diploma">No known diploma</string>
     <string name="no_contract_known">Contract\'s desire unknown</string>
     <string name="invalid_mail">Invalid mail</string>
@@ -246,11 +180,23 @@ Voici un CV qui devrait vous intéresser.
     <string name="title_document_list">documents</string>
     <string name="title_document_detail">document Detail</string>
     <string name="menu_document_list">Documents list</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading…</string>
     <string name="skillIT">IT Skill</string>
     <string name="skillTechno">Techno skill</string>
     <string name="wage_expectation">Wage expectation</string>
     <string name="wage_currency">€</string>
     <string name="new_applicant">New Applicant</string>
     <string name="add_CV">CV_ADD</string>
+    <string name="none">None</string>
+    <string name="internship">Internship</string>
+    <string name="CDD">CDD</string>
+    <string name="CDI">CDI</string>
+    <string name="freelance">Freelance</string>
+    <string name="subcontracting">Subcontracting</string>
+    <string name="reconversion">Reconversion</string>
+    <string name="IT">IT</string>
+    <string name="techno">Techno</string>
+
+    <string name="no_client_mail">No email clients installed.</string>
+    <string name="mobilites">Mobilities</string>
 </resources>

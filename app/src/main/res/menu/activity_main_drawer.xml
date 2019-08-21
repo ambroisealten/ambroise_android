@@ -9,12 +9,10 @@
             android:icon="@drawable/ic_menu_forum"
             android:title="@string/forum" />
         <item
-            android:id="@+id/nav_mission"
             android:enabled="false"
             android:icon="@drawable/ic_menu_mission"
             android:title="@string/mission" />
         <item
-            android:id="@+id/nav_competence"
             android:enabled="false"
             android:icon="@drawable/ic_menu_competence"
             android:title="@string/competence" />

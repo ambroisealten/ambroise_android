@@ -140,7 +140,6 @@
         android:layout_height="wrap_content">
 
         <View
-            android:id="@+id/divider3"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider"/>
@@ -199,7 +198,6 @@
         android:layout_height="wrap_content">
 
         <View
-            android:id="@+id/divider4"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider" />
@@ -258,7 +256,6 @@
         android:layout_height="wrap_content">
 
         <View
-            android:id="@+id/divider5"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider" />

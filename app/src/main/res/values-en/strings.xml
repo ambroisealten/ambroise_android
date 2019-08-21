@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="abstractContract">Summary</string>
+    <string name="accept">Accept</string>
+    <string name="action">Action</string>
+    <string name="action_settings">Settings</string>
+    <string name="add_CV">Add a CV</string>
+    <string name="add_geographic">ADD</string>
+    <string name="alert_process_message">Do you really want to decline? This will stop the process, and delete all saved data</string>
+    <string name="alert_process_title">Confirm the cessation of the process</string>
+    <string name="allDiplomas">All the diplomas</string>
+    <string name="allSkills">All the skills</string>
+    <string name="applicant_accepted_and_validated">Applicant sheet created and validated</string>
+    <string name="begin_at">Beginning at</string>
+    <string name="cancel">Cancel</string>
+    <string name="carbon_copied_preference">Automatic Carbon Copied</string>
+    <string name="competence">Skillsheet</string>
+    <string name="contract">Contract</string>
+    <string name="cv_picture">Applicant\'s CV</string>
+    <string name="cv_picture_description">CV picture</string>
+    <string name="cv_that_will_interest_you">Cv that will interest you</string>
+    <string name="decline">Refuser</string>
+    <string name="defaultTextMobility">Mobility, within 100 kms</string>
+    <string name="dialog_forum">New Forum</string>
+    <string name="diploma">Diploma</string>
+    <string name="diplomaAdd">Add a diploma</string>
+    <string name="diplomaName">Diploma\'s name</string>
+    <string name="document">Documents</string>
+    <string name="driving_license">Driving license</string>
+    <string name="end_of_process">End of process</string>
+    <string name="error_creating_file">An error occurred while creating the File</string>
+    <string name="european_citizenship">EUROPEAN</string>
+    <string name="forTime">For</string>
+    <string name="forum">Forum</string>
+    <string name="forum_name">Forum\'s name</string>
+    <string name="forum_place">Forum\'s place</string>
+    <string name="france">France</string>
+    <string name="franceWithoutIDF">France without IDF</string>
+    <string name="francemobility">Mobility for France ?</string>
+    <string name="french_nationality">FRENCH</string>
+    <string name="geographic">Places</string>
+    <string name="graduatingYear">Year of graduation</string>
+    <string name="has_vehicle">Has a personal vehicle</string>
+    <string name="international">International</string>
+    <string name="invalid_already_existing_diploma">This diploma already exists</string>
+    <string name="invalid_already_existing_skill">This skill already exists</string>
+    <string name="invalid_mail">Invalid email address</string>
+    <string name="invalid_phone">Invalid phone number</string>
+    <string name="invalid_year">Invalid year (not in bound)</string>
+    <string name="kilometers">Kms</string>
+    <string name="loading">Loading…</string>
+    <string name="mail">Email</string>
+    <string name="mail_bye_text">"\n        <![CDATA[Best regards,
+        ]]>\n    "</string>
+    <string name="mail_hello_text">"\n        <![CDATA[
+Hello,
+
+Here is a CV that should interest you.
+        ]]>\n    "</string>
+    <string name="menu_add_applicant">Create a new applicant</string>
+    <string name="menu_add_forum">Create a new forum</string>
+    <string name="menu_applicant_list">Applicant list</string>
+    <string name="menu_document_list">Document list</string>
+    <string name="menu_forum_list">Forum list</string>
+    <string name="messages_header">Email</string>
+    <string name="minutes">Mins</string>
+    <string name="mission">Mission</string>
+    <string name="mobility">Mobility</string>
+    <string name="mobility_radius">Within a radius of</string>
+    <string name="months">months</string>
+    <string name="more">More</string>
+    <string name="name">Name</string>
+    <string name="nationality">Nationality :</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_subtitle">Forum module</string>
+    <string name="nav_header_title">ALTEN: Application Ambroise</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="new_applicant">New applicant</string>
+    <string name="noMail">\@noMail.alten.com</string>
+    <string name="no_client_mail">No email client installed.</string>
+    <string name="no_contract_known">The contract\'s desired is unknown</string>
+    <string name="no_diploma">No known diploma</string>
+    <string name="none">None</string>
+    <string name="not_defined">No value defined</string>
+    <string name="not_implemented">Tab not implemented yet</string>
+    <string name="number_of_months">Number of months</string>
+    <string name="one_mail_is_invalid">One mail is invalid. Please, check each mail and be sure to separate them with a comma (\",\")</string>
+    <string name="opinion">Opinion</string>
+    <string name="other_infos">Other information</string>
+    <string name="other_nationality">OTHER</string>
+    <string name="phone">Phone number</string>
+    <string name="preview">Preview</string>
+    <string name="proceed">Proceed</string>
+    <string name="radius">Radius</string>
+    <string name="rgpd_accept">Do you agree to have your data saved?</string>
+    <string name="rgpd_text"><![CDATA[Pursuant to your discussion with ALTEN, you have given consent to participate in the recruitment process and in the improvement thereof, involving the computer processing of your personal data by ALTEN. Your data may be forwarded to the Group\'s various entities for the same purposes. We remind you that you have a right of access, correction and deletion for the data relating to you, a right of limitation, portability, erasure and opposition for legitimate reasons that you may exercise by sending an email to our DPO at the following address:<u>dpo@alten.com</u>.
+The data collected is indispensable for this processing and is intended for the authorised departments of ALTEN. It will be retained for a period of 2 years as from our final contact.
+
+        For further details, please consult the ALTEN privacy policy.
+
+        PROTECTION DE VOS DONNÉES PERSONNELLES
+
+La protection de vos données à caractère personnel est d’une grande importance pour le Groupe ALTEN.
+ALTEN prend toutes les précautions nécessaires pour s’assurer que vos données personnelles soient traitées en
+toute sécurité et en conformité avec la réglementation.
+Vous trouverez ci-dessous des informations détaillées sur le traitement de vos données personnelles dans le
+    cadre de l’utilisation de ce site internet.
+
+        Qui est le responsable de traitement de vos données personnelles ?
+
+Vos données personnelles sont traitées par ALTEN en qualité de responsable de traitement.
+La société ALTEN est située au 40, avenue André Morizet 92100 Boulogne-Billancourt. Les coordonnées de son
+    délégué à la protection des données personnelles sont les suivantes : <u>dpo@alten.com</u>.
+
+        Quelle utilisation de vos données ?
+
+Vos données sont utilisées par ALTEN pour les finalités suivantes:
+    - Répondre et traiter vos messages pour toute question ou demande d’information
+    - Gérer vos candidatures et la procédure de recrutement,
+    - Garantir la sécurité de notre site internet,
+    - Comprendre la navigation des utilisateurssur notre site Web, mais d’une manière non personnalisée.
+ALTEN utilise aussi des cookies pendant que vous naviguez sur son site Web. Vous pouvez en savoir plus sur l’utilisation
+des cookies par ALTEN en cliquant ici.
+Notez que les traitements de données personnelles visés ci-dessus sont basés sur l’intérêt légitime d’ALTEN.
+
+        Qui a accès à vos données ?
+
+Les informations que nous recueillons sont exclusivement destinées à la Direction de la Communication et à la
+Direction des Ressources humaines d’ALTEN. Aucune donnée personnelle vous concernant n’est cédée à des tiers.
+Quelle est la durée de conservation des données ?
+Les données personnelles seront conservées :
+    - Pour la rubrique « Contact », le temps de traiter la demande
+    - Pour traiter vos candidatures et gérer la procédure de recrutement, 2 ans après notre dernier contact avec vous
+    - Pour garantir la sécurité de notre site Web, les données relatives aux comptes utilisateurs sont conservées 1 an
+    - Les données de navigation des utilisateurssur notre site Web sont conservées jusqu’à 13 mois.
+
+        Quels sont vos droits ?
+
+Vous disposez d\'un droit d\'accès, de modification et de suppression sur les données qui vous concernent, d’un
+droit de limitation, à la portabilité, à l’effacement et d’opposition pour des motifs légitimes, ainsi que du droit
+de définir des directives relatives au sort de vos données en cas de décès que vous pouvez exercer en adressant
+un e-mail au Délégué à la Protection des données d’ALTEN à l’adresse suivante : dpo@alten.com.
+Vous disposez par ailleurs, du droit d’introduire une réclamation auprès de la Commission Nationale de
+    l’Informatique et des Libertés (CNIL), notamment sur son site internet www.cnil.fr.
+
+        Modification de la politique
+
+La présente politique a été mise à jour le 10/07/2018.
+    En cas de modification ou mise à jour de la présente politique, vous serez informés par un affichage sur le site.]]></string>
+    <string name="rgpd_warning">! Applicant must read RGPD information and accept it !</string>
+    <string name="save">Save</string>
+    <string name="selectContract">Contract type</string>
+    <string name="sendTo">Send by mail to</string>
+    <string name="sendToHint">(separate each person by a comma \",\")</string>
+    <string name="send_email_applicant">Send by email</string>
+    <string name="send_email_using">Send email using…</string>
+    <string name="sign_hint">Sign here</string>
+    <string name="signature_title">Your signature</string>
+    <string name="skillIT">IT skill</string>
+    <string name="skillTechno">Techno skill</string>
+    <string name="skills">Skills</string>
+    <string name="skillsAdd">Add a skill</string>
+    <string name="splashscreen">Spash screen</string>
+    <string name="start_interview">Start the interview</string>
+    <string name="surname">Surname</string>
+    <string name="take_cv_picture">CV</string>
+    <string name="title_activity_applicant">Applicant</string>
+    <string name="title_activity_forum">Forum</string>
+    <string name="title_activity_main">Forum</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_document_detail">Document</string>
+    <string name="title_document_list">Documents</string>
+    <string name="unknown">Unknown</string>
+    <string name="validate">Validate</string>
+    <string name="validation_image_description">Check validation icon</string>
+    <string name="wage_currency">€</string>
+    <string name="wage_expectation">Expected wage</string>
+    <string name="withinMonths">Within</string>
+    <string name="years">Years</string>
+    <string name="techno">Techno</string>
+    <string name="subcontracting">Subcontracting</string>
+    <string name="reconversion">Reconversion</string>
+    <string name="mobilites">Mobilities</string>
+    <string name="internship">Internship</string>
+    <string name="freelance">Freelance</string>
+    <string name="days">Days</string>
+    <string name="IT">IT</string>
+    <string name="CDI">Permanent contract</string>
+    <string name="CDD">Fixed-term contract</string>
+</resources>

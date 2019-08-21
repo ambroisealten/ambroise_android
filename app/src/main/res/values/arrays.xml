@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Arrays for spinners -->
+    <string-array name="contract_type">
+        <item>@string/internship</item>
+        <item>@string/CDD</item>
+        <item>@string/CDI</item>
+        <item>@string/freelance</item>
+        <item>@string/subcontracting</item>
+        <item>@string/reconversion</item>
+    </string-array>
+    <string-array name="contract_duration_type">
+        <item>@string/days</item>
+        <item>@string/months</item>
+        <item>@string/years</item>
+    </string-array>
+
     <string-array name="grade">
         <item>@string/none</item>
         <item>+++</item>
@@ -50,18 +65,7 @@
         <item>Project management</item>
         <item>V Cycle</item>
     </string-array>
-    
-    <string name="none">None</string>
-    <!-- Reply Preference -->
-    <string-array name="reply_entries">
-        <item>Reply</item>
-        <item>Reply to all</item>
-    </string-array>
 
-    <string-array name="reply_values">
-        <item>reply</item>
-        <item>reply_all</item>
-    </string-array>
     <string-array name="carbon_copied_mail_default" />
     <!-- Value display in preference dialog -->
     <string-array name="carbon_copied_mail">
@@ -73,4 +77,6 @@
         <item>anita.leroi@alten.com</item>
         <item>mariefleur.rochat@alten.com</item>
     </string-array>
+    <string name="days">Days</string>
+    <string name="years">Years</string>
 </resources>

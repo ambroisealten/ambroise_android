@@ -31,25 +31,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:checkedButton="@id/it_skill">
 
                 <RadioButton
-                    android:id="@+id/radioButton5"
+                    android:id="@+id/it_skill"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:tag="IT"
+                    android:tag="@string/IT"
                     android:text="@string/skillIT" />
 
                 <RadioButton
-                    android:id="@+id/radioButton4"
+                    android:id="@+id/techno_skill"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
-                    android:tag="Techno"
+                    android:tag="@string/techno"
                     android:text="@string/skillTechno" />
 
             </RadioGroup>
@@ -75,7 +76,6 @@
         android:layout_height="wrap_content">
 
         <View
-            android:id="@+id/divider1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider" />
@@ -93,7 +93,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/allSkills"

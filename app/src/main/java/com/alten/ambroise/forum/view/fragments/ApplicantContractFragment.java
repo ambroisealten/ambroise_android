@@ -212,9 +212,9 @@ public class ApplicantContractFragment extends Fragment implements ApplicantInfo
         final Editable withinMonths = this.withinMonths.getText();
         String dateRepresentation;
         if (withinMonths.length() <= 0) {
-            dateRepresentation = duration > 0 ? this.contractSpinner.getSelectedItem() + ", beginning the " + getBeginningDate() + ", for " + duration + " " + this.optionalSpinner.getSelectedItem() : this.contractSpinner.getSelectedItem() + ", beginning the " + getBeginningDate();
+            dateRepresentation = duration > 0 ? this.contractSpinner.getSelectedItem() + ", "+getResources().getString(R.string.begin_at)+" "+ getBeginningDate() + ", "+getResources().getString(R.string.forTime)+" "+ duration + " " + this.optionalSpinner.getSelectedItem() : this.contractSpinner.getSelectedItem() + ", "+getResources().getString(R.string.begin_at) + " "+getBeginningDate();
         } else {
-            dateRepresentation = duration > 0 ? this.contractSpinner.getSelectedItem() + ", within " + withinMonths + " months, for " + duration + " " + this.optionalSpinner.getSelectedItem() : this.contractSpinner.getSelectedItem() + ", within " + withinMonths + " months";
+            dateRepresentation = duration > 0 ? this.contractSpinner.getSelectedItem() + ", "+getResources().getString(R.string.withinMonths)+" "+ withinMonths + " "+getResources().getString(R.string.months)+", "+ getResources().getString(R.string.forTime)+" " + duration + " " + this.optionalSpinner.getSelectedItem() : this.contractSpinner.getSelectedItem() + ", "+getResources().getString(R.string.withinMonths)+" "+ withinMonths + " "+getResources().getString(R.string.months);
         }
         this.abstractTextView.setText(dateRepresentation);
         refreshView();
