@@ -39,15 +39,6 @@ public class RGPDTextFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putBoolean(STATE_ACCEPT_ENABLE, accept.isEnabled());
-        savedInstanceState.putInt(STATE_ACCEPT_VISIBILITY,accept.getVisibility());
-        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override
@@ -56,16 +47,17 @@ public class RGPDTextFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_rgpd_text, container, false);
         accept = view.findViewById(R.id.accept_rgpd);
-        if(savedInstanceState != null){
+        final ScrollView scrollView = view.findViewById(R.id.scroll_text_rgpd);
+
+        if (savedInstanceState != null) {
             accept.setVisibility(savedInstanceState.getInt(STATE_ACCEPT_VISIBILITY));
             accept.setEnabled(savedInstanceState.getBoolean(STATE_ACCEPT_ENABLE));
-        }else {
+        } else {
             accept.setEnabled(false);
             accept.setVisibility(View.GONE);
         }
         Button decline = view.findViewById(R.id.decline_rgpd);
 
-        final ScrollView scrollView = view.findViewById(R.id.scroll_text_rgpd);
 
         scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             View view1 = scrollView.getChildAt(scrollView.getChildCount() - 1);
@@ -77,19 +69,24 @@ public class RGPDTextFragment extends Fragment {
             }
         });
 
-        accept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                mListener.onFragmentInteraction(true, RGPDFragmentSwitcher.RGPD_TEXT_TAG);
-            }
-        });
-        decline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                mListener.onFragmentInteraction(false, RGPDFragmentSwitcher.RGPD_TEXT_TAG);
+        accept.setOnClickListener(v -> mListener.onFragmentInteraction(true, RGPDFragmentSwitcher.RGPD_TEXT_TAG));
+        decline.setOnClickListener(v -> mListener.onFragmentInteraction(false, RGPDFragmentSwitcher.RGPD_TEXT_TAG));
+        view.post(() -> {
+            final int measuredHeight = scrollView.getHeight();
+            final int measuredHeight1 = scrollView.getChildAt(0).getHeight();
+            if (measuredHeight >= measuredHeight1) {
+                accept.setEnabled(true);
+                accept.setVisibility(View.VISIBLE);
             }
         });
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putBoolean(STATE_ACCEPT_ENABLE, accept.isEnabled());
+        savedInstanceState.putInt(STATE_ACCEPT_VISIBILITY, accept.getVisibility());
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override
