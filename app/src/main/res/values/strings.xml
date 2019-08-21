@@ -3,7 +3,7 @@
     <string name="title_activity_main">Forum</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">ALTEN: Application Ambroise</string>
+    <string name="nav_header_title">ALTEN: Ambroise Application</string>
     <string name="nav_header_subtitle">Module Forum</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
@@ -12,13 +12,10 @@
     <string name="forum_place">Forum place</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
-    <string name="new_forum">New forum</string>
     <string name="unknown">Unknown</string>
     <string name="preview">Preview</string>
     <string name="title_activity_forum">ForumActivity</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="name">Name</string>
     <string name="surname">Surname</string>
     <string name="phone">Phone number</string>
@@ -29,9 +26,6 @@
     <string name="cv_picture_description">CV picture</string>
     <string name="error_creating_file">An error occurred while creating the File</string>
     <string name="noMail">\@noMail.alten.com</string>
-    <string name="title_activity_blbl">blbl</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
     <string name="mobility">Mobility</string>
     <string name="contract">Contract</string>
     <string name="diploma">Diploma</string>
@@ -50,10 +44,8 @@
     <string name="sign_hint">Sign here</string>
     <string name="decline">Decline</string>
     <string name="accept">Accept</string>
-    <string name="sign">Signature</string>
     <string name="francemobility">Mobility for France ?</string>
     <string name="begin_at">Beginning at</string>
-    <string name="dateBegin">Beginning date</string>
     <string name="withinMonths">Within</string>
     <string name="months">months</string>
     <string name="number_of_months">Number of months</string>
@@ -62,20 +54,18 @@
     <string name="defaultTextMobility">Mobility, within 100 kms</string>
     <string name="add_geographic">Add</string>
     <string name="not_implemented">Tab not implemented yet</string>
-    <string name="diplomas">Diplomas</string>
-    <string name="graduatingYear">Year of obtention</string>
+    <string name="graduatingYear">Year of graduation</string>
     <string name="diplomaAdd">Add Diploma</string>
     <string name="allDiplomas">All Diplomas</string>
     <string name="skillsAdd">Add Skill</string>
     <string name="allSkills">All Skills</string>
     <string name="nationality">Nationality :</string>
     <string name="driving_license">Driving license</string>
-    <string name="has_vehicle">Has a personnal vehicle</string>
+    <string name="has_vehicle">Has a personal vehicle</string>
     <string name="french_nationality">FRENCH</string>
     <string name="european_citizenship">EUROPEAN</string>
     <string name="other_nationality">OTHER</string>
-    <string name="other_infos">Other informations</string>
-    <string name="minRadius">1</string>
+    <string name="other_infos">Other information</string>
     <string name="send_email_applicant">Send by email</string>
 
     <!-- Arrays for spinners -->
@@ -221,7 +211,6 @@ Voici un CV qui devrait vous intéresser.
     <string name="not_defined">No value defined</string>
 
     <string name="alert_process_title">Need confirmation</string>
-    <string name="cancel_error">Transaction didn\'t worked :/</string>
     <string name="alert_process_message">Do you really want to decline ? It will stop the process, and delete all your data within the application.</string>
     <string name="selectContract">Contract Type</string>
     <string name="forum">Forum</string>
@@ -234,7 +223,6 @@ Voici un CV qui devrait vous intéresser.
     <string name="menu_add_forum">Create new forum</string>
     <string name="menu_add_applicant">Create new applicant</string>
     <string name="separator">-</string>
-    <string name="title_applicant">Applicant</string>
     <string name="no_diploma">No known diploma</string>
     <string name="no_contract_known">Contract\'s desire unknown</string>
     <string name="invalid_mail">Invalid mail</string>
@@ -246,7 +234,7 @@ Voici un CV qui devrait vous intéresser.
     <string name="title_document_list">documents</string>
     <string name="title_document_detail">document Detail</string>
     <string name="menu_document_list">Documents list</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading…</string>
     <string name="skillIT">IT Skill</string>
     <string name="skillTechno">Techno skill</string>
     <string name="wage_expectation">Wage expectation</string>
