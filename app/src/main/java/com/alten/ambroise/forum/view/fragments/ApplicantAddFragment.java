@@ -156,7 +156,7 @@ public class ApplicantAddFragment extends Fragment {
             newApplicant.setPhoneNumber(phone.length() == 0 ? "0000000000" : phone.getText().toString());
 
             final Drawable drawable = cvDisplay.getDrawable();
-            if (drawable != null) {
+            if (drawable != null && !cvDisplay.getTag().toString().equals("CV_ADD")) {
                 Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);

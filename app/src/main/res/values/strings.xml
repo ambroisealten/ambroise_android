@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ambroise-forum</string>
+    <string name="app_name" translatable="false">Ambroise-forum</string>
     <string name="title_activity_main">Forum</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -108,10 +108,10 @@ La société ALTEN est située au 40, avenue André Morizet 92100 Boulogne-Billa
         Quelle utilisation de vos données ?
 
 Vos données sont utilisées par ALTEN pour les finalités suivantes:
-- Répondre et traiter vos messages pour toute question ou demande d’information
-- Gérer vos candidatures et la procédure de recrutement,
-- Garantir la sécurité de notre site internet,
-- Comprendre la navigation des utilisateurssur notre site Web, mais d’une manière non personnalisée.
+    - Répondre et traiter vos messages pour toute question ou demande d’information
+    - Gérer vos candidatures et la procédure de recrutement,
+    - Garantir la sécurité de notre site internet,
+    - Comprendre la navigation des utilisateurssur notre site Web, mais d’une manière non personnalisée.
 ALTEN utilise aussi des cookies pendant que vous naviguez sur son site Web. Vous pouvez en savoir plus sur l’utilisation
 des cookies par ALTEN en cliquant ici.
 Notez que les traitements de données personnelles visés ci-dessus sont basés sur l’intérêt légitime d’ALTEN.
@@ -119,7 +119,7 @@ Notez que les traitements de données personnelles visés ci-dessus sont basés 
         Qui a accès à vos données ?
 
 Les informations que nous recueillons sont exclusivement destinées à la Direction de la Communication et à la
-Direction des Ressources humaines d’ALTEN. Aucune donnée personnelle vous concernant n’est cédée à des tiers. 
+Direction des Ressources humaines d’ALTEN. Aucune donnée personnelle vous concernant n’est cédée à des tiers.
 Quelle est la durée de conservation des données ?
 Les données personnelles seront conservées :
     - Pour la rubrique « Contact », le temps de traiter la demande
@@ -149,7 +149,6 @@ La présente politique a été mise à jour le 10/07/2018.
     <string name="sendToHint">(separate each person by a comma \",\")</string>
     <string name="validate">Validate</string>
     <string name="send_email_using">Send email using…</string>
-    <string name="no_client_mail">No email clients installed.</string>
     <string name="end_of_process">End of process</string>
     <string name="diplomaName">Diploma\'s name</string>
     <string name="mail_hello_text">
@@ -186,7 +185,7 @@ Here is a CV that should interest you.
     <string name="document">Documents</string>
     <string name="menu_add_forum">Create new forum</string>
     <string name="menu_add_applicant">Create new applicant</string>
-    <string name="separator">-</string>
+    <string name="separator" translatable="false">-</string>
     <string name="no_diploma">No known diploma</string>
     <string name="no_contract_known">Contract\'s desire unknown</string>
     <string name="invalid_mail">Invalid mail</string>
@@ -205,4 +204,5 @@ Here is a CV that should interest you.
     <string name="wage_currency">€</string>
     <string name="new_applicant">New Applicant</string>
     <string name="add_CV">CV_ADD</string>
+    <string name="no_client_mail">No email clients installed.</string>
 </resources>
