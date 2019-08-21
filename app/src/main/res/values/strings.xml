@@ -177,7 +177,7 @@ Here is a CV that should interest you.
     <string name="invalid_already_existing_diploma">This diploma already exists</string>
     <string name="invalid_year">Invalid year (not in bound)</string>
     <string name="invalid_already_existing_skill">This skill already exists</string>
-    <string name="title_document_list">documents</string>
+    <string name="title_document_list">Documents</string>
     <string name="title_document_detail">document Detail</string>
     <string name="menu_document_list">Documents list</string>
     <string name="loading">Loading…</string>

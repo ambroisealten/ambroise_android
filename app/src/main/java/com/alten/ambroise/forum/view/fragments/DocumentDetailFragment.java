@@ -72,7 +72,9 @@ public class DocumentDetailFragment extends Fragment {
             final ProgressDialog progressDialog = new ProgressDialog(getContext());
             progressDialog.setMessage(getString(R.string.loading));
             progressDialog.setCancelable(true);
-            progressDialog.show();
+            if(savedInstanceState==null){
+                progressDialog.show();
+            }
             PDFView pdfView = rootView.findViewById(R.id.pdfv);
             WebView webview = rootView.findViewById(R.id.document_detail);
             if (mItem.getUri().substring(mItem.getUri().lastIndexOf(".") + 1).equals("pdf")) {
