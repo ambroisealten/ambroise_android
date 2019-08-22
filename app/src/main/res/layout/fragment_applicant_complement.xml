@@ -82,10 +82,12 @@
             android:id="@+id/group_nationality"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checkedButton="@id/french_nationality"
             android:gravity="center"
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/french_nationality"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -94,6 +96,7 @@
                 android:text="@string/french_nationality" />
 
             <RadioButton
+                android:id="@+id/european_nationality"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -101,6 +104,7 @@
                 android:text="@string/european_citizenship" />
 
             <RadioButton
+                android:id="@+id/other_nationality"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

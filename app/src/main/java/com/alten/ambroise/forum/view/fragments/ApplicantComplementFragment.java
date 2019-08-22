@@ -18,8 +18,6 @@ import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.utils.InputFilterMinMax;
 import com.alten.ambroise.forum.utils.Nationality;
 
-import java.util.Calendar;
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -85,16 +83,15 @@ public class ApplicantComplementFragment extends Fragment implements ApplicantIn
 
         int id = ((RadioGroup) getView().findViewById(R.id.group_nationality)).getCheckedRadioButtonId();
 
-        if(id != -1) {
-            applicant.setNationality(Nationality.valueOf(getView().findViewById(id).getTag().toString()));
-        }
-        else{
+        if (id != -1) {
+            applicant.setNationality(Nationality.getNationality(getView().findViewById(id).getTag().toString()));
+        } else {
             applicant.setNationality(Nationality.NONE);
         }
 
         String wage_expectation = ((EditText) getView().findViewById(R.id.wage_expectation)).getText().toString();
 
-        if(wage_expectation.length() > 0){
+        if (wage_expectation.length() > 0) {
             applicant.setWageExpectations(Integer.parseInt(wage_expectation));
         }
 
