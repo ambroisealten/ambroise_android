@@ -47,8 +47,6 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
         // Required empty public constructor
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +74,7 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                that.setEnableButton();
+                checkValidity();
             }
 
             @Override
@@ -98,7 +96,7 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                that.setEnableButton();
+                checkValidity();
             }
 
             @Override
@@ -110,6 +108,7 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
         });
 
         this.addButton = view.findViewById(R.id.add_skills_button);
+        this.addButton.setEnabled(false);
         this.addButton.setOnClickListener(v -> {
             String diploma = that.diplomaAutoComplete.getText().toString();
             String diplomaYear = that.inputEditDate.getText().toString();
@@ -207,5 +206,9 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(ApplicantForum applicant);
+    }
+
+    private void checkValidity() {
+        this.addButton.setEnabled(this.diplomaAutoComplete.getText().length() > 0 && this.inputEditDate.getText().length() > 0);
     }
 }
