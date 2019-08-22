@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity
 
         DocumentViewModel mDocumentViewModel = ViewModelProviders.of(this).get(DocumentViewModel.class);
         mDocumentViewModel.getAllDocuments().observe(this, documents -> {
+            documentsMenu.keySet().forEach(id -> navigationView.getMenu().removeItem(id));
+            documentsMenu.clear();
             for (int i = 0; i < documents.size(); i++) {
                 final Document document = documents.get(i);
                 if (!documentsMenu.containsValue(document)) {
