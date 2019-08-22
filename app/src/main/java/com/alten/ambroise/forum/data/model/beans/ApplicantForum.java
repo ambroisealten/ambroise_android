@@ -309,7 +309,7 @@ public class ApplicantForum implements Parcelable {
             return "";
         }
         final StringBuilder builder = new StringBuilder();
-        skills.forEach(skill -> builder.append(skill).append(" "));
+        skills.forEach(skill -> builder.append(skill).append(", "));
         return builder.toString();
     }
 
@@ -323,7 +323,7 @@ public class ApplicantForum implements Parcelable {
             Gson gson = new GsonBuilder().create();
             JsonObject jsonMobility = gson.toJsonTree(mobility).getAsJsonObject();
 
-            builder.append(gson.fromJson(jsonMobility, Mobility.class).toString() + " ");
+            builder.append(gson.fromJson(jsonMobility, Mobility.class).toString() + ", ");
         });
         return builder.toString();
     }
