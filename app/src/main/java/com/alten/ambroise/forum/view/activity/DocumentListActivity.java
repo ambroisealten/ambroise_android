@@ -34,8 +34,10 @@ public class DocumentListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_document_list);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(view -> super.onBackPressed());
 
         if (findViewById(R.id.document_detail_container) != null) {
             // The detail container view will be present only in the

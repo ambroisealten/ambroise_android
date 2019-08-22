@@ -62,8 +62,9 @@ public class ApplicantActivity extends AppCompatActivity implements ApplicantMob
         Toolbar mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle(applicant.getSurname() + " " + applicant.getName());
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-        mToolbar.setNavigationOnClickListener(view -> stopProcess());
         setSupportActionBar(mToolbar);
+        mToolbar.setNavigationOnClickListener(view -> stopProcess());
+
 
         FloatingActionButton validateButton = findViewById(R.id.save_applicant);
         validateButton.setOnClickListener(v -> {
