@@ -150,7 +150,7 @@ public class ApplicantAddFragment extends Fragment {
 
             newApplicant.setSurname(surname.length() == 0 ? getString(R.string.applicant)+"#" + newId : surname.getText().toString());
             newApplicant.setName(name.length() == 0 ? getString(R.string.applicant)+"#" + newId : name.getText().toString());
-            newApplicant.setMail(mail.length() == 0 ? getString(R.string.applicant)+"#" + newId + R.string.noMail : mail.getText().toString());
+            newApplicant.setMail(mail.length() == 0 ? getString(R.string.applicant)+"#" + newId + getString(R.string.noMail) : mail.getText().toString());
             newApplicant.setPhoneNumber(phone.length() == 0 ? "0000000000" : phone.getText().toString());
 
             final Drawable drawable = cvDisplay.getDrawable();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,64 +9,62 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/applicant_view_surname_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:layout_weight="2"
-            android:text="name surname"
-            android:textSize="30dp" />
-
-        <Button
-            android:id="@+id/applicant_view_share"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/send_email_applicant"
-            android:textColor="@color/colorPrimary"
-            android:textSize="15dp" />
-    </LinearLayout>
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/applicant_view_surname_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:layout_weight="2"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/applicant_view_share"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_send_24dp"
+                android:drawablePadding="5dp"
+                android:text="@string/send_email_applicant"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/applicant_view_startAt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_margin"
-                    android:text="may 2020"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/applicant_view_startAt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/text_margin"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/applicant_view_phoneNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/text_margin"
-                        android:text="phone"
                         android:textAppearance="?attr/textAppearanceListItem" />
 
                     <TextView
@@ -74,17 +72,203 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/text_margin"
-                        android:text="mail"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/applicant_view_grade"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/text_margin"
+                        android:text="@string/opinion"
                         android:textAppearance="?attr/textAppearanceListItem" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/applicant_view_highestDiploma"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/text_margin"
+                            android:textAppearance="?attr/textAppearanceListItem" />
+
+                        <TextView
+                            android:id="@+id/applicant_view_highestDiplomaYear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/text_margin"
+                            android:textAppearance="?attr/textAppearanceListItem" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/applicant_view_grade"
+                <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/applicant_view_cv_display"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/cv_picture_description" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+        </FrameLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin"
-                    android:text="@string/opinion"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    android:text="@string/mobility"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal">
+
+                    <ScrollView
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="20"
+                        android:fillViewport="true"
+                        android:scrollbars="vertical">
+
+                        <GridView
+                            android:id="@+id/applicant_view_mobility_grid_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="25dp"
+                            android:layout_marginBottom="15dp"
+                            android:gravity="center"
+                            android:horizontalSpacing="20dp"
+                            android:numColumns="auto_fit"
+                            android:stretchMode="columnWidth"
+                            android:verticalSpacing="10dp" />
+                    </ScrollView>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+        </FrameLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin"
+                    android:text="@string/skills"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal">
+
+                    <ScrollView
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="20"
+                        android:fillViewport="true"
+                        android:scrollbars="vertical">
+
+                        <GridView
+                            android:id="@+id/applicant_view_skills_grid_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="25dp"
+                            android:layout_marginBottom="15dp"
+                            android:gravity="center"
+                            android:horizontalSpacing="20dp"
+                            android:numColumns="auto_fit"
+                            android:stretchMode="columnWidth"
+                            android:verticalSpacing="10dp" />
+                    </ScrollView>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+        </FrameLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin"
+                    android:text="@string/other_infos"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="20sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -92,220 +276,26 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/applicant_view_highestDiploma"
+                        android:id="@+id/applicant_view_driverLicense"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/text_margin"
-                        android:text="xxx diploma"
+                        android:text="@string/driving_license"
                         android:textAppearance="?attr/textAppearanceListItem" />
 
                     <TextView
-                        android:id="@+id/applicant_view_highestDiplomaYear"
+                        android:id="@+id/applicant_view_vehicule"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/text_margin"
-                        android:text="2000"
                         android:textAppearance="?attr/textAppearanceListItem" />
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/applicant_view_personInChargeMail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_margin"
-                    android:text="incharge@alten.com"
-                    android:textAppearance="?attr/textAppearanceListItem" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/applicant_view_cv_display"
+                    android:id="@+id/applicant_view_nationality"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:adjustViewBounds="true"
-                    android:contentDescription="@string/cv_picture_description" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider"/>
-
-    </FrameLayout>
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="5">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                android:text="@string/mobility"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:orientation="horizontal">
-
-                <ScrollView
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="20"
-                    android:fillViewport="true"
-                    android:scrollbars="vertical">
-
-                    <GridView
-                        android:id="@+id/applicant_view_mobility_grid_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="25dp"
-                        android:layout_marginBottom="15dp"
-                        android:gravity="center"
-                        android:horizontalSpacing="20dp"
-                        android:numColumns="auto_fit"
-                        android:stretchMode="columnWidth"
-                        android:verticalSpacing="10dp" />
-                </ScrollView>
-            </LinearLayout>
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
-
-    </FrameLayout>
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="5">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                android:text="@string/skills"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:orientation="horizontal">
-
-                <ScrollView
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="20"
-                    android:fillViewport="true"
-                    android:scrollbars="vertical">
-
-                    <GridView
-                        android:id="@+id/applicant_view_skills_grid_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="25dp"
-                        android:layout_marginBottom="15dp"
-                        android:gravity="center"
-                        android:horizontalSpacing="20dp"
-                        android:numColumns="auto_fit"
-                        android:stretchMode="columnWidth"
-                        android:verticalSpacing="10dp" />
-                </ScrollView>
-            </LinearLayout>
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
-
-    </FrameLayout>
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                android:text="@string/other_infos"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/applicant_view_driverLicense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/driving_license"
-                    android:textAppearance="?attr/textAppearanceListItem" />
-
-                <TextView
-                    android:id="@+id/applicant_view_vehicule"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="vehicle"
+                    android:text="@string/nationality"
                     android:textAppearance="?attr/textAppearanceListItem" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/applicant_view_nationality"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/nationality"
-                android:textAppearance="?attr/textAppearanceListItem" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-</LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</ScrollView>

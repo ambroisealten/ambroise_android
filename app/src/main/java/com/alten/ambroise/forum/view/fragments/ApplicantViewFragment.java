@@ -97,7 +97,6 @@ public class ApplicantViewFragment extends Fragment {
         ((TextView)view.findViewById(R.id.applicant_view_grade)).setText(this.applicant.getGrade());
         ((TextView)view.findViewById(R.id.applicant_view_highestDiploma)).setText(this.applicant.getHighestDiploma());
         ((TextView)view.findViewById(R.id.applicant_view_highestDiplomaYear)).setText(this.applicant.getHighestDiplomaYear());
-        ((TextView)view.findViewById(R.id.applicant_view_personInChargeMail)).setText(this.applicant.getPersonInChargeMail());
         ((TextView)view.findViewById(R.id.applicant_view_driverLicense)).setText(this.applicant.isDriverLicense() ? getString(R.string.driving_license) : "");
         ((TextView)view.findViewById(R.id.applicant_view_vehicule)).setText(this.applicant.isVehicule() ? getString(R.string.has_vehicle) : "");
         ((TextView)view.findViewById(R.id.applicant_view_nationality)).setText(this.applicant.getNationality() == null ? "" :  getString(R.string.nationality)+" " + this.applicant.getNationality().toString());
