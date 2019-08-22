@@ -10,8 +10,11 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
         android:layout_weight="0"
-        android:layout_marginTop="18dp">
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,7 +50,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/mobility_radius"
-                    android:textColor="@color/colorPrimary"/>
+                    android:textColor="@color/colorPrimary" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
@@ -72,7 +75,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/minutes"
-                    android:textColor="@color/colorPrimary"/>
+                    android:textColor="@color/colorPrimary" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -87,8 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:thumbTint="@color/colorPrimary"
-                        android:trackTint="@color/colorPrimary"
-                        />
+                        android:trackTint="@color/colorPrimary" />
                 </LinearLayout>
 
                 <TextView
@@ -97,7 +99,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/kilometers"
-                    android:textColor="@color/colorPrimary"/>
+                    android:textColor="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
@@ -107,13 +109,12 @@
                 android:orientation="vertical">
 
                 <Button
-                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:id="@+id/button_add_geographics"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/add_geographic"
-                    />
+                    android:text="@string/add_geographic" />
             </LinearLayout>
 
         </LinearLayout>
@@ -136,22 +137,24 @@
         style="@style/CardView.Light"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
 
         <GridView
             android:id="@id/gridView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="15dp"
             android:gravity="center"
+            android:horizontalSpacing="15dp"
             android:numColumns="auto_fit"
             android:stretchMode="columnWidth"
-            android:horizontalSpacing="15dp"
-            android:verticalSpacing="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            >
+            android:verticalSpacing="10dp">
 
         </GridView>
 
@@ -171,12 +174,15 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
+            android:gravity="center|top"
             android:orientation="vertical">
 
             <TextView
@@ -195,49 +201,39 @@
                 android:paddingBottom="25dp">
 
                 <Button
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:background="@drawable/rounded_button"
                     android:id="@+id/buttonFrance"
+                    style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_button"
                     android:text="@string/france" />
 
                 <Button
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:background="@drawable/rounded_button"
                     android:id="@+id/buttonIDF"
+                    style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_button"
 
                     android:text="@string/franceWithoutIDF" />
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center|top"
-                android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/internationalCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-                <CheckBox
-                    android:id="@+id/internationalCheckBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-
-                    android:paddingTop="5dp"
-                    android:switchTextAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:text="@string/international"
-                    android:textColor="#000000"
-                    android:textSize="25sp"
-                    />
-            </LinearLayout>
+                android:gravity="bottom|center"
+                android:paddingTop="5dp"
+                android:switchTextAppearance="@style/TextAppearance.AppCompat.Small"
+                android:text="@string/international"
+                android:textColor="#000000"
+                android:textSize="25sp" />
 
         </LinearLayout>
 

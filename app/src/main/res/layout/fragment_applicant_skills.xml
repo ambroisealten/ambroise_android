@@ -10,7 +10,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp">
+        android:layout_marginTop="18dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,6 +30,7 @@
                 android:textColor="@color/colorPrimary" />
 
             <RadioGroup
+                android:layout_marginTop="10dp"
                 android:id="@+id/skill_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,7 +49,6 @@
                     android:text="@string/skillIT" />
 
                 <RadioButton
-                    android:id="@+id/techno_skill"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
@@ -55,19 +58,19 @@
 
             </RadioGroup>
 
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
             <Button
                 android:id="@+id/add_skills_button"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/rounded_button"
                 android:text="@string/skillsAdd" />
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -84,7 +87,10 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"

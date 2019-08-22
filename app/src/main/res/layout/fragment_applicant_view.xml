@@ -83,7 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin"
-                    android:text="Opinion : "
+                    android:text="@string/opinion"
                     android:textAppearance="?attr/textAppearanceListItem" />
 
                 <LinearLayout
@@ -159,7 +159,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"
-                android:text="Mobility"
+                android:text="@string/mobility"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textSize="20sp" />
 
@@ -217,7 +217,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"
-                android:text="Skills"
+                android:text="@string/skills"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textSize="20sp" />
 
@@ -275,7 +275,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"
-                android:text="Other"
+                android:text="@string/other_infos"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textSize="20sp" />
 

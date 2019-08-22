@@ -147,6 +147,8 @@
                     android:id="@+id/cv_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:background="@drawable/rounded_button"
                     android:text="@string/take_cv_picture" />
 
                 <ImageView

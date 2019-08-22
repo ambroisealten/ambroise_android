@@ -98,9 +98,9 @@ public class ApplicantViewFragment extends Fragment {
         ((TextView)view.findViewById(R.id.applicant_view_highestDiploma)).setText(this.applicant.getHighestDiploma());
         ((TextView)view.findViewById(R.id.applicant_view_highestDiplomaYear)).setText(this.applicant.getHighestDiplomaYear());
         ((TextView)view.findViewById(R.id.applicant_view_personInChargeMail)).setText(this.applicant.getPersonInChargeMail());
-        ((TextView)view.findViewById(R.id.applicant_view_driverLicense)).setText(this.applicant.isDriverLicense() ? "Driver license" : "");
-        ((TextView)view.findViewById(R.id.applicant_view_vehicule)).setText(this.applicant.isVehicule() ? "Own vehicule" : "");
-        ((TextView)view.findViewById(R.id.applicant_view_nationality)).setText(this.applicant.getNationality() == null ? "" : "Nationality : " + this.applicant.getNationality().toString());
+        ((TextView)view.findViewById(R.id.applicant_view_driverLicense)).setText(this.applicant.isDriverLicense() ? getString(R.string.driving_license) : "");
+        ((TextView)view.findViewById(R.id.applicant_view_vehicule)).setText(this.applicant.isVehicule() ? getString(R.string.has_vehicle) : "");
+        ((TextView)view.findViewById(R.id.applicant_view_nationality)).setText(this.applicant.getNationality() == null ? "" :  getString(R.string.nationality)+" " + this.applicant.getNationality().toString());
         // Skills list
         this.skillsGridView = view.findViewById(R.id.applicant_view_skills_grid_view);
         refreshSkillsGridView();

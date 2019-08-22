@@ -75,11 +75,7 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
 
                 int id = ((RadioGroup) getView().findViewById(R.id.skill_type)).getCheckedRadioButtonId();
 
-                System.out.println(id);
-
                 String skillType = getView().findViewById(id).getTag().toString();
-
-                System.out.println(skillType);
 
                 testSkill += " - "+skillType;
 
@@ -101,11 +97,7 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
 
             int id = ((RadioGroup) getView().findViewById(R.id.skill_type)).getCheckedRadioButtonId();
 
-            System.out.println(id);
-
             String skillType = getView().findViewById(id).getTag().toString();
-
-            System.out.println(skillType);
 
             testSkill += " - "+skillType;
 

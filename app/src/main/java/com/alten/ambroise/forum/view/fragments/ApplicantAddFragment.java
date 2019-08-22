@@ -117,9 +117,7 @@ public class ApplicantAddFragment extends Fragment {
                     this.temp = null;
                     checkIfStartAllowed();
                 } else {
-                    if (cvDisplay.getDrawable() == null) {
-                        //cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_add_picture_background));
-                    } else {
+                    if (cvDisplay.getDrawable() != null) {
                         this.currentPhotoPath = this.temp;
                         this.temp = null;
                     }
@@ -150,13 +148,13 @@ public class ApplicantAddFragment extends Fragment {
             ApplicantForum newApplicant = new ApplicantForum();
             long newId = System.currentTimeMillis();
 
-            newApplicant.setSurname(surname.length() == 0 ? "Candidat#" + newId : surname.getText().toString());
-            newApplicant.setName(name.length() == 0 ? "Candidat#" + newId : name.getText().toString());
-            newApplicant.setMail(mail.length() == 0 ? "Candidat#" + newId + R.string.noMail : mail.getText().toString());
+            newApplicant.setSurname(surname.length() == 0 ? getString(R.string.applicant)+"#" + newId : surname.getText().toString());
+            newApplicant.setName(name.length() == 0 ? getString(R.string.applicant)+"#" + newId : name.getText().toString());
+            newApplicant.setMail(mail.length() == 0 ? getString(R.string.applicant)+"#" + newId + R.string.noMail : mail.getText().toString());
             newApplicant.setPhoneNumber(phone.length() == 0 ? "0000000000" : phone.getText().toString());
 
             final Drawable drawable = cvDisplay.getDrawable();
-            if (drawable != null && !cvDisplay.getTag().toString().equals("CV_ADD")) {
+            if (drawable != null && !cvDisplay.getTag().toString().equals("CV_ADD") && drawable.getClass().equals(BitmapDrawable.class)) {
                 Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
@@ -178,7 +176,6 @@ public class ApplicantAddFragment extends Fragment {
         if (savedInstanceState != null && currentPhotoPath != null) {
             cvDisplay.setImageURI(Uri.fromFile(new File(currentPhotoPath)));
         } else {
-            //cvDisplay.setBackground(getActivity().getDrawable(R.drawable.ic_add_picture_background));
             button_start.setEnabled(false);
         }
 
