@@ -106,6 +106,7 @@ public class ForumAddDialogFragment extends DialogFragment {
         dateLayout.setLayoutMode(HORIZONTAL_GRAVITY_MASK);
 
         inputDate = new DatePicker(this.getContext());
+        inputDate.setMinDate(System.currentTimeMillis());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             inputDate.setOnDateChangedListener((datePicker, year, month, dayOfMonth) -> updateTextPreview());
         }
