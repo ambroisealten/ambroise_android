@@ -81,7 +81,7 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String testSkill = s.toString();
+                String testSkill = s.toString().trim();
 
                 int id = ((RadioGroup) getView().findViewById(R.id.skill_type)).getCheckedRadioButtonId();
 
@@ -102,7 +102,7 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
         RadioGroup rdGroup = view.findViewById(R.id.skill_type);
 
         rdGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            String testSkill = skillsAutoComplete.getText().toString();
+            String testSkill = skillsAutoComplete.getText().toString().trim();
 
             int id = ((RadioGroup) getView().findViewById(R.id.skill_type)).getCheckedRadioButtonId();
 

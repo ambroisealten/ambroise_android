@@ -92,6 +92,10 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
             public void afterTextChanged(Editable s) {
                 if (that.allDiplomas.contains(s.toString().trim())) {
                     diplomaAutoComplete.setError(getString(R.string.invalid_already_existing_diploma));
+                    addButton.setEnabled(false);
+                }else {
+                    addButton.setError(null);
+                    setEnableButton();
                 }
             }
         });
@@ -115,6 +119,7 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
                 if (!UtilsMethods.isYearValid(s)) {
                     inputEditDate.setError(getString(R.string.invalid_year));
                 }
+                setEnableButton();
             }
         });
 

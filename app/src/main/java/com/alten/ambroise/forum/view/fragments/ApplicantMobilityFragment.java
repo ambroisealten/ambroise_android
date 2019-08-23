@@ -131,7 +131,15 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (allGeographicsUsed.contains(s.toString().trim())) {
+                    geographicsInput.setError(getString(R.string.invalid_already_existing_diploma));
+                    addGeographics.setEnabled(false);
+                    radiusInput.setEnabled(false);
+                }else {
+                    addGeographics.setError(null);
+                    radiusInput.setEnabled(true);
+                    checkValidity();
+                }
             }
         });
 
