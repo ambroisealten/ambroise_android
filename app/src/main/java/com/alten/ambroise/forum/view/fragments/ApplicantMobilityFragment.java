@@ -107,7 +107,7 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
         addGeographics.setOnClickListener(v -> {
             Mobility createdMobility = createNewMobility(geographicsInput.getText().toString(), Integer.parseInt(radiusInput.getText().toString()), currentUnit);
 
-            if (!allGeographicsUsed.contains(geographicsInput.getText().toString().toLowerCase()) && !geographicsInput.getText().toString().equals("France") && !geographicsInput.getText().toString().equals("France without IDF") && !geographicsInput.getText().toString().equals("International")) {
+            if (!allGeographicsUsed.contains(geographicsInput.getText().toString().toLowerCase()) && !geographicsInput.getText().toString().equals(getString(R.string.france)) && !geographicsInput.getText().toString().equals(getString(R.string.franceWithoutIDF)) && !geographicsInput.getText().toString().equals(getString(R.string.international))) {
                 allGeos.add(createdMobility);
                 allGeographicsUsed.add(geographicsInput.getText().toString().toLowerCase());
             }
@@ -164,11 +164,11 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
         }
         buttonFrance.setOnClickListener(v -> {
             if (!isFranceChecked && !tagExists(PRESENT_FRANCE_TAG)) {
-                Mobility createdMobility = createNewMobility("France", 0, "kms");
+                Mobility createdMobility = createNewMobility(getString(R.string.france), 0, "kms");
                 createdMobility.setTag(PRESENT_FRANCE_TAG);
 
                 if (isIDFChecked) {
-                    deleteGeographic("France without IDF");
+                    deleteGeographic(getString(R.string.franceWithoutIDF));
                 }
 
                 allGeos.add(createdMobility);
@@ -186,11 +186,11 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
         }
         buttonFranceWithoutIDF.setOnClickListener(v -> {
             if (!isIDFChecked && !tagExists(PRESENT_IDF_TAG)) {
-                Mobility createdMobility = createNewMobility("France without IDF", 0, "kms");
+                Mobility createdMobility = createNewMobility(getString(R.string.franceWithoutIDF), 0, "kms");
                 createdMobility.setTag(PRESENT_IDF_TAG);
 
                 if (isFranceChecked) {
-                    deleteGeographic("France");
+                    deleteGeographic(getString(R.string.france));
                 }
 
                 allGeos.add(createdMobility);
@@ -233,7 +233,7 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
 
 
     private void refreshGridView() {
-        allGeos.removeIf(mobility -> mobility.getGeographic().equals("International"));
+        allGeos.removeIf(mobility -> mobility.getGeographic().equals(getString(R.string.international)));
 
 
         CustomGridMobilityAdapter adapter = new CustomGridMobilityAdapter(getActivity(), allGeos, allRadius, this);
@@ -244,7 +244,7 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
         int position = findPosition(geo);
         if (position != -1) {
             Mobility tobeDeleted = allGeos.get(position);
-            if (tobeDeleted.getGeographic().equals("France") || tobeDeleted.getGeographic().equals("France without IDF")) {
+            if (tobeDeleted.getGeographic().equals(getString(R.string.france)) || tobeDeleted.getGeographic().equals(getString(R.string.franceWithoutIDF))) {
                 buttonFranceWithoutIDF.setEnabled(true);
                 buttonFrance.setEnabled(true);
                 isFranceChecked = false;
@@ -270,7 +270,7 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
     @Override
     public void saveInformation(ApplicantForum applicant) {
         if (((CheckBox) getView().findViewById(R.id.internationalCheckBox)).isChecked()) {
-            Mobility createdMobility = createNewMobility("International", 0, "kms");
+            Mobility createdMobility = createNewMobility(getString(R.string.international), 0, "kms");
             createdMobility.setTag(PRESENT_INTERNATIONAL_TAG);
             allGeos.add(createdMobility);
         }
