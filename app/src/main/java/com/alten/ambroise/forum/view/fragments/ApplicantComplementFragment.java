@@ -26,13 +26,6 @@ import com.alten.ambroise.forum.utils.Nationality;
  */
 public class ApplicantComplementFragment extends Fragment implements ApplicantInfo {
 
-
-    private boolean hasLicense;
-    private boolean hasVehicle;
-
-    private String nationality = "";
-
-
     private OnFragmentInteractionListener mListener;
 
     public ApplicantComplementFragment() {

@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checked="true"
-                android:tag="FRENCH"
+                android:tag="@string/french_nationality"
                 android:text="@string/french_nationality" />
 
             <RadioButton
