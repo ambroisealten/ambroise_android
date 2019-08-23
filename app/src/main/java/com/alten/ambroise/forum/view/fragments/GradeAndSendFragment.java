@@ -79,9 +79,9 @@ public class GradeAndSendFragment extends Fragment {
 
             @Override
             public void afterTextChanged(final Editable s) {
-                if (!UtilsMethods.isValidMultipleEmail(s,",")) {
+                if (!UtilsMethods.isValidMultipleEmail(s, ",")) {
                     mails.setError(getString(R.string.one_mail_is_invalid));
-                }else {
+                } else {
                     mails.setError(null);
                 }
             }

@@ -40,21 +40,19 @@ public class ApplicantRecyclerViewAdapter extends RecyclerView.Adapter<Applicant
             holder.mItem = applicant;
             holder.mSurnameView.setText(applicant.getSurname());
             holder.mNameView.setText(applicant.getName());
-            if(applicant.getGrade() == null){
+            if (applicant.getGrade() == null) {
                 holder.mGradeView.setText(R.string.none);
-            }
-            else{
+            } else {
                 holder.mGradeView.setText(applicant.getGrade());
             }
-            if(applicant.getHighestDiploma() == null){
+            if (applicant.getHighestDiploma() == null) {
                 holder.mHighestDiplomaView.setText(R.string.no_diploma);
-            }
-            else{
+            } else {
                 holder.mHighestDiplomaView.setText(applicant.getHighestDiploma());
                 holder.mHighestDiplomaYearView.setText(applicant.getHighestDiplomaYear());
             }
             final String contractRepresentation = applicant.getStartAt();
-            if(contractRepresentation == null){
+            if (contractRepresentation == null) {
                 holder.mContractTypeView.setText(R.string.no_contract_known);
             }
             holder.mContractTypeView.setText(contractRepresentation);
@@ -64,18 +62,20 @@ public class ApplicantRecyclerViewAdapter extends RecyclerView.Adapter<Applicant
         }
     }
 
-    public void setApplicants(List<ApplicantForum> applicants) {
-        mApplicants = applicants;
-        notifyDataSetChanged();
-    }
-
     // getItemCount() is called many times, and when it is first called,
     // mApplicants has not been updated (means initially, it's null, and we can't return null).
     @Override
     public int getItemCount() {
-        if (mApplicants != null)
+        if (mApplicants != null) {
             return mApplicants.size();
-        else return 0;
+        } else {
+            return 0;
+        }
+    }
+
+    public void setApplicants(List<ApplicantForum> applicants) {
+        mApplicants = applicants;
+        notifyDataSetChanged();
     }
 
     public interface OnItemClickListener {

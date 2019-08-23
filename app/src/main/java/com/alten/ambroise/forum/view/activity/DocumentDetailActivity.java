@@ -58,16 +58,16 @@ public class DocumentDetailActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case android.R.id.home:
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. For
-            // more uri, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
-            navigateUpTo(new Intent(this, DocumentListActivity.class));
-            return true;
+                // This ID represents the Home or Up button. In the case of this
+                // activity, the Up button is shown. For
+                // more uri, see the Navigation pattern on Android Design:
+                //
+                // http://developer.android.com/design/patterns/navigation.html#up-vs-back
+                //
+                navigateUpTo(new Intent(this, DocumentListActivity.class));
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

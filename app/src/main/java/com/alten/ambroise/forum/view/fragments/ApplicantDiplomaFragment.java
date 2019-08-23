@@ -48,6 +48,17 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -79,15 +90,15 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(that.allDiplomas.contains(s.toString())){
-                   diplomaAutoComplete.setError(getString(R.string.invalid_already_existing_diploma));
+                if (that.allDiplomas.contains(s.toString())) {
+                    diplomaAutoComplete.setError(getString(R.string.invalid_already_existing_diploma));
                 }
             }
         });
 
 
         this.inputEditDate = view.findViewById(R.id.date_edit_text);
-        this.inputEditDate.setFilters(new InputFilter[]{new InputFilterMinMax(0, Calendar.getInstance().get(Calendar.YEAR)+10)});
+        this.inputEditDate.setFilters(new InputFilter[]{new InputFilterMinMax(0, Calendar.getInstance().get(Calendar.YEAR) + 10)});
         this.inputEditDate.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -101,7 +112,7 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(!UtilsMethods.isYearValid(s)){
+                if (!UtilsMethods.isYearValid(s)) {
                     inputEditDate.setError(getString(R.string.invalid_year));
                 }
             }
@@ -124,7 +135,7 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
         });
 
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             this.allDiplomas = savedInstanceState.getStringArrayList(STATE_ALL_DIPLOMA);
             this.allDiplomasRepresentation = savedInstanceState.getStringArrayList(STATE_ALL_DIPLOMAS_REPRESENTATION);
         }
@@ -136,20 +147,9 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putStringArrayList(STATE_ALL_DIPLOMA,allDiplomas);
-        savedInstanceState.putStringArrayList(STATE_ALL_DIPLOMAS_REPRESENTATION,allDiplomasRepresentation);
+        savedInstanceState.putStringArrayList(STATE_ALL_DIPLOMA, allDiplomas);
+        savedInstanceState.putStringArrayList(STATE_ALL_DIPLOMAS_REPRESENTATION, allDiplomasRepresentation);
         super.onSaveInstanceState(savedInstanceState);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
 
     @Override
@@ -166,13 +166,13 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
         mListener.onFragmentInteraction(applicant);
     }
 
-    private void saveNewDiploma(String diploma, String diplomaYear){
-        if(! this.allDiplomas.contains(diploma.toLowerCase()) && Integer.parseInt(diplomaYear) > 1930){
-            this.allDiplomasRepresentation.add(diploma+" - "+diplomaYear);
+    private void saveNewDiploma(String diploma, String diplomaYear) {
+        if (!this.allDiplomas.contains(diploma.toLowerCase()) && Integer.parseInt(diplomaYear) > 1930) {
+            this.allDiplomasRepresentation.add(diploma + " - " + diplomaYear);
             this.allDiplomas.add(diploma.toLowerCase());
         }
 
-        if(Integer.parseInt(diplomaYear) >= this.highestDiplomaYear){
+        if (Integer.parseInt(diplomaYear) >= this.highestDiplomaYear) {
             this.highestDiploma = diploma;
             this.highestDiplomaYear = Integer.parseInt(diplomaYear);
         }
@@ -184,31 +184,30 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
         this.gridView.setAdapter(adapter);
     }
 
-    private void setEnableButton(){
+    private void setEnableButton() {
         String currentDiploma = this.diplomaAutoComplete.getText().toString();
 
-        if(UtilsMethods.isYearValid(this.inputEditDate.getText()) && !allDiplomas.contains(currentDiploma)) {
+        if (UtilsMethods.isYearValid(this.inputEditDate.getText()) && !allDiplomas.contains(currentDiploma)) {
             this.addButton.setEnabled(true);
-        }
-        else{
+        } else {
             this.addButton.setEnabled(false);
         }
     }
 
-    public void deleteDiploma(String diplomaToDelete){
+    public void deleteDiploma(String diplomaToDelete) {
         int position = allDiplomasRepresentation.indexOf(diplomaToDelete);
-        if(position != -1){
+        if (position != -1) {
             allDiplomasRepresentation.remove(position);
             allDiplomas.remove(position);
             refreshGridView();
         }
     }
 
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(ApplicantForum applicant);
-    }
-
     private void checkValidity() {
         this.addButton.setEnabled(this.diplomaAutoComplete.getText().length() > 0 && this.inputEditDate.getText().length() > 0);
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(ApplicantForum applicant);
     }
 }

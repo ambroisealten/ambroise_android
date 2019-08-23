@@ -27,10 +27,12 @@ public class ApplicantForumViewModel extends AndroidViewModel {
     }
 
     public Long insert(ApplicantForum applicant) {
-         return mApplicantForumRepository.insert(applicant);
+        return mApplicantForumRepository.insert(applicant);
     }
 
-    public void update(ApplicantForum applicant) { mApplicantForumRepository.update(applicant); }
+    public void update(ApplicantForum applicant) {
+        mApplicantForumRepository.update(applicant);
+    }
 
     public ApplicantForum getApplicant(final Long id) {
         return mApplicantForumRepository.getApplicant(id);

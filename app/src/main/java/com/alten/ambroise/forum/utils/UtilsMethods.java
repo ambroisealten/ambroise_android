@@ -26,8 +26,8 @@ public class UtilsMethods {
         return true;
     }
 
-    public static boolean isYearValid(CharSequence target){
-        if(TextUtils.isEmpty(target)) {
+    public static boolean isYearValid(CharSequence target) {
+        if (TextUtils.isEmpty(target)) {
             return false;
         }
 

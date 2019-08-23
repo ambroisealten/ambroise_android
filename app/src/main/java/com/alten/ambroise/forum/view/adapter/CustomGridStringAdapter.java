@@ -16,14 +16,14 @@ import com.alten.ambroise.forum.view.fragments.ApplicantViewFragment;
 
 import java.util.ArrayList;
 
-public class CustomGridStringAdapter extends BaseAdapter{
-    private Context mContext;
+public class CustomGridStringAdapter extends BaseAdapter {
     private final ArrayList<String> web;
     private final ApplicantDiplomaFragment parent;
     private final ApplicantSkillsFragment parentF;
     private final ApplicantViewFragment parentV;
+    private Context mContext;
 
-    public CustomGridStringAdapter(Context c, ArrayList<String> web, ApplicantDiplomaFragment parent ) {
+    public CustomGridStringAdapter(Context c, ArrayList<String> web, ApplicantDiplomaFragment parent) {
         mContext = c;
         this.web = web;
         this.parent = parent;
@@ -31,7 +31,7 @@ public class CustomGridStringAdapter extends BaseAdapter{
         this.parentV = null;
     }
 
-    public CustomGridStringAdapter(Context c, ArrayList<String> web, ApplicantSkillsFragment parentF ) {
+    public CustomGridStringAdapter(Context c, ArrayList<String> web, ApplicantSkillsFragment parentF) {
         mContext = c;
         this.web = web;
         this.parentF = parentF;
@@ -39,7 +39,7 @@ public class CustomGridStringAdapter extends BaseAdapter{
         this.parentV = null;
     }
 
-    public CustomGridStringAdapter(Context c, ArrayList<String> web, ApplicantViewFragment parentV ) {
+    public CustomGridStringAdapter(Context c, ArrayList<String> web, ApplicantViewFragment parentV) {
         mContext = c;
         this.web = web;
         this.parentV = parentV;
@@ -82,16 +82,15 @@ public class CustomGridStringAdapter extends BaseAdapter{
             textView.setText(web.get(position));
 
             ImageButton buttonDelete = grid.findViewById(R.id.imageButton);
-            if(this.parentV != null) {
+            if (this.parentV != null) {
                 buttonDelete.setVisibility(View.INVISIBLE);
             } else {
                 buttonDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(that.parent != null){
+                        if (that.parent != null) {
                             that.parent.deleteDiploma(web.get(position));
-                        }
-                        else{
+                        } else {
                             that.parentF.deleteSkill(web.get(position));
                         }
                     }

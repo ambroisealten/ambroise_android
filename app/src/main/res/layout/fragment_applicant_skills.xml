@@ -49,7 +49,6 @@
                     android:text="@string/skillIT" />
 
                 <RadioButton
-                    android:id="@+id/techno_skill"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"

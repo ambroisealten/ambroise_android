@@ -12,17 +12,17 @@ public class SplashScreen extends Activity {
     private static final int SPLASH_TIME_OUT = 3000;
 
     @Override
-    protected void onCreate(Bundle savedStateInstance){
+    protected void onCreate(Bundle savedStateInstance) {
         super.onCreate(savedStateInstance);
         setContentView(R.layout.activity_splash);
-        new Handler().postDelayed(new Runnable(){
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 Intent intent = new Intent(SplashScreen.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             }
-        },SPLASH_TIME_OUT);
+        }, SPLASH_TIME_OUT);
     }
 }

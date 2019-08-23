@@ -30,7 +30,9 @@ public class DocumentViewModel extends AndroidViewModel {
         return mDocumentRepository.insert(document);
     }
 
-    public void update(Document document) { mDocumentRepository.update(document); }
+    public void update(Document document) {
+        mDocumentRepository.update(document);
+    }
 
     public Document getDocument(final Long id) {
         return mDocumentRepository.getDocument(id);

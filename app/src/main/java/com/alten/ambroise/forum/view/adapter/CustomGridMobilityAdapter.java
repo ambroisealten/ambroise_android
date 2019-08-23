@@ -16,21 +16,22 @@ import com.alten.ambroise.forum.view.fragments.ApplicantViewFragment;
 
 import java.util.ArrayList;
 
-public class CustomGridMobilityAdapter extends BaseAdapter{
-    private Context mContext;
+public class CustomGridMobilityAdapter extends BaseAdapter {
     private final ArrayList<Mobility> web;
     private final ApplicantMobilityFragment parent;
     private final ApplicantViewFragment parentV;
     private final int[] Imageid;
+    private Context mContext;
 
-    public CustomGridMobilityAdapter(Context c, ArrayList<Mobility> web, int[] Imageid, ApplicantMobilityFragment parent ) {
+    public CustomGridMobilityAdapter(Context c, ArrayList<Mobility> web, int[] Imageid, ApplicantMobilityFragment parent) {
         mContext = c;
         this.Imageid = Imageid;
         this.web = web;
         this.parent = parent;
         this.parentV = null;
     }
-    public CustomGridMobilityAdapter(Context c, ArrayList<Mobility> web, int[] Imageid, ApplicantViewFragment parentV ) {
+
+    public CustomGridMobilityAdapter(Context c, ArrayList<Mobility> web, int[] Imageid, ApplicantViewFragment parentV) {
         mContext = c;
         this.Imageid = Imageid;
         this.web = web;
@@ -74,7 +75,7 @@ public class CustomGridMobilityAdapter extends BaseAdapter{
             textView.setText(txt);
 
             ImageButton buttonDelete = grid.findViewById(R.id.imageButton);
-            if(this.parentV != null) {
+            if (this.parentV != null) {
                 buttonDelete.setVisibility(View.INVISIBLE);
             } else {
                 buttonDelete.setOnClickListener(new View.OnClickListener() {

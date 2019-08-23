@@ -38,35 +38,6 @@ public class ApplicantListFragment extends Fragment {
     }
 
     @Override
-    public void onResume(){
-        //Instantiate forum view model and add observer
-        ApplicantForumViewModel mApplicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
-        if(forumId < 0){
-            //no forum provided
-            mApplicantForumViewModel.getAllApplicants().observe(this,applicants -> adapter.setApplicants(applicants));
-        }else {
-            mApplicantForumViewModel.getAllApplicants().observe(this, applicants -> {
-                final ForumViewModel forumViewModel = ViewModelProviders.of(this).get(ForumViewModel.class);
-                Forum forum = forumViewModel.getForum(this.forumId);
-                final List<ApplicantForum> applicantsFiltered = applicants.stream().filter(applicant -> {
-                    //Conversion with Double necessary but for no known reason. List<Long> was a List<double> with no reason.
-                    for (final Object forumApplicantId : forum.getApplicants()) {
-                        final Double id = (Double) forumApplicantId;
-                        if (id.longValue() == applicant.get_id()) {
-                            return true;
-                        }
-                    }
-                    return false;
-                }).collect(Collectors.toList());
-
-                // Update the cached copy of the applicants in the adapter. (with filter them to don't have unrelated forum applicant
-                adapter.setApplicants(applicantsFiltered);
-            });
-        }
-        super.onResume();
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         final Bundle arguments = getArguments();
         if (arguments != null) {
@@ -104,6 +75,35 @@ public class ApplicantListFragment extends Fragment {
             recyclerView.setAdapter(adapter);
         }
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        //Instantiate forum view model and add observer
+        ApplicantForumViewModel mApplicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
+        if (forumId < 0) {
+            //no forum provided
+            mApplicantForumViewModel.getAllApplicants().observe(this, applicants -> adapter.setApplicants(applicants));
+        } else {
+            mApplicantForumViewModel.getAllApplicants().observe(this, applicants -> {
+                final ForumViewModel forumViewModel = ViewModelProviders.of(this).get(ForumViewModel.class);
+                Forum forum = forumViewModel.getForum(this.forumId);
+                final List<ApplicantForum> applicantsFiltered = applicants.stream().filter(applicant -> {
+                    //Conversion with Double necessary but for no known reason. List<Long> was a List<double> with no reason.
+                    for (final Object forumApplicantId : forum.getApplicants()) {
+                        final Double id = (Double) forumApplicantId;
+                        if (id.longValue() == applicant.get_id()) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }).collect(Collectors.toList());
+
+                // Update the cached copy of the applicants in the adapter. (with filter them to don't have unrelated forum applicant
+                adapter.setApplicants(applicantsFiltered);
+            });
+        }
+        super.onResume();
     }
 
     @Override

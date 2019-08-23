@@ -11,13 +11,6 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "document_table", indices = {@Index(value = "_id", unique = true)})
 public class Document implements Parcelable {
 
-    @PrimaryKey(autoGenerate = true)
-    public Long _id;
-    @NonNull
-    public String title;
-    @NonNull
-    public String uri;
-
     public static final Creator<Document> CREATOR = new Creator<Document>() {
         @Override
         public Document createFromParcel(Parcel in) {
@@ -29,12 +22,32 @@ public class Document implements Parcelable {
             return new Document[size];
         }
     };
+    @PrimaryKey(autoGenerate = true)
+    public Long _id;
+    @NonNull
+    public String title;
+    @NonNull
+    public String uri;
 
     public Document() {
     }
 
+    protected Document(Parcel in) {
+        if (in.readByte() == 0) {
+            _id = null;
+        } else {
+            _id = in.readLong();
+        }
+        title = in.readString();
+        uri = in.readString();
+    }
+
     public Long get_id() {
         return _id;
+    }
+
+    public void set_id(final Long _id) {
+        this._id = _id;
     }
 
     @NonNull
@@ -42,17 +55,13 @@ public class Document implements Parcelable {
         return title;
     }
 
+    public void setTitle(@NonNull final String title) {
+        this.title = title;
+    }
+
     @NonNull
     public String getUri() {
         return uri;
-    }
-
-    public void set_id(final Long _id) {
-        this._id = _id;
-    }
-
-    public void setTitle(@NonNull final String title) {
-        this.title = title;
     }
 
     public void setUri(@NonNull final String uri) {
@@ -67,16 +76,6 @@ public class Document implements Parcelable {
     @Override
     public int describeContents() {
         return 0;
-    }
-
-    protected Document(Parcel in) {
-        if (in.readByte() == 0) {
-            _id = null;
-        } else {
-            _id = in.readLong();
-        }
-        title = in.readString();
-        uri = in.readString();
     }
 
     @Override

@@ -45,18 +45,20 @@ public class ForumRecyclerViewAdapter extends RecyclerView.Adapter<ForumRecycler
         }
     }
 
-    public void setForums(List<Forum> forums) {
-        mForums = forums;
-        notifyDataSetChanged();
-    }
-
     // getItemCount() is called many times, and when it is first called,
     // mForums has not been updated (means initially, it's null, and we can't return null).
     @Override
     public int getItemCount() {
-        if (mForums != null)
+        if (mForums != null) {
             return mForums.size();
-        else return 0;
+        } else {
+            return 0;
+        }
+    }
+
+    public void setForums(List<Forum> forums) {
+        mForums = forums;
+        notifyDataSetChanged();
     }
 
     public interface OnItemClickListener {

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -27,9 +26,6 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
 
     public static final String APPLICANT_LIST_TAG = "applicantListTag";
     public static final String ADD_APPLICANT_TAG = "addApplicantTag";
-    private static final String APPLICANT_VIEW_TAG = "applicantViewTag";
-
-
     public static final Creator<ApplicantFragmentSwitcher> CREATOR = new Creator<ApplicantFragmentSwitcher>() {
         @Override
         public ApplicantFragmentSwitcher createFromParcel(Parcel in) {
@@ -41,6 +37,7 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
             return new ApplicantFragmentSwitcher[size];
         }
     };
+    private static final String APPLICANT_VIEW_TAG = "applicantViewTag";
     private Activity activity;
 
     public ApplicantFragmentSwitcher(Activity activity) {
@@ -81,6 +78,15 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
         }
         // Remplacez, ajoutez à la backstack et commit
         fTransaction.addToBackStack(tag).commit();
+    }
+
+    @Override
+    public void onItemClick(ApplicantForum applicant) {
+        //Toast.makeText(activity, "CLICK SUR CANDIDAT" + applicant.getMail(), Toast.LENGTH_SHORT).show();
+        // Intent intent = new Intent(activity.getBaseContext(), ApplicantActivity.class);
+        //intent.putExtra("applicant",applicant);
+        //activity.startActivity(intent);
+        switchFragment(((AppCompatActivity) activity).getSupportFragmentManager(), APPLICANT_VIEW_TAG, applicant.get_id());
     }
 
     private ApplicantAddFragment switchApplicantAddFragment(FragmentManager fm) {
@@ -126,15 +132,6 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
         activity.findViewById(R.id.fab_forum).setVisibility(View.GONE);
         activity.findViewById(R.id.forum_fragment).setTag(ADD_APPLICANT_TAG);
         return applicantViewFragment;
-    }
-
-    @Override
-    public void onItemClick(ApplicantForum applicant) {
-        //Toast.makeText(activity, "CLICK SUR CANDIDAT" + applicant.getMail(), Toast.LENGTH_SHORT).show();
-       // Intent intent = new Intent(activity.getBaseContext(), ApplicantActivity.class);
-        //intent.putExtra("applicant",applicant);
-        //activity.startActivity(intent);
-        switchFragment(((AppCompatActivity)activity).getSupportFragmentManager(), APPLICANT_VIEW_TAG, applicant.get_id());
     }
 
     @Override

@@ -66,11 +66,8 @@ public class ApplicantViewFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        //Instantiate applicant forum view model and add observer
-        ApplicantForumViewModel mApplicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
-        this.applicant = mApplicantForumViewModel.getApplicant(this.applicantId);
-        super.onResume();
+    public void onAttach(Context context) {
+        super.onAttach(context);
     }
 
     @Override
@@ -90,16 +87,16 @@ public class ApplicantViewFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_applicant_view, container, false);
-        ((TextView)view.findViewById(R.id.applicant_view_surname_name)).setText(this.applicant.getSurname() + " " + this.applicant.getName());
-        ((TextView)view.findViewById(R.id.applicant_view_startAt)).setText(this.applicant.getStartAt());
-        ((TextView)view.findViewById(R.id.applicant_view_phoneNumber)).setText(this.applicant.getPhoneNumber());
-        ((TextView)view.findViewById(R.id.applicant_view_mail)).setText(this.applicant.getMail());
-        ((TextView)view.findViewById(R.id.applicant_view_grade)).setText(this.applicant.getGrade());
-        ((TextView)view.findViewById(R.id.applicant_view_highestDiploma)).setText(this.applicant.getHighestDiploma());
-        ((TextView)view.findViewById(R.id.applicant_view_highestDiplomaYear)).setText(this.applicant.getHighestDiplomaYear());
-        ((TextView)view.findViewById(R.id.applicant_view_driverLicense)).setText(this.applicant.isDriverLicense() ? getString(R.string.driving_license) : "");
-        ((TextView)view.findViewById(R.id.applicant_view_vehicule)).setText(this.applicant.isVehicule() ? getString(R.string.has_vehicle) : "");
-        ((TextView)view.findViewById(R.id.applicant_view_nationality)).setText(this.applicant.getNationality() == null ? "" :  getString(R.string.nationality)+" " + this.applicant.getNationality().toString());
+        ((TextView) view.findViewById(R.id.applicant_view_surname_name)).setText(this.applicant.getSurname() + " " + this.applicant.getName());
+        ((TextView) view.findViewById(R.id.applicant_view_startAt)).setText(this.applicant.getStartAt());
+        ((TextView) view.findViewById(R.id.applicant_view_phoneNumber)).setText(this.applicant.getPhoneNumber());
+        ((TextView) view.findViewById(R.id.applicant_view_mail)).setText(this.applicant.getMail());
+        ((TextView) view.findViewById(R.id.applicant_view_grade)).setText(this.applicant.getGrade());
+        ((TextView) view.findViewById(R.id.applicant_view_highestDiploma)).setText(this.applicant.getHighestDiploma());
+        ((TextView) view.findViewById(R.id.applicant_view_highestDiplomaYear)).setText(this.applicant.getHighestDiplomaYear());
+        ((TextView) view.findViewById(R.id.applicant_view_driverLicense)).setText(this.applicant.isDriverLicense() ? getString(R.string.driving_license) : "");
+        ((TextView) view.findViewById(R.id.applicant_view_vehicule)).setText(this.applicant.isVehicule() ? getString(R.string.has_vehicle) : "");
+        ((TextView) view.findViewById(R.id.applicant_view_nationality)).setText(this.applicant.getNationality() == null ? "" : getString(R.string.nationality) + " " + this.applicant.getNationality().toString());
         // Skills list
         this.skillsGridView = view.findViewById(R.id.applicant_view_skills_grid_view);
         refreshSkillsGridView();
@@ -135,8 +132,11 @@ public class ApplicantViewFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onResume() {
+        //Instantiate applicant forum view model and add observer
+        ApplicantForumViewModel mApplicantForumViewModel = ViewModelProviders.of(this).get(ApplicantForumViewModel.class);
+        this.applicant = mApplicantForumViewModel.getApplicant(this.applicantId);
+        super.onResume();
     }
 
     @Override
@@ -149,21 +149,21 @@ public class ApplicantViewFragment extends Fragment {
     }
 
     private void refreshSkillsGridView() {
-        CustomGridStringAdapter adapter = new CustomGridStringAdapter(getActivity(), (ArrayList<String>)this.applicant.getSkills(), this);
+        CustomGridStringAdapter adapter = new CustomGridStringAdapter(getActivity(), (ArrayList<String>) this.applicant.getSkills(), this);
         this.skillsGridView.setAdapter(adapter);
     }
 
     private void refreshMobilityGridView() {
         int[] allRadius = {};
         List<Mobility> mobilities = new ArrayList<>();
-        List<LinkedTreeMap> mobilitiesTreemap = (List<LinkedTreeMap>)((Object)this.applicant.getMobilities());
+        List<LinkedTreeMap> mobilitiesTreemap = (List<LinkedTreeMap>) ((Object) this.applicant.getMobilities());
         mobilitiesTreemap.forEach(mobility -> {
             Gson gson = new GsonBuilder().create();
             JsonObject jsonMobility = gson.toJsonTree(mobility).getAsJsonObject();
 
             mobilities.add(gson.fromJson(jsonMobility, Mobility.class));
         });
-        CustomGridMobilityAdapter adapter = new CustomGridMobilityAdapter(getActivity(),(ArrayList<Mobility>) mobilities, allRadius, this);
+        CustomGridMobilityAdapter adapter = new CustomGridMobilityAdapter(getActivity(), (ArrayList<Mobility>) mobilities, allRadius, this);
         this.mobilityGridView.setAdapter(adapter);
     }
 

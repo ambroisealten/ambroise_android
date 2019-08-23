@@ -56,7 +56,7 @@ public class Converters {
             return (null);
         }
         Gson gson = new Gson();
-        return gson.toJson(mobility,Mobility.class);
+        return gson.toJson(mobility, Mobility.class);
     }
 
     @TypeConverter
@@ -65,6 +65,6 @@ public class Converters {
             return (null);
         }
         Gson gson = new Gson();
-        return gson.fromJson(mobilityString,Mobility.class);
+        return gson.fromJson(mobilityString, Mobility.class);
     }
 }

@@ -39,15 +39,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Set;
 
 import static com.alten.ambroise.forum.utils.UtilsMethods.setToString;
 
 public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragment.OnFragmentInteractionListener, ValidationFragment.OnFragmentInteractionListener, SignFragment.OnFragmentInteractionListener, RGPDTextFragment.OnFragmentInteractionListener {
 
     public static final String STATE_APPLICANT = "applicant";
-    private static final String STATE_RGPD_FRAGMENT_SWITCHER = "rgpdFragmentSwitcher";
     public static final String STATE_FORUM_ID = "forumId";
+    private static final String STATE_RGPD_FRAGMENT_SWITCHER = "rgpdFragmentSwitcher";
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
     private static final int MAIL_REQUEST_CODE = 1;
     private ApplicantForum applicant;
@@ -77,7 +76,15 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
     }
 
     @Override
-    public void onBackPressed(){
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putParcelable(STATE_RGPD_FRAGMENT_SWITCHER, rgpdFragmentSwitcher);
+        savedInstanceState.putLong(STATE_FORUM_ID, this.forumId);
+        savedInstanceState.putParcelable(STATE_APPLICANT, this.applicant);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onBackPressed() {
         stopProcess();
     }
 
@@ -98,14 +105,6 @@ public class RGPDActivity extends AppCompatActivity implements GradeAndSendFragm
         Intent intent = new Intent(this, ForumActivity.class);
         intent.putExtra(ForumActivity.STATE_FORUM, forumViewModel.getForum(this.forumId));
         startActivity(intent);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putParcelable(STATE_RGPD_FRAGMENT_SWITCHER, rgpdFragmentSwitcher);
-        savedInstanceState.putLong(STATE_FORUM_ID, this.forumId);
-        savedInstanceState.putParcelable(STATE_APPLICANT, this.applicant);
-        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override

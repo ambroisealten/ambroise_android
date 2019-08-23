@@ -23,8 +23,8 @@ public class SimpleItemRecyclerViewAdapter
         extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.DocumentViewHolder> {
 
     private final DocumentListActivity mParentActivity;
-    private List<Document> mValues = new ArrayList<Document>();
     private final boolean mTwoPane;
+    private List<Document> mValues = new ArrayList<Document>();
 
     public SimpleItemRecyclerViewAdapter(DocumentListActivity parent,
                                          boolean twoPane) {

@@ -98,11 +98,6 @@ public class ForumActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
     public void onRestart() {
         //if (findViewById(R._id.forum_fragment).getTag() != null && findViewById(R._id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
         fab.setVisibility(View.VISIBLE);
@@ -136,6 +131,11 @@ public class ForumActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -147,17 +147,16 @@ public class ForumActivity extends AppCompatActivity
                 super.onBackPressed();
             } else {
                 super.onBackPressed();
-                try{
-                    findViewById(R.id.forum_fragment).setTag(getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() -1).getName());
+                try {
+                    findViewById(R.id.forum_fragment).setTag(getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName());
                     if (findViewById(R.id.forum_fragment).getTag() == null) {
                         this.applicantFragmentSwitcher.switchFragment(getSupportFragmentManager(), ApplicantFragmentSwitcher.APPLICANT_LIST_TAG, this.getForumId());
                     }
                     if (findViewById(R.id.forum_fragment).getTag() == ApplicantFragmentSwitcher.APPLICANT_LIST_TAG) {
                         findViewById(R.id.fab_forum).setVisibility(View.VISIBLE);
                     }
-                }
-                catch (ArrayIndexOutOfBoundsException e){
-                    Intent newIntent = new Intent(this,MainActivity.class);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    Intent newIntent = new Intent(this, MainActivity.class);
                     newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(newIntent);
@@ -182,7 +181,7 @@ public class ForumActivity extends AppCompatActivity
                 startActivity(intentForumList);
                 break;
             case R.id.nav_document_list:
-                Intent intent = new Intent(getBaseContext(),DocumentListActivity.class);
+                Intent intent = new Intent(getBaseContext(), DocumentListActivity.class);
                 startActivity(intent);
                 break;
             default:

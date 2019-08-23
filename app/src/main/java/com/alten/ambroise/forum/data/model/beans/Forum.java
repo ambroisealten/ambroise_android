@@ -16,16 +16,21 @@ import java.util.List;
 @Entity(tableName = "forum_table")
 public class Forum implements Parcelable {
 
+    public static final Creator<Forum> CREATOR = new Creator<Forum>() {
+        @Override
+        public Forum createFromParcel(Parcel in) {
+            return new Forum(in);
+        }
+
+        @Override
+        public Forum[] newArray(int size) {
+            return new Forum[size];
+        }
+    };
     @PrimaryKey(autoGenerate = true)
     private Long _id;
     @NonNull
     private String name;
-
-    @Override
-    public String toString() {
-        return name +" " + date;
-    }
-
     @NonNull
     private String date;
     @NonNull
@@ -44,17 +49,10 @@ public class Forum implements Parcelable {
         place = in.readString();
     }
 
-    public static final Creator<Forum> CREATOR = new Creator<Forum>() {
-        @Override
-        public Forum createFromParcel(Parcel in) {
-            return new Forum(in);
-        }
-
-        @Override
-        public Forum[] newArray(int size) {
-            return new Forum[size];
-        }
-    };
+    @Override
+    public String toString() {
+        return name + " " + date;
+    }
 
     public Long get_id() {
         return _id;
@@ -112,7 +110,7 @@ public class Forum implements Parcelable {
         this.applicants = applicants;
     }
 
-    public void putApplicantId(Long id){
+    public void putApplicantId(Long id) {
         this.applicants.add(id);
     }
 }

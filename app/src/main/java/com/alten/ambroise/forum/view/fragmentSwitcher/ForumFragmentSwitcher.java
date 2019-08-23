@@ -95,7 +95,7 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
         if (applicantListFragment == null) {
             applicantListFragment = new ApplicantListFragment();
             Bundle bundle = new Bundle();
-            bundle.putInt(ApplicantListFragment.STATE_COLUMN_COUNT,1);
+            bundle.putInt(ApplicantListFragment.STATE_COLUMN_COUNT, 1);
             bundle.putLong(ForumActivity.STATE_FORUM, -1); //-1 because we want all applicant of all forums
             applicantListFragment.setArguments(bundle);
             applicantListFragment.setSwitcher(this);

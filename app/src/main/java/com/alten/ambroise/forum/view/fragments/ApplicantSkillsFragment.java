@@ -39,6 +39,16 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,13 +87,12 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
 
                 String skillType = getView().findViewById(id).getTag().toString();
 
-                testSkill += " - "+skillType;
+                testSkill += " - " + skillType;
 
-                if(allSkills.contains(testSkill.toLowerCase())){
+                if (allSkills.contains(testSkill.toLowerCase())) {
                     skillsAutoComplete.setError(getString(R.string.invalid_already_existing_skill));
                     buttonAddSkill.setEnabled(false);
-                }
-                else{
+                } else {
                     skillsAutoComplete.setError(null);
                     setEnableButton();
                 }
@@ -99,13 +108,12 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
 
             String skillType = getView().findViewById(id).getTag().toString();
 
-            testSkill += " - "+skillType;
+            testSkill += " - " + skillType;
 
-            if(allSkills.contains(testSkill.toLowerCase())){
+            if (allSkills.contains(testSkill.toLowerCase())) {
                 skillsAutoComplete.setError(getString(R.string.invalid_already_existing_skill));
                 buttonAddSkill.setEnabled(false);
-            }
-            else{
+            } else {
                 skillsAutoComplete.setError(null);
                 setEnableButton();
             }
@@ -121,10 +129,10 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
 
             String skillType = getView().findViewById(id).getTag().toString();
 
-            newSkill += " - "+skillType;
+            newSkill += " - " + skillType;
 
 
-            if( !that.allSkills.contains(newSkill.toLowerCase())){
+            if (!that.allSkills.contains(newSkill.toLowerCase())) {
                 that.allSkillsRepresentation.add(newSkill);
                 that.allSkills.add(newSkill.toLowerCase());
             }
@@ -135,7 +143,7 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
             that.refreshGridView();
         });
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             this.allSkills = savedInstanceState.getStringArrayList(STATE_ALL_SKILLS);
             this.allSkillsRepresentation = savedInstanceState.getStringArrayList(STATE_ALL_SKILLS_REPRESENTATION);
         }
@@ -147,21 +155,9 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putStringArrayList(STATE_ALL_SKILLS,allSkills);
-        savedInstanceState.putStringArrayList(STATE_ALL_SKILLS_REPRESENTATION,allSkillsRepresentation);
+        savedInstanceState.putStringArrayList(STATE_ALL_SKILLS, allSkills);
+        savedInstanceState.putStringArrayList(STATE_ALL_SKILLS_REPRESENTATION, allSkillsRepresentation);
         super.onSaveInstanceState(savedInstanceState);
-    }
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
 
     @Override
@@ -175,18 +171,17 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
         this.gridView.setAdapter(adapter);
     }
 
-    private void setEnableButton(){
-        if (this.skillsAutoComplete.getText().toString().length() > 0){
+    private void setEnableButton() {
+        if (this.skillsAutoComplete.getText().toString().length() > 0) {
             this.buttonAddSkill.setEnabled(true);
-        }
-        else{
+        } else {
             this.buttonAddSkill.setEnabled(false);
         }
     }
 
-    public void deleteSkill(String skillToDelete){
+    public void deleteSkill(String skillToDelete) {
         int position = this.allSkillsRepresentation.indexOf(skillToDelete);
-        if (position > -1){
+        if (position > -1) {
             this.allSkillsRepresentation.remove(position);
             this.allSkills.remove(position);
             this.refreshGridView();

@@ -57,9 +57,20 @@ public class ForumListFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnListFragmentInteractionListener) {
+            mListener = (OnListFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnListFragmentInteractionListener");
+        }
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             this.mColumnCount = savedInstanceState.getInt(STATE_COLUMN_COUNT);
             this.switcher = savedInstanceState.getParcelable(STATE_SWITCHER);
             this.switcher.setActivity(getActivity());
@@ -87,14 +98,6 @@ public class ForumListFragment extends Fragment {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putParcelable(STATE_SWITCHER,switcher);
-        savedInstanceState.putInt(STATE_COLUMN_COUNT,mColumnCount);
-        super.onSaveInstanceState(savedInstanceState);
-    }
-
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_forum_list, container, false);
@@ -113,16 +116,11 @@ public class ForumListFragment extends Fragment {
         return view;
     }
 
-
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
-        }
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putParcelable(STATE_SWITCHER, switcher);
+        savedInstanceState.putInt(STATE_COLUMN_COUNT, mColumnCount);
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override

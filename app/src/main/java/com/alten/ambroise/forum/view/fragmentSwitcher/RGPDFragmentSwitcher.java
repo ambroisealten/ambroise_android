@@ -61,7 +61,7 @@ public class RGPDFragmentSwitcher implements FragmentSwitcher, Parcelable {
                     fragment = switchRGPDValidationFragment(fm);
                     break;
                 case RGPD_GRADE_AND_SEND_TAG:
-                    fragment = switchRGPDGradeAndSendFragment(fm,(ApplicantForum) args[0]);
+                    fragment = switchRGPDGradeAndSendFragment(fm, (ApplicantForum) args[0]);
                     break;
                 default:
                     fragment = switchRGPDTextFragment(fm);

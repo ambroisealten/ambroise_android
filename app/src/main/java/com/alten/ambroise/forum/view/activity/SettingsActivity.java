@@ -35,7 +35,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         super.onBackPressed();
         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().commit();
     }

@@ -72,7 +72,7 @@ public class DocumentDetailFragment extends Fragment {
             final ProgressDialog progressDialog = new ProgressDialog(getContext());
             progressDialog.setMessage(getString(R.string.loading));
             progressDialog.setCancelable(true);
-            if(savedInstanceState==null){
+            if (savedInstanceState == null) {
                 progressDialog.show();
             }
             PDFView pdfView = rootView.findViewById(R.id.pdfv);
