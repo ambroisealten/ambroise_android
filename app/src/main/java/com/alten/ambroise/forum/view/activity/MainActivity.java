@@ -137,6 +137,10 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         switch (item.getItemId()) {
+            case R.id.nav_forum:
+                Intent intentForum = new Intent(this, MainActivity.class);
+                startActivity(intentForum);
+                break;
             case R.id.nav_new_forum:
                 forumFragmentSwitcher.switchFragment(getSupportFragmentManager(), ForumFragmentSwitcher.ADD_FORUM_TAG);
                 break;

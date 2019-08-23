@@ -56,7 +56,7 @@ public class DocumentDetailFragment extends Fragment {
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
+            if (appBarLayout != null && mItem != null) {
                 appBarLayout.setTitle(mItem.title);
             }
         }
