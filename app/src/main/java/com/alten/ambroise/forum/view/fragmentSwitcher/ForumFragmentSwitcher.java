@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -100,6 +101,7 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
             applicantListFragment.setArguments(bundle);
             applicantListFragment.setSwitcher(this);
         }
+        activity.findViewById(R.id.fab).setVisibility(View.INVISIBLE);
         return applicantListFragment;
     }
 
