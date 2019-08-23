@@ -138,6 +138,7 @@ public class ForumActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        findViewById(R.id.fab_forum).setVisibility(View.VISIBLE);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {

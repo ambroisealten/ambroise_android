@@ -82,10 +82,6 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
 
     @Override
     public void onItemClick(ApplicantForum applicant) {
-        //Toast.makeText(activity, "CLICK SUR CANDIDAT" + applicant.getMail(), Toast.LENGTH_SHORT).show();
-        // Intent intent = new Intent(activity.getBaseContext(), ApplicantActivity.class);
-        //intent.putExtra("applicant",applicant);
-        //activity.startActivity(intent);
         switchFragment(((AppCompatActivity) activity).getSupportFragmentManager(), APPLICANT_VIEW_TAG, applicant.get_id());
     }
 
@@ -130,7 +126,7 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
         }
         //Deactivate fab add button
         activity.findViewById(R.id.fab_forum).setVisibility(View.GONE);
-        activity.findViewById(R.id.forum_fragment).setTag(ADD_APPLICANT_TAG);
+        activity.findViewById(R.id.forum_fragment).setTag(APPLICANT_VIEW_TAG);
         return applicantViewFragment;
     }
 

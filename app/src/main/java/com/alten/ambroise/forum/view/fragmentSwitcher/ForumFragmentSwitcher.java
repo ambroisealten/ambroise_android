@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.View;
-import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -20,6 +20,7 @@ import com.alten.ambroise.forum.data.model.viewModel.ForumViewModel;
 import com.alten.ambroise.forum.view.activity.ForumActivity;
 import com.alten.ambroise.forum.view.adapter.ForumRecyclerViewAdapter;
 import com.alten.ambroise.forum.view.fragments.ApplicantListFragment;
+import com.alten.ambroise.forum.view.fragments.ApplicantViewFragment;
 import com.alten.ambroise.forum.view.fragments.ForumAddDialogFragment;
 import com.alten.ambroise.forum.view.fragments.ForumListFragment;
 
@@ -27,6 +28,7 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
 
     public static final String FORUM_LIST_TAG = "forumListTag";
     public static final String ADD_FORUM_TAG = "addForumTag";
+    private static final String APPLICANT_VIEW_TAG = "applicantViewTag";
     public static final String APPLICANT_LIST_TAG = "applicantListTag";
 
     public static final Creator<ForumFragmentSwitcher> CREATOR = new Creator<ForumFragmentSwitcher>() {
@@ -64,6 +66,9 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
                 case APPLICANT_LIST_TAG:
                     fragment = switchApplicantListFragment(fm);
                     break;
+                case APPLICANT_VIEW_TAG:
+                    fragment = switchApplicantViewFragment(fm, (long) args[0]);
+                    break;
                 default:
                     fragment = switchForumListFragment(fm);
                     break;
@@ -85,10 +90,21 @@ public class ForumFragmentSwitcher implements FragmentSwitcher, ForumRecyclerVie
 
     @Override
     public void onItemClick(ApplicantForum applicant) {
-        Toast.makeText(activity, "CLICK SUR CANDIDAT" + applicant.getMail(), Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(activity.getBaseContext(), ForumActivity.class);
-//        intent.putExtra("forum",forum);
-//        activity.startActivity(intent);
+        switchFragment(((AppCompatActivity) activity).getSupportFragmentManager(), APPLICANT_VIEW_TAG, applicant.get_id());
+    }
+
+    private ApplicantViewFragment switchApplicantViewFragment(FragmentManager fm, long applicantId) {
+        ApplicantViewFragment applicantViewFragment = (ApplicantViewFragment) fm.findFragmentByTag(APPLICANT_VIEW_TAG);
+        if (applicantViewFragment == null) {
+            applicantViewFragment = new ApplicantViewFragment();
+            Bundle bundle = new Bundle();
+            bundle.putLong(ApplicantViewFragment.STATE_APPLICANT, applicantId);
+            applicantViewFragment.setArguments(bundle);
+            applicantViewFragment.setSwitcher(this);
+        }
+        //Deactivate fab add button
+        activity.findViewById(R.id.fab).setVisibility(View.GONE);
+        return applicantViewFragment;
     }
 
     private ApplicantListFragment switchApplicantListFragment(FragmentManager fm) {
