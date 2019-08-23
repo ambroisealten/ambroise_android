@@ -314,7 +314,7 @@ public class ApplicantForum implements Parcelable {
     }
 
     private String mobilitiesToString(List<?> mobilities) {
-        mobilities = mobilities;
+        mobilities = (List<LinkedTreeMap>) mobilities;
         if (mobilities == null) {
             return "";
         }

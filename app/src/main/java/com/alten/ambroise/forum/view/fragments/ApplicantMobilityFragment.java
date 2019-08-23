@@ -135,7 +135,7 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
                     geographicsInput.setError(getString(R.string.invalid_already_existing_diploma));
                     addGeographics.setEnabled(false);
                     radiusInput.setEnabled(false);
-                }else {
+                } else {
                     addGeographics.setError(null);
                     radiusInput.setEnabled(true);
                     checkValidity();
