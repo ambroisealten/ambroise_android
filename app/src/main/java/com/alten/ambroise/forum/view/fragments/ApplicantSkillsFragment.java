@@ -89,7 +89,7 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
 
                 testSkill += " - " + skillType;
 
-                if (allSkills.contains(testSkill.toLowerCase())) {
+                if (allSkills.contains(testSkill.trim().toLowerCase())) {
                     skillsAutoComplete.setError(getString(R.string.invalid_already_existing_skill));
                     buttonAddSkill.setEnabled(false);
                 } else {
@@ -110,7 +110,7 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
 
             testSkill += " - " + skillType;
 
-            if (allSkills.contains(testSkill.toLowerCase())) {
+            if (allSkills.contains(testSkill.trim().toLowerCase())) {
                 skillsAutoComplete.setError(getString(R.string.invalid_already_existing_skill));
                 buttonAddSkill.setEnabled(false);
             } else {
@@ -134,7 +134,7 @@ public class ApplicantSkillsFragment extends Fragment implements ApplicantInfo {
 
             if (!that.allSkills.contains(newSkill.toLowerCase())) {
                 that.allSkillsRepresentation.add(newSkill);
-                that.allSkills.add(newSkill.toLowerCase());
+                that.allSkills.add(newSkill.trim().toLowerCase());
             }
 
             that.skillsAutoComplete.getText().clear();

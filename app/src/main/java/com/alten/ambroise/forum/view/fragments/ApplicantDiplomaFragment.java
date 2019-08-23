@@ -90,7 +90,7 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (that.allDiplomas.contains(s.toString())) {
+                if (that.allDiplomas.contains(s.toString().trim())) {
                     diplomaAutoComplete.setError(getString(R.string.invalid_already_existing_diploma));
                 }
             }
@@ -167,9 +167,9 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
     }
 
     private void saveNewDiploma(String diploma, String diplomaYear) {
-        if (!this.allDiplomas.contains(diploma.toLowerCase()) && Integer.parseInt(diplomaYear) > 1930) {
+        if (!this.allDiplomas.contains(diploma.trim().toLowerCase()) && Integer.parseInt(diplomaYear) > 1930) {
             this.allDiplomasRepresentation.add(diploma + " - " + diplomaYear);
-            this.allDiplomas.add(diploma.toLowerCase());
+            this.allDiplomas.add(diploma.toLowerCase().trim());
         }
 
         if (Integer.parseInt(diplomaYear) >= this.highestDiplomaYear) {
@@ -187,7 +187,7 @@ public class ApplicantDiplomaFragment extends Fragment implements ApplicantInfo 
     private void setEnableButton() {
         String currentDiploma = this.diplomaAutoComplete.getText().toString();
 
-        if (UtilsMethods.isYearValid(this.inputEditDate.getText()) && !allDiplomas.contains(currentDiploma)) {
+        if (UtilsMethods.isYearValid(this.inputEditDate.getText()) && !allDiplomas.contains(currentDiploma.trim())) {
             this.addButton.setEnabled(true);
         } else {
             this.addButton.setEnabled(false);

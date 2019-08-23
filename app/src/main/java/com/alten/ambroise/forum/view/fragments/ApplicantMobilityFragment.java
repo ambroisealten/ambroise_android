@@ -107,9 +107,9 @@ public class ApplicantMobilityFragment extends Fragment implements ApplicantInfo
         addGeographics.setOnClickListener(v -> {
             Mobility createdMobility = createNewMobility(geographicsInput.getText().toString(), Integer.parseInt(radiusInput.getText().toString()), currentUnit);
 
-            if (!allGeographicsUsed.contains(geographicsInput.getText().toString().toLowerCase()) && !geographicsInput.getText().toString().equals(getString(R.string.france)) && !geographicsInput.getText().toString().equals(getString(R.string.franceWithoutIDF)) && !geographicsInput.getText().toString().equals(getString(R.string.international))) {
+            if (!allGeographicsUsed.contains(geographicsInput.getText().toString().trim().toLowerCase()) && !geographicsInput.getText().toString().trim().equals(getString(R.string.france)) && !geographicsInput.getText().toString().trim().equals(getString(R.string.franceWithoutIDF)) && !geographicsInput.getText().toString().trim().equals(getString(R.string.international))) {
                 allGeos.add(createdMobility);
-                allGeographicsUsed.add(geographicsInput.getText().toString().toLowerCase());
+                allGeographicsUsed.add(geographicsInput.getText().toString().trim().toLowerCase());
             }
             refreshGridView();
             geographicsInput.getText().clear();
