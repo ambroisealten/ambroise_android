@@ -141,4 +141,5 @@ Pour en savoir plus, consultez la politique de protection des données personnel
     <string name="days">Jours</string>
     <string name="mobilites">Mobilités</string>
     <string name="applicant">Candidat</string>
+    <string name="error">Une erreur s\'est produite</string>
 </resources>

@@ -189,4 +189,5 @@ La présente politique a été mise à jour le 10/07/2018.
     <string name="CDI">Permanent contract</string>
     <string name="CDD">Fixed-term contract</string>
     <string name="applicant">Applicant</string>
+    <string name="error">An error occur</string>
 </resources>

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -99,7 +100,7 @@ public class DocumentDetailFragment extends Fragment {
                         try {
                             progressDialog.dismiss();
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            Toast.makeText(getContext(),getString(R.string.error),Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
