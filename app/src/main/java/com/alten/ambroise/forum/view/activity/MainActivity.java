@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity
     private static final String STATE_FORUM_FRAGMENT_SWITCHER = "forumFragmentSwitcher";
 
     private ForumFragmentSwitcher forumFragmentSwitcher;
-    private HashMap<Integer, Document> documentsMenu = new HashMap<Integer, Document>();
+    private final HashMap<Integer, Document> documentsMenu = new HashMap<Integer, Document>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -323,7 +323,7 @@ public class ApplicantForum implements Parcelable {
             Gson gson = new GsonBuilder().create();
             JsonObject jsonMobility = gson.toJsonTree(mobility).getAsJsonObject();
 
-            builder.append(gson.fromJson(jsonMobility, Mobility.class).toString() + ", ");
+            builder.append(gson.fromJson(jsonMobility, Mobility.class).toString()).append(", ");
         });
         return builder.toString();
     }

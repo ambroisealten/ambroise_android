@@ -36,7 +36,7 @@ public class ForumActivity extends AppCompatActivity
     private Forum forum;
     private ApplicantFragmentSwitcher applicantFragmentSwitcher;
     private FloatingActionButton fab;
-    private HashMap<Integer, Document> documentsMenu = new HashMap<Integer, Document>();
+    private final HashMap<Integer, Document> documentsMenu = new HashMap<Integer, Document>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

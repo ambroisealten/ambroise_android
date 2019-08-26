@@ -43,12 +43,7 @@ public class ValidationFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_validation, container, false);
         Button validate = view.findViewById(R.id.validation_proceed);
-        validate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                mListener.onFragmentInteraction(true, RGPDFragmentSwitcher.RGPD_VALIDATION_TAG);
-            }
-        });
+        validate.setOnClickListener(v -> mListener.onFragmentInteraction(true, RGPDFragmentSwitcher.RGPD_VALIDATION_TAG));
         return view;
     }
 

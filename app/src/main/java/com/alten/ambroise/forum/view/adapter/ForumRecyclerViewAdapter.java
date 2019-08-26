@@ -81,12 +81,7 @@ public class ForumRecyclerViewAdapter extends RecyclerView.Adapter<ForumRecycler
         }
 
         void bind(final Forum forum, final OnItemClickListener listener) {
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onItemClick(forum);
-                }
-            });
+            itemView.setOnClickListener(v -> listener.onItemClick(forum));
         }
 
         @Override

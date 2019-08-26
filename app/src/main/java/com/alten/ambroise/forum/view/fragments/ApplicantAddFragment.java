@@ -274,11 +274,6 @@ public class ApplicantAddFragment extends Fragment {
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
     public void setSwitcher(ApplicantFragmentSwitcher applicantFragmentSwitcher) {
         this.switcher = applicantFragmentSwitcher;
     }

@@ -36,7 +36,7 @@ public abstract class DocumentRoomDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             DocumentRoomDatabase.class, "document_database")
-                            .addCallback(sRoomDatabaseCallback) //TODO DELETE ON PROD (Or check if it's a good idea to conserve it to always get present assets files
+                            .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
             }

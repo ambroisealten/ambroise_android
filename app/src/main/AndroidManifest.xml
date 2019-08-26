@@ -24,7 +24,7 @@
         <activity
             android:name=".view.activity.DocumentListActivity"
             android:label="@string/title_document_list"
-            android:theme="@style/AppTheme.NoActionBar.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.NoActionBar" />
         <activity
             android:name=".view.activity.DocumentDetailActivity"
             android:label="@string/title_document_detail"

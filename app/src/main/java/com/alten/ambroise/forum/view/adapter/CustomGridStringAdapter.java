@@ -21,7 +21,7 @@ public class CustomGridStringAdapter extends BaseAdapter {
     private final ApplicantDiplomaFragment parent;
     private final ApplicantSkillsFragment parentF;
     private final ApplicantViewFragment parentV;
-    private Context mContext;
+    private final Context mContext;
 
     public CustomGridStringAdapter(Context c, ArrayList<String> web, ApplicantDiplomaFragment parent) {
         mContext = c;
@@ -49,25 +49,21 @@ public class CustomGridStringAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
         return web.size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
-        // TODO Auto-generated method stub
         View grid;
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -76,7 +72,6 @@ public class CustomGridStringAdapter extends BaseAdapter {
 
         if (convertView == null) {
 
-            grid = new View(mContext);
             grid = inflater.inflate(R.layout.mobility_capsule, null);
             TextView textView = grid.findViewById(R.id.mobility_resume);
             textView.setText(web.get(position));
@@ -85,14 +80,11 @@ public class CustomGridStringAdapter extends BaseAdapter {
             if (this.parentV != null) {
                 buttonDelete.setVisibility(View.INVISIBLE);
             } else {
-                buttonDelete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (that.parent != null) {
-                            that.parent.deleteDiploma(web.get(position));
-                        } else {
-                            that.parentF.deleteSkill(web.get(position));
-                        }
+                buttonDelete.setOnClickListener(v -> {
+                    if (that.parent != null) {
+                        that.parent.deleteDiploma(web.get(position));
+                    } else {
+                        that.parentF.deleteSkill(web.get(position));
                     }
                 });
             }

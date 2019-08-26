@@ -53,7 +53,6 @@ public class ApplicantViewFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final String STATE_APPLICANT = "applicant";
     private static final int MAIL_REQUEST_CODE = 1;
-    private FragmentSwitcher switcher;
     private GridView skillsGridView;
     private GridView mobilityGridView;
     private ImageView cvDisplay;
@@ -105,9 +104,7 @@ public class ApplicantViewFragment extends Fragment {
         refreshMobilityGridView();
         // Share button
         Button shareApplicant = view.findViewById(R.id.applicant_view_share);
-        shareApplicant.setOnClickListener(v -> {
-            this.sendMail();
-        });
+        shareApplicant.setOnClickListener(v -> this.sendMail());
         // CV display
         cvDisplay = view.findViewById(R.id.applicant_view_cv_display);
         byte[] decodedString = Base64.decode(this.applicant.getCvPerson(), Base64.DEFAULT);
@@ -139,13 +136,8 @@ public class ApplicantViewFragment extends Fragment {
         super.onResume();
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
     public void setSwitcher(FragmentSwitcher switcher) {
-        this.switcher = switcher;
+        final FragmentSwitcher switcher1 = switcher;
     }
 
     private void refreshSkillsGridView() {

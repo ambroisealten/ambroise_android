@@ -30,10 +30,8 @@ import java.util.List;
  */
 public class ForumListFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     public static final String STATE_COLUMN_COUNT = "column-count";
     public static final String STATE_SWITCHER = "switcher";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     private ForumRecyclerViewAdapter adapter;
@@ -46,8 +44,6 @@ public class ForumListFragment extends Fragment {
     public ForumListFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static ForumListFragment newInstance(int columnCount) {
         ForumListFragment fragment = new ForumListFragment();
         Bundle args = new Bundle();
@@ -75,22 +71,16 @@ public class ForumListFragment extends Fragment {
             this.switcher = savedInstanceState.getParcelable(STATE_SWITCHER);
             this.switcher.setActivity(getActivity());
         }
-        this.adapter = new ForumRecyclerViewAdapter(this.getContext(), new ForumRecyclerViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Forum forum) {
-                if (forum != null) {
-                    switcher.onItemClick(forum);
-                }
+        this.adapter = new ForumRecyclerViewAdapter(this.getContext(), forum -> {
+            if (forum != null) {
+                switcher.onItemClick(forum);
             }
         });
         //Instantiate forum view model and add observer
         ForumViewModel mForumViewModel = ViewModelProviders.of(this).get(ForumViewModel.class);
-        mForumViewModel.getAllForums().observe(this, new Observer<List<Forum>>() {
-            @Override
-            public void onChanged(@Nullable final List<Forum> forums) {
-                // Update the cached copy of the forums in the adapter.
-                adapter.setForums(forums);
-            }
+        mForumViewModel.getAllForums().observe(this, forums -> {
+            // Update the cached copy of the forums in the adapter.
+            adapter.setForums(forums);
         });
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(STATE_COLUMN_COUNT);

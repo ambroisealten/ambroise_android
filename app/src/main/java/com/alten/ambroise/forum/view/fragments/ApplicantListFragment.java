@@ -113,11 +113,6 @@ public class ApplicantListFragment extends Fragment {
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
     public void setSwitcher(FragmentSwitcher switcher) {
         this.switcher = switcher;
     }

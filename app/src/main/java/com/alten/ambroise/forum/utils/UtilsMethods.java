@@ -8,11 +8,11 @@ import java.util.Set;
 
 public class UtilsMethods {
 
-    public final static boolean isValidEmail(CharSequence target) {
+    public static boolean isValidEmail(CharSequence target) {
         return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
-    public final static boolean isValidPhoneNumber(CharSequence target) {
+    public static boolean isValidPhoneNumber(CharSequence target) {
         return !TextUtils.isEmpty(target) && Patterns.PHONE.matcher(target).matches();
     }
 

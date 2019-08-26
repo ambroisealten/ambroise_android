@@ -20,12 +20,6 @@ public class ApplicantProcessService extends Service {
         return START_NOT_STICKY;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        //Service Destroyed
-    }
-
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
