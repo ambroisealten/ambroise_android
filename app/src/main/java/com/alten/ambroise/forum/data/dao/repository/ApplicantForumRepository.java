@@ -1,6 +1,7 @@
 package com.alten.ambroise.forum.data.dao.repository;
 
 import android.app.Application;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
@@ -95,7 +96,12 @@ public class ApplicantForumRepository {
 
         @Override
         protected Long doInBackground(final ApplicantForum... params) {
-            return mAsyncTaskDao.insert(params[0]);
+            try{
+                return mAsyncTaskDao.insert(params[0]);
+            }
+            catch (SQLiteConstraintException e){
+                return Long.valueOf(-1);
+            }
         }
     }
 

@@ -201,5 +201,6 @@ Here is a CV that should interest you.
     <string name="mobilites">Mobilities</string>
     <string name="applicant">Applicant</string>
     <string name="error">An error occur</string>
-    <string name="delete_capsule">delete capsule</string>
+    <string name="delete_capsule">Delete capsule</string>
+    <string name="error_mail_used" >Error, this mail has already been used</string>
 </resources>

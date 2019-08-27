@@ -106,25 +106,30 @@ public class ApplicantViewFragment extends Fragment {
         Button shareApplicant = view.findViewById(R.id.applicant_view_share);
         shareApplicant.setOnClickListener(v -> this.sendMail());
         // CV display
-        cvDisplay = view.findViewById(R.id.applicant_view_cv_display);
-        byte[] decodedString = Base64.decode(this.applicant.getCvPerson(), Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        cvDisplay.setImageBitmap(decodedByte);
-        //add preview picture action
-        cvDisplay.setOnClickListener(v -> {
-            if (cvDisplay.getDrawable() != null) {
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                decodedByte.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), decodedByte, "Title", null);
-                Uri uri = Uri.parse(path);
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_QUICK_VIEW);
-                intent.setDataAndType(uri, "image/*");
-                intent.setFlags(FLAG_GRANT_READ_URI_PERMISSION | FLAG_GRANT_WRITE_URI_PERMISSION);
-                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-            }
-        });
+        try {
+            cvDisplay = view.findViewById(R.id.applicant_view_cv_display);
+            byte[] decodedString = Base64.decode(this.applicant.getCvPerson(), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            cvDisplay.setImageBitmap(decodedByte);
 
+            //add preview picture action
+            cvDisplay.setOnClickListener(v -> {
+                if (cvDisplay.getDrawable() != null) {
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    decodedByte.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                    String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), decodedByte, "Title", null);
+                    Uri uri = Uri.parse(path);
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_QUICK_VIEW);
+                    intent.setDataAndType(uri, "image/*");
+                    intent.setFlags(FLAG_GRANT_READ_URI_PERMISSION | FLAG_GRANT_WRITE_URI_PERMISSION);
+                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                }
+            });
+        }
+        catch (Exception e){
+
+        }
         return view;
     }
 

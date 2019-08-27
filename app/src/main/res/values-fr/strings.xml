@@ -142,4 +142,6 @@ Pour en savoir plus, consultez la politique de protection des données personnel
     <string name="mobilites">Mobilités</string>
     <string name="applicant">Candidat</string>
     <string name="error">Une erreur s\'est produite</string>
+    <string name="error_mail_used">Erreur, ce mail a déjà été utilisé</string>
+    <string name="delete_capsule">Supprimer la cartouche</string>
 </resources>

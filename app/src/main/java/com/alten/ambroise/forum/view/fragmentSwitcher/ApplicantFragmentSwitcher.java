@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.alten.ambroise.forum.App;
 import com.alten.ambroise.forum.R;
 import com.alten.ambroise.forum.data.model.beans.ApplicantForum;
 import com.alten.ambroise.forum.data.model.viewModel.ApplicantForumViewModel;
@@ -144,13 +146,19 @@ public class ApplicantFragmentSwitcher implements FragmentSwitcher, ApplicantRec
     }
 
     public void startNewApplicantProcess(ApplicantForum applicant, FragmentManager fm) {
-        fm.popBackStackImmediate();
         ApplicantForumViewModel applicantForumViewModel = new ApplicantForumViewModel(activity.getApplication());
         Long id = applicantForumViewModel.insert(applicant);
-        Intent intent = new Intent(activity.getBaseContext(), ApplicantActivity.class);
-        intent.putExtra(ApplicantActivity.STATE_APPLICANT, id);
-        intent.putExtra(ForumActivity.STATE_FORUM, ((ForumActivity) activity).getForumId());
-        activity.startActivity(intent);
+        if(id == Long.valueOf(-1)){
+            Toast.makeText(activity.getBaseContext(), activity.getString(R.string.error_mail_used),Toast.LENGTH_SHORT).show();
+        }
+        else{
+            fm.popBackStackImmediate();
+            Intent intent = new Intent(activity.getBaseContext(), ApplicantActivity.class);
+            intent.putExtra(ApplicantActivity.STATE_APPLICANT, id);
+            intent.putExtra(ForumActivity.STATE_FORUM, ((ForumActivity) activity).getForumId());
+            activity.startActivity(intent);
+        }
+
     }
 
     public void setFabInvisible() {
